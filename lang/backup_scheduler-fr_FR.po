@@ -1,0 +1,154 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2011-12-05T16:58:53+00:00\n"
+"Last-Translator: SedLex <http://www.sedlex.fr/>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: France\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "Ce plugin permet une sauvegarde des parties importante de votre site : simple à utiliser et efficace !"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "Désolé, mais vous devez activer %s sur votre site web. Autrement, ce plugin ne fonctionnera pas proprement !"
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Voici les fichiers de sauvegarde. Vous pouvez forcez une nouvelle sauvegarde ou télécharger les précédentes sauvegardes."
+
+msgid "An automatic backup will be launched in %s days."
+msgstr "Une sauvegarde automatique sera lancé dans %s jours."
+
+msgid "Force a new backup"
+msgstr "Forcer une nouvelle sauvegarde"
+
+msgid "Backups"
+msgstr "Sauvegardes"
+
+msgid "How often do you want to backup your website?"
+msgstr "Vous voulez sauvegarder votre site web tout les combien de temps ?"
+
+msgid "Frequency (in days):"
+msgstr "Fréquence (en jours) :"
+
+msgid "Please note that the backup will occur at midnight to be sure that your website is not overloaded"
+msgstr "Merci de noter que les sauvegardes seront lancées à minuitt afin d&#039;être certain que votre site web n&#039;est pas surchargé."
+
+msgid "Keep the backup files for (in days):"
+msgstr "Garder les fichiers de sauvegardes pendant (en jours) :"
+
+msgid "What do you want to save?"
+msgstr "Que voulez-vous sauvegarder ?"
+
+msgid "The plugins directory:"
+msgstr "Le répertoire des plugins :"
+
+msgid "(i.e. %s)"
+msgstr "(i.e. %s)"
+
+msgid "The themes directory:"
+msgstr "Le répértoire des thèmes :"
+
+msgid "The upload directory:"
+msgstr "Le répertoire upload : "
+
+msgid "The SQL database:"
+msgstr "La base de données SQL :"
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "Voulez-vous que la sauvegarde vous soit envoyé par email ?"
+
+msgid "If so, please enter your email:"
+msgstr "Le cas échant, merci de compléter votre email :"
+
+msgid "The maximum attachment size (in MB):"
+msgstr "La taille maximal des pièces-jointes (en Mo) :"
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
+msgstr "Le fichier zip sera découpé en plusieurs fichiers afin de respecter la taille maximale que vous aurez indiquée."
+
+msgid "Do you want to rename the files?"
+msgstr "Voulez-vous renommer les fichiers ?"
+
+msgid "What is the suffix of the file:"
+msgstr "Quel est le suffixe du fichier : "
+
+msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
+msgstr "Cette option permet de coutourner les mesures de bloquage prise par certains fournisseurs mails qui bloquent les mails avec des pièces jointes de type zip (comme GMail)."
+
+msgid "Parameters"
+msgstr "Paramètres"
+
+msgid "Manage translations"
+msgstr "Gérer les traductions"
+
+msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
+msgstr "Ce formulaire vous permet de contacter facilement l&#039;auteur afin de discuter de vos problèmes, des incompatibilités, etc."
+
+msgid "Give feedback"
+msgstr "Donner un feedback"
+
+msgid "Here is the plugins developped by the author:"
+msgstr "Voici les plugins développés par l&#039;auteur :"
+
+msgid "Other possible plugins"
+msgstr "Autres plugins possibles"
+
+msgid "Date of the backup"
+msgstr "Date de la sauvegarde"
+
+msgid "Backup files"
+msgstr "Fichiers de sauvegarde"
+
+msgid "Part %s"
+msgstr "Partie %s"
+
+msgid "Backup completed on %s at %s"
+msgstr "Sauvegarde terminée le %s à %s"
+
+msgid "The total size of the files is %s"
+msgstr "La taille totale des fichiers est %s"
+
+msgid "These files will be deleted in %s days"
+msgstr "Ces fichiers seront supprimés dans %s jours"
+
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr "(Pour l&#039;instant, il n&#039;y a pas de fichiers de sauvegarde... Vous devriez attendre ou vous pouvez forcer une sauvegarde (voir ci-dessous) )"
+
+msgid "An other backup is still in progress... Please wait!"
+msgstr "Une autre sauvegarde est encore en cours... merci de patienter !"
+
+msgid "An error occured while sending mail!"
+msgstr "Une erreur est survenue lors de l&#039;envoi d&#039;un email !"
+
+msgid "A new backup have been generated!"
+msgstr "Une nouvelle sauvegarde a été réalisée"
+
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
+
+msgid "Dear sirs,"
+msgstr "Cher monsieur, chère madame, "
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr "Voici en pièce-jointe le %s sur %s fichiers de sauvegarde pour aujourd&#039;hui"
+
+msgid "Best regards,"
+msgstr "Salutations, "
+
+msgid "Backup of %s (%s)"
+msgstr "Sauvegarde de %s (%s)"
+
