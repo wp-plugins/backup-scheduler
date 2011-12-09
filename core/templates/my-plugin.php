@@ -227,7 +227,7 @@ class my_plugin extends pluginSedLex {
 			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() ) ; 	
 
 			ob_start() ; 
-				echo __('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID) ; 
+				echo "<p>".__('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID)."</p>" ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 				$trans = new feedbackSL($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 

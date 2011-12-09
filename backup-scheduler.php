@@ -2,7 +2,7 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)
-Version: 1.0.1
+Version: 1.0.2
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -229,7 +229,7 @@ class backup_scheduler extends pluginSedLex {
 			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() ) ; 	
 
 			ob_start() ; 
-				echo __('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID) ; 
+				echo "<p>".__('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID)."</p>" ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 				$trans = new feedbackSL($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
@@ -237,8 +237,8 @@ class backup_scheduler extends pluginSedLex {
 			
 			ob_start() ; 
 				echo "<p>".__('Here is the plugins developped by the author:',  $this->pluginID) ."</p>" ; 
-				// A liste of plugin slug to be excluded
-				$exlude = array() ; 
+				// A list of plugin slug to be excluded
+				$exlude = array('wp-pirates-search') ; 
 				// Replace sedLex by your own author name
 				$trans = new otherPlugins("sedLex", $exlude) ; 
 				$trans->list_plugins() ; 

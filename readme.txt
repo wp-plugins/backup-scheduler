@@ -54,6 +54,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.0.2 =
+* Update of the core
+
 = 1.0.1 =
 * First release in the wild web (enjoy)
 
@@ -64,4 +67,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:3934c639b5a047d8ffcef96d7af51075
+InfoVersion:fb1f69b2eff963309d143bc21fd754e7
