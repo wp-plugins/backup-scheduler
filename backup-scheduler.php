@@ -2,13 +2,13 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)
-Version: 1.0.2
+Version: 1.0.3
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
 Author URI: http://www.sedlex.fr/
-Plugin URI: http://wordpress.org/extend/plugins/image-zoom/
+Plugin URI: http://wordpress.org/extend/plugins/backup-scheduler/
 License: GPL3
 */
 
@@ -193,7 +193,7 @@ class backup_scheduler extends pluginSedLex {
 			$tabs->add_tab(__('Backups',  $this->pluginID), ob_get_clean() ) ; 	
 
 			ob_start() ; 
-				$params = new parametersSedLex($this, 'tab-parameters') ; 
+				$params = new parametersSedLex($this) ; 
 				
 				$params->add_title(sprintf(__('How often do you want to backup your website?',$this->pluginID), $title)) ; 
 				$params->add_param('frequency', __('Frequency (in days):',$this->pluginID)) ; 
@@ -219,30 +219,28 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_comment(__('This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail).',$this->pluginID)) ; 
 				
 				$params->flush() ; 
-			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
 			
 			
 			ob_start() ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 				$trans = new translationSL($this->pluginID, $plugin) ; 
 				$trans->enable_translation() ; 
-			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_trad.png") ; 	
 
 			ob_start() ; 
-				echo "<p>".__('This form is an easy way to contact the author and to discuss issues / incompatibilities / etc.',  $this->pluginID)."</p>" ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
 				$trans = new feedbackSL($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
-			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_mail.png") ; 	
 			
 			ob_start() ; 
-				echo "<p>".__('Here is the plugins developped by the author:',  $this->pluginID) ."</p>" ; 
 				// A list of plugin slug to be excluded
 				$exlude = array('wp-pirates-search') ; 
 				// Replace sedLex by your own author name
 				$trans = new otherPlugins("sedLex", $exlude) ; 
 				$trans->list_plugins() ; 
-			$tabs->add_tab(__('Other possible plugins',  $this->pluginID), ob_get_clean() ) ; 	
+			$tabs->add_tab(__('Other plugins',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_plug.png") ; 	
 			
 			echo $tabs->flush() ; 
 			

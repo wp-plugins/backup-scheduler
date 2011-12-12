@@ -123,108 +123,93 @@ msgid "Parameters"
 msgstr ""
 
 #: backup-scheduler.php:229
-#: core/templates/my-plugin.php:227
 #@ backup_scheduler
 msgid "Manage translations"
 msgstr ""
 
-#: backup-scheduler.php:232
-#: core/templates/my-plugin.php:230
-#@ backup_scheduler
-msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
-msgstr ""
-
-#: backup-scheduler.php:236
-#: core/templates/my-plugin.php:234
+#: backup-scheduler.php:235
 #@ backup_scheduler
 msgid "Give feedback"
 msgstr ""
 
-#: backup-scheduler.php:239
-#: core/templates/my-plugin.php:237
+#: backup-scheduler.php:243
 #@ backup_scheduler
-msgid "Here is the plugins developped by the author:"
+msgid "Other plugins"
 msgstr ""
 
-#: backup-scheduler.php:245
-#: core/templates/my-plugin.php:243
-#@ backup_scheduler
-msgid "Other possible plugins"
-msgstr ""
-
-#: backup-scheduler.php:267
+#: backup-scheduler.php:265
 #@ backup_scheduler
 msgid "Date of the backup"
 msgstr ""
 
-#: backup-scheduler.php:267
+#: backup-scheduler.php:265
 #@ backup_scheduler
 msgid "Backup files"
 msgstr ""
 
-#: backup-scheduler.php:284
-#: backup-scheduler.php:291
+#: backup-scheduler.php:282
+#: backup-scheduler.php:289
 #@ backup_scheduler
 msgid "Part %s"
 msgstr ""
 
-#: backup-scheduler.php:301
+#: backup-scheduler.php:299
 #@ backup_scheduler
 msgid "Backup completed on %s at %s"
 msgstr ""
 
-#: backup-scheduler.php:302
+#: backup-scheduler.php:300
 #@ backup_scheduler
 msgid "The total size of the files is %s"
 msgstr ""
 
-#: backup-scheduler.php:303
+#: backup-scheduler.php:301
 #@ backup_scheduler
 msgid "These files will be deleted in %s days"
 msgstr ""
 
-#: backup-scheduler.php:311
+#: backup-scheduler.php:309
 #@ backup_scheduler
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr ""
 
-#: backup-scheduler.php:338
+#: backup-scheduler.php:336
 #@ backup_scheduler
 msgid "An other backup is still in progress... Please wait!"
 msgstr ""
 
-#: backup-scheduler.php:380
-#: backup-scheduler.php:402
+#: backup-scheduler.php:378
+#: backup-scheduler.php:400
 #@ backup_scheduler
 msgid "An error occured while sending mail!"
 msgstr ""
 
-#: backup-scheduler.php:432
+#: backup-scheduler.php:430
 #@ backup_scheduler
 msgid "A new backup have been generated!"
 msgstr ""
 
-#: backup-scheduler.php:441
+#: backup-scheduler.php:439
 #@ backup_scheduler
 msgid "An error occurred"
 msgstr ""
 
-#: backup-scheduler.php:547
+#: backup-scheduler.php:545
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
 
-#: backup-scheduler.php:548
+#: backup-scheduler.php:546
 #@ backup_scheduler
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
-#: backup-scheduler.php:549
+#: backup-scheduler.php:547
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
-#: backup-scheduler.php:556
+#: backup-scheduler.php:554
 #@ backup_scheduler
 msgid "Backup of %s (%s)"
 msgstr ""

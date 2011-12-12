@@ -75,6 +75,8 @@ if (!class_exists("otherPlugins")) {
 	
 						}
 					}
+					echo "<h3>".__("Other plugins",'SL_framework')."</h3>" ; 
+					echo "<p>".__('Here are other plugins developped by the author:',  "SL_framework") ."</p>" ; 
 					echo $table->flush() ; 
 				}
 			}

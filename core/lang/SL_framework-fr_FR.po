@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-08T23:27:20+00:00\n"
+"PO-Revision-Date: 2011-12-12T14:45:58+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -347,6 +347,12 @@ msgstr "Go"
 msgid "Parameters"
 msgstr "Paramètres"
 
+msgid "Here are the parameters of the plugin. Modify them at will to fit your needs."
+msgstr "Voici les paramètres du plugin. Modifier les afin de satisfaire vos besoins."
+
+msgid "Here are the parameters of the framework. Modify them at will to fit your needs."
+msgstr "Voici les paramètres du framework. Modifier les afin de satisfaire vos besoins."
+
 msgid "Values"
 msgstr "Valeurs"
 
@@ -388,6 +394,12 @@ msgstr "Tout sélectionnez"
 
 msgid "Un-select all"
 msgstr "Tout désélectionnez"
+
+msgid "Feedback form"
+msgstr "Formulaire de feedback"
+
+msgid "This form is an easy way to contact the author and to discuss issues/incompatibilities/etc. with him"
+msgstr "Ce formulaire est un moyen simple de contacter l&#039;auteur afin de discuter avec lui de vos problèmes, des incompatibilités rencontrées, etc."
 
 msgid "Contact the author"
 msgstr "Contact de l&#039;auteur"
@@ -431,8 +443,8 @@ msgstr "Vos identifiants de connexion ne semblent pas corrects. Merci de les vé
 msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
 msgstr "Le fichier n&#039;a pas été mis sur le dépôt SVN à cause de problème côté serveur. Néanmoins, vous devriez réessayer car cela arrive souvent ... le deuxième essai peut être le bon !"
 
-msgid "The available translation for the SL framework (contained in the '%s' folder)"
-msgstr "La traduction disponible pour le framework SL (contenu dans le répertoire &#039;%s&#039;)"
+msgid "The available translations for the SL framework (contained in the '%s' folder)"
+msgstr "Les traductions disponibles pour le SL framework (contenu dans le répertoire &#039;%s&#039;)"
 
 msgid "There is %d languages supported for the 'SL framework'."
 msgstr "Il y a %d langues supportées par le framework SL."
@@ -440,14 +452,14 @@ msgstr "Il y a %d langues supportées par le framework SL."
 msgid "There is %d sentence to be translated in the framework."
 msgstr "Il y a %d phrases à traduire dans le framework."
 
-msgid "The available translation for this plugin"
-msgstr "La traduction disponible pour le plugin"
+msgid "The available translations for this plugin"
+msgstr "Les traductions disponibles pour ce plugin"
 
-msgid "There is %d languages supported for this plugin."
-msgstr "Il y a %d langues supportées par ce plugin."
+msgid "This plugin is available in %d languages."
+msgstr "Ce plugin est disponible en %s langues"
 
-msgid "There is %d sentence to be translated in this plugin."
-msgstr "Il y a %d phrases à traduire dans ce plugin."
+msgid "There are %d sentences to be translated in this plugin."
+msgstr "Il y a %d phrases à traduire pour ce plugin."
 
 msgid "Please note that the translation for the framework is available in the %s submenu (see the %s tab)."
 msgstr "Les traductions du framework sont accessibles via le sous-menu %s (voir l&#039;onglet %s)"
@@ -532,4 +544,10 @@ msgstr "Information sur le plugin"
 
 msgid "Description and Screenshots"
 msgstr "Description et captures d&#039;écran"
+
+msgid "Other plugins"
+msgstr "Autres plugins"
+
+msgid "Here are other plugins developped by the author:"
+msgstr "Voici les autres plugins développés par l&#039;auteur"
 

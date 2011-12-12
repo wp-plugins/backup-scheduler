@@ -31,6 +31,8 @@ if (!class_exists("feedbackSL")) {
 
 		public function enable_feedback() {
 			
+			echo  "<h3>".__("Feedback form",'SL_framework')."</h3>" ; 
+			echo "<p>".__('This form is an easy way to contact the author and to discuss issues/incompatibilities/etc. with him',  "SL_framework")."</p>" ; 
 			echo "<a name='top_feedback'></a><div id='form_feedback_info'></div><div id='form_feedback'>" ; 
 			$_POST['plugin'] = $this->plugin ; 
 			
@@ -47,7 +49,7 @@ if (!class_exists("feedbackSL")) {
 				$cel2 = new adminCell("<p><input onChange='modifyFormContact()' id='feedback_mail' type='text' name='feedback_mail' value='' /></p>") ;
 				$table->add_line(array($cel1, $cel2), '1') ;	
 				// Comment
-				$cel1 = new adminCell("<p>".__('Your comments:', 'SL_framework')."</p><p class='paramComment' style='color: rgb(164, 164, 164);'>".__('Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)', 'SL_framework')."</p>") ;
+				$cel1 = new adminCell("<p>".__('Your comments:', 'SL_framework')."*</p><p class='paramComment' style='color: rgb(164, 164, 164);'>".__('Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)', 'SL_framework')."</p>") ;
 				$cel2 = new adminCell("<p><textarea id='feedback_comment' style='width:500px;height:200px;'></textarea></p>") ;
 				$table->add_line(array($cel1, $cel2), '1') ;	
 				

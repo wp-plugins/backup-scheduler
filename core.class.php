@@ -38,6 +38,7 @@ if (!class_exists('pluginSedLex')) {
 			}
 			add_action('admin_menu',  array( $this, 'admin_menu'));
 			add_filter('plugin_row_meta', array( $this, 'plugin_actions'), 10, 2);
+			add_filter('plugin_action_links', array($this, 'plugin_action_links'), 10, 2);
 			add_action('init', array( $this, 'init_textdomain'));
 			
 			add_action('wp_print_scripts', array( $this, 'javascript_front'), 5);
@@ -133,7 +134,19 @@ if (!class_exists('pluginSedLex')) {
 				$this->_update() ; 
 			}
 		}
-		
+
+		/** ====================================================================================================================================================
+		* Get the plugin ID
+		* 
+		* @return string the plugin ID string. the string will be empty if it is not a plugin (i.e. the framework)
+		*/
+		public function getPluginID () {
+			$tmp = $this->pluginID ; 
+			if ($tmp=="coreSLframework") 
+				return "" ; 
+			return $tmp ; 
+		}
+	
 		/** ====================================================================================================================================================
 		* In order to uninstall the plugin, few things are to be done ... 
 		* This function is not supposed to be called from your plugin : it is a purely internal function called when you de-activate the plugin
@@ -263,6 +276,27 @@ if (!class_exists('pluginSedLex')) {
 		* @return array of new links set with a Settings link added
 		*/
 		public function plugin_actions($links, $file) { 
+			$tmp = explode('/',plugin_basename($this->path)) ; 
+			$plugin = $tmp[0]."/".$tmp[0].".php" ; 
+			if ($file == $plugin) {
+				return array_merge(
+					$links,
+					array( '<a href="admin.php?page='.$plugin.'">'. __('Settings', 'SL_framework') .'</a>')
+				);
+			}
+			return $links;
+		}
+		
+		/** ====================================================================================================================================================
+		* Handler for the 'plugin_action_links' hook. Adds a "Settings" link to this plugin's entry
+		* on the plugin list.
+		*
+		* @access private
+		* @param array $links
+		* @param string $file
+		* @return array
+		*/
+		function plugin_action_links($links, $file) {
 			$tmp = explode('/',plugin_basename($this->path)) ; 
 			$plugin = $tmp[0]."/".$tmp[0].".php" ; 
 			if ($file == $plugin) {

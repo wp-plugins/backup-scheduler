@@ -54,6 +54,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.0.3 =
+* Improve the English text thanks to Rene 
+
 = 1.0.2 =
 * Update of the core
 
@@ -67,4 +70,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:fb1f69b2eff963309d143bc21fd754e7
+InfoVersion:24bc467c97d90019e55881da1974deca

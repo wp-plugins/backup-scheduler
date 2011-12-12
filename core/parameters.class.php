@@ -79,7 +79,15 @@ if (!class_exists("parametersSedLex")) {
 			global $_FILES ; 
 			
 			// We create the beginning of the form
-			$this->output = "<div class='wrap parameters'><form enctype='multipart/form-data' method='post' action='".$_SERVER["REQUEST_URI"]."'>\n" ; 
+				
+			$this->output =  "<h3>".__("Parameters",'SL_framework')."</h3>" ; 
+				
+			if ($this->obj->getPluginID()!="") {
+				$this->output .= "<p>".__("Here are the parameters of the plugin. Modify them at will to fit your needs.","SL_framework")."</p>" ; 
+			} else {
+				$this->output .= "<p>".__("Here are the parameters of the framework. Modify them at will to fit your needs.","SL_framework")."</p>" ; 			
+			}
+			$this->output .= "<div class='wrap parameters'><form enctype='multipart/form-data' method='post' action='".$_SERVER["REQUEST_URI"]."'>\n" ; 
 			
 			// We compute the parameter output
 			$hastobeclosed = false ; 
