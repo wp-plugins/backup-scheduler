@@ -23,7 +23,8 @@ You can choose:
 
 = Localizations =
 
-* Spanish translation (by AVfoto)
+* Italian translation (by AVfoto)
+* Spanish translation (by PuntoCon)
 * French translation (by me)
 
 = Features of the framework = 
@@ -55,6 +56,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.0.5 =
+* Improving zip decompression and path 
+
 = 1.0.4 =
 * Italian translation (by AVfoto)
 * Spanish translation (by PuntoCon)
@@ -76,4 +80,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:54b23bad60d55e7135e5760f0e9f61c5
+InfoVersion:9eb974a95adf3659519793cac4688c5e

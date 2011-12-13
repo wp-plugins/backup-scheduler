@@ -2,7 +2,7 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)
-Version: 1.0.4
+Version: 1.0.5
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -63,6 +63,9 @@ class backup_scheduler extends pluginSedLex {
 		@mkdir(WP_CONTENT_DIR."/sedlex/backup-scheduler/", 0777, true) ; 
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup")) {
 			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup", date("Y-m-d")) ; 
+		}
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess", "Options All -Indexes") ; 
 		}
 		
 		// Important variables initialisation (Do not modify)
@@ -327,6 +330,9 @@ class backup_scheduler extends pluginSedLex {
 		$rand = Utils::rand_str(10, "abcdefghijklmnopqrstuvwxyz0123456789") ; 
 		$name = WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$date."_".$rand.".zip" ; 
 		@mkdir(WP_CONTENT_DIR."/sedlex/backup-scheduler/", 0777, true) ; 
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess", "Options All -Indexes") ; 
+		}
 		
 		$z = new SL_Zip;
 		
@@ -360,7 +366,7 @@ class backup_scheduler extends pluginSedLex {
 				
 			if ($ok) {
 				$z -> removePath(WP_CONTENT_DIR."/") ; 
-				$z -> addPath("/backup_".$date."/") ; 
+				$z -> addPath("backup_".$date."/") ; 
 				$path = $z -> createZip($name,$this->get_param('chunk')*1024*1024, 5);
 				if ($path['finished']==true) {
 					// We rename the zip file if needed

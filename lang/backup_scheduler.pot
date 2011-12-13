@@ -1,215 +1,215 @@
 Content-Transfer-Encoding: 8bit
 
-#: backup-scheduler.php:159
+#: backup-scheduler.php:162
 #@ backup_scheduler
 msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
 msgstr ""
 
-#: backup-scheduler.php:167
+#: backup-scheduler.php:170
 #@ backup_scheduler
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
 msgstr ""
 
-#: backup-scheduler.php:179
+#: backup-scheduler.php:182
 #@ backup_scheduler
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
 msgstr ""
 
-#: backup-scheduler.php:180
+#: backup-scheduler.php:183
 #@ backup_scheduler
 msgid "An automatic backup will be launched in %s days."
 msgstr ""
 
-#: backup-scheduler.php:184
+#: backup-scheduler.php:187
 #@ backup_scheduler
 msgid "Force a new backup"
 msgstr ""
 
-#: backup-scheduler.php:193
+#: backup-scheduler.php:196
 #@ backup_scheduler
 msgid "Backups"
 msgstr ""
 
-#: backup-scheduler.php:198
+#: backup-scheduler.php:201
 #@ backup_scheduler
 msgid "How often do you want to backup your website?"
 msgstr ""
 
-#: backup-scheduler.php:199
+#: backup-scheduler.php:202
 #@ backup_scheduler
 msgid "Frequency (in days):"
 msgstr ""
 
-#: backup-scheduler.php:200
+#: backup-scheduler.php:203
 #@ backup_scheduler
 msgid "Please note that the backup will occur at midnight to be sure that your website is not overloaded"
 msgstr ""
 
-#: backup-scheduler.php:201
+#: backup-scheduler.php:204
 #@ backup_scheduler
 msgid "Keep the backup files for (in days):"
 msgstr ""
 
-#: backup-scheduler.php:203
+#: backup-scheduler.php:206
 #@ backup_scheduler
 msgid "What do you want to save?"
 msgstr ""
 
-#: backup-scheduler.php:204
+#: backup-scheduler.php:207
 #@ backup_scheduler
 msgid "The plugins directory:"
 msgstr ""
 
-#: backup-scheduler.php:205
-#: backup-scheduler.php:207
-#: backup-scheduler.php:209
+#: backup-scheduler.php:208
+#: backup-scheduler.php:210
+#: backup-scheduler.php:212
 #@ backup_scheduler
 msgid "(i.e. %s)"
 msgstr ""
 
-#: backup-scheduler.php:206
+#: backup-scheduler.php:209
 #@ backup_scheduler
 msgid "The themes directory:"
 msgstr ""
 
-#: backup-scheduler.php:208
+#: backup-scheduler.php:211
 #@ backup_scheduler
 msgid "The upload directory:"
 msgstr ""
 
-#: backup-scheduler.php:210
+#: backup-scheduler.php:213
 #@ backup_scheduler
 msgid "The SQL database:"
 msgstr ""
 
-#: backup-scheduler.php:212
+#: backup-scheduler.php:215
 #@ backup_scheduler
 msgid "Do you want that the backup is sent by email?"
 msgstr ""
 
-#: backup-scheduler.php:213
+#: backup-scheduler.php:216
 #@ backup_scheduler
 msgid "If so, please enter your email:"
 msgstr ""
 
-#: backup-scheduler.php:214
+#: backup-scheduler.php:217
 #@ backup_scheduler
 msgid "The maximum attachment size (in MB):"
 msgstr ""
 
-#: backup-scheduler.php:215
+#: backup-scheduler.php:218
 #@ backup_scheduler
 msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
 msgstr ""
 
-#: backup-scheduler.php:217
+#: backup-scheduler.php:220
 #@ backup_scheduler
 msgid "Do you want to rename the files?"
 msgstr ""
 
-#: backup-scheduler.php:218
+#: backup-scheduler.php:221
 #@ backup_scheduler
 msgid "What is the suffix of the file:"
 msgstr ""
 
-#: backup-scheduler.php:219
+#: backup-scheduler.php:222
 #@ backup_scheduler
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr ""
 
-#: backup-scheduler.php:222
+#: backup-scheduler.php:225
 #@ backup_scheduler
 msgid "Parameters"
 msgstr ""
 
-#: backup-scheduler.php:229
+#: backup-scheduler.php:232
 #@ backup_scheduler
 msgid "Manage translations"
 msgstr ""
 
-#: backup-scheduler.php:235
+#: backup-scheduler.php:238
 #@ backup_scheduler
 msgid "Give feedback"
 msgstr ""
 
-#: backup-scheduler.php:243
+#: backup-scheduler.php:246
 #@ backup_scheduler
 msgid "Other plugins"
 msgstr ""
 
-#: backup-scheduler.php:265
+#: backup-scheduler.php:268
 #@ backup_scheduler
 msgid "Date of the backup"
 msgstr ""
 
-#: backup-scheduler.php:265
+#: backup-scheduler.php:268
 #@ backup_scheduler
 msgid "Backup files"
 msgstr ""
 
-#: backup-scheduler.php:282
-#: backup-scheduler.php:289
+#: backup-scheduler.php:285
+#: backup-scheduler.php:292
 #@ backup_scheduler
 msgid "Part %s"
 msgstr ""
 
-#: backup-scheduler.php:299
+#: backup-scheduler.php:302
 #@ backup_scheduler
 msgid "Backup completed on %s at %s"
 msgstr ""
 
-#: backup-scheduler.php:300
+#: backup-scheduler.php:303
 #@ backup_scheduler
 msgid "The total size of the files is %s"
 msgstr ""
 
-#: backup-scheduler.php:301
+#: backup-scheduler.php:304
 #@ backup_scheduler
 msgid "These files will be deleted in %s days"
 msgstr ""
 
-#: backup-scheduler.php:309
+#: backup-scheduler.php:312
 #@ backup_scheduler
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr ""
 
-#: backup-scheduler.php:336
+#: backup-scheduler.php:342
 #@ backup_scheduler
 msgid "An other backup is still in progress... Please wait!"
 msgstr ""
 
-#: backup-scheduler.php:378
-#: backup-scheduler.php:400
+#: backup-scheduler.php:384
+#: backup-scheduler.php:406
 #@ backup_scheduler
 msgid "An error occured while sending mail!"
 msgstr ""
 
-#: backup-scheduler.php:430
+#: backup-scheduler.php:436
 #@ backup_scheduler
 msgid "A new backup have been generated!"
 msgstr ""
 
-#: backup-scheduler.php:439
+#: backup-scheduler.php:445
 #@ backup_scheduler
 msgid "An error occurred"
 msgstr ""
 
-#: backup-scheduler.php:545
+#: backup-scheduler.php:551
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
 
-#: backup-scheduler.php:546
+#: backup-scheduler.php:552
 #@ backup_scheduler
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
-#: backup-scheduler.php:547
+#: backup-scheduler.php:553
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
-#: backup-scheduler.php:554
+#: backup-scheduler.php:560
 #@ backup_scheduler
 msgid "Backup of %s (%s)"
 msgstr ""
