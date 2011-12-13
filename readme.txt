@@ -23,6 +23,7 @@ You can choose:
 
 = Localizations =
 
+* Spanish translation (by AVfoto)
 * French translation (by me)
 
 = Features of the framework = 
@@ -54,6 +55,11 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.0.4 =
+* Italian translation (by AVfoto)
+* Spanish translation (by PuntoCon)
+* Correction of a bug that occurs when server refuse to access / directory "open_basedir" restriction
+
 = 1.0.3 =
 * Improve the English text thanks to Rene 
 
@@ -70,4 +76,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:24bc467c97d90019e55881da1974deca
+InfoVersion:54b23bad60d55e7135e5760f0e9f61c5

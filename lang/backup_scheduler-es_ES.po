@@ -1,0 +1,148 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2011-12-13T07:55:56+00:00\n"
+"Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: Spain\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "Este plugin activa la copia de seguridad programada de partes importanes de tu website, facil de usar y eficiente!"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "Lo siento, pero debes de instalar/activar %s en tu website. De otra manera el plugin no funcionará correctamente !"
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Aquí están los archivos de la copia de seguridad. Puedes forzar a hacer un nuevo backup o descargar los anteriores."
+
+msgid "An automatic backup will be launched in %s days."
+msgstr "Una copia automática será realizada en %s dias."
+
+msgid "Force a new backup"
+msgstr "Forzar una nueva copia de seguridad."
+
+msgid "Backups"
+msgstr "Copias de seguridad."
+
+msgid "How often do you want to backup your website?"
+msgstr "Cada cuanto quieres realizar copia de seguridad de tu website?"
+
+msgid "Frequency (in days):"
+msgstr "Frecuencia (en dias):"
+
+msgid "Please note that the backup will occur at midnight to be sure that your website is not overloaded"
+msgstr "Por favor, fíjate que si la copia de seguridad va a ocurrir a media noche tu website no está sobrecargado."
+
+msgid "Keep the backup files for (in days):"
+msgstr "Guardar los archivos de copia por (en dias):"
+
+msgid "What do you want to save?"
+msgstr "Que quieres guardad?"
+
+msgid "The plugins directory:"
+msgstr "El directorio de plugins:"
+
+msgid "(i.e. %s)"
+msgstr "(por ejemplo %s)"
+
+msgid "The themes directory:"
+msgstr "El directorio de temas:"
+
+msgid "The upload directory:"
+msgstr "El directorio de subidas:"
+
+msgid "The SQL database:"
+msgstr "La base de datos SQL:"
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "Quieres que la copia de seguridad te sea enviada por e-mail?"
+
+msgid "If so, please enter your email:"
+msgstr "Si es así, introduce tu e-mail:"
+
+msgid "The maximum attachment size (in MB):"
+msgstr "Tamaño máximo de adjuntos (in MB):"
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
+msgstr ""
+
+msgid "Do you want to rename the files?"
+msgstr ""
+
+msgid "What is the suffix of the file:"
+msgstr ""
+
+msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
+msgstr ""
+
+msgid "Parameters"
+msgstr ""
+
+msgid "Manage translations"
+msgstr ""
+
+msgid "Give feedback"
+msgstr ""
+
+msgid "Other plugins"
+msgstr ""
+
+msgid "Date of the backup"
+msgstr ""
+
+msgid "Backup files"
+msgstr ""
+
+msgid "Part %s"
+msgstr ""
+
+msgid "Backup completed on %s at %s"
+msgstr ""
+
+msgid "The total size of the files is %s"
+msgstr ""
+
+msgid "These files will be deleted in %s days"
+msgstr ""
+
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr ""
+
+msgid "An other backup is still in progress... Please wait!"
+msgstr ""
+
+msgid "An error occured while sending mail!"
+msgstr ""
+
+msgid "A new backup have been generated!"
+msgstr ""
+
+msgid "An error occurred"
+msgstr ""
+
+msgid "Dear sirs,"
+msgstr ""
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr ""
+
+msgid "Best regards,"
+msgstr ""
+
+msgid "Backup of %s (%s)"
+msgstr ""
+

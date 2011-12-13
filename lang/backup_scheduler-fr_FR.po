@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-12T12:59:07+00:00\n"
+"PO-Revision-Date: 2011-12-13T08:57:12+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgid "Sorry, but you should install/activate %s on your website. Otherwise, thi
 msgstr "Désolé, mais vous devez activer %s sur votre site web. Autrement, ce plugin ne fonctionnera pas proprement !"
 
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr "Voici les fichiers de sauvegarde. Vous pouvez forcez une nouvelle sauvegarde ou télécharger les précédentes sauvegardes."
+msgstr "Voici les fichiers de sauvegarde. Vous pouvez forcer une nouvelle sauvegarde ou télécharger les précédentes sauvegardes."
 
 msgid "An automatic backup will be launched in %s days."
 msgstr "Une sauvegarde automatique sera lancé dans %s jours."
@@ -145,13 +145,4 @@ msgstr "Salutations, "
 
 msgid "Backup of %s (%s)"
 msgstr "Sauvegarde de %s (%s)"
-
-msgid "This form is an easy way to contact the author and to discuss issues / incompatibilities / etc."
-msgstr "Ce formulaire vous permet de contacter facilement l&#039;auteur afin de discuter de vos problèmes, des incompatibilités, etc."
-
-msgid "Here is the plugins developped by the author:"
-msgstr "Voici les plugins développés par l&#039;auteur :"
-
-msgid "Other possible plugins"
-msgstr "Autres plugins possibles"
 
