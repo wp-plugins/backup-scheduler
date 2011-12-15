@@ -23,7 +23,7 @@ You can choose:
 
 = Localizations =
 
-* Italian translation (by AVfoto)
+* Italian translation (by AVfoto and Javier)
 * Spanish translation (by PuntoCon)
 * French translation (by me)
 
@@ -56,6 +56,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.0.6 =
+* Add time and memory management for constrained configuration
+
 = 1.0.5 =
 * Improving zip decompression and path 
 
@@ -80,4 +83,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:9eb974a95adf3659519793cac4688c5e
+InfoVersion:c342155c0a559701fb5643a917008dc5

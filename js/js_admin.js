@@ -47,11 +47,25 @@ function forceBackup() {
 			jQuery("#backupInfo").html(response);
 			jQuery("#backupButton").removeAttr('disabled');
 			jQuery("#wait_backup").hide();
+		} else if ((""+response+ "").indexOf("Error") !=-1) {
+			jQuery("#backupInfo").html(response);
+			jQuery("#backupButton").removeAttr('disabled');
+			jQuery("#wait_backup").hide();
 		} else {
-			valeur = response.split("/") ; 
-			progressBar_modifyProgression(Math.floor(valeur[0]/valeur[1]*100));
-			progressBar_modifyText(response);
-			window.setTimeout(function() { 	forceBackup()  }, 200);
+			if (typeof(response)=='string') {
+				valeur = response.split("/") ; 
+				progressBar_modifyProgression(Math.floor(valeur[0]/valeur[1]*100));
+				progressBar_modifyText(response);
+				window.setTimeout(function() { 	forceBackup()  }, 200);
+			} else {
+				jQuery("#backupInfo").html("TimeOut problem");
+				jQuery("#backupButton").removeAttr('disabled');
+				jQuery("#wait_backup").hide();
+			}
 		}
+	}).error(function(jqXHR, textStatus, errorThrown) { 
+		jQuery("#backupInfo").html(textStatus+" " + errorThrown);
+		jQuery("#backupButton").removeAttr('disabled');
+		jQuery("#wait_backup").hide();
 	});    
 }

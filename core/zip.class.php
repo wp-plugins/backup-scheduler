@@ -102,9 +102,10 @@ if (!class_exists("SL_Zip")) {
 				$timeprocess = time() - (int)$timestart ; 
 				// We ensure that the process has not been started a too long time ago
 				if ($timeprocess<200) {
-					return array("step"=>"in progress") ; 
+					return array("step"=>"in progress", "for"=>$timeprocess) ; 
+				} else {
+					@unlink($path."/in_progress") ; 
 				}
-				
 			} 
 			
 			// We search for a tmp file
@@ -124,10 +125,11 @@ if (!class_exists("SL_Zip")) {
 		* @param string $splitfilename the path of the zip file to create
 		* @param integer $chunk_size the maximum size of the archive
 		* @param integer $maxExecutionTime the maximum execution time in second (if this time is exceeded, the function will return false. You just have to relaunch this function to complete the zip from where it has stopped)
+		* @param integer $maxExecutionTime the maximum memory allocated by the process (in bytes)
 		* @return array with the name of the file (or false if the max eceution time has been exceeded)
 		*/
 		
-		function createZip($splitfilename, $chunk_size=1000000000000000, $maxExecutionTime=0) {
+		function createZip($splitfilename, $chunk_size=1000000000000000, $maxExecutionTime=150, $maxAllocatedMemory=4000000) {
 			$zipfile_comment = "Compressed/Splitted by the SL framework (SedLex)";
 			
 			if ($chunk_size!=1000000000000000)
@@ -153,6 +155,8 @@ if (!class_exists("SL_Zip")) {
 				// We ensure that the process has not been started a too long time ago
 				if ($timeprocess<200) {
 					return array('finished'=>false, 'error' => sprintf(__("An other process is still running (it runs for %s seconds)", "SL_framework"), $timeprocess)) ; 
+				} else {
+					@unlink(dirname($splitfilename)."/in_progress") ; 
 				}
 			}
 			// We create a file with the time inside to indicate that this process is doing something
@@ -175,7 +179,7 @@ if (!class_exists("SL_Zip")) {
 				// We check that the time is not exceeded
 				$nowtime = microtime(true) ; 
 				if ($maxExecutionTime!=0) {
-					if ($nowtime - $this->starttime > $maxExecutionTime) {
+					if (($nowtime - $this->starttime > $maxExecutionTime) || ($maxAllocatedMemory<=strlen($data_segments))){
 						// We remove the file already inserted in the zip
 						$this->filelist =  array_slice($this->filelist,$k);
 						// We save the content on the disk

@@ -2,7 +2,7 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)
-Version: 1.0.5
+Version: 1.0.6
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -66,6 +66,9 @@ class backup_scheduler extends pluginSedLex {
 		}
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
 			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess", "Options All -Indexes") ; 
+		}
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php")) {
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php", "Hi") ; 
 		}
 		
 		// Important variables initialisation (Do not modify)
@@ -137,6 +140,8 @@ class backup_scheduler extends pluginSedLex {
 			case 'save_plugin' 		: return false				; break ; 
 			case 'save_theme' 		: return false				; break ; 
 			case 'save_db' 		: return true				; break ; 
+			case 'max_allocated' 		: return 5				; break ;
+			case 'max_time' 		: return 15				; break ;
 		}
 		return null ;
 	}
@@ -206,11 +211,15 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_title(sprintf(__('What do you want to save?',$this->pluginID), $title)) ; 
 				$params->add_param('save_plugin', __('The plugins directory:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/plugins/")) ; 
+				$params->add_comment(__('Check this option if you want to save all plugins that you have installed and that you use on this website.',$this->pluginID)) ; 
 				$params->add_param('save_theme', __('The themes directory:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/themes/")) ; 
+				$params->add_comment(__('Check this option if you want to save all themes that you have installed and that you use on this website.',$this->pluginID)) ; 
 				$params->add_param('save_upload', __('The upload directory:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/uploads/")) ; 
+				$params->add_comment(__('Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages.',$this->pluginID)) ; 
 				$params->add_param('save_db', __('The SQL database:',$this->pluginID)) ;
+				$params->add_comment(__('Check this option if you want to save the text of your posts, your configurations, etc.',$this->pluginID)) ; 
 				
 				$params->add_title(sprintf(__('Do you want that the backup is sent by email?',$this->pluginID), $title)) ; 
 				$params->add_param('email', __('If so, please enter your email:',$this->pluginID)) ; 
@@ -220,7 +229,15 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_title(sprintf(__('Do you want to rename the files?',$this->pluginID), $title)) ; 
 				$params->add_param('rename', __('What is the suffix of the file:',$this->pluginID)) ; 
 				$params->add_comment(__('This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail).',$this->pluginID)) ; 
-				
+				$params->add_comment(__('You do not need to fill this field if no mail is to be sent.',$this->pluginID)) ; 
+
+				$params->add_title(sprintf(__('Advanced - Memory and time management',$this->pluginID), $title)) ; 
+				$params->add_param('max_allocated', __('What is the maximum size of allocated memory (in MB):',$this->pluginID)) ; 
+				$params->add_comment(__('On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error.',$this->pluginID)) ; 
+				$params->add_comment(__('It is recommended that the maximum attachment size is not set to a value higher than this one.',$this->pluginID)) ; 
+				$params->add_param('max_time', __('What is the maximum time for the php scripts execution (in seconds):',$this->pluginID)) ; 
+				$params->add_comment(__('Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster.',$this->pluginID)) ; 
+
 				$params->flush() ; 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
 			
@@ -271,41 +288,43 @@ class backup_scheduler extends pluginSedLex {
 		$nb = 0 ; 
 		foreach ($files as $f) {
 			if (preg_match("/^BackupScheduler.*zip/i", $f)) {
-				$date = explode("_", $f) ; 
-				$date = $date[1] ; 
-				$date = date_i18n(get_option('date_format') ,mktime(0, 0, 0, substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
-				$heure = date ("H:i:s.", @filemtime(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f)) ; 
-				
-				$lien = "<p>" ; 
-				$i = 1 ; 
-				$size = 0 ; 
-				$racine = str_replace(".zip",".z". sprintf("%02d",$i), $f) ; 
-				
-				while (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$racine)) {
-					$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$racine."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$racine)).") | "  ; 
-					$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$racine) ; 
-					//MAJ
-					$i++ ; 
+				if (!preg_match("/^BackupScheduler.*tmp$/i", $f)) {
+					$date = explode("_", $f) ; 
+					$date = $date[1] ; 
+					$date = date_i18n(get_option('date_format') ,mktime(0, 0, 0, substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
+					$heure = date ("H:i:s.", @filemtime(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f)) ; 
+					
+					$lien = "<p>" ; 
+					$i = 1 ; 
+					$size = 0 ; 
 					$racine = str_replace(".zip",".z". sprintf("%02d",$i), $f) ; 
-				}
-				$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f) ; 
-				$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$f."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f)).")"  ; 
-				$lien .= "<p>" ; 
-				
-				// We compute in how many days the backup will be deleted
-				$name_file = explode("_", $f, 3) ; 
-				$new_date = date("Ymd") ; 
-				$date2 = substr($name_file[1], 0, 8) ; 
-				$s = strtotime($new_date)-strtotime($date2);
-				$delta = $this->get_param("delete_after")-intval($s/86400);   
+					
+					while (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$racine)) {
+						$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$racine."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$racine)).") | "  ; 
+						$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$racine) ; 
+						//MAJ
+						$i++ ; 
+						$racine = str_replace(".zip",".z". sprintf("%02d",$i), $f) ; 
+					}
+					$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f) ; 
+					$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$f."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f)).")"  ; 
+					$lien .= "<p>" ; 
+					
+					// We compute in how many days the backup will be deleted
+					$name_file = explode("_", $f, 3) ; 
+					$new_date = date("Ymd") ; 
+					$date2 = substr($name_file[1], 0, 8) ; 
+					$s = strtotime($new_date)-strtotime($date2);
+					$delta = $this->get_param("delete_after")-intval($s/86400);   
 
-				$valeur  = "<p>".sprintf(__('Backup completed on %s at %s',  $this->pluginID), $date, $heure)."</p>" ; 
-				$valeur .= "<p style='font-size:80%'>".sprintf(__('The total size of the files is %s',  $this->pluginID), Utils::byteSize($size))."</p>" ; 
-				$valeur .= "<p style='font-size:80%'>".sprintf(__('These files will be deleted in %s days',  $this->pluginID), $delta)."</p>" ; 
-				$cel1 = new adminCell($valeur) ;
-				$cel2 = new adminCell($lien) ;
-				$table->add_line(array($cel1, $cel2), '1') ;
-				$nb++ ; 
+					$valeur  = "<p>".sprintf(__('Backup completed on %s at %s',  $this->pluginID), $date, $heure)."</p>" ; 
+					$valeur .= "<p style='font-size:80%'>".sprintf(__('The total size of the files is %s',  $this->pluginID), Utils::byteSize($size))."</p>" ; 
+					$valeur .= "<p style='font-size:80%'>".sprintf(__('These files will be deleted in %s days',  $this->pluginID), $delta)."</p>" ; 
+					$cel1 = new adminCell($valeur) ;
+					$cel2 = new adminCell($lien) ;
+					$table->add_line(array($cel1, $cel2), '1') ;
+					$nb++ ; 
+				}
 			}
 		}
 		if ($nb==0) {
@@ -333,13 +352,16 @@ class backup_scheduler extends pluginSedLex {
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
 			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess", "Options All -Indexes") ; 
 		}
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php")) {
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php", "Hi") ; 
+		}
 		
 		$z = new SL_Zip;
 		
 		$ip = $z->is_inProgress(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
 		
 		if ($ip['step'] == "in progress") {
-			return array('finished'=>false, 'error'=>__("An other backup is still in progress... Please wait!", $this->pluginID)) ; 
+			return array('finished'=>false, 'error'=>sprintf(__("An other backup is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip['for'])) ; 
 		} else if ($ip['step'] == "nothing") {
 			$ok = false ; 
 			if ($this->get_param('save_plugin')) {
@@ -367,7 +389,7 @@ class backup_scheduler extends pluginSedLex {
 			if ($ok) {
 				$z -> removePath(WP_CONTENT_DIR."/") ; 
 				$z -> addPath("backup_".$date."/") ; 
-				$path = $z -> createZip($name,$this->get_param('chunk')*1024*1024, 5);
+				$path = $z -> createZip($name,$this->get_param('chunk')*1024*1024, 5, $this->get_param('max_allocated')*1024*1024 );
 				if ($path['finished']==true) {
 					// We rename the zip file if needed
 					if ($this->get_param('rename')!="") {
@@ -389,7 +411,7 @@ class backup_scheduler extends pluginSedLex {
 			}
 		} else if ($ip['step'] == "to be completed") {
 			$name = $ip['name_zip']  ; 
-			$path = $z -> createZip(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name,$this->get_param('chunk')*1024*1024, 10);
+			$path = $z -> createZip(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name,$this->get_param('chunk')*1024*1024, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
 			if ($path['finished']==true) {
 				@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup", date("Y-m-d")) ; 
 				// We rename the zip file if needed
@@ -616,7 +638,7 @@ class backup_scheduler extends pluginSedLex {
 						$insertions .=  "'";
 						
 					// Si c'est trop grand on flush
-					if (strlen($insertions)>4000000) {
+					if (strlen($insertions)> $this->get_param('max_allocated') * 1024 * 1024) {
 						@file_put_contents($sqlPath, $insertions, FILE_APPEND) ; 
 						$insertions = "" ; 
 					}

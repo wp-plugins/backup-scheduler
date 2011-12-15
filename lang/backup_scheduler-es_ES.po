@@ -4,7 +4,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-13T07:55:56+00:00\n"
+"PO-Revision-Date: 2011-12-14T16:01:52+00:00\n"
+"Last-Translator: Javier <>\n"
 "Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -78,71 +79,71 @@ msgid "The maximum attachment size (in MB):"
 msgstr "Tamaño máximo de adjuntos (in MB):"
 
 msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr ""
+msgstr "El archivo zip será dividido en múltiples archivos del tamaño máximo especificado."
 
 msgid "Do you want to rename the files?"
-msgstr ""
+msgstr "¿Quiere renombrar los archivos?"
 
 msgid "What is the suffix of the file:"
-msgstr ""
+msgstr "Cuál es el sufijo del archivo:"
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
-msgstr ""
+msgstr "Esta opción permite desactivar la función de bloqueo de algunos proveedores de correo que bloquean los correos con archivos adjuntos zip (como Gmail)."
 
 msgid "Parameters"
-msgstr ""
+msgstr "Parámetros"
 
 msgid "Manage translations"
-msgstr ""
+msgstr "Modificar traducciones"
 
 msgid "Give feedback"
-msgstr ""
+msgstr "Deje su comentario"
 
 msgid "Other plugins"
-msgstr ""
+msgstr "Otros plugins"
 
 msgid "Date of the backup"
-msgstr ""
+msgstr "Fecha de la copia de seguridad"
 
 msgid "Backup files"
-msgstr ""
+msgstr "Archivos en la copia de seguridad"
 
 msgid "Part %s"
-msgstr ""
+msgstr "Parte %s"
 
 msgid "Backup completed on %s at %s"
-msgstr ""
+msgstr "Copia de seguridad completada el %s a las %s"
 
 msgid "The total size of the files is %s"
-msgstr ""
+msgstr "El tamaño total de los archivos es %s"
 
 msgid "These files will be deleted in %s days"
-msgstr ""
+msgstr "Estos archivos serán eliminados en %s days"
 
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
-msgstr ""
+msgstr "(Por el momento, no hay archivos de copia de seguridad ... Espere o fuerce una copia de seguridad (ver más abajo))"
 
 msgid "An other backup is still in progress... Please wait!"
-msgstr ""
+msgstr "Otra copia de seguridad está ya en progreso... Espere por favor!"
 
 msgid "An error occured while sending mail!"
-msgstr ""
+msgstr "Ocurrió un error mientras se enviaba el correo."
 
 msgid "A new backup have been generated!"
-msgstr ""
+msgstr "Se ha creado una nueva copia de seguridad!"
 
 msgid "An error occurred"
-msgstr ""
+msgstr "Ocurrió un error"
 
 msgid "Dear sirs,"
-msgstr ""
+msgstr "Estimados señores,"
 
 msgid "Here is attached the %s on %s backup files for today"
-msgstr ""
+msgstr "Aquí se adjunta el % s en los archivos de copia de seguridad de % s para hoy"
 
 msgid "Best regards,"
-msgstr ""
+msgstr "Saludos cordiales,"
 
 msgid "Backup of %s (%s)"
-msgstr ""
+msgstr "Copia de seguridad de %s (%s)"
 
