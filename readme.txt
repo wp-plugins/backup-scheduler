@@ -23,6 +23,7 @@ You can choose:
 
 = Localizations =
 
+* Polish translation (by Pablo)
 * Italian translation (by AVfoto and Javier)
 * Spanish translation (by PuntoCon)
 * French translation (by me)
@@ -52,9 +53,13 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Screenshots ==
 
-1. The configuration page of the plugin
+1. A list of all backup files
+2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.0.7 =
+* Polish translation (by Pablo)
 
 = 1.0.6 =
 * Add time and memory management for constrained configuration
@@ -83,4 +88,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:c342155c0a559701fb5643a917008dc5
+InfoVersion:59a22ec458a3a5eeee39d51c3c56ab7d

@@ -2,7 +2,7 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)
-Version: 1.0.6
+Version: 1.0.7
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -234,6 +234,8 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_title(sprintf(__('Advanced - Memory and time management',$this->pluginID), $title)) ; 
 				$params->add_param('max_allocated', __('What is the maximum size of allocated memory (in MB):',$this->pluginID)) ; 
 				$params->add_comment(__('On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error.',$this->pluginID)) ; 
+				$params->add_comment(sprintf(__('For your information, the memory limit of your webserver is %s whereas the present memory usage is %s.',$this->pluginID), ini_get('memory_limit'), Utils::byteSize(memory_get_usage()))) ; 
+				
 				$params->add_comment(__('It is recommended that the maximum attachment size is not set to a value higher than this one.',$this->pluginID)) ; 
 				$params->add_param('max_time', __('What is the maximum time for the php scripts execution (in seconds):',$this->pluginID)) ; 
 				$params->add_comment(__('Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster.',$this->pluginID)) ; 
@@ -344,6 +346,13 @@ class backup_scheduler extends pluginSedLex {
 	
 	public function create_zip() {
 		$date = date("YmdHis") ; 
+		
+		// Memory limit upgrade
+		$current_use    = ceil( memory_get_usage() / (1024*1024) );
+		$limit  = ((int)ini_get('memory_limit'));
+		if ( $current_use + $this->get_param('max_allocated') + 20 >= $limit ){
+			@ini_set('memory_limit', sprintf('%dM', ($current_use + $this->get_param('max_allocated') + 20) ));
+		}
 		
 		// Security
 		$rand = Utils::rand_str(10, "abcdefghijklmnopqrstuvwxyz0123456789") ; 
@@ -619,6 +628,7 @@ class backup_scheduler extends pluginSedLex {
 			$creations .= $wpdb->get_var("show create table ".$table[0], 1);
 			
 			@file_put_contents($sqlPath, $creations, FILE_APPEND) ; 
+			$creations = "" ; 
 		
 			$insertions = "\n\n";
 	 		$insertions .= "-- -----------------------------\n";
