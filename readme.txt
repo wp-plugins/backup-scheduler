@@ -19,10 +19,11 @@ You can choose:
 
 * which folders you will save; 
 * whether your database should be saved; 
-* whether the backup is stored on the local website or sent by email (support of multipart zip files)
+* whether the backup is stored on the local website or sent by email (support of multi part zip files)
 
 = Localizations =
 
+* German-Switzerland translation (by BernhardKnab)
 * Polish translation (by Pablo)
 * Italian translation (by AVfoto and Javier)
 * Spanish translation (by PuntoCon)
@@ -58,6 +59,11 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.0.8 =
+* German-Switzerland translation (by BernhardKnab)
+* Improve memory and time management for database extraction
+* Add error messages if it is impossible to read/delete/modify files
+
 = 1.0.7 =
 * Polish translation (by Pablo)
 
@@ -88,4 +94,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:59a22ec458a3a5eeee39d51c3c56ab7d
+InfoVersion:c1167fc6cd3b905a5acd3ee8c9b94718

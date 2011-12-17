@@ -2,7 +2,7 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)
-Version: 1.0.7
+Version: 1.0.8
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -371,8 +371,35 @@ class backup_scheduler extends pluginSedLex {
 		
 		if ($ip['step'] == "in progress") {
 			return array('finished'=>false, 'error'=>sprintf(__("An other backup is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip['for'])) ; 
+		} else if ($ip['step'] == "error") {
+			return array('finished'=>false, 'error'=>$ip['msg']) ; 			
 		} else if ($ip['step'] == "nothing") {
 			$ok = false ; 
+			if ($this->get_param('save_db')) {
+				$sql = new SL_Database() ; 
+				$ip2 = $sql->is_inProgress(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
+				if ($ip2['step'] == "in progress") {
+					return array('finished'=>false, 'error'=>sprintf(__("An other SQL extraction is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip2['for'])) ; 
+				} else if ($i2['step'] == "error") {
+					return array('finished'=>false, 'error'=>$ip2['msg']) ; 			
+				} else if ($ip2['step'] == "nothing") {
+					$name2 = "BackupScheduler_".$date."_".$rand.".sql" ; 
+					$res = $sql->createSQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name2, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
+					if ($res['finished']==false) {
+						$res['text'] = ' '.__('(SQL extraction)', "SL_framework") ; 	
+						return $res ;
+					}
+				} else if ($ip2['step'] == "to be completed") {
+					$name2 = $ip2['name_sql']  ; 
+					$res = $sql->createSQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name2, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
+					if ($res['finished']==false) {
+						$res['text'] = ' '.__('(SQL extraction)', "SL_framework") ; 	
+						return $res ;
+					}
+				}
+				$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$date."_".$rand.".sql");
+				$ok = true ; 
+			}
 			if ($this->get_param('save_plugin')) {
 				$z -> addDir(WP_CONTENT_DIR."/plugins/");
 				$ok = true ; 
@@ -385,11 +412,6 @@ class backup_scheduler extends pluginSedLex {
 				$z -> addDir(WP_CONTENT_DIR."/uploads/");
 				$ok = true ; 
 			}
-			if ($this->get_param('save_db')) {
-				$this->dumpMySQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$date."_".$rand.".sql") ; 
-				$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$date."_".$rand.".sql");
-				$ok = true ; 
-			}
 			
 			@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
 			@copy(ABSPATH."/wp-config.php", WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
@@ -399,6 +421,7 @@ class backup_scheduler extends pluginSedLex {
 				$z -> removePath(WP_CONTENT_DIR."/") ; 
 				$z -> addPath("backup_".$date."/") ; 
 				$path = $z -> createZip($name,$this->get_param('chunk')*1024*1024, 5, $this->get_param('max_allocated')*1024*1024 );
+				
 				if ($path['finished']==true) {
 					// We rename the zip file if needed
 					if ($this->get_param('rename')!="") {
@@ -416,6 +439,7 @@ class backup_scheduler extends pluginSedLex {
 						$path['finished'] = false ;  
 					}
 				}
+				$path['text'] = ' '.__('(ZIP creation)', "SL_framework") ; 	
 				return $path ; 
 			}
 		} else if ($ip['step'] == "to be completed") {
@@ -438,10 +462,11 @@ class backup_scheduler extends pluginSedLex {
 					$path['finished'] = false ;  
 				}
 			}
+			$path['text'] = ' '.__('(ZIP creation)', "SL_framework") ; 	
 			return $path ; 
 		}
 		
-		return false ;
+		return array('finished'=>false, 'error'=>__("An unknown error occured!", $this->pluginID)) ; 
 	}
 	
 	/** ====================================================================================================================================================
@@ -462,18 +487,15 @@ class backup_scheduler extends pluginSedLex {
 	*/
 	function backupForce() {
 		$result = $this->create_zip() ;
-		if ($result!==false) {
-			if ($result['finished']==true) {
-				echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup have been generated!", $this->pluginID)."</p></div>" ; 
-			} else {
-				if (isset($result['error'])) {
-					echo "<div class='error fade'><p class='backupError'>".$result['error']."</p></div>" ; 
-				} else {
-					echo $result['nb_finished']."/".($result['nb_finished']+$result['nb_to_finished']) ; 
-				}
-			}
+		
+		if ($result['finished']==true) {
+			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup have been generated!", $this->pluginID)."</p></div>" ; 
 		} else {
-			echo "<p class='backupError'>".__("An error occurred", $this->pluginID)."</p>" ; 
+			if (isset($result['error'])) {
+				echo "<div class='error fade'><p class='backupError'>".$result['error']."</p></div>" ; 
+			} else {
+				echo $result['nb_finished']."/".($result['nb_finished']+$result['nb_to_finished']).$result['text'] ; 
+			}
 		}
 		
 		die() ; 
@@ -597,70 +619,7 @@ class backup_scheduler extends pluginSedLex {
 			} 
 		}
 		return true ; 
-	}
-	
-	/** ====================================================================================================================================================
-	* Export the DB in a sql file
-	*
-	* @param $sqlPath the path to SQL file to save
-	* @return void
-	*/
-	function dumpMySQL($sqlPath) {
-		global $wpdb ; 
-		
-		@file_put_contents($sqlPath, "") ; 
-		
-		$entete = "-- -------------------------------------------------\n";
-		$entete .= "-- ".DB_NAME." - ".date("d-M-Y")."\n";
-		$entete .= "-- -----------------------------------------------\n";
-		
-		@file_put_contents($sqlPath, $entete, FILE_APPEND) ; 
-		
-		$creations = "";
-		
-	 	$tables = $wpdb->get_results("show tables", ARRAY_N);
-		foreach ($tables as $table) {
-			
-			$creations = "\n\n";
-			$creations .= "-- -----------------------------\n";
-			$creations .= "-- CREATE ".$table[0]."\n";
-			$creations .= "-- -----------------------------\n";
-			$creations .= $wpdb->get_var("show create table ".$table[0], 1);
-			
-			@file_put_contents($sqlPath, $creations, FILE_APPEND) ; 
-			$creations = "" ; 
-		
-			$insertions = "\n\n";
-	 		$insertions .= "-- -----------------------------\n";
-			$insertions .= "-- INSERT INTO ".$table[0]."\n";
-			$insertions .= "-- -----------------------------\n\n";
-					
-			$lignes = $wpdb->get_results("SELECT * FROM ".$table[0], ARRAY_N);
-			foreach ( $lignes as $ligne ) {
-				$insertions .= "INSERT INTO ".$table[0]." VALUES(";
-				for($i=0; $i < count($ligne); $i++) {
-					if($i != 0) 
-						$insertions .=  ", ";
-					if ( ($wpdb->get_col_info('type', $i) == "string") || ($wpdb->get_col_info('type', $i) == "blob") )
-						$insertions .=  "'";
-					$insertions .= addslashes($ligne[$i]);
-					if ( ($wpdb->get_col_info('type', $i) == "string") || ($wpdb->get_col_info('type', $i) == "blob") )
-						$insertions .=  "'";
-						
-					// Si c'est trop grand on flush
-					if (strlen($insertions)> $this->get_param('max_allocated') * 1024 * 1024) {
-						@file_put_contents($sqlPath, $insertions, FILE_APPEND) ; 
-						$insertions = "" ; 
-					}
-		
-				}
-				$insertions .=  ");\n";
-				
-			}
-			@file_put_contents($sqlPath, $insertions, FILE_APPEND) ; 
-		}
-	}
-	
+	}	
 }
 
 $backup_scheduler = backup_scheduler::getInstance();

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-13T08:57:12+00:00\n"
+"PO-Revision-Date: 2011-12-17T16:18:43+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgid "Frequency (in days):"
 msgstr "Fréquence (en jours) :"
 
 msgid "Please note that the backup will occur at midnight to be sure that your website is not overloaded"
-msgstr "Merci de noter que les sauvegardes seront lancées à minuitt afin d&#039;être certain que votre site web n&#039;est pas surchargé."
+msgstr "Merci de noter que les sauvegardes seront lancées à minuit afin d&#039;être certain que votre site web n&#039;est pas surchargé."
 
 msgid "Keep the backup files for (in days):"
 msgstr "Garder les fichiers de sauvegardes pendant (en jours) :"
@@ -59,14 +59,26 @@ msgstr "Le répertoire des plugins :"
 msgid "(i.e. %s)"
 msgstr "(i.e. %s)"
 
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "Cocher cette option si vous voulez sauvegarder tous les plugins que vous avez installés et que vous utilisez sur ce site web. "
+
 msgid "The themes directory:"
 msgstr "Le répértoire des thèmes :"
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "Cocher cette option si vous voulez sauvegarder tous les thèmes que vous avez installés et que vous utilisez sur ce site web. "
 
 msgid "The upload directory:"
 msgstr "Le répertoire upload : "
 
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
+msgstr "Cocher cette option si vous voulez sauvegarder toutes les images, les fichiers, etc. que vous avez téléchargés sur vote site web pour créer vos articles/pages."
+
 msgid "The SQL database:"
 msgstr "La base de données SQL :"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr "Cocher cette option si vous voulez sauvegarder le texte de vos articles, vos configurations, etc."
 
 msgid "Do you want that the backup is sent by email?"
 msgstr "Voulez-vous que la sauvegarde vous soit envoyé par email ?"
@@ -88,6 +100,30 @@ msgstr "Quel est le suffixe du fichier : "
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr "Cette option permet de coutourner les mesures de bloquage prise par certains fournisseurs mails qui bloquent les mails avec des pièces jointes de type zip (comme GMail)."
+
+msgid "You do not need to fill this field if no mail is to be sent."
+msgstr "Vous n&#039;avez pas besoin de remplir ce champ si vous ne souhaitez pas envoyer de mail."
+
+msgid "Advanced - Memory and time management"
+msgstr "Avancé - Gestion de la mémoire et du temps"
+
+msgid "What is the maximum size of allocated memory (in MB):"
+msgstr "Quelle est la taille maximale de mémoire à allouer (en Mo) :"
+
+msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
+msgstr "Sur certaines installation de Wordpress, vous pouvez avoir des problèmes de mémoire. Ainsi, essayer de réduire ce nombre si vous rencontrer ce genre de problème."
+
+msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
+msgstr "Pour votre information, la limite d&#039;allocation mémoire de votre server est %s tandis que la consommation actuelle est de %s."
+
+msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
+msgstr "Il est recommandé que la taille maximale des pièces-jointes ne soit pas plus grande que cette valeur."
+
+msgid "What is the maximum time for the php scripts execution (in seconds):"
+msgstr "Quel est le temps maximal d&#039;execution des scripts PHP (en seconde) : "
+
+msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
+msgstr "Même si vous n&#039;avez pas de restriction, il est recommandé de mettre cette valeur à 15 sec afin d&#039;éviter que votre hébergeur n&#039;arrête l&#039;execution de ce script."
 
 msgid "Parameters"
 msgstr "Paramètres"
@@ -122,17 +158,20 @@ msgstr "Ces fichiers seront supprimés dans %s jours"
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "(Pour l&#039;instant, il n&#039;y a pas de fichiers de sauvegarde... Vous devriez attendre ou vous pouvez forcer une sauvegarde (voir ci-dessous) )"
 
-msgid "An other backup is still in progress... Please wait!"
-msgstr "Une autre sauvegarde est encore en cours... merci de patienter !"
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "Une autre sauvegarde est en cours (depuis %s secondes)... Merci de patienter ! "
+
+msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
+msgstr "Une autre extraction SQL est en cours (depuis %s secondes)... Merci de patienter ! "
 
 msgid "An error occured while sending mail!"
 msgstr "Une erreur est survenue lors de l&#039;envoi d&#039;un email !"
 
+msgid "An unknown error occured!"
+msgstr "Une erreur inconnue est survenue"
+
 msgid "A new backup have been generated!"
 msgstr "Une nouvelle sauvegarde a été réalisée"
-
-msgid "An error occurred"
-msgstr "Une erreur est survenue"
 
 msgid "Dear sirs,"
 msgstr "Cher monsieur, chère madame, "

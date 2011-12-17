@@ -93,23 +93,32 @@ if (!class_exists("SL_Zip")) {
 		* Tells whether a zip file is being created or not
 		* 
 		* @param $path the path in which the zip should be created
-		* @return array the 'step' could be 'in progress' (a process is still running), 'nothing' (no zip is being zipped) or 'to be completed' (and the 'name_zip' will be the name of the zip file being zipped)
+		* @return array the 'step' could be 'in progress' (a process is still running), 'nothing' (no zip is being zipped) or 'to be completed' (and the 'name_zip' will be the name of the zip file being zipped) or 'error' (and the 'msg' will display the error messgae)
 		*/
 		
 		function is_inProgress($path) {
 			if (is_file($path."/in_progress")) {
 				$timestart = @file_get_contents($path."/in_progress")  ;
+				if ($timestart===FALSE) {
+					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be read. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/in_progress</code>")) ; 
+				}
 				$timeprocess = time() - (int)$timestart ; 
 				// We ensure that the process has not been started a too long time ago
 				if ($timeprocess<200) {
 					return array("step"=>"in progress", "for"=>$timeprocess) ; 
 				} else {
-					@unlink($path."/in_progress") ; 
+					$r = @unlink($path."/in_progress") ; 
+					if ($r===FALSE) {
+						return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/in_progress</code>")) ; 
+					}
 				}
 			} 
 			
 			// We search for a tmp file
-			$files = scandir($path) ;
+			$files = @scandir($path) ;
+			if ($files===FALSE) {
+				return array("step"=>"error", "msg"=>sprintf(__('The folder %s cannot be opened. You should have a problem with folder permissions or security restrictions.', 'SL_framework'),"<code>".$path."</code>")) ; 
+			}
 			foreach ($files as $f) {
 				if (preg_match("/zip[.]tmp$/i", $f)) {
 					$name_file = str_replace(".zip.tmp", ".zip",$f) ; 
@@ -126,7 +135,7 @@ if (!class_exists("SL_Zip")) {
 		* @param integer $chunk_size the maximum size of the archive
 		* @param integer $maxExecutionTime the maximum execution time in second (if this time is exceeded, the function will return false. You just have to relaunch this function to complete the zip from where it has stopped)
 		* @param integer $maxExecutionTime the maximum memory allocated by the process (in bytes)
-		* @return array with the name of the file (or false if the max eceution time has been exceeded)
+		* @return array with the name of the file (or 'finished' => false if an error occured see 'error' for the error message)
 		*/
 		
 		function createZip($splitfilename, $chunk_size=1000000000000000, $maxExecutionTime=150, $maxAllocatedMemory=4000000) {
@@ -151,26 +160,44 @@ if (!class_exists("SL_Zip")) {
 			// We check that no process is running
 			if (is_file(dirname($splitfilename)."/in_progress")) {
 				$timestart = @file_get_contents(dirname($splitfilename)."/in_progress")  ;
+				if ($timestart===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be read. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".dirname($splitfilename)."/in_progress</code>")) ; 
+				}
 				$timeprocess = time() - (int)$timestart ; 
 				// We ensure that the process has not been started a too long time ago
 				if ($timeprocess<200) {
 					return array('finished'=>false, 'error' => sprintf(__("An other process is still running (it runs for %s seconds)", "SL_framework"), $timeprocess)) ; 
 				} else {
-					@unlink(dirname($splitfilename)."/in_progress") ; 
+					$r = @unlink(dirname($splitfilename)."/in_progress") ; 
+					if ($r===FALSE) {
+						return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".dirname($splitfilename)."/in_progress</code>")) ; 
+					}
 				}
 			}
 			// We create a file with the time inside to indicate that this process is doing something
-			@file_put_contents(dirname($splitfilename)."/in_progress", time()) ; 
-				
+			$r = @file_put_contents(dirname($splitfilename)."/in_progress", time()) ; 
+			if ($r===FALSE) {
+				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".dirname($splitfilename)."/in_progress</code>")) ; 
+			}
+					
 			// We look if the .tmp file exists, if so, it means that we have to restart the zip process where it stopped
 			if (is_file($splitfilename.".tmp")) {
 				// We retrieve the process
 				$content = @file_get_contents($splitfilename.".tmp") ; 
-				@unlink($splitfilename.".tmp") ; 
+				if ($content===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be read. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".tmp</code>")) ; 
+				}
+				$r = @unlink($splitfilename.".tmp") ; 
+				if ($r===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".tmp</code>")) ; 
+				}
 				list($data_segments_len, $nbentry, $pathToReturn, $split_offset, $old_offset, $disk_number, $this->filelist, $this->addpath, $this->removepath) = unserialize($content) ; 
 			}
 			if (!is_file($splitfilename.".data_segment.tmp")) {
-				@file_put_contents($splitfilename.".data_segment.tmp" ,$split_signature) ; 
+				$r = @file_put_contents($splitfilename.".data_segment.tmp" ,$split_signature) ; 
+				if ($r===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
+				}
 			}
 				
 			// We create the zip file
@@ -183,13 +210,23 @@ if (!class_exists("SL_Zip")) {
 						// We remove the file already inserted in the zip
 						$this->filelist =  array_slice($this->filelist,$k);
 						// We save the content on the disk
-						@file_put_contents($splitfilename.".tmp" ,serialize(array($data_segments_len, $nbentry, $pathToReturn, $split_offset, $old_offset, $disk_number, $this->filelist, $this->addpath, $this->removepath))) ; 
-						@file_put_contents($splitfilename.".data_segment.tmp" ,$data_segments, FILE_APPEND) ; 
-						@file_put_contents($splitfilename.".file_headers.tmp" ,$file_headers, FILE_APPEND) ; 
-						
+						$r = @file_put_contents($splitfilename.".tmp" ,serialize(array($data_segments_len, $nbentry, $pathToReturn, $split_offset, $old_offset, $disk_number, $this->filelist, $this->addpath, $this->removepath))) ; 
+						if ($r===FALSE) {
+							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".tmp</code>")) ; 
+						}
+						$r = @file_put_contents($splitfilename.".data_segment.tmp" ,$data_segments, FILE_APPEND) ; 
+						if ($r===FALSE) {
+							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
+						}
+						$r = @file_put_contents($splitfilename.".file_headers.tmp" ,$file_headers, FILE_APPEND) ; 
+						if ($r===FALSE) {
+							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".file_headers.tmp</code>")) ; 
+						}
 						// we inform that the process is finished
-						@unlink(dirname($splitfilename)."/in_progress") ; 
-						
+						$r = @unlink(dirname($splitfilename)."/in_progress") ; 
+						if ($r===FALSE) {
+							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".dirname($splitfilename)."/in_progress</code>")) ; 
+						}
 						return  array('finished'=>false, 'nb_to_finished' => count($this->filelist), 'nb_finished' => ($nbentry)) ; 
 					}
 				}
@@ -198,15 +235,21 @@ if (!class_exists("SL_Zip")) {
 				$nbentry ++ ; 
 								
 				//Get the data
-				$filedata = file_get_contents($filename);
+				$filedata = @file_get_contents($filename);
+				if ($filedata===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be read. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$filename."</code>")) ; 
+				}
 				
 				//Compressing data
-				$c_data   = gzcompress($filedata);
-				$compressed_filedata    = substr(substr($c_data, 0, strlen($c_data) - 4), 2); // fix crc bug
+				$c_data = @gzcompress($filedata);
+				if ($c_data===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be compressed.', 'SL_framework'),"<code>".$filename."</code>")) ; 
+				}
+				$compressed_filedata = substr(substr($c_data, 0, strlen($c_data) - 4), 2); // fix crc bug
 								
 				// Get the time
 				clearstatcache();
-				$filetime = filectime($filename);
+				$filetime = @filectime($filename);
 				if ($filetime == 0) { 
 					$timearray = getdate() ;
 				} else { 
@@ -245,7 +288,6 @@ if (!class_exists("SL_Zip")) {
 				$filename_length = pack('v', strlen($newfilename));// 2 bytes filename_length
 				$extra_field_length = pack('v', 0);  //2 bytes extra_field_length
 				
-				
 				$local_file_header = $local_file_header_signature . $version_needed_to_extract . $general_purpose_bit_flag .$compression_method .$last_mod_file_time .$last_mod_file_date .$crc_32 .$compressed_size .$uncompressed_size .$filename_length .$extra_field_length . $newfilename;
 								
 				//Set Data Descriptor
@@ -277,12 +319,24 @@ if (!class_exists("SL_Zip")) {
 			}
 			
 			// We complete the tmp files with current content
-			@file_put_contents($splitfilename.".data_segment.tmp" ,$data_segments, FILE_APPEND) ; 
-			@file_put_contents($splitfilename.".file_headers.tmp" ,$file_headers, FILE_APPEND) ; 
-						
+			$r = @file_put_contents($splitfilename.".data_segment.tmp" ,$data_segments, FILE_APPEND) ; 
+			if ($r===FALSE) {
+				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
+			}
+			$r = @file_put_contents($splitfilename.".file_headers.tmp" ,$file_headers, FILE_APPEND) ; 
+			if ($r===FALSE) {
+				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".file_headers.tmp</code>")) ; 
+			}			
+			
 			// We retrieve the file header
 			$file_headers = @file_get_contents($splitfilename.".file_headers.tmp") ; 
-			@unlink($splitfilename.".file_headers.tmp") ; 
+			if ($file_headers===FALSE) {
+				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be read. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".file_headers.tmp</code>")) ; 
+			}
+			$r = @unlink($splitfilename.".file_headers.tmp") ; 
+			if ($r===FALSE) {
+				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".file_headers.tmp</code>")) ; 
+			}
 			
 			// We finalize
 			if($splitted) {
@@ -302,17 +356,22 @@ if (!class_exists("SL_Zip")) {
 			$endCentralDirectory  = $end_central_dir_signature . $number_this_disk . $number_disk_start . $total_number_entries . $total_number_entries_central . $size_central_directory . $offset_start_central . $zipfile_comment_length . $zipfile_comment; 
 		
 			// We complete the data segments file
-			@file_put_contents($splitfilename.".data_segment.tmp" , $file_headers. $endCentralDirectory, FILE_APPEND) ; 
+			$r = @file_put_contents($splitfilename.".data_segment.tmp" , $file_headers. $endCentralDirectory, FILE_APPEND) ; 
+			if ($r===FALSE) {
+				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
+			}
 			
 			// We split the zip file
-			$fp = fopen($splitfilename.".data_segment.tmp", 'rb') ; 
+			$fp = @fopen($splitfilename.".data_segment.tmp", 'rb') ; 
 			if ($fp) {
 				$j = 0 ; 
 				for ($i = 0; $i < strlen($split_signature) + $data_segments_len + strlen($file_headers.$endCentralDirectory) ; $i += $chunk_size) {
 					
 					$j++ ; 
-					$out = fread($fp, $chunk_size) ; 
-					
+					$out = @fread($fp, $chunk_size) ; 
+					if ($out===FALSE) {
+						return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be read. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
+					}
 					// Select the correct name of the file
 					if( $i+$chunk_size < strlen($split_signature) + $data_segments_len + strlen($file_headers.$endCentralDirectory) ) {
 						$sfilename = basename ($splitfilename,".zip"); 
@@ -323,18 +382,34 @@ if (!class_exists("SL_Zip")) {
 					}
 					
 					$pathToReturn[] = $sfilename ; 
-					@file_put_contents($sfilename, $out);
+					$r = @file_put_contents($sfilename, $out);
+					if ($r===FALSE) {
+						return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sfilename."</code>")) ; 
+					}
 				}
-				@unlink($splitfilename.".data_segment.tmp") ; 
+				$r = @unlink($splitfilename.".data_segment.tmp") ;
+				if ($r===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
+				}
 				// we inform that the process is finished
-				@unlink(dirname($splitfilename)."/in_progress") ; 
-				fclose($fp) ; 
+				$r = @unlink(dirname($splitfilename)."/in_progress") ; 
+				if ($r===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".dirname($splitfilename)."/in_progress</code>")) ; 
+				}
+				@fclose($fp) ; 
 				return array('finished'=>true, 'nb_files'=>$nbentry , 'path'=>$pathToReturn) ; 
 			} else {
 				// we inform that the process is finished
-				@unlink(dirname($splitfilename)."/in_progress") ; 
-				@unlink($splitfilename.".data_segment.tmp") ; 
-				return array('finished'=>true, 'error' => 'Cannot open the file') ; 
+				$r = @unlink($splitfilename.".data_segment.tmp") ;
+				if ($r===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
+				}
+				// we inform that the process is finished
+				$r = @unlink(dirname($splitfilename)."/in_progress") ; 
+				if ($r===FALSE) {
+					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".dirname($splitfilename)."/in_progress</code>")) ; 
+				}
+				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be read. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".data_segment.tmp</code>")) ; 
 			}
 		}
 	} 

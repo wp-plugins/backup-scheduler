@@ -238,38 +238,43 @@ msgstr ""
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
 msgstr ""
 
-#: backup-scheduler.php:415
-#: backup-scheduler.php:437
+#: backup-scheduler.php:382
+#@ backup_scheduler
+msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
+msgstr ""
+
+#: backup-scheduler.php:438
+#: backup-scheduler.php:461
 #@ backup_scheduler
 msgid "An error occured while sending mail!"
 msgstr ""
 
-#: backup-scheduler.php:467
+#: backup-scheduler.php:469
+#@ backup_scheduler
+msgid "An unknown error occured!"
+msgstr ""
+
+#: backup-scheduler.php:492
 #@ backup_scheduler
 msgid "A new backup have been generated!"
 msgstr ""
 
-#: backup-scheduler.php:476
-#@ backup_scheduler
-msgid "An error occurred"
-msgstr ""
-
-#: backup-scheduler.php:582
+#: backup-scheduler.php:604
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
 
-#: backup-scheduler.php:583
+#: backup-scheduler.php:605
 #@ backup_scheduler
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
-#: backup-scheduler.php:584
+#: backup-scheduler.php:606
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
-#: backup-scheduler.php:591
+#: backup-scheduler.php:613
 #@ backup_scheduler
 msgid "Backup of %s (%s)"
 msgstr ""

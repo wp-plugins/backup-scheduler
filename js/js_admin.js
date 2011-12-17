@@ -53,7 +53,8 @@ function forceBackup() {
 			jQuery("#wait_backup").hide();
 		} else {
 			if (typeof(response)=='string') {
-				valeur = response.split("/") ; 
+				valeur = response.split(" ") ; 
+				valeur = valeur[0].split("/") ; 
 				progressBar_modifyProgression(Math.floor(valeur[0]/valeur[1]*100));
 				progressBar_modifyText(response);
 				window.setTimeout(function() { 	forceBackup()  }, 200);
