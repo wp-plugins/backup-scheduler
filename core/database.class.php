@@ -93,7 +93,7 @@ if (!class_exists("SL_Database")) {
 			$current_index = 0 ; 
 			$current_offset = 0 ; 
 			$max_size = 1000 ; 
-			$contentOfTable = "\n-- MEMORY OR TIME LIMIT ------------------------------------------------\n" ; 
+			$contentOfTable = "" ; 
 				
 			// We look if the .tmp file exists, if so, it means that we have to restart the zip process where it stopped
 			if (is_file($sqlfilename.".tmp")) {
@@ -119,7 +119,7 @@ if (!class_exists("SL_Database")) {
 					$entete .= "-- -----------------------------\n";
 					$entete .= "-- CREATE ".$table[0]."\n";
 					$entete .= "-- -----------------------------\n";
-					$entete .= $wpdb->get_var("show create table ".$table[0], 1);
+					$entete .= $wpdb->get_var("show create table ".$table[0], 1).";";
 				}
 				$r = @file_put_contents($sqlfilename.".content.tmp" ,$entete) ; 
 				if ($r===FALSE) {
@@ -172,11 +172,12 @@ if (!class_exists("SL_Database")) {
 						for($ii=0; $ii < count($ligne); $ii++) {
 							if($ii != 0) 
 								$contentOfTable .=  ", ";
-							if ( ($wpdb->get_col_info('type', $ii) == "string") || ($wpdb->get_col_info('type', $ii) == "blob") )
-								$contentOfTable .=  "'";
-							$contentOfTable .= addslashes($ligne[$ii]);
-							if ( ($wpdb->get_col_info('type', $ii) == "string") || ($wpdb->get_col_info('type', $ii) == "blob") )
-								$contentOfTable .=  "'";
+							//DATE, TIMESTAMP, TIMESTAMP
+							$delimit = "" ; 
+							if ( ($wpdb->get_col_info('type', $ii) == "string") || ($wpdb->get_col_info('type', $ii) == "blob") || ($wpdb->get_col_info('type', $ii) == "datetime") || ($wpdb->get_col_info('type', $ii) == "date") || ($wpdb->get_col_info('type', $ii) == "timestamp") || ($wpdb->get_col_info('type', $ii) == "time") || ($wpdb->get_col_info('type', $ii) == "year") )
+								$delimit .=  "'";
+							$contentOfTable .= $delimit.addslashes($ligne[$ii]).$delimit;
+							
 				
 						}
 						$contentOfTable .=  ");\n";

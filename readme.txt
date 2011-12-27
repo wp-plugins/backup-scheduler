@@ -62,6 +62,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.1.0 =
+* Bug in the sql file : date and time managements were incorrect
+
 = 1.0.9 =
 * Russian translation (by Slawka)
 * Add a time option for choosing the best moment to perform an automatic backup
@@ -112,4 +115,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:ced1471aae506bff1a0db2d1405892d1
+InfoVersion:b556ca94228f21966b0a957bc46e904b

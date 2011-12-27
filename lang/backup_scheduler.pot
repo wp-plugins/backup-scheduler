@@ -1,46 +1,55 @@
 Content-Transfer-Encoding: 8bit
 
 #: backup-scheduler.php:168
+#: core/backup-scheduler.php:168
 #@ backup_scheduler
 msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
 msgstr ""
 
 #: backup-scheduler.php:176
+#: core/backup-scheduler.php:176
 #@ backup_scheduler
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
 msgstr ""
 
 #: backup-scheduler.php:190
+#: core/backup-scheduler.php:190
 #@ backup_scheduler
 msgid "How often do you want to backup your website?"
 msgstr ""
 
 #: backup-scheduler.php:191
+#: core/backup-scheduler.php:191
 #@ backup_scheduler
 msgid "Frequency (in days):"
 msgstr ""
 
 #: backup-scheduler.php:192
+#: core/backup-scheduler.php:192
 #@ backup_scheduler
 msgid "Time of the backups:"
 msgstr ""
 
 #: backup-scheduler.php:193
+#: core/backup-scheduler.php:193
 #@ backup_scheduler
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr ""
 
 #: backup-scheduler.php:194
+#: core/backup-scheduler.php:194
 #@ backup_scheduler
 msgid "Keep the backup files for (in days):"
 msgstr ""
 
 #: backup-scheduler.php:196
+#: core/backup-scheduler.php:196
 #@ backup_scheduler
 msgid "What do you want to save?"
 msgstr ""
 
 #: backup-scheduler.php:197
+#: core/backup-scheduler.php:197
 #@ backup_scheduler
 msgid "The plugins directory:"
 msgstr ""
@@ -48,238 +57,289 @@ msgstr ""
 #: backup-scheduler.php:198
 #: backup-scheduler.php:201
 #: backup-scheduler.php:204
+#: core/backup-scheduler.php:198
+#: core/backup-scheduler.php:201
+#: core/backup-scheduler.php:204
 #@ backup_scheduler
 msgid "(i.e. %s)"
 msgstr ""
 
 #: backup-scheduler.php:199
+#: core/backup-scheduler.php:199
 #@ backup_scheduler
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
 msgstr ""
 
 #: backup-scheduler.php:200
+#: core/backup-scheduler.php:200
 #@ backup_scheduler
 msgid "The themes directory:"
 msgstr ""
 
 #: backup-scheduler.php:202
+#: core/backup-scheduler.php:202
 #@ backup_scheduler
 msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
 msgstr ""
 
 #: backup-scheduler.php:203
+#: core/backup-scheduler.php:203
 #@ backup_scheduler
 msgid "The upload directory:"
 msgstr ""
 
 #: backup-scheduler.php:205
+#: core/backup-scheduler.php:205
 #@ backup_scheduler
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
 msgstr ""
 
 #: backup-scheduler.php:206
+#: core/backup-scheduler.php:206
 #@ backup_scheduler
 msgid "The SQL database:"
 msgstr ""
 
 #: backup-scheduler.php:207
+#: core/backup-scheduler.php:207
 #@ backup_scheduler
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
 msgstr ""
 
 #: backup-scheduler.php:209
+#: core/backup-scheduler.php:209
 #@ backup_scheduler
 msgid "Do you want that the backup is sent by email?"
 msgstr ""
 
 #: backup-scheduler.php:210
+#: core/backup-scheduler.php:210
 #@ backup_scheduler
 msgid "If so, please enter your email:"
 msgstr ""
 
 #: backup-scheduler.php:211
+#: core/backup-scheduler.php:211
 #@ backup_scheduler
 msgid "The maximum attachment size (in MB):"
 msgstr ""
 
 #: backup-scheduler.php:212
+#: core/backup-scheduler.php:212
 #@ backup_scheduler
 msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
 msgstr ""
 
 #: backup-scheduler.php:214
+#: core/backup-scheduler.php:214
 #@ backup_scheduler
 msgid "Do you want to rename the files?"
 msgstr ""
 
 #: backup-scheduler.php:215
+#: core/backup-scheduler.php:215
 #@ backup_scheduler
 msgid "What is the suffix of the file:"
 msgstr ""
 
 #: backup-scheduler.php:216
+#: core/backup-scheduler.php:216
 #@ backup_scheduler
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr ""
 
 #: backup-scheduler.php:217
+#: core/backup-scheduler.php:217
 #@ backup_scheduler
 msgid "You do not need to fill this field if no mail is to be sent."
 msgstr ""
 
 #: backup-scheduler.php:219
+#: core/backup-scheduler.php:219
 #@ backup_scheduler
 msgid "Advanced - Memory and time management"
 msgstr ""
 
 #: backup-scheduler.php:220
+#: core/backup-scheduler.php:220
 #@ backup_scheduler
 msgid "What is the maximum size of allocated memory (in MB):"
 msgstr ""
 
 #: backup-scheduler.php:221
+#: core/backup-scheduler.php:221
 #@ backup_scheduler
 msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
 msgstr ""
 
 #: backup-scheduler.php:222
+#: core/backup-scheduler.php:222
 #@ backup_scheduler
 msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
 msgstr ""
 
 #: backup-scheduler.php:224
+#: core/backup-scheduler.php:224
 #@ backup_scheduler
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr ""
 
 #: backup-scheduler.php:225
+#: core/backup-scheduler.php:225
 #@ backup_scheduler
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr ""
 
 #: backup-scheduler.php:226
+#: core/backup-scheduler.php:226
 #@ backup_scheduler
 msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
 msgstr ""
 
 #: backup-scheduler.php:232
+#: core/backup-scheduler.php:232
 #@ backup_scheduler
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
 msgstr ""
 
 #: backup-scheduler.php:236
+#: core/backup-scheduler.php:236
 #@ backup_scheduler
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr ""
 
 #: backup-scheduler.php:240
+#: core/backup-scheduler.php:240
 #@ backup_scheduler
 msgid "Force a new backup"
 msgstr ""
 
 #: backup-scheduler.php:249
+#: core/backup-scheduler.php:249
 #@ backup_scheduler
 msgid "Backups"
 msgstr ""
 
 #: backup-scheduler.php:251
+#: core/backup-scheduler.php:251
 #@ backup_scheduler
 msgid "Parameters"
 msgstr ""
 
 #: backup-scheduler.php:257
+#: core/backup-scheduler.php:257
 #@ backup_scheduler
 msgid "Manage translations"
 msgstr ""
 
 #: backup-scheduler.php:263
+#: core/backup-scheduler.php:263
 #@ backup_scheduler
 msgid "Give feedback"
 msgstr ""
 
 #: backup-scheduler.php:271
+#: core/backup-scheduler.php:271
 #@ backup_scheduler
 msgid "Other plugins"
 msgstr ""
 
 #: backup-scheduler.php:293
+#: core/backup-scheduler.php:293
 #@ backup_scheduler
 msgid "Date of the backup"
 msgstr ""
 
 #: backup-scheduler.php:293
+#: core/backup-scheduler.php:293
 #@ backup_scheduler
 msgid "Backup files"
 msgstr ""
 
 #: backup-scheduler.php:311
 #: backup-scheduler.php:318
+#: core/backup-scheduler.php:311
+#: core/backup-scheduler.php:318
 #@ backup_scheduler
 msgid "Part %s"
 msgstr ""
 
 #: backup-scheduler.php:328
+#: core/backup-scheduler.php:328
 #@ backup_scheduler
 msgid "Backup completed on %s at %s"
 msgstr ""
 
 #: backup-scheduler.php:329
+#: core/backup-scheduler.php:329
 #@ backup_scheduler
 msgid "The total size of the files is %s"
 msgstr ""
 
 #: backup-scheduler.php:330
+#: core/backup-scheduler.php:330
 #@ backup_scheduler
 msgid "These files will be deleted in %s days"
 msgstr ""
 
 #: backup-scheduler.php:339
+#: core/backup-scheduler.php:339
 #@ backup_scheduler
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr ""
 
 #: backup-scheduler.php:379
+#: core/backup-scheduler.php:379
 #@ backup_scheduler
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
 msgstr ""
 
 #: backup-scheduler.php:388
+#: core/backup-scheduler.php:388
 #@ backup_scheduler
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr ""
 
 #: backup-scheduler.php:444
 #: backup-scheduler.php:467
+#: core/backup-scheduler.php:444
+#: core/backup-scheduler.php:467
 #@ backup_scheduler
 msgid "An error occured while sending mail!"
 msgstr ""
 
 #: backup-scheduler.php:475
+#: core/backup-scheduler.php:475
 #@ backup_scheduler
 msgid "An unknown error occured!"
 msgstr ""
 
 #: backup-scheduler.php:498
+#: core/backup-scheduler.php:498
 #@ backup_scheduler
 msgid "A new backup have been generated!"
 msgstr ""
 
 #: backup-scheduler.php:614
+#: core/backup-scheduler.php:614
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
 
 #: backup-scheduler.php:615
+#: core/backup-scheduler.php:615
 #@ backup_scheduler
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
 #: backup-scheduler.php:616
+#: core/backup-scheduler.php:616
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
 #: backup-scheduler.php:623
+#: core/backup-scheduler.php:623
 #@ backup_scheduler
 msgid "Backup of %s (%s)"
 msgstr ""

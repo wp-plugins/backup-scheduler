@@ -540,20 +540,116 @@ msgstr ""
 msgid "The data has been saved. You may close this window."
 msgstr ""
 
-#: backup-scheduler.php:395
-#: backup-scheduler.php:402
+#: core/svn.class.php:688
+#@ SL_framework
+msgid "Your credentials do not seem to be correct. Please check them!"
+msgstr ""
+
+#: core/svn.class.php:692
+#@ SL_framework
+msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
+msgstr ""
+
+#: core/database.class.php:28
+#: core/database.class.php:72
+#: core/database.class.php:103
+#: core/zip.class.php:103
+#: core/zip.class.php:164
+#: core/zip.class.php:188
+#: core/zip.class.php:240
+#: core/zip.class.php:334
+#: core/zip.class.php:373
+#: core/zip.class.php:412
+#@ SL_framework
+msgid "The file %s cannot be read. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/database.class.php:37
+#: core/database.class.php:81
+#: core/database.class.php:107
+#: core/database.class.php:153
+#: core/database.class.php:198
+#: core/zip.class.php:112
+#: core/zip.class.php:173
+#: core/zip.class.php:192
+#: core/zip.class.php:228
+#: core/zip.class.php:338
+#: core/zip.class.php:392
+#: core/zip.class.php:397
+#: core/zip.class.php:405
+#: core/zip.class.php:410
+#@ SL_framework
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/database.class.php:45
+#: core/zip.class.php:120
+#@ SL_framework
+msgid "The folder %s cannot be opened. You should have a problem with folder permissions or security restrictions."
+msgstr ""
+
+#: core/database.class.php:77
+#: core/zip.class.php:169
+#@ SL_framework
+msgid "An other process is still running (it runs for %s seconds)"
+msgstr ""
+
+#: core/database.class.php:89
+#: core/database.class.php:144
+#: core/database.class.php:192
+#: core/zip.class.php:180
+#: core/zip.class.php:215
+#: core/zip.class.php:324
+#: core/zip.class.php:328
+#: core/zip.class.php:361
+#: core/zip.class.php:387
+#@ SL_framework
+msgid "The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/database.class.php:126
+#: core/zip.class.php:199
+#: core/zip.class.php:223
+#@ SL_framework
+msgid "The file %s cannot be created. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/database.class.php:148
+#: core/zip.class.php:219
+#@ SL_framework
+msgid "The file %s cannot be modified. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/database.class.php:202
+#@ SL_framework
+msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
 #: core/backup-scheduler.php:395
 #: core/backup-scheduler.php:402
 #@ SL_framework
 msgid "(SQL extraction)"
 msgstr ""
 
-#: backup-scheduler.php:448
-#: backup-scheduler.php:471
 #: core/backup-scheduler.php:448
 #: core/backup-scheduler.php:471
 #@ SL_framework
 msgid "(ZIP creation)"
+msgstr ""
+
+#: core/utils.class.php:123
+#@ SL_framework
+msgid "KB"
+msgstr ""
+
+#: core/utils.class.php:127
+#@ SL_framework
+msgid "MB"
+msgstr ""
+
+#: core/utils.class.php:130
+#@ SL_framework
+msgid "GB"
 msgstr ""
 
 #: core/parameters.class.php:83
@@ -632,116 +728,6 @@ msgstr ""
 #: core/parameters.class.php:512
 #@ SL_framework
 msgid "Parameters have been updated successfully!"
-msgstr ""
-
-#: core/database.class.php:28
-#: core/database.class.php:72
-#: core/database.class.php:103
-#: core/zip.class.php:103
-#: core/zip.class.php:164
-#: core/zip.class.php:188
-#: core/zip.class.php:240
-#: core/zip.class.php:334
-#: core/zip.class.php:373
-#: core/zip.class.php:412
-#@ SL_framework
-msgid "The file %s cannot be read. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/database.class.php:37
-#: core/database.class.php:81
-#: core/database.class.php:107
-#: core/database.class.php:153
-#: core/database.class.php:197
-#: core/zip.class.php:112
-#: core/zip.class.php:173
-#: core/zip.class.php:192
-#: core/zip.class.php:228
-#: core/zip.class.php:338
-#: core/zip.class.php:392
-#: core/zip.class.php:397
-#: core/zip.class.php:405
-#: core/zip.class.php:410
-#@ SL_framework
-msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/database.class.php:45
-#: core/zip.class.php:120
-#@ SL_framework
-msgid "The folder %s cannot be opened. You should have a problem with folder permissions or security restrictions."
-msgstr ""
-
-#: core/database.class.php:77
-#: core/zip.class.php:169
-#@ SL_framework
-msgid "An other process is still running (it runs for %s seconds)"
-msgstr ""
-
-#: core/database.class.php:89
-#: core/database.class.php:144
-#: core/database.class.php:191
-#: core/zip.class.php:180
-#: core/zip.class.php:215
-#: core/zip.class.php:324
-#: core/zip.class.php:328
-#: core/zip.class.php:361
-#: core/zip.class.php:387
-#@ SL_framework
-msgid "The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/database.class.php:126
-#: core/zip.class.php:199
-#: core/zip.class.php:223
-#@ SL_framework
-msgid "The file %s cannot be created. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/database.class.php:148
-#: core/zip.class.php:219
-#@ SL_framework
-msgid "The file %s cannot be modified. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/database.class.php:201
-#@ SL_framework
-msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/popup.class.php:74
-#@ SL_framework
-msgid "Close popup"
-msgstr ""
-
-#: core/otherplugins.class.php:47
-#@ SL_framework
-msgid "Plugin Information"
-msgstr ""
-
-#: core/otherplugins.class.php:47
-#@ SL_framework
-msgid "Description and Screenshots"
-msgstr ""
-
-#: core/otherplugins.class.php:78
-#@ SL_framework
-msgid "Other plugins"
-msgstr ""
-
-#: core/otherplugins.class.php:79
-#@ SL_framework
-msgid "Here are other plugins developped by the author:"
-msgstr ""
-
-#: core/svn.class.php:688
-#@ SL_framework
-msgid "Your credentials do not seem to be correct. Please check them!"
-msgstr ""
-
-#: core/svn.class.php:692
-#@ SL_framework
-msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
 msgstr ""
 
 #: core/folder_diff.class.php:139
@@ -943,31 +929,6 @@ msgstr ""
 msgid "If you do not want to loose your translations on the next upgrading of this plugin, please save them on your hard disk before upgrading and then restore them after the upgrade !"
 msgstr ""
 
-#: core/zip.class.php:25
-#@ SL_framework
-msgid "Error: %s function is not found"
-msgstr ""
-
-#: core/zip.class.php:246
-#@ SL_framework
-msgid "The file %s cannot be compressed."
-msgstr ""
-
-#: core/utils.class.php:123
-#@ SL_framework
-msgid "KB"
-msgstr ""
-
-#: core/utils.class.php:127
-#@ SL_framework
-msgid "MB"
-msgstr ""
-
-#: core/utils.class.php:130
-#@ SL_framework
-msgid "GB"
-msgstr ""
-
 #: core/feedback.class.php:34
 #@ SL_framework
 msgid "Feedback form"
@@ -1016,5 +977,40 @@ msgstr ""
 #: core/feedback.class.php:149
 #@ SL_framework
 msgid "The feedback has been sent"
+msgstr ""
+
+#: core/zip.class.php:25
+#@ SL_framework
+msgid "Error: %s function is not found"
+msgstr ""
+
+#: core/zip.class.php:246
+#@ SL_framework
+msgid "The file %s cannot be compressed."
+msgstr ""
+
+#: core/popup.class.php:74
+#@ SL_framework
+msgid "Close popup"
+msgstr ""
+
+#: core/otherplugins.class.php:47
+#@ SL_framework
+msgid "Plugin Information"
+msgstr ""
+
+#: core/otherplugins.class.php:47
+#@ SL_framework
+msgid "Description and Screenshots"
+msgstr ""
+
+#: core/otherplugins.class.php:78
+#@ SL_framework
+msgid "Other plugins"
+msgstr ""
+
+#: core/otherplugins.class.php:79
+#@ SL_framework
+msgid "Here are other plugins developped by the author:"
 msgstr ""
 
