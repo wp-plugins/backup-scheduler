@@ -21,12 +21,15 @@ You can choose:
 * whether your database should be saved; 
 * whether the backup is stored on the local website or sent by email (support of multi part zip files)
 
+This plugin is under GPL licence.
+
 = Localizations =
 
-* German-Switzerland translation (by BernhardKnab)
+* Russian translation (by Slawka)
+* German-Switzerland translation (by BernhardKnab and PeterDbbert)
 * Polish translation (by Pablo)
-* Italian translation (by AVfoto and Javier)
-* Spanish translation (by PuntoCon)
+* Spanish translation (by AVfoto and Javier)
+* Italian translation (by PuntoCon)
 * French translation (by me)
 
 = Features of the framework = 
@@ -59,6 +62,12 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.0.9 =
+* Russian translation (by Slawka)
+* Add a time option for choosing the best moment to perform an automatic backup
+* Display bug correction
+* Add instructions to restore the backup :)
+
 = 1.0.8 =
 * German-Switzerland translation (by BernhardKnab)
 * Improve memory and time management for database extraction
@@ -74,8 +83,8 @@ Moreover, all the plugins developped with this framework is able to use astonish
 * Improving zip decompression and path 
 
 = 1.0.4 =
-* Italian translation (by AVfoto)
-* Spanish translation (by PuntoCon)
+* Spanish translation (by AVfoto)
+* Italian translation (by PuntoCon)
 * Correction of a bug that occurs when server refuse to access / directory "open_basedir" restriction
 
 = 1.0.3 =
@@ -89,9 +98,18 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Frequently Asked Questions ==
 
+= To restore the backups =
+* install a fresh version of Wordpress on your server ; 
+* unzip the backup (actually, the zip file comprises a plurality of files i.e. a multip-part zip (zip, z01, z02, etc.). These files should be saved in a same folder and your zip program (such as winzip, winrar, ...) will do the job for you...
+* replace the 'plugins' folder (in the wp-content folder) with the one in the archive ; 
+* replace the 'themes' folder (in the wp-content folder) with the one in the archive ;
+* replace the 'uploads' folder (in the wp-content folder) with the one in the archive ;
+* replace the wp-config.php (at the root of your wordpress repository) with the one in the sedlex/backup-scheduler
+* import the sql file in your database (with for instance phpmyadmin). It is recommended to save your database first.
+
 * Where can I read more?
 
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:c1167fc6cd3b905a5acd3ee8c9b94718
+InfoVersion:ced1471aae506bff1a0db2d1405892d1

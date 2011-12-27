@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-17T16:18:43+00:00\n"
+"PO-Revision-Date: 2011-12-25T17:14:08+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,26 +26,17 @@ msgstr "Ce plugin permet une sauvegarde des parties importante de votre site : s
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
 msgstr "Désolé, mais vous devez activer %s sur votre site web. Autrement, ce plugin ne fonctionnera pas proprement !"
 
-msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr "Voici les fichiers de sauvegarde. Vous pouvez forcer une nouvelle sauvegarde ou télécharger les précédentes sauvegardes."
-
-msgid "An automatic backup will be launched in %s days."
-msgstr "Une sauvegarde automatique sera lancé dans %s jours."
-
-msgid "Force a new backup"
-msgstr "Forcer une nouvelle sauvegarde"
-
-msgid "Backups"
-msgstr "Sauvegardes"
-
 msgid "How often do you want to backup your website?"
 msgstr "Vous voulez sauvegarder votre site web tout les combien de temps ?"
 
 msgid "Frequency (in days):"
 msgstr "Fréquence (en jours) :"
 
-msgid "Please note that the backup will occur at midnight to be sure that your website is not overloaded"
-msgstr "Merci de noter que les sauvegardes seront lancées à minuit afin d&#039;être certain que votre site web n&#039;est pas surchargé."
+msgid "Time of the backups:"
+msgstr "Heure des sauvegardes."
+
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "Merci de noter que 0 signifie minuit, 1 signifie 1h du matin, 13 signifie 1h de l&#039;après midi, etc. La sauvegarde sera lancée à cette heure (heure du serveur) ; ainsi vérifiez que votre serveur n&#039;est pas trop chargé à cette heure là."
 
 msgid "Keep the backup files for (in days):"
 msgstr "Garder les fichiers de sauvegardes pendant (en jours) :"
@@ -124,6 +115,18 @@ msgstr "Quel est le temps maximal d&#039;execution des scripts PHP (en seconde) 
 
 msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
 msgstr "Même si vous n&#039;avez pas de restriction, il est recommandé de mettre cette valeur à 15 sec afin d&#039;éviter que votre hébergeur n&#039;arrête l&#039;execution de ce script."
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Voici les fichiers de sauvegarde. Vous pouvez forcer une nouvelle sauvegarde ou télécharger les précédentes sauvegardes."
+
+msgid "An automatic backup will be launched in %s days and %s hours."
+msgstr "Une sauvergarde automatique sera lancée dans %s jours et %s heures."
+
+msgid "Force a new backup"
+msgstr "Forcer une nouvelle sauvegarde"
+
+msgid "Backups"
+msgstr "Sauvegardes"
 
 msgid "Parameters"
 msgstr "Paramètres"

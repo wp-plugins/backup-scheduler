@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-17T16:24:07+00:00\n"
+"PO-Revision-Date: 2011-12-19T12:59:18+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -216,10 +216,10 @@ msgid "The file %s is not %s !"
 msgstr "Le fichier %s n&#039;est pas %s !"
 
 msgid "The folder %s does not exists and cannot be created !"
-msgstr "Le répertoire %s n&#039;existe pas et ne peut pas être créer !"
+msgstr "Le répertoire %s n&#039;existe pas et ne peut pas être créé !"
 
 msgid "The file %s does not exists and cannot be created !"
-msgstr "Le fichier %s n&#039;existe pas et ne peux pas être créer !"
+msgstr "Le fichier %s n&#039;existe pas et ne peux pas être créé !"
 
 msgid "There are some issues with folders rights. Please corret them as soon as possible as they could induce bugs and instabilities."
 msgstr "Il y a des problèmes avec les droits des répertoires. Merci de les corriger dès que possible afin d&#039;éviter des bugs et des instabilités."
@@ -352,9 +352,6 @@ msgstr "Le fichier %s ne peut pas être modifié/créé. Vous avez probablement 
 
 msgid "The file %s cannot be created. You should have a problem with file permissions or security restrictions."
 msgstr "Le fichier %s ne peut pas être créé. Vous avez probablement un problème de droit sur ce fichier et des restrictions de sécurité."
-
-msgid "The file %s cannot be created/modified. You should have a problem with file permissions or security restrictions."
-msgstr ""
 
 msgid "The file %s cannot be modified. You should have a problem with file permissions or security restrictions."
 msgstr "Ce fichier ne peut pas être modifié. Vous avez probablement un problème de droit sur ce fichier et des restrictions de sécurité."

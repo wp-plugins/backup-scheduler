@@ -256,13 +256,16 @@ if (!class_exists('pluginSedLex')) {
 			add_action('admin_print_scripts-'.$page, array($this,'javascript_admin'));
 			add_action('admin_print_styles-'.$page, array($this,'css_admin'));
 			
+			if (method_exists($this,'_admin_js_load')) {
+				add_action('admin_print_scripts-'.$page, array($this,'_admin_js_load'));
+			}
+			
 			add_action('admin_print_scripts-'.$page, array($this,'javascript_admin_always'),5);
 			add_action('admin_print_styles-'.$page, array($this,'css_admin_always'),5);
 			
 			add_action('admin_print_scripts-'.$page, array( $this, 'flush_js'), 10000000);
 			add_action('admin_print_styles-'.$page, array( $this, 'flush_css'), 10000000);
 
-			
 
 		}
 		
@@ -637,9 +640,7 @@ if (!class_exists('pluginSedLex')) {
 		* @return void
 		*/
 		function sedlex_information() {
-			
 			global $submenu;
-			
 			
 			ob_start() ; 
 			$params = new parametersSedLex ($this->frmk) ;
@@ -892,7 +893,7 @@ if (!class_exists('pluginSedLex')) {
 			// get the arguments
 			$plugin_name = $_POST['plugin_name'] ;
 			$url = $_POST['url'] ;
-
+			
 			$info_core = $this->checkCoreOfThePlugin(dirname(WP_PLUGIN_DIR.'/'.$url )."/core.php") ; 
 			$hash_plugin = $this->update_hash_plugin(dirname(WP_PLUGIN_DIR."/".$url)) ; 
 
@@ -1474,12 +1475,13 @@ if (!class_exists('pluginSedLex')) {
 					}
 				} else {
 					// We check if the last have an extension
-					if (strpos(".", basename($f[0]))!==false) {
+					if (strpos(basename($f[0]) , ".")===false) {
 						// It is a folder
 						if (!@mkdir($f[0],0755,true)) {
 							$result .= "<p>".sprintf(__('The folder %s does not exists and cannot be created !','SL_framework'), "<code>".$f[0]."</code>")."</p>" ; 
 						}
 					} else {
+					
 						$foldtemp = str_replace(basename($f[0]), "", str_replace(basename($f[0])."/","", $f[0])) ; 
 						// We create the sub folders
 						if ((!is_dir($foldtemp))&&(!@mkdir($foldtemp,0755,true))) {
