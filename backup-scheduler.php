@@ -2,7 +2,7 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)</li></ul>
-Version: 1.1.0
+Version: 1.1.1
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr

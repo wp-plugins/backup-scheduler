@@ -295,7 +295,7 @@ if (!class_exists("SL_Zip")) {
 								
 				//Set Data Segment
 				$data_segments .=     $local_file_header . $compressed_filedata . $data_descriptor; 
-				$data_segments_len += strlen($local_file_header . $compressed_filedata . $data_descriptor) ; 
+				$data_segments_len += strlen($local_file_header)+strlen($compressed_filedata) +strlen( $data_descriptor ); 
 				
 				//Set File Header
 				$new_offset        		= strlen( $split_signature ) + $data_segments_len ;

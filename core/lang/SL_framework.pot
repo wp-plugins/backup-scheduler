@@ -625,18 +625,6 @@ msgstr ""
 msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: core/backup-scheduler.php:395
-#: core/backup-scheduler.php:402
-#@ SL_framework
-msgid "(SQL extraction)"
-msgstr ""
-
-#: core/backup-scheduler.php:448
-#: core/backup-scheduler.php:471
-#@ SL_framework
-msgid "(ZIP creation)"
-msgstr ""
-
 #: core/utils.class.php:123
 #@ SL_framework
 msgid "KB"

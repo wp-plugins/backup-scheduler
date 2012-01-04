@@ -47,6 +47,10 @@ function forceBackup() {
 			jQuery("#backupInfo").html(response);
 			jQuery("#backupButton").removeAttr('disabled');
 			jQuery("#wait_backup").hide();
+		} else if ((""+response+ "").indexOf("error") !=-1) {
+			jQuery("#backupInfo").html(response);
+			jQuery("#backupButton").removeAttr('disabled');
+			jQuery("#wait_backup").hide();
 		} else if ((""+response+ "").indexOf("Error") !=-1) {
 			jQuery("#backupInfo").html(response);
 			jQuery("#backupButton").removeAttr('disabled');

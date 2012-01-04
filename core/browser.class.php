@@ -225,12 +225,12 @@ if (!class_exists("browsersOsDetection")) {
 			 * Determine if the browser is Android or not
 			 */
 			} else if( stripos($agent,'Android') !== false ) {
-				$aresult = explode(' ',stristr($agent,'Android'));
+				$aresult = explode('/',stristr($agent,'Version'));
 				if( isset($aresult[1]) ) {
 					$aversion = explode(' ',$aresult[1]);
 					$this->browser_version = ($aversion[0]);
 				} else {
-					$this->browser_version = ("?");
+					$this->browser_version = "";
 				}
 				$this->mobile = true ;
 				$this->browser_name = ("Android Browser");
@@ -267,7 +267,7 @@ if (!class_exists("browsersOsDetection")) {
 					$aversion = explode(' ',$aresult[1]);
 					$this->browser_version = ($aversion[0]);
 				} else {
-					$this->browser_version = "?";
+					$this->browser_version = "";
 				}
 				$this->mobile = true ;
 				$this->browser_name = ('Safari');
@@ -281,7 +281,7 @@ if (!class_exists("browsersOsDetection")) {
 					$aversion = explode(' ',$aresult[1]);
 					$this->browser_version = ($aversion[0]);
 				} else {
-					$this->browser_version = ("?");
+					$this->browser_version = ("");
 				}
 				$this->mobile = true ;
 				$this->browser_name = ("Safari");
@@ -295,7 +295,7 @@ if (!class_exists("browsersOsDetection")) {
 					$aversion = explode(' ',$aresult[1]);
 					$this->browser_version = ($aversion[0]);
 				} else {
-					$this->browser_version = "?";
+					$this->browser_version = "";
 				}
 				$this->mobile = true ;
 				$this->browser_name = ("Safari");
@@ -398,7 +398,7 @@ if (!class_exists("browsersOsDetection")) {
 			} else if (( stripos($agent, 'linux') !== false )||( stripos($agent, 'X11') !== false )) {
 				$this->platform_name = 'Linux';
 			} else {
-				$this->platform_name = 'Errr';
+				$this->platform_name = 'Other';
 			}
 		}
 		

@@ -62,6 +62,9 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.1.1 =
+* Improve error management and memory leakage
+
 = 1.1.0 =
 * Bug in the sql file : date and time managements were incorrect
 
@@ -115,4 +118,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b556ca94228f21966b0a957bc46e904b
+InfoVersion:b72786b6a092992807917a051994a87e
