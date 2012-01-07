@@ -2,7 +2,7 @@
 /**
 Plugin Name: Backup Scheduler
 Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)</li></ul>
-Version: 1.1.1
+Version: 1.1.2
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -53,11 +53,12 @@ class backup_scheduler extends pluginSedLex {
 		// For instance add_action( "the_content",  array($this,"modify_content")) : this function will call the function 'modify_content' when the content of a post is displayed
 		
 		add_action( "wp_ajax_initBackupForce",  array($this,"initBackupForce")) ; 
+		add_action( "wp_ajax_deleteBackup",  array($this,"deleteBackup")) ; 
 		add_action( "wp_ajax_backupForce",  array($this,"backupForce")) ; 
 		add_action( "wp_ajax_updateBackupTable",  array($this,"updateBackupTable")) ;
 		add_action( 'wp_ajax_nopriv_checkIfBackupNeeded', array( $this, 'checkIfBackupNeeded'));
 		add_action( 'wp_ajax_checkIfBackupNeeded', array( $this, 'checkIfBackupNeeded'));
-		add_action('wp_print_scripts', array( $this, 'javascript_checkIfBackupNeeded'));
+		add_action( 'wp_print_scripts', array( $this, 'javascript_checkIfBackupNeeded'));
 		
 		// Si le dernier backup n'a pas eu lieu, creer le fichier
 		@mkdir(WP_CONTENT_DIR."/sedlex/backup-scheduler/", 0777, true) ; 
@@ -237,8 +238,10 @@ class backup_scheduler extends pluginSedLex {
 				echo "<div id='zipfile'>" ; 
 				$this->displayBackup() ; 
 				echo "</div>" ; 
-				echo "<p><input type='button' id='backupButton' class='button-primary validButton' onClick='initForceBackup()'  value='". __('Force a new backup',$this->pluginID)."' />" ; 
+				echo "<p><input type='button' id='backupButton' class='button-primary validButton' onClick='initForceBackup(false)'  value='". __('Force a new backup (with mail)',$this->pluginID)."' />" ; 
 				echo "<script>jQuery('#backupButton').removeAttr('disabled');</script>" ; 
+				echo "<input type='button' id='backupButton2' class='button validButton' onClick='initForceBackup(true)'  value='". __('Force a new backup (without mail)',$this->pluginID)."' />" ; 
+				echo "<script>jQuery('#backupButton2').removeAttr('disabled');</script>" ; 
 				echo "<img id='wait_backup' src='".WP_PLUGIN_URL."/".str_replace(basename(__FILE__),"",plugin_basename( __FILE__))."core/img/ajax-loader.gif' style='display: none;'>" ; 
 				echo "</p>" ; 
 				echo "<div id='backupInfo'>" ; 
@@ -329,6 +332,8 @@ class backup_scheduler extends pluginSedLex {
 					$valeur .= "<p style='font-size:80%'>".sprintf(__('The total size of the files is %s',  $this->pluginID), Utils::byteSize($size))."</p>" ; 
 					$valeur .= "<p style='font-size:80%'>".sprintf(__('These files will be deleted in %s days',  $this->pluginID), $delta)."</p>" ; 
 					$cel1 = new adminCell($valeur) ;
+					$racinefichier = explode(".", $f) ; 
+					$cel1->add_action(__("Delete these backup files", $this->pluginID), "deleteBackup('".$racinefichier[0]."')") ; 
 					$cel2 = new adminCell($lien) ;
 					$table->add_line(array($cel1, $cel2), '1') ;
 					$nb++ ; 
@@ -350,7 +355,7 @@ class backup_scheduler extends pluginSedLex {
 	* @return boolean if it works
 	*/
 	
-	public function create_zip() {
+	public function create_zip($no_email) {
 		$date = date("YmdHis") ; 
 		
 		// Memory limit upgrade
@@ -440,9 +445,11 @@ class backup_scheduler extends pluginSedLex {
 					}
 					
 					@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup", date("Y-m-d")) ; 
-					if (!$this->sendEmail($path['path'])) {
-						$path['error'] = __("An error occured while sending mail!", $this->pluginID) ; 
-						$path['finished'] = false ;  
+					if (!$no_email) {
+						if (!$this->sendEmail($path['path'])) {
+							$path['error'] = __("An error occured while sending mail!", $this->pluginID) ; 
+							$path['finished'] = false ;  
+						}
 					}
 				}
 				$path['text'] = ' '.__('(ZIP creation)', "SL_framework") ; 	
@@ -463,9 +470,11 @@ class backup_scheduler extends pluginSedLex {
 					$path['path'] = $path2 ; 
 				}
 				
-				if (!$this->sendEmail($path['path'])) {
-					$path['error'] = __("An error occured while sending mail!", $this->pluginID) ; 
-					$path['finished'] = false ;  
+				if (!$no_email) {
+					if (!$this->sendEmail($path['path'])) {
+						$path['error'] = __("An error occured while sending mail!", $this->pluginID) ; 
+						$path['finished'] = false ;  
+					}
 				}
 			}
 			$path['text'] = ' '.__('(ZIP creation)', "SL_framework") ; 	
@@ -492,7 +501,9 @@ class backup_scheduler extends pluginSedLex {
 	* @return void
 	*/
 	function backupForce() {
-		$result = $this->create_zip() ;
+		$no_mail = $_POST['no_mail'] ;
+
+		$result = $this->create_zip($no_mail) ;
 		
 		if ($result['finished']==true) {
 			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup have been generated!", $this->pluginID)."</p></div>" ; 
@@ -528,7 +539,7 @@ class backup_scheduler extends pluginSedLex {
 	function checkIfBackupNeeded() {
 		// si le nb de jours dans laquel on doit faire un backup est inferieur ou egal a 0, on sauve
 		if ($this->backupInHours()<0){
-			$this->create_zip() ;
+			$this->create_zip(false) ;
 		}
 		// On parcours les fichier de sauvegarde et on les supprime si trop vieux
 		$files = scandir(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ;
@@ -596,6 +607,29 @@ class backup_scheduler extends pluginSedLex {
 			$java = ob_get_clean() ; 
 			$this->add_inline_js($java) ; 
 		}
+	}
+	
+	/** ====================================================================================================================================================
+	* Callback deleting backup files
+	*
+	* @return void
+	*/
+	
+	function deleteBackup() {	
+		$racine = $_POST['racine'] ;
+		$files = scandir(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
+		$nb = 0 ; 
+		foreach ($files as $f) {
+			if (preg_match("/^".$racine."/i", $f)) {
+				$res = @unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f) ; 
+				if ($res===false) {
+					echo "Error: ".WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f." can not be deleted. Checks rights!" ; 
+					die() ; 
+				}
+			}
+		}
+		$this->displayBackup() ; 
+		die() ; 
 	}
 	
 	/** ====================================================================================================================================================

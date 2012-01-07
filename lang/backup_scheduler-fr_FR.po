@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-12-25T17:14:08+00:00\n"
+"PO-Revision-Date: 2012-01-05T14:55:26+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgid "Check this option if you want to save the text of your posts, your config
 msgstr "Cocher cette option si vous voulez sauvegarder le texte de vos articles, vos configurations, etc."
 
 msgid "Do you want that the backup is sent by email?"
-msgstr "Voulez-vous que la sauvegarde vous soit envoyé par email ?"
+msgstr "Voulez-vous que la sauvegarde vous soit envoyée par email ?"
 
 msgid "If so, please enter your email:"
 msgstr "Le cas échant, merci de compléter votre email :"

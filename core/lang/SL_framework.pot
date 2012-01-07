@@ -540,19 +540,23 @@ msgstr ""
 msgid "The data has been saved. You may close this window."
 msgstr ""
 
-#: core/svn.class.php:688
+#: backup-scheduler.php:400
+#: backup-scheduler.php:407
 #@ SL_framework
-msgid "Your credentials do not seem to be correct. Please check them!"
+msgid "(SQL extraction)"
 msgstr ""
 
-#: core/svn.class.php:692
+#: backup-scheduler.php:455
+#: backup-scheduler.php:480
 #@ SL_framework
-msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
+msgid "(ZIP creation)"
 msgstr ""
 
-#: core/database.class.php:28
-#: core/database.class.php:72
-#: core/database.class.php:103
+#: core/zip.class.php:25
+#@ SL_framework
+msgid "Error: %s function is not found"
+msgstr ""
+
 #: core/zip.class.php:103
 #: core/zip.class.php:164
 #: core/zip.class.php:188
@@ -560,15 +564,13 @@ msgstr ""
 #: core/zip.class.php:334
 #: core/zip.class.php:373
 #: core/zip.class.php:412
+#: core/database.class.php:28
+#: core/database.class.php:72
+#: core/database.class.php:103
 #@ SL_framework
 msgid "The file %s cannot be read. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: core/database.class.php:37
-#: core/database.class.php:81
-#: core/database.class.php:107
-#: core/database.class.php:153
-#: core/database.class.php:198
 #: core/zip.class.php:112
 #: core/zip.class.php:173
 #: core/zip.class.php:192
@@ -578,66 +580,56 @@ msgstr ""
 #: core/zip.class.php:397
 #: core/zip.class.php:405
 #: core/zip.class.php:410
+#: core/database.class.php:37
+#: core/database.class.php:81
+#: core/database.class.php:107
+#: core/database.class.php:153
+#: core/database.class.php:198
 #@ SL_framework
 msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: core/database.class.php:45
 #: core/zip.class.php:120
+#: core/database.class.php:45
 #@ SL_framework
 msgid "The folder %s cannot be opened. You should have a problem with folder permissions or security restrictions."
 msgstr ""
 
-#: core/database.class.php:77
 #: core/zip.class.php:169
+#: core/database.class.php:77
 #@ SL_framework
 msgid "An other process is still running (it runs for %s seconds)"
 msgstr ""
 
-#: core/database.class.php:89
-#: core/database.class.php:144
-#: core/database.class.php:192
 #: core/zip.class.php:180
 #: core/zip.class.php:215
 #: core/zip.class.php:324
 #: core/zip.class.php:328
 #: core/zip.class.php:361
 #: core/zip.class.php:387
+#: core/database.class.php:89
+#: core/database.class.php:144
+#: core/database.class.php:192
 #@ SL_framework
 msgid "The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: core/database.class.php:126
 #: core/zip.class.php:199
 #: core/zip.class.php:223
+#: core/database.class.php:126
 #@ SL_framework
 msgid "The file %s cannot be created. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: core/database.class.php:148
 #: core/zip.class.php:219
+#: core/database.class.php:148
 #@ SL_framework
 msgid "The file %s cannot be modified. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: core/database.class.php:202
+#: core/zip.class.php:246
 #@ SL_framework
-msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/utils.class.php:123
-#@ SL_framework
-msgid "KB"
-msgstr ""
-
-#: core/utils.class.php:127
-#@ SL_framework
-msgid "MB"
-msgstr ""
-
-#: core/utils.class.php:130
-#@ SL_framework
-msgid "GB"
+msgid "The file %s cannot be compressed."
 msgstr ""
 
 #: core/parameters.class.php:83
@@ -718,16 +710,9 @@ msgstr ""
 msgid "Parameters have been updated successfully!"
 msgstr ""
 
-#: core/folder_diff.class.php:139
-#: core/folder_diff.class.php:247
+#: core/popup.class.php:74
 #@ SL_framework
-msgid "Select all"
-msgstr ""
-
-#: core/folder_diff.class.php:140
-#: core/folder_diff.class.php:248
-#@ SL_framework
-msgid "Un-select all"
+msgid "Close popup"
 msgstr ""
 
 #: core/translation.class.php:258
@@ -917,6 +902,38 @@ msgstr ""
 msgid "If you do not want to loose your translations on the next upgrading of this plugin, please save them on your hard disk before upgrading and then restore them after the upgrade !"
 msgstr ""
 
+#: core/folder_diff.class.php:139
+#: core/folder_diff.class.php:247
+#@ SL_framework
+msgid "Select all"
+msgstr ""
+
+#: core/folder_diff.class.php:140
+#: core/folder_diff.class.php:248
+#@ SL_framework
+msgid "Un-select all"
+msgstr ""
+
+#: core/database.class.php:202
+#@ SL_framework
+msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/utils.class.php:123
+#@ SL_framework
+msgid "KB"
+msgstr ""
+
+#: core/utils.class.php:127
+#@ SL_framework
+msgid "MB"
+msgstr ""
+
+#: core/utils.class.php:130
+#@ SL_framework
+msgid "GB"
+msgstr ""
+
 #: core/feedback.class.php:34
 #@ SL_framework
 msgid "Feedback form"
@@ -967,21 +984,6 @@ msgstr ""
 msgid "The feedback has been sent"
 msgstr ""
 
-#: core/zip.class.php:25
-#@ SL_framework
-msgid "Error: %s function is not found"
-msgstr ""
-
-#: core/zip.class.php:246
-#@ SL_framework
-msgid "The file %s cannot be compressed."
-msgstr ""
-
-#: core/popup.class.php:74
-#@ SL_framework
-msgid "Close popup"
-msgstr ""
-
 #: core/otherplugins.class.php:47
 #@ SL_framework
 msgid "Plugin Information"
@@ -1000,5 +1002,15 @@ msgstr ""
 #: core/otherplugins.class.php:79
 #@ SL_framework
 msgid "Here are other plugins developped by the author:"
+msgstr ""
+
+#: core/svn.class.php:688
+#@ SL_framework
+msgid "Your credentials do not seem to be correct. Please check them!"
+msgstr ""
+
+#: core/svn.class.php:692
+#@ SL_framework
+msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
 msgstr ""
 

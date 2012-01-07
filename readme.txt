@@ -62,6 +62,10 @@ Moreover, all the plugins developped with this framework is able to use astonish
 
 == Changelog ==
 
+= 1.1.2 =
+* Add a link to delete manually the backup (feature requested by Mirza)
+* You can also force a new update without sending the emails
+
 = 1.1.1 =
 * Improve error management and memory leakage
 
@@ -118,4 +122,4 @@ Moreover, all the plugins developped with this framework is able to use astonish
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b72786b6a092992807917a051994a87e
+InfoVersion:efea442dbc4aa1e74a76bd68036835d6
