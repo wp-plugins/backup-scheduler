@@ -4,16 +4,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-28T11:03:30+00:00\n"
-"Last-Translator: GerinG <http://gering111.com/>\n"
-"Last-Translator: Slawka <http://eth0.org.ru>\n"
+"PO-Revision-Date: 2012-01-26T05:09:42+00:00\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
-"X-Poedit-Language: Russian\n"
-"X-Poedit-Country: Russia\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Thai\n"
+"X-Poedit-Country: Thailand\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;\n"
 "X-Poedit-Basepath: \n"
@@ -22,73 +20,73 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
-msgstr "Этот плагин выполняет резервное копирование важных частей вашего сайта: просто и эффективно"
+msgstr "Plugin นี้ทำให้คุณสามารถสำรองข้อมูล เฉพาะส่วนที่สำคัญของเวปไซต์ได้ อย่างง่ายดายและมีประสิทธิภาพ"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr ""
+msgstr "คุณยังไม่ได้ทำการติดตั้งหรือเริ่มการทำงานของ Plug-in ทำให้การทำงานยังไม่สมบูรณ์"
 
 msgid "How often do you want to backup your website?"
-msgstr "Как часто вы хотите делать резервные копии вашего сайта?"
+msgstr "ต้องการให้สำรองข้อมูลบ่อยแค่ไหน ?"
 
 msgid "Frequency (in days):"
-msgstr "Интервал (в днях):"
+msgstr "ความถี่ (วัน)"
 
 msgid "Time of the backups:"
-msgstr "Время, когда создается бэкап"
+msgstr "ระยะเวลาในการสำรองข้อมูล"
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr ""
 
 msgid "Keep the backup files for (in days):"
-msgstr "Время хранение копий (в днях):"
+msgstr "ระยะเวลาเก็บข้อมูลที่สำรองแล้ว ?"
 
 msgid "What do you want to save?"
-msgstr "Что вы хотите сохранять?"
+msgstr ""
 
 msgid "The plugins directory:"
-msgstr "Каталог плагина:"
+msgstr "สถานที่ที่เก็บ Plugin ?"
 
 msgid "(i.e. %s)"
 msgstr ""
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
-msgstr "Выберите этот пункт, если вы хотите сохранять все установленные плагины"
+msgstr ""
 
 msgid "The themes directory:"
-msgstr "Каталог тем:"
+msgstr "สถานที่ที่เก็บ Themes ?"
 
 msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
-msgstr "Выберите этот пункт, если вы хотите сохранять все установленные темы"
+msgstr ""
 
 msgid "The upload directory:"
-msgstr "Папка загрузки"
+msgstr "สถานที่ที่เก็บ File Upload ?"
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
-msgstr "Выберите этот пункт, если вы хотите сохранять все загруженные изображения и файлы"
+msgstr ""
 
 msgid "The SQL database:"
-msgstr "База данных SQL"
+msgstr ""
 
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
-msgstr "Выберите этот пункт, если вы хотите сохранять все ваши записи, файлы конфигурации и прочее"
+msgstr ""
 
 msgid "Do you want that the backup is sent by email?"
-msgstr "Вы хотите получать резервные копии на email?"
+msgstr ""
 
 msgid "If so, please enter your email:"
-msgstr "Если да, введите ваш emal:"
+msgstr ""
 
 msgid "The maximum attachment size (in MB):"
-msgstr "Максимальный размер вложения (в МБ)"
+msgstr ""
 
 msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
 msgstr ""
 
 msgid "Do you want to rename the files?"
-msgstr "Вы хотите переименовывать файлы?"
+msgstr ""
 
 msgid "What is the suffix of the file:"
-msgstr "Суффикс файла"
+msgstr ""
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr ""
@@ -100,7 +98,7 @@ msgid "Advanced - Memory and time management"
 msgstr ""
 
 msgid "What is the maximum size of allocated memory (in MB):"
-msgstr "Какой объём памяти может занимать плагин при работе?"
+msgstr ""
 
 msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
 msgstr ""
@@ -124,34 +122,34 @@ msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr ""
 
 msgid "Force a new backup (with mail)"
-msgstr "Создать новый бэкап(с отправкой почты)"
+msgstr ""
 
 msgid "Force a new backup (without mail)"
-msgstr "Создать новый бэкап(без отправки почты)"
+msgstr ""
 
 msgid "Backups"
-msgstr "Резервные копии"
+msgstr "สำรองข้อมูล"
 
 msgid "Parameters"
-msgstr "Параметры"
+msgstr ""
 
 msgid "Manage translations"
 msgstr ""
 
 msgid "Give feedback"
-msgstr "Отправить отзыв"
+msgstr ""
 
 msgid "Other plugins"
-msgstr "Другие плагины"
+msgstr ""
 
 msgid "Date of the backup"
-msgstr "Дата резервного копирования"
+msgstr "วันที่สำรองข้อมูล"
 
 msgid "Backup files"
 msgstr ""
 
 msgid "Part %s"
-msgstr "Часть"
+msgstr ""
 
 msgid "Backup completed on %s at %s"
 msgstr ""
@@ -163,7 +161,7 @@ msgid "These files will be deleted in %s days"
 msgstr ""
 
 msgid "Delete these backup files"
-msgstr "Удалить эти резервные копии"
+msgstr ""
 
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr ""
@@ -175,23 +173,23 @@ msgid "An other SQL extraction is still in progress (for %s seconds)... Please w
 msgstr ""
 
 msgid "An error occured while sending mail!"
-msgstr "Ошибка отправки почты"
+msgstr ""
 
 msgid "An unknown error occured!"
-msgstr "Возникла неизвестная ошибка"
+msgstr ""
 
 msgid "A new backup have been generated!"
-msgstr "Новая резервная копия создана"
+msgstr ""
 
 msgid "Dear sirs,"
-msgstr "Уважаемые господа"
+msgstr ""
 
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
 msgid "Best regards,"
-msgstr "С уважением"
+msgstr ""
 
 msgid "Backup of %s (%s)"
-msgstr "Копия "
+msgstr ""
 

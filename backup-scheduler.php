@@ -1,8 +1,9 @@
 <?php
 /**
 Plugin Name: Backup Scheduler
-Description: <p>With this plugin, you may plan the backup of your website.</p><p>You can choose: </p><ul><li>which folders you will save; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website or sent by email (support of multipart zip files)</li></ul>
-Version: 1.1.2
+Plugin Tag: backup, schedule, plugin, save, database, zip
+Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
+Version: 1.2.1
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -54,6 +55,7 @@ class backup_scheduler extends pluginSedLex {
 		
 		add_action( "wp_ajax_initBackupForce",  array($this,"initBackupForce")) ; 
 		add_action( "wp_ajax_deleteBackup",  array($this,"deleteBackup")) ; 
+		add_action( "wp_ajax_cancelBackup",  array($this,"cancelBackup")) ; 
 		add_action( "wp_ajax_backupForce",  array($this,"backupForce")) ; 
 		add_action( "wp_ajax_updateBackupTable",  array($this,"updateBackupTable")) ;
 		add_action( 'wp_ajax_nopriv_checkIfBackupNeeded', array( $this, 'checkIfBackupNeeded'));
@@ -65,11 +67,11 @@ class backup_scheduler extends pluginSedLex {
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup")) {
 			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup", date("Y-m-d")) ; 
 		}
-		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
-			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess", "Options All -Indexes") ; 
+		if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
+			@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess") ; 
 		}
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php")) {
-			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php", "Hi") ; 
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php", "You are not allowed here!") ; 
 		}
 		
 		// Important variables initialisation (Do not modify)
@@ -133,7 +135,18 @@ class backup_scheduler extends pluginSedLex {
 		switch ($option) {
 			// Alternative default return values (Please modify)
 			case 'save_time' 		: return 0 		; break ; 
+			
+			case 'ftp' 		: return false 		; break ; 
+			case 'ftp_host' 		: return "" 		; break ; 
+			case 'ftp_login' 		: return "" 		; break ; 
+			case 'ftp_pass' 		: return "[password]" 		; break ; 
+			case 'ftp_mail' 		: return "" 		; break ; 
+			case 'ftp_to_be_sent' 		: return array()		; break ; 
+			case 'ftp_sent' 		: return array()		; break ; 
+
+			case 'email_check' 		: return true 		; break ; 
 			case 'email' 		: return "" 		; break ; 
+			
 			case 'rename' 		: return "" 		; break ; 
 			case 'chunk' 		: return 5			; break ; 
 			case 'frequency' 		: return 7			; break ; 
@@ -141,6 +154,7 @@ class backup_scheduler extends pluginSedLex {
 			case 'save_upload' 		: return true				; break ; 
 			case 'save_plugin' 		: return false				; break ; 
 			case 'save_theme' 		: return false				; break ; 
+			case 'save_all' 		: return false				; break ; 
 			case 'save_db' 		: return true				; break ; 
 			case 'max_allocated' 		: return 5				; break ;
 			case 'max_time' 		: return 15				; break ;
@@ -192,9 +206,13 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_param('frequency', __('Frequency (in days):',$this->pluginID)) ; 
 				$params->add_param('save_time', __('Time of the backups:',$this->pluginID)) ; 
 				$params->add_comment(__('Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time.',$this->pluginID)) ; 
+				$params->add_comment(__("Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge.",$this->pluginID)) ; 
 				$params->add_param('delete_after', __('Keep the backup files for (in days):',$this->pluginID)) ; 
 				
 				$params->add_title(sprintf(__('What do you want to save?',$this->pluginID), $title)) ; 
+				$params->add_param('save_all', __('All directories (the full Wordpress installation):',$this->pluginID),"", "", array('!save_upload', '!save_theme', '!save_plugin')) ;
+				$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), ABSPATH)) ; 
+				$params->add_comment(__('Check this option if you want to save everything. Be careful, because the backup could be quite huge!',$this->pluginID)) ; 
 				$params->add_param('save_plugin', __('The plugins directory:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/plugins/")) ; 
 				$params->add_comment(__('Check this option if you want to save all plugins that you have installed and that you use on this website.',$this->pluginID)) ; 
@@ -206,17 +224,28 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_comment(__('Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages.',$this->pluginID)) ; 
 				$params->add_param('save_db', __('The SQL database:',$this->pluginID)) ;
 				$params->add_comment(__('Check this option if you want to save the text of your posts, your configurations, etc.',$this->pluginID)) ; 
-				
+				$params->add_param('chunk', __('The maximum file size (in MB):',$this->pluginID)) ; 
+				$params->add_comment(__('Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated',$this->pluginID)) ; 
+
 				$params->add_title(sprintf(__('Do you want that the backup is sent by email?',$this->pluginID), $title)) ; 
+				$params->add_param('email_check', __('Send the backup files by email:',$this->pluginID), '', '', array('email', 'rename')) ; 
 				$params->add_param('email', __('If so, please enter your email:',$this->pluginID)) ; 
-				$params->add_param('chunk', __('The maximum attachment size (in MB):',$this->pluginID)) ; 
-				$params->add_comment(__('Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated',$this->pluginID)) ; 
-				
-				$params->add_title(sprintf(__('Do you want to rename the files?',$this->pluginID), $title)) ; 
-				$params->add_param('rename', __('What is the suffix of the file:',$this->pluginID)) ; 
+				$params->add_param('rename', __('Do you want to add a suffix to sent files:',$this->pluginID)) ; 
 				$params->add_comment(__('This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail).',$this->pluginID)) ; 
 				$params->add_comment(__('You do not need to fill this field if no mail is to be sent.',$this->pluginID)) ; 
 
+				$params->add_title(sprintf(__('Do you want that the backup is stored on a FTP?',$this->pluginID), $title)) ;
+				if (function_exists("ftp_connect")) {
+					$params->add_param('ftp', __('Save the backup files on a FTP?',$this->pluginID), '', '', array('ftp_host', 'ftp_login', 'ftp_pass', 'ftp_root')) ; 
+					$params->add_param('ftp_host', __('FTP host:',$this->pluginID)) ; 
+					$params->add_comment(sprintf(__('Should be at the form %s or %s',$this->pluginID), '<code>ftp://domain.tld/root_folder/</code>', '<code>ftps://domain.tld/root_folder/</code>')) ; 
+					$params->add_param('ftp_login', __('Your FTP login:',$this->pluginID)) ; 
+					$params->add_param('ftp_pass', __('Your FTP pass:',$this->pluginID)) ; 
+					$params->add_param('ftp_mail', __('If you want to be notify when the FTP storage is finished, please enter your email:',$this->pluginID)) ; 
+				} else {
+					$params->add_comment(__('Your PHP installation does not support FTP features, thus this option has been disabled! Sorry...',$this->pluginID)) ; 
+				}
+								
 				$params->add_title(sprintf(__('Advanced - Memory and time management',$this->pluginID), $title)) ; 
 				$params->add_param('max_allocated', __('What is the maximum size of allocated memory (in MB):',$this->pluginID)) ; 
 				$params->add_comment(__('On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error.',$this->pluginID)) ; 
@@ -232,15 +261,19 @@ class backup_scheduler extends pluginSedLex {
 			ob_start() ; 
 				echo "<p>". __('Here is the backup files. You can force a new backup or download previous backup files.',$this->pluginID)."</p>" ; 
 				$hours = $this->backupInHours() ; 
-				$days = floor($hours/24) ; 
-				$hours = $hours - 24*$days ; 
-				echo "<p>".sprintf( __('An automatic backup will be launched in %s days and %s hours.',$this->pluginID), $days, $hours)."</p>" ; 
+				if ($hours>0) {
+					$days = floor($hours/24) ; 
+					$hours = $hours - 24*$days ; 
+					echo "<p>".sprintf( __('An automatic backup will be launched in %s days and %s hours.',$this->pluginID), $days, $hours)."</p>" ; 
+				} else {
+					echo "<p>".sprintf( __('The backup process has started %s hours ago but has not finished yet.',$this->pluginID), -$hours)."</p>" ; 
+				}
 				echo "<div id='zipfile'>" ; 
 				$this->displayBackup() ; 
 				echo "</div>" ; 
-				echo "<p><input type='button' id='backupButton' class='button-primary validButton' onClick='initForceBackup(false)'  value='". __('Force a new backup (with mail)',$this->pluginID)."' />" ; 
+				echo "<p><input type='button' id='backupButton' class='button-primary validButton' onClick='initForceBackup(\"external\")'  value='". __('Force a new backup (with Mail/FTP)',$this->pluginID)."' />" ; 
 				echo "<script>jQuery('#backupButton').removeAttr('disabled');</script>" ; 
-				echo "<input type='button' id='backupButton2' class='button validButton' onClick='initForceBackup(true)'  value='". __('Force a new backup (without mail)',$this->pluginID)."' />" ; 
+				echo "<input type='button' id='backupButton2' class='button validButton' onClick='initForceBackup(\"internal\")'  value='". __('Force a new backup (without any external storage or sending)',$this->pluginID)."' />" ; 
 				echo "<script>jQuery('#backupButton2').removeAttr('disabled');</script>" ; 
 				echo "<img id='wait_backup' src='".WP_PLUGIN_URL."/".str_replace(basename(__FILE__),"",plugin_basename( __FILE__))."core/img/ajax-loader.gif' style='display: none;'>" ; 
 				echo "</p>" ; 
@@ -299,7 +332,7 @@ class backup_scheduler extends pluginSedLex {
 		$nb = 0 ; 
 		foreach ($files as $f) {
 			if (preg_match("/^BackupScheduler.*zip/i", $f)) {
-				if (!preg_match("/^BackupScheduler.*tmp$/i", $f)) {
+				if ((!preg_match("/^BackupScheduler.*tmp$/i", $f))&&(!preg_match("/^BackupScheduler.*tmp2$/i", $f))) {
 					$date = explode("_", $f) ; 
 					$date = $date[1] ; 
 					$date = date_i18n(get_option('date_format') ,mktime(0, 0, 0, substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
@@ -328,7 +361,7 @@ class backup_scheduler extends pluginSedLex {
 					$s = strtotime($new_date)-strtotime($date2);
 					$delta = $this->get_param("delete_after")-intval($s/86400);   
 
-					$valeur  = "<p>".sprintf(__('Backup completed on %s at %s',  $this->pluginID), $date, $heure)."</p>" ; 
+					$valeur  = "<p>".sprintf(__('Backup finished on %s at %s',  $this->pluginID), $date, $heure)."</p>" ; 
 					$valeur .= "<p style='font-size:80%'>".sprintf(__('The total size of the files is %s',  $this->pluginID), Utils::byteSize($size))."</p>" ; 
 					$valeur .= "<p style='font-size:80%'>".sprintf(__('These files will be deleted in %s days',  $this->pluginID), $delta)."</p>" ; 
 					$cel1 = new adminCell($valeur) ;
@@ -337,8 +370,60 @@ class backup_scheduler extends pluginSedLex {
 					$cel2 = new adminCell($lien) ;
 					$table->add_line(array($cel1, $cel2), '1') ;
 					$nb++ ; 
+				} 
+			}
+		}
+		if  ((is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"))||(is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"))) {
+			$sec_rand = "" ; 
+			$files = scandir(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
+			foreach ($files as $f) {
+				if (preg_match("/sec_rand/i", $f)) {
+					list($nothing1, $nothing2, $sec_rand) = explode("_", $f, 3) ; 
 				}
 			}
+
+			$date_tmp = explode("_", $sec_rand) ; 
+			$date_tmp = $date_tmp[0] ; 
+			$date = date_i18n(get_option('date_format') ,mktime(0, 0, 0, substr($date_tmp, 4, 2), substr($date_tmp, 6, 2), substr($date_tmp, 0, 4)));
+			$heure = date ("H:i:s.", mktime(substr($date_tmp, 8, 2), substr($date_tmp, 10, 2), substr($date_tmp, 12, 2), substr($date_tmp, 4, 2), substr($date_tmp, 6, 2), substr($date_tmp, 0, 4))) ; 
+			$valeur  = "<p>".sprintf(__('The process is still in progress for this backup (begun %s at %s).',  $this->pluginID), $date, $heure)."</p>" ;
+			// STEP SQL
+			if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="SQL") {
+				$sql = new SL_Database() ; 
+				$progress = $sql->progress(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$sec_rand.".sql") ; 
+				$valeur  .= "<p style='font-size:80%'>".sprintf(__('The SQL extraction is in progress (%s tables extracted).',  $this->pluginID), $progress)."</p>" ;
+			}
+			// STEP ZIP
+			if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="ZIP") {
+				// We create the zip file
+				$z = new SL_Zip;
+				$progress = $z->progress(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$sec_rand.".zip") ; 
+				$size = @filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$sec_rand.".zip.data_segment.tmp") ; 
+				$valeur  .= "<p style='font-size:80%'>".sprintf(__('The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s).',  $this->pluginID), $progress, Utils::byteSize($size))."</p>" ;				
+			}
+			
+			// STEP FTP
+			if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="FTP") {	
+				$files_to_sent = $this->get_param('ftp_to_be_sent') ; 
+				$files_sent = $this->get_param('ftp_sent') ; 
+				$progress = count($files_sent)."/".(count($files_to_sent)+count($files_sent)) ; 
+				$valeur  .= "<p style='font-size:80%'>".sprintf(__('The FTP sending is in progress (%s files has been stored in the FTP).',  $this->pluginID), $progress)."</p>" ;				
+			}
+			
+			// STEP MAIL
+			if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="MAIL") {	
+				$files_to_sent = $this->get_param('mail_to_be_sent') ; 
+				$files_sent = $this->get_param('mail_sent') ; 
+				$progress = count($files_sent)."/".(count($files_to_sent)+count($files_sent)) ; 
+				$valeur  .= "<p style='font-size:80%'>".sprintf(__('The MAIL sending is in progress (%s files has been sent).',  $this->pluginID), $progress)."</p>" ;				
+			}
+			
+			$cel1 = new adminCell($valeur) ;
+			$cel1->add_action(__("Cancel this process", $this->pluginID), "cancelBackup()") ; 
+			$valeur  = "<p>".__('Please wait...',  $this->pluginID)."</p>" ; 
+			$cel2 = new adminCell($valeur) ;
+			$table->add_line(array($cel1, $cel2), '1') ;
+			$nb++ ; 
 		}
 		if ($nb==0) {
 			$cel1 = new adminCell("<p>".__('(For now, there is no backup files... You should wait or force a backup (see below) )',  $this->pluginID)."</p>") ;
@@ -355,8 +440,27 @@ class backup_scheduler extends pluginSedLex {
 	* @return boolean if it works
 	*/
 	
-	public function create_zip($no_email) {
-		$date = date("YmdHis") ; 
+	public function create_zip($type_backup) {
+		// We check if the process is in progress
+		clearstatcache() ; 
+		if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+			return array('finished'=>false, 'error'=>__("Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first.", $this->pluginID)) ; 
+		}
+		file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock", 'lock') ; 
+		clearstatcache() ; 
+	
+		@mkdir(WP_CONTENT_DIR."/sedlex/backup-scheduler/", 0777, true) ; 
+		if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
+			@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess") ; 
+		}
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php")) {
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php", "You are not allowed here!") ; 
+		}
+
+	
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step") ) {	
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "SQL") ; 
+		}
 		
 		// Memory limit upgrade
 		$current_use    = ceil( memory_get_usage() / (1024*1024) );
@@ -366,121 +470,176 @@ class backup_scheduler extends pluginSedLex {
 		}
 		
 		// Security
-		$rand = Utils::rand_str(10, "abcdefghijklmnopqrstuvwxyz0123456789") ; 
-		$name = WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$date."_".$rand.".zip" ; 
-		@mkdir(WP_CONTENT_DIR."/sedlex/backup-scheduler/", 0777, true) ; 
-		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
-			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess", "Options All -Indexes") ; 
+		$sec_rand = "" ; 
+		$files = scandir(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
+		foreach ($files as $f) {
+			if (preg_match("/sec_rand/i", $f)) {
+				list($nothing1, $nothing2, $sec_rand) = explode("_", $f, 3) ; 
+			}
 		}
-		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php")) {
-			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/index.php", "Hi") ; 
+		$rand = $sec_rand ; 
+		if ($rand=="") {
+			$rand = date("YmdHis")."_".Utils::rand_str(10, "abcdefghijklmnopqrstuvwxyz0123456789") ; 
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.sec_rand_".$rand, "ok") ; 
 		}
 		
-		$z = new SL_Zip;
-		
-		$ip = $z->is_inProgress(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
-		
-		if ($ip['step'] == "in progress") {
-			return array('finished'=>false, 'error'=>sprintf(__("An other backup is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip['for'])) ; 
-		} else if ($ip['step'] == "error") {
-			return array('finished'=>false, 'error'=>$ip['msg']) ; 			
-		} else if ($ip['step'] == "nothing") {
-			$ok = false ; 
+		// STEP SQL
+		if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="SQL") {
 			if ($this->get_param('save_db')) {
+				// We create the SQL file
 				$sql = new SL_Database() ; 
-				$ip2 = $sql->is_inProgress(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
-				if ($ip2['step'] == "in progress") {
-					return array('finished'=>false, 'error'=>sprintf(__("An other SQL extraction is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip2['for'])) ; 
-				} else if ($i2['step'] == "error") {
-					return array('finished'=>false, 'error'=>$ip2['msg']) ; 			
-				} else if ($ip2['step'] == "nothing") {
-					$name2 = "BackupScheduler_".$date."_".$rand.".sql" ; 
-					$res = $sql->createSQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name2, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
-					if ($res['finished']==false) {
-						$res['text'] = ' '.__('(SQL extraction)', "SL_framework") ; 	
-						return $res ;
-					}
-				} else if ($ip2['step'] == "to be completed") {
-					$name2 = $ip2['name_sql']  ; 
-					$res = $sql->createSQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name2, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
-					if ($res['finished']==false) {
-						$res['text'] = ' '.__('(SQL extraction)', "SL_framework") ; 	
-						return $res ;
-					}
+				$ip = $sql->is_inProgress(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
+
+				if ($ip['step'] == "in progress") {
+					return array('finished'=>false, 'error'=>sprintf(__("An other SQL extraction is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip['for'])) ; 
+				} else if ($ip['step'] == "error") {
+					return array('finished'=>false, 'error'=>$ip['msg']) ; 			
+				} else if ($ip['step'] == "nothing") {
+					$name = "BackupScheduler_".$rand.".sql" ; 
+				} else if ($ip['step'] == "to be completed") {
+					$name = $ip['name_sql']  ; 
 				}
-				$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$date."_".$rand.".sql");
-				$ok = true ; 
+				$res = $sql->createSQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
+				
+				// Check if the step should be modified
+				if ($res['finished']==true) {
+					@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "ZIP") ; 
+				}
+				$res['text'] = ' '.__('(SQL extraction)', $this->pluginID) ; 	
+				return $res ; 
+			} else {
+				// Nothing should be done, thus we go directly at the next step
+				@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "ZIP") ; 
 			}
-			if ($this->get_param('save_plugin')) {
-				$z -> addDir(WP_CONTENT_DIR."/plugins/");
-				$ok = true ; 
-			}
-			if ($this->get_param('save_theme')) {
-				$z -> addDir(WP_CONTENT_DIR."/themes/");
-				$ok = true ; 
-			}
-			if ($this->get_param('save_upload')) {
-				$z -> addDir(WP_CONTENT_DIR."/uploads/");
-				$ok = true ; 
+		}
+		
+		// STEP ZIP
+		if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="ZIP") {
+			// We create the zip file
+			$z = new SL_Zip;
+			$ip = $z->is_inProgress(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
+			
+			if ($ip['step'] == "in progress") {
+				return array('finished'=>false, 'error'=>sprintf(__("An other backup is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip['for'])) ; 
+			} else if ($ip['step'] == "error") {
+				return array('finished'=>false, 'error'=>$ip['msg']) ; 			
+			} else if ($ip['step'] == "nothing") {
+				if ($this->get_param('save_all')) {
+					$z -> addDir(ABSPATH, ABSPATH, "backup_".date("Ymd")."/", array(WP_CONTENT_DIR."/sedlex/"));
+				} else {
+					if ($this->get_param('save_plugin')) {
+						$z -> addDir(WP_CONTENT_DIR."/plugins/", WP_CONTENT_DIR."/", "backup_".date("Ymd")."/");
+					}
+					if ($this->get_param('save_theme')) {
+						$z -> addDir(WP_CONTENT_DIR."/themes/", WP_CONTENT_DIR."/", "backup_".date("Ymd")."/");
+					}
+					if ($this->get_param('save_upload')) {
+						$z -> addDir(WP_CONTENT_DIR."/uploads/", WP_CONTENT_DIR."/", "backup_".date("Ymd")."/");
+					}
+					@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
+					@copy(ABSPATH."/wp-config.php", WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
+					$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php", WP_CONTENT_DIR."/sedlex/backup-scheduler/", "backup_".date("Ymd")."/");
+				}
+				if ($this->get_param('save_db')) {
+					$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".sql", WP_CONTENT_DIR."/sedlex/backup-scheduler/", "backup_".date("Ymd")."/");
+				}
+					
+				$name = WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".zip" ; 
+			} else if ($ip['step'] == "to be completed") {
+				$name = WP_CONTENT_DIR."/sedlex/backup-scheduler/".$ip['name_zip']  ; 
 			}
 			
-			@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
-			@copy(ABSPATH."/wp-config.php", WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
-			$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php");
-				
-			if ($ok) {
-				$z -> removePath(WP_CONTENT_DIR."/") ; 
-				$z -> addPath("backup_".$date."/") ; 
-				$path = $z -> createZip($name,$this->get_param('chunk')*1024*1024, 5, $this->get_param('max_allocated')*1024*1024 );
-				
-				if ($path['finished']==true) {
-					// We rename the zip file if needed
-					if ($this->get_param('rename')!="") {
-						$path2 = array() ; 
-						foreach ($path['path'] as $f) {
-							@rename($f, $f.$this->get_param('rename')) ; 
-							$path2[] = $f.$this->get_param('rename') ; 
-						}
-						$path['path'] = $path2 ; 
-					}
-					
-					@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup", date("Y-m-d")) ; 
-					if (!$no_email) {
-						if (!$this->sendEmail($path['path'])) {
-							$path['error'] = __("An error occured while sending mail!", $this->pluginID) ; 
-							$path['finished'] = false ;  
-						}
-					}
-				}
-				$path['text'] = ' '.__('(ZIP creation)', "SL_framework") ; 	
-				return $path ; 
-			}
-		} else if ($ip['step'] == "to be completed") {
-			$name = $ip['name_zip']  ; 
-			$path = $z -> createZip(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$name,$this->get_param('chunk')*1024*1024, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
+			$path = $z -> createZip($name,$this->get_param('chunk')*1024*1024, $this->get_param('max_time'),$this->get_param('max_allocated')*1024*1024);
+			
+			// Check if the step should be modified
 			if ($path['finished']==true) {
-				@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup", date("Y-m-d")) ; 
-				// We rename the zip file if needed
-				if ($this->get_param('rename')!="") {
-					$path2 = array() ; 
-					foreach ($path['path'] as $f) {
-						@rename($f, $f.$this->get_param('rename')) ; 
-						$path2[] = $f.$this->get_param('rename') ; 
-					}
-					$path['path'] = $path2 ; 
-				}
-				
-				if (!$no_email) {
-					if (!$this->sendEmail($path['path'])) {
-						$path['error'] = __("An error occured while sending mail!", $this->pluginID) ; 
-						$path['finished'] = false ;  
-					}
-				}
+				@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "FTP") ; 
+				// We delete the possible SQL file and config file
+				@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".sql") ; 
+				@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
+				$files_to_sent = $path['path'] ; 
+				// Reset this variable to avoid any conflicts
+				$this->set_param('ftp_to_be_sent', $files_to_sent) ; 
+				$this->set_param('mail_to_be_sent', $files_to_sent) ; 
+				$this->set_param('ftp_sent', array()) ; 
+				$this->set_param('mail_sent', array()) ; 
 			}
-			$path['text'] = ' '.__('(ZIP creation)', "SL_framework") ; 	
+			$path['text'] = ' '.__('(ZIP creation)', $this->pluginID) ; 	
 			return $path ; 
 		}
 		
+		// STEP FTP
+		if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="FTP") {	
+			if (($this->get_param('ftp'))&&($type_backup=="external")) {
+				// On envoie le premier fichier en FTP
+				$files_to_sent = $this->get_param('ftp_to_be_sent') ; 
+				$files_sent = $this->get_param('ftp_sent') ; 
+				$file_to_sent = array_pop ($files_to_sent) ; 
+				array_push($files_sent, $file_to_sent) ; 
+				// Mise ˆ jour 
+				$this->set_param('ftp_to_be_sent', $files_to_sent) ; 
+				$this->set_param('ftp_sent', $files_sent) ; 
+				
+				if ($file_to_sent!=NULL) {
+					$res = $this->sendFTP(array($file_to_sent)) ; 
+					if ($res['transfer']) {
+						$res['text'] = ' '.__('(FTP sending)', $this->pluginID) ; 	
+						$res['nb_finished'] = count($files_sent) ; 
+						$res['nb_to_finished'] = count($files_to_sent) ; 
+					} 
+					return $res ; 
+				} else {
+					$this->sendFTPEmail(count($files_sent)) ; 
+					@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "MAIL") ; 
+				}
+			} else {
+				// Nothing should be done, thus we go directly at the next step
+				@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "MAIL") ; 			
+			}
+		}
+		
+		// STEP MAIL
+		if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")=="MAIL") {	
+			if (($this->get_param('email_check'))&&($type_backup=="external")) {
+				// On envoie le premier fichier en mail
+				$files_to_sent = $this->get_param('mail_to_be_sent') ; 
+				$files_sent = $this->get_param('mail_sent') ; 
+				$file_to_sent = array_pop ($files_to_sent) ; 
+				array_push($files_sent, $file_to_sent ) ; 
+				// Mise à jour 
+				$this->set_param('mail_to_be_sent', $files_to_sent) ; 
+				$this->set_param('mail_sent', $files_sent) ; 
+				
+				if ($file_to_sent!=NULL) {
+					$subject = sprintf(__("Backup of %s on %s (%s)", $this->pluginID), get_bloginfo('name') , date('Y-m-d'), count($files_sent)."/".(count($files_to_sent)+count($files_sent)) ) ; 
+					$res = $this->sendEmail(array($file_to_sent), $subject) ; 
+					if ($res===true) {
+						$path['text'] = ' '.__('(MAIL sending)', $this->pluginID) ; 	
+						$path['nb_finished'] = count($files_sent) ; 
+						$path['nb_to_finished'] = count($files_to_sent) ; 
+					} else {
+						$path['error'] = __("Your Wordpress installation cannot send emails (with heavy attachments)!", $this->pluginID)  ; 
+					}
+					return $path ; 
+				} else {
+					if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
+						return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
+					}
+				}
+			} else {
+				// Nothing should be done, thus we go directly at the next step
+				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
+					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
+				}
+			}
+		}
+		
+		// STEP END
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step") ) {	
+			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/last_backup", date("Y-m-d")) ; 	
+			return  ; 		
+		}
+
 		return array('finished'=>false, 'error'=>__("An unknown error occured!", $this->pluginID)) ; 
 	}
 	
@@ -491,6 +650,7 @@ class backup_scheduler extends pluginSedLex {
 	*/
 	function initBackupForce() {	
 		$pb = new progressBarAdmin(300, 20, 0, "") ; 
+		$this->only_cancelBackup() ; 
 		$pb->flush() ;
 		die() ; 
 	}
@@ -501,24 +661,37 @@ class backup_scheduler extends pluginSedLex {
 	* @return void
 	*/
 	function backupForce() {
-		$no_mail = $_POST['no_mail'] ;
+		$type_backup = $_POST['type_backup'] ;
 
-		$result = $this->create_zip($no_mail) ;
+		$result = $this->create_zip($type_backup) ;
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+			$this->only_cancelBackup() ; 
+			$result = array('finished'=>false, 'error'=>__("The process has been canceled by a third person", $this->pluginID)) ; 
+		}
 		
-		if ($result['finished']==true) {
-			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup have been generated!", $this->pluginID)."</p></div>" ; 
+
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
+			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup has been generated!", $this->pluginID)."</p></div>" ; 
+			$this->only_cancelBackup() ; 
 		} else {
 			if (isset($result['error'])) {
 				echo "<div class='error fade'><p class='backupError'>".$result['error']."</p></div>" ; 
+				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
+					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
+				}
+				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
+				}
 			} else {
 				echo $result['nb_finished']."/".($result['nb_finished']+$result['nb_to_finished']).$result['text'] ; 
+				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
+				}
 			}
 		}
 		
 		die() ; 
 	}
-	
-	
 	
 	/** ====================================================================================================================================================
 	* Callback updating the table with zip files
@@ -538,8 +711,33 @@ class backup_scheduler extends pluginSedLex {
 	
 	function checkIfBackupNeeded() {
 		// si le nb de jours dans laquel on doit faire un backup est inferieur ou egal a 0, on sauve
-		if ($this->backupInHours()<0){
-			$this->create_zip(false) ;
+		if ($this->backupInHours()<0){	
+			// We check dead lock
+			$filemtime = @filemtime(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock");  // returns FALSE if file does not exist
+			if ($filemtime>0 && (time() - $filemtime >= 200)){
+				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
+				}
+			}
+			// Create backup
+			$result = $this->create_zip("external") ;
+			if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
+				// New backup ended ; 
+				$this->only_cancelBackup() ; 
+			} else {
+				if (!isset($result['error'])) {
+					if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+						return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
+					}
+					echo ">".@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step") ; 
+				} else {
+					//echo $result['error'] ; // DEBUG
+				}
+			}
+			
+		} else {
+			echo "No Backup Needed" ; 
+			$this->only_cancelBackup() ; 
 		}
 		// On parcours les fichier de sauvegarde et on les supprime si trop vieux
 		$files = scandir(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ;
@@ -570,9 +768,9 @@ class backup_scheduler extends pluginSedLex {
 		$dateOfNextBackup = strtotime($dateOfLastBackup) + $this->get_param("frequency")*86400 + $this->get_param("save_time")*3600 ; 
 		
 		$DateNow = strtotime(date("Y-m-d H:0:0")) ; 
-		
+
 		$delta = ceil(($dateOfNextBackup-$DateNow)/3600);   
-		
+
 		return $delta;
 
 	}
@@ -633,16 +831,43 @@ class backup_scheduler extends pluginSedLex {
 	}
 	
 	/** ====================================================================================================================================================
-	* Send Email with the backupfiles
+	* Callback cancelling backup files
 	*
-	* @param $attach the bachup file paths
 	* @return void
 	*/
 	
-	function sendEmail($attach) {
-		if ($this->get_param('email')=='') 
-			return true ;
-			
+	function cancelBackup() {	
+		$this->only_cancelBackup() ; 
+		$this->displayBackup() ; 
+		die() ; 
+	}	
+
+	function only_cancelBackup() {	
+		$files = scandir(WP_CONTENT_DIR."/sedlex/backup-scheduler/") ; 
+		$nb = 0 ; 
+		@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock") ; 
+		@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step") ; 
+		foreach ($files as $f) {
+			if (preg_match("/sec_rand/i", $f)) {
+				@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f) ; 
+			}
+		}
+		foreach ($files as $f) {
+			if (preg_match("/tmp$/i", $f)) {
+				@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$f) ; 
+			}
+		}
+	}	
+
+	/** ====================================================================================================================================================
+	* Send Email with the backup files
+	*
+	* @param $attach the backup file paths
+	* @return void
+	*/
+	
+	function sendEmail($attach, $subject="Backup") {
+
 		for ($i=0 ; $i<count($attach) ; $i++) {
 			$message = "" ; 
 			$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
@@ -653,16 +878,105 @@ class backup_scheduler extends pluginSedLex {
 					"Content-Type: text/html; charset=\"" .
 					get_option('blog_charset') . "\"\n";
 					
-			$attachments = array($attach[$i]);
-			$subject = sprintf(__("Backup of %s (%s)", $this->pluginID), get_bloginfo('name') , ($i+1)."/".count($attach)) ; 
+			// We rename the zip files if needed
+			if ($this->get_param('rename')!="") {
+				@rename($attach[$i], $attach[$i].$this->get_param('rename')) ; 
+				$attachments = array($attach[$i].$this->get_param('rename'));
+			} else {
+				$attachments = array($attach[$i]);
+			}
+			
 						
 			// send the email
-			if (wp_mail($this->get_param('email'), $subject, $message, $headers, $attachments )) {
-			} else {
+			$res = wp_mail($this->get_param('email'), $subject, $message, $headers, $attachments ) ; 
+			
+			// We unrename the file 
+			if ($this->get_param('rename')!="") {
+				@rename($attach[$i].$this->get_param('rename'), $attach[$i]) ; 
+			}
+			
+			if (!$res) {
 				return false ; 			
 			} 
 		}
 		return true ; 
+	}	
+	
+	/** ====================================================================================================================================================
+	* Send Email with the backup files
+	*
+	* @param $attach the backup file paths
+	* @return void
+	*/
+	
+	function sendFTPEmail($nb) {
+		if (trim($this->get_param('ftp_mail'))=="")
+			return ;
+			
+		$message = "" ; 
+		$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
+		$message .= "<p>".sprintf(__("%s backup files has been successfully saved on your FTP (%s)", $this->pluginID), $nb, $this->get_param('ftp_host'))."</p><p>&nbsp;</p>" ; 
+		$message .= "<p>".__("Best regards,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
+		
+		$headers= "MIME-Version: 1.0\n" .
+				"Content-Type: text/html; charset=\"" .
+				get_option('blog_charset') . "\"\n";
+		
+		$subject = sprintf(__("Backup of %s on %s - FTP confirmation", $this->pluginID), get_bloginfo('name') , date('Y-m-d') ) ; 
+		
+		// send the email
+		$res = wp_mail($this->get_param('ftp_mail'), $subject, $message, $headers) ; 
+	}	
+	
+	/** ====================================================================================================================================================
+	* Send backup files to ftp host
+	*
+	* @param $attach the bachup file paths
+	* @return void
+	*/
+	
+	function sendFTP($attach) {
+		if ($this->get_param('ftp_host')=='') 
+			return array("transfer"=>false, "error"=>__('No host has been defined', $this->pluginID)) ; 
+		
+		$conn=false ; 
+		
+		if (preg_match("/ftp:\/\/([^\/]*?)(\/.*)/i", $this->get_param('ftp_host'), $match)) {
+			$conn = @ftp_connect($match[1]); 
+		} else {
+			if (!function_exists('ftp_ssl_connect')) {
+				return array("transfer"=>false, "error"=>sprintf(__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
+			}
+			if (preg_match("/ftps:\/\/([^\/]*?)(\/.*)/i", $this->get_param('ftp_host'), $match)) {
+				$conn = @ftp_ssl_connect($match[1]); 
+			}
+		}
+		if ($conn===false) {
+			return array("transfer"=>false, "error"=>sprintf(__('The host %s cannot be resolved!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
+		} else {
+			if (@ftp_login($conn, $this->get_param('ftp_login'), $this->get_param('ftp_pass'))) {
+				if (@ftp_chdir($conn, $match[2])) {
+					for ($i=0 ; $i<count($attach) ; $i++) {
+						ob_start() ; 
+						$res = ftp_put($conn, basename($attach[$i]), $attach[$i], FTP_BINARY);
+						if (!$res) {
+							return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".ob_get_clean()."</code>")) ; 
+						}
+						$vide = ob_get_clean() ; 
+					}
+					@ftp_close($conn) ; 
+					return array("transfer"=>true) ; 
+				} else {
+				 	@ftp_close($conn) ; 
+					return array("transfer"=>false, "error"=>sprintf(__('The specified folder %s does not exists. Please create it so that the transfer may start!', $this->pluginID), $match[2])) ; 
+				}
+			} else {
+				@ftp_close($conn) ; 
+				return array("transfer"=>false, "error"=>__('The login/password does not seems valid!', $this->pluginID)) ; 
+			}
+		}
+		
+		return array("transfer"=>true) ; 
 	}	
 }
 

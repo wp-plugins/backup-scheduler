@@ -4,48 +4,54 @@ Author: SedLex
 Contributors: SedLex
 Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/extend/plugins/backup-scheduler/
-Tags: plugin, backup, database, schedule
+Tags: backup, schedule, plugin, save, database, zip
 Requires at least: 3.0
-Tested up to: 3.2
+Tested up to: 3.3.1
 Stable tag: trunk
 
-With this plugin, you may plan the backup of your website
+With this plugin, you may plan the backup of your entire website (folders, files and/or database).
 
 == Description ==
 
-With this plugin, you may plan the backup of your website.
+With this plugin, you may plan the backup of your entire website (folders, files and/or database).
 
 You can choose: 
 
-* which folders you will save; 
+* which folders you want to save; 
+* the frequency of the backup process; 
 * whether your database should be saved; 
-* whether the backup is stored on the local website or sent by email (support of multi part zip files)
+* whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)
 
-This plugin is under GPL licence.
+This plugin is under GPL licence
 
-= Localizations =
+= Localization =
 
-* Russian translation (by Slawka)
-* German-Switzerland translation (by BernhardKnab and PeterDbbert)
-* Polish translation (by Pablo)
-* Spanish translation (by AVfoto and Javier)
-* Italian translation (by PuntoCon)
-* French translation (by me)
+* German (Switzerland) translation provided by PeterDbbert, BernhardKnab
+* English (United States), default language
+* Spanish (Spain) translation provided by Javier, AVfoto
+* French (France) translation provided by SedLex
+* Indonesian (Indonesia) translation provided by Faleddo
+* Italian (Italy) translation provided by PuntoCon
+* Dutch (Netherlands) translation provided by Matrix
+* Polish (Poland) translation provided by Lukasz, pablo
+* Portuguese (Portugal) translation provided by FranciscoRocha
+* Russian (Russia) translation provided by GerinG, Slawka
+* Swedish (Sweden) translation provided by 
+* Thai (Thailand) translation provided by 
+* Chinese (People's Republic of China) translation provided by YiscaJoe
 
-= Features of the framework = 
+= Features of the framework =
 
-This plugin use SL framework.
+This plugin uses the SL framework. This framework eases the creation of new plugins by providing incredible tools and frames.
 
-You may translate this plugin with an embedded feature which is very easy to use by any end-users (without any external tools / knowledge).
+For instance, a new created plugin comes with
 
-You may also create a new plugin. You will download, from the plugin, an "hello World" plugin: You just have to fill the blank and follow the comments.
-
-Moreover, all the plugins developped with this framework is able to use astonishing tools, such as :
-
-* embedded SVN client (subversion) to easily commit/update the plugin in wordpress.org repository ; 
-* detailled documentation of all available classes and methodes ; 
-* updating the core with a single click ; 
+* A translation interface to simplify the localization of the text of the plugin ; 
+* An embedded SVN client (subversion) to easily commit/update the plugin in wordpress.org repository ; 
+* A detailled documentation of all available classes and methodes ; 
 * etc.
+
+Have fun !
 
 == Installation ==
 
@@ -61,6 +67,14 @@ Moreover, all the plugins developped with this framework is able to use astonish
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.2.1 =
+* Portuguese translation added (by FranciscoRocha)
+
+= 1.2.0 =
+* FTP support
+* Full site backup is now possible
+* Bug correction when SQL has NULL value
 
 = 1.1.2 =
 * Add a link to delete manually the backup (feature requested by Mirza)
@@ -109,17 +123,15 @@ Moreover, all the plugins developped with this framework is able to use astonish
 == Frequently Asked Questions ==
 
 = To restore the backups =
+
 * install a fresh version of Wordpress on your server ; 
-* unzip the backup (actually, the zip file comprises a plurality of files i.e. a multip-part zip (zip, z01, z02, etc.). These files should be saved in a same folder and your zip program (such as winzip, winrar, ...) will do the job for you...
-* replace the 'plugins' folder (in the wp-content folder) with the one in the archive ; 
-* replace the 'themes' folder (in the wp-content folder) with the one in the archive ;
-* replace the 'uploads' folder (in the wp-content folder) with the one in the archive ;
-* replace the wp-config.php (at the root of your wordpress repository) with the one in the sedlex/backup-scheduler
-* import the sql file in your database (with for instance phpmyadmin). It is recommended to save your database first.
+* unzip the backup (actually, the zip file comprises a plurality of files i.e. a multi-part zip (zip, z01, z02, etc.). These files should be saved in a same folder and your zip program (such as winzip, winrar, ...) will do the job for you...
+* If you have configured to save the entire installation, replace all the wordpress files by the one in the zip file and import the SQL file (at the root of the zip file) in your database (with for instance phpmyadmin). It is recommended to save your database first ;
+* In other cases, replace the 'plugins',  'themes', 'uploads' folders (in the wp-content folder) with the one in the archive, replace the wp-config.php (at the root of your wordpress repository) with the one at the root of the zip file and  import the SQL file (at the root of the zip file) in your database (with for instance phpmyadmin). It is recommended to save your database first.
 
 * Where can I read more?
 
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:efea442dbc4aa1e74a76bd68036835d6
+InfoVersion:4b10487ec8bfc68c314019dfe8e33ca0

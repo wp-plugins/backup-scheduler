@@ -4,16 +4,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-28T11:03:30+00:00\n"
-"Last-Translator: GerinG <http://gering111.com/>\n"
-"Last-Translator: Slawka <http://eth0.org.ru>\n"
+"PO-Revision-Date: 2012-01-15T12:33:25+00:00\n"
+"Last-Translator: YiscaJoe <J.Yisca@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
-"X-Poedit-Language: Russian\n"
-"X-Poedit-Country: Russia\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: People's Republic of China\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;\n"
 "X-Poedit-Basepath: \n"
@@ -22,176 +21,176 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
-msgstr "Этот плагин выполняет резервное копирование важных частей вашего сайта: просто и эффективно"
+msgstr "这个插件将使计划备份成为您的网站的重要组成部分：使用简单、高效！"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr ""
+msgstr "很抱歉，但您应该确保 install/activate%s 在您的网站上。否则，这个插件将无法正常工作！"
 
 msgid "How often do you want to backup your website?"
-msgstr "Как часто вы хотите делать резервные копии вашего сайта?"
+msgstr "您希望多久备份一次您的站点呢？"
 
 msgid "Frequency (in days):"
-msgstr "Интервал (в днях):"
+msgstr "频率（按天数）："
 
 msgid "Time of the backups:"
-msgstr "Время, когда создается бэкап"
+msgstr "备份时间："
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
-msgstr ""
+msgstr "请注意0表示午夜，1表示凌晨1点，13表示下午1点等等。请确保您的网站在设置的时间进行备份不会造成系统过载。"
 
 msgid "Keep the backup files for (in days):"
-msgstr "Время хранение копий (в днях):"
+msgstr "保存文件的时间（按天数）："
 
 msgid "What do you want to save?"
-msgstr "Что вы хотите сохранять?"
+msgstr "您要保存哪些文件呢？"
 
 msgid "The plugins directory:"
-msgstr "Каталог плагина:"
+msgstr "插件目录："
 
 msgid "(i.e. %s)"
-msgstr ""
+msgstr "（即 %s）"
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
-msgstr "Выберите этот пункт, если вы хотите сохранять все установленные плагины"
+msgstr "选中此项将保存所有您已经安装和使用的插件。"
 
 msgid "The themes directory:"
-msgstr "Каталог тем:"
+msgstr "主题目录："
 
 msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
-msgstr "Выберите этот пункт, если вы хотите сохранять все установленные темы"
+msgstr "选中此项将保存所有您已经安装和使用的主题。"
 
 msgid "The upload directory:"
-msgstr "Папка загрузки"
+msgstr "上传文件目录："
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
-msgstr "Выберите этот пункт, если вы хотите сохранять все загруженные изображения и файлы"
+msgstr "选中此项将保存已经上传的图片和文件等等在articles/posts/pages中。"
 
 msgid "The SQL database:"
-msgstr "База данных SQL"
+msgstr "SQL数据库："
 
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
-msgstr "Выберите этот пункт, если вы хотите сохранять все ваши записи, файлы конфигурации и прочее"
+msgstr "选中此项将保存您文章中的文字和设置等等。"
 
 msgid "Do you want that the backup is sent by email?"
-msgstr "Вы хотите получать резервные копии на email?"
+msgstr "您希望您的备份被发送到您的邮箱中么？"
 
 msgid "If so, please enter your email:"
-msgstr "Если да, введите ваш emal:"
+msgstr "如果需要发送，请输入您的邮箱账号："
 
 msgid "The maximum attachment size (in MB):"
-msgstr "Максимальный размер вложения (в МБ)"
+msgstr "最大附件大小（MB）："
 
 msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr ""
+msgstr "请注意文件将可能被压缩并分割成多个压缩文件"
 
 msgid "Do you want to rename the files?"
-msgstr "Вы хотите переименовывать файлы?"
+msgstr "您希望重命名文件么？"
 
 msgid "What is the suffix of the file:"
-msgstr "Суффикс файла"
+msgstr "文件后缀名："
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
-msgstr ""
+msgstr "这项设置将允许该块通过一些电子邮件服务商对于zip附件的拦截（如GMail）。"
 
 msgid "You do not need to fill this field if no mail is to be sent."
-msgstr ""
+msgstr "如果不需要邮寄您的备份，您不需要填写该字段。"
 
 msgid "Advanced - Memory and time management"
-msgstr ""
+msgstr "高级 - 内存和时间管理"
 
 msgid "What is the maximum size of allocated memory (in MB):"
-msgstr "Какой объём памяти может занимать плагин при работе?"
+msgstr "允许的最大内存（MB）："
 
 msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
-msgstr ""
+msgstr "在一些已安装的WordPress中，您可能会遇见一些内存错误。如果你碰到错误，请尽量减小这个数值。"
 
 msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
-msgstr ""
+msgstr "根据您的信息，服务器允许的最大内存值为 %s 而目前的内存使用状况是 %s。"
 
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
-msgstr ""
+msgstr "这是建议设置的附件最高大小没有比这个更高的值了。"
 
 msgid "What is the maximum time for the php scripts execution (in seconds):"
-msgstr ""
+msgstr "PHP脚本执行的最长时间（按秒）："
 
 msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
-msgstr ""
+msgstr "即使您没有时间限制，建议您将该值设定为15s，以免您的服务器提供商将该PHP脚本强制结束。"
 
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr ""
+msgstr "这是备份文件。你可以建立一个新的备份文件或者下载您之前的备份文件。"
 
 msgid "An automatic backup will be launched in %s days and %s hours."
-msgstr ""
+msgstr "自动备份将在 %s天%s小时 后进行。"
 
 msgid "Force a new backup (with mail)"
-msgstr "Создать новый бэкап(с отправкой почты)"
+msgstr "强制建立一个新的备份（邮寄）"
 
 msgid "Force a new backup (without mail)"
-msgstr "Создать новый бэкап(без отправки почты)"
+msgstr "强制建立一个新的备份（不邮寄）"
 
 msgid "Backups"
-msgstr "Резервные копии"
+msgstr "备份"
 
 msgid "Parameters"
-msgstr "Параметры"
+msgstr "参数"
 
 msgid "Manage translations"
-msgstr ""
+msgstr "翻译管理"
 
 msgid "Give feedback"
-msgstr "Отправить отзыв"
+msgstr "提供反馈意见"
 
 msgid "Other plugins"
-msgstr "Другие плагины"
+msgstr "其它插件"
 
 msgid "Date of the backup"
-msgstr "Дата резервного копирования"
+msgstr "备份天数"
 
 msgid "Backup files"
-msgstr ""
+msgstr "备份文件"
 
 msgid "Part %s"
-msgstr "Часть"
+msgstr "第 %s 部分"
 
 msgid "Backup completed on %s at %s"
-msgstr ""
+msgstr "备份在 %s %s 完成"
 
 msgid "The total size of the files is %s"
-msgstr ""
+msgstr "文件大小合计为%s"
 
 msgid "These files will be deleted in %s days"
-msgstr ""
+msgstr "这些文件将在 %s 天后删除"
 
 msgid "Delete these backup files"
-msgstr "Удалить эти резервные копии"
+msgstr "删除这些备份文件"
 
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
-msgstr ""
+msgstr "（现在，这里没有任何备份文件。你应该等待或者强行建立一个备份（看看下面））"
 
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr ""
+msgstr "另一个备份操作仍在进行（已运行 %s 秒）请稍等！"
 
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
-msgstr ""
+msgstr "另一个SQL数据提取仍在进行（已运行 %s 秒）请稍等！"
 
 msgid "An error occured while sending mail!"
-msgstr "Ошибка отправки почты"
+msgstr "在发送邮件时发生一个错误！"
 
 msgid "An unknown error occured!"
-msgstr "Возникла неизвестная ошибка"
+msgstr "发生了一个未知错误！"
 
 msgid "A new backup have been generated!"
-msgstr "Новая резервная копия создана"
+msgstr "已经产生了一个新的备份！"
 
 msgid "Dear sirs,"
-msgstr "Уважаемые господа"
+msgstr "亲爱的用户们，"
 
 msgid "Here is attached the %s on %s backup files for today"
-msgstr ""
+msgstr "这里是今天 %s %s 备份文件的链接"
 
 msgid "Best regards,"
-msgstr "С уважением"
+msgstr "最亲切的问候，"
 
 msgid "Backup of %s (%s)"
-msgstr "Копия "
+msgstr "%s 的备份（%s）"
 

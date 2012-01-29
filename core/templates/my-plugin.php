@@ -1,6 +1,7 @@
 <?php
 /**
 Plugin Name: My Plugin
+Plugin Tag: tag
 Description: <p>The description of the plugin on this line. </p>
 Version: 1.0.0
 Framework: SL_Framework
