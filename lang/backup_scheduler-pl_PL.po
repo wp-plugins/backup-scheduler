@@ -4,7 +4,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-26T14:48:36+00:00\n"
+"PO-Revision-Date: 2012-01-30T21:38:39+00:00\n"
+"Last-Translator: Opti <>\n"
 "Last-Translator: Lukasz <www.premiumaccount.co.ukwww.esteepc.co.uk>\n"
 "Last-Translator: pablo <pawel@dream.net.pl>\n"
 "Language-Team: \n"
@@ -34,10 +35,13 @@ msgid "Frequency (in days):"
 msgstr "Częstotliwość (dni)"
 
 msgid "Time of the backups:"
-msgstr "Czas wykonania backupu:    "
+msgstr "Czas wykonania backupu:"
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "Proszę pamiętać, że 0 oznacza północ, 1 oznacza 1. w nocy, 13am 1. po południu, itd. Backup nastąpi o (czas zgodny z godziną serwera), wiec upewnij sie, że twoja strona nie jest przeciążona w tych godzinach."
+
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr "Należy również pamiętać, że kopia zapasowa nie będzie końca dokładnie w tym czasie. Proces wykonywania kopii zapasowej może potrwać do 6h zwłaszcza jeśli nie masz dużo ruchu na swojej stronie i / lub jeśli kopia zapasowa jest dość duża."
 
 msgid "Keep the backup files for (in days):"
 msgstr "Trzymaj kopie zapasową przez (dni)"
@@ -45,11 +49,17 @@ msgstr "Trzymaj kopie zapasową przez (dni)"
 msgid "What do you want to save?"
 msgstr "Co chcesz zachować?"
 
-msgid "The plugins directory:"
-msgstr "Katalog pluginów:"
+msgid "All directories (the full Wordpress installation):"
+msgstr "Wszystkie katalogi (cała instalacja Wordpress)"
 
 msgid "(i.e. %s)"
 msgstr "np. %s"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr "Zaznacz tę opcję jeśli chcesz zachować wszystko. Uważaj, kopia może mieć duży rozmiar."
+
+msgid "The plugins directory:"
+msgstr "Katalog pluginów:"
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
 msgstr "Zaznacz tą opcje, jeśli chcesz zachować kopie wszystkich wtyczek, które zainstalowaleś i które używasz na swojej stronie."
@@ -72,29 +82,53 @@ msgstr "Baza danych SQL:"
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
 msgstr "Zaznacz tą opcje, jeśli chcesz zachować wszystkie twoje posty oraz konfiguracje, itp."
 
+msgid "The maximum file size (in MB):"
+msgstr "Maksymalny rozmiar pliku (w MB)"
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr "Należy pamiętać, że plik zip będzie podzielony na kilka plików aby nie przekroczyć maksymalnego rozmiaru pliku, który ustawiono"
+
 msgid "Do you want that the backup is sent by email?"
 msgstr "Chcesz aby kopie zapasowe były wysyłane emailem?"
+
+msgid "Send the backup files by email:"
+msgstr "Wyślij backup na email"
 
 msgid "If so, please enter your email:"
 msgstr "Jeśli tak, podaj adres email:"
 
-msgid "The maximum attachment size (in MB):"
-msgstr "Maksymalna wielkośc załącznika (w MB)"
-
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr "Proszę pamiętać, że spakowany plik zip będzie podzielony na kilka innych, by dostosować się do maksymalnego rozmiaru pliku wyznaczonego uprzednio przez użytkownika."
-
-msgid "Do you want to rename the files?"
-msgstr "Chcesz zmienić nazwy plików?"
-
-msgid "What is the suffix of the file:"
-msgstr "Przyrostek; koncówka nazwy pliku bazy danych:"
+msgid "Do you want to add a suffix to sent files:"
+msgstr "Czy chcesz dodać przyrostek (sufix) do wysłanych plików"
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr "Ta opcja umożliwia obejśćie zabezpieczeń niektórych dostawców kont emailowych, którzy domyślnie blokują emaile wraz załącznikami z rozszerzeniem zip ( np. GMail.)"
 
 msgid "You do not need to fill this field if no mail is to be sent."
 msgstr "Nie musisz wypełniać tego pola, jeśli nie skonfigurowałeś opcji email."
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr "Czy chcesz zapisać ten backup na FTP?"
+
+msgid "Save the backup files on a FTP?"
+msgstr "Zapisać pliki backupu na FTP?"
+
+msgid "FTP host:"
+msgstr "serwer FTP:"
+
+msgid "Should be at the form %s or %s"
+msgstr "Użyć formy %s czy %s"
+
+msgid "Your FTP login:"
+msgstr "Twój login FTP:"
+
+msgid "Your FTP pass:"
+msgstr "Twoje hasło FTP:"
+
+msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
+msgstr "Jeśli chcesz być powiadomiony gdy ładowanie backupu na FTP jest zakończone, wpisz e-mail:"
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr "Twoja instalacja PHP nie obsługuje funkcji FTP, ponieważ ta opcja jest wyłączona! Przepraszamy ..."
 
 msgid "Advanced - Memory and time management"
 msgstr "Zaawansowane - Zarządzanie czasem i użyciem pamięci"
@@ -123,11 +157,14 @@ msgstr "Tutaj znajdują się pliki archiwum. Możesz wykonać nową kopię zapas
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr "Automatyczna kopia plików zostanie uruchomiona w %s dni i %s godzin."
 
-msgid "Force a new backup (with mail)"
-msgstr "Wymuś utworzenie nowej kopii zapasowej ( łacznie z przesyłem danych na email)"
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr "Proces wykonywania kopii zapasowej rozpoczęto %s godzin temu, ale jeszcze nie jest skończony."
 
-msgid "Force a new backup (without mail)"
-msgstr "Wymuś utworzenie nowej kopii zapasowej ( bez przesyłu danych na emaila)"
+msgid "Force a new backup (with Mail/FTP)"
+msgstr "Wymuś nowy backup (na mail/FTP)"
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr "Wymuś nowy backup (bez wysyłania na mail/FTP)"
 
 msgid "Backups"
 msgstr "Archiwa"
@@ -139,7 +176,7 @@ msgid "Manage translations"
 msgstr "Zarządzaj tłumaczeniami"
 
 msgid "Give feedback"
-msgstr "Podziel się z nami twoją opinią, by usprawnić dzialanie naszej wtyczki  "
+msgstr "Podziel się z nami twoją opinią, by usprawnić dzialanie naszej wtyczki"
 
 msgid "Other plugins"
 msgstr "Inne pluginy"
@@ -153,8 +190,8 @@ msgstr "Zarchiwizowane pliki"
 msgid "Part %s"
 msgstr "Część %s"
 
-msgid "Backup completed on %s at %s"
-msgstr "Kopia wykonana dnia %s o %s"
+msgid "Backup finished on %s at %s"
+msgstr "Zakończono backup na %s z %s"
 
 msgid "The total size of the files is %s"
 msgstr "Całkowita wielkość kopii %s"
@@ -165,23 +202,68 @@ msgstr "Te pliki zostaną skasowane za %s dni"
 msgid "Delete these backup files"
 msgstr "Skasuj kopie zapasowe pllików"
 
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr "Proces jest w toku dla kopii zapasowej (rozpoczęte %s na %s)."
+
+msgid "The SQL extraction is in progress (%s tables extracted)."
+msgstr "Wydobycie SQL jest w toku (%s tabeli wyodrębniono)."
+
+msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
+msgstr "Stworzenie ZIP jest w toku (%s plików został dodany do pliku zip i obecnie archiwum zip jest wielkości %s)."
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr "Wysyłanie FTP jest w toku (%s plików zostało wrzuconych na FTP)."
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr "Wysyłanie poczty jest w toku (%s plików zostało wysłanych)."
+
+msgid "Cancel this process"
+msgstr "Anuluj ten proces"
+
+msgid "Please wait..."
+msgstr "Proszę czekaj..."
+
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "Nie znaleziono żadnych kopii zapasowych, powinieneś poczekać albo wykonać ją teraz (patrz poniżej)"
 
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr "Inna kopia jest ciągle w trakcie wykonywania.. (przez %s sekund)... Proszę czekać"
+msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
+msgstr "Proszę czekać, tworzenia kopii zapasowych jest w toku! Jeśli chcesz stworzyć nową kopię zapasową, odśwież stronę i zakończ bieżącą kopię w pierwszej kolejności."
 
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr "Inny proces wypakowywania bazy SQL ciągle trwa (  dla %s sekund)...Proszę czekać"
 
-msgid "An error occured while sending mail!"
-msgstr "Wystąpił błąd podczas wysyłania emaila!"
+msgid "(SQL extraction)"
+msgstr "(wypakowywanie SQL)"
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "Inna kopia jest ciągle w trakcie wykonywania.. (przez %s sekund)... Proszę czekać"
+
+msgid "(ZIP creation)"
+msgstr "(Tworzę archiwum ZIP)"
+
+msgid "(FTP sending)"
+msgstr "(Wysyłam na FTP)"
+
+msgid "Backup of %s on %s (%s)"
+msgstr "Backup z %s na %s (%s)"
+
+msgid "(MAIL sending)"
+msgstr "(Wysyłam na email)"
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr "Twoja instalacja Wordpress nie mogą wysyłać e-mail (z ciężkim załącznikami)!"
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr "Plik% s nie może zostać usunięty. Powinieneś mieć problem z uprawnieniami do pliku lub wymogów bezpieczeństwa."
 
 msgid "An unknown error occured!"
 msgstr "Wystąpił nieznany błąd!"
 
-msgid "A new backup have been generated!"
-msgstr "Wykonano nową kopię zapasową!"
+msgid "The process has been canceled by a third person"
+msgstr "Proces został odwołany przez osobę trzecią"
+
+msgid "A new backup has been generated!"
+msgstr "Nowej kopii zapasowej został wygenerowany!"
 
 msgid "Dear sirs,"
 msgstr "Szanowny użytkowniku,"
@@ -192,6 +274,27 @@ msgstr "Tutaj znajdziesz załączone %s z %s kopii zapasowej plików zaplanowany
 msgid "Best regards,"
 msgstr "Z poważaniem,"
 
-msgid "Backup of %s (%s)"
-msgstr "Kopia zapasowa %s (%s)"
+msgid "%s backup files has been successfully saved on your FTP (%s)"
+msgstr "%s plików kopii zapasowej został dodany pomyślnie, na FTP (%s)"
+
+msgid "Backup of %s on %s - FTP confirmation"
+msgstr "Kopia zapasowa %s na %s - FTP potwierdzenie"
+
+msgid "No host has been defined"
+msgstr "Nie został ustawiony serwer FTP"
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr "Twoja instalacja PHP nie obsługuje funkcji protokołu SSL ... Tak więc, proszę używać standardowego FTP a nie FTPS!"
+
+msgid "The host %s cannot be resolved!"
+msgstr "Nie można znaleźć serwera %s!"
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr "Plik %s nie może być przeniesione do repozytorium FTP! Zwraca ftp_put funkcji: %s"
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr "Folder %s nie istnieje. Proszę utworzyć folder aby transfer może się rozpoczął!"
+
+msgid "The login/password does not seems valid!"
+msgstr "Login / hasło nie wydaje się prawidłowe!"
 
