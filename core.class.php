@@ -1241,7 +1241,7 @@ if (!class_exists('pluginSedLex')) {
 			$plugin_name = wp_kses(trim($plugin_name[1]), $plugins_allowedtags);
 			$plugin_tag = wp_kses(trim($plugin_tag[1]), $plugins_allowedtags);
 			$plugin_uri = wp_kses(trim($plugin_uri[1]), $plugins_allowedtags);
-			$description = wp_kses(wptexturize(trim($description[1])), $plugins_allowedtags);
+			$description = wp_kses(trim($description[1]), $plugins_allowedtags);
 			$author = wp_kses(trim($author_name[1]), $plugins_allowedtags);
 			$author_uri = wp_kses(trim($author_uri[1]), $plugins_allowedtags);;
 			$author_email = wp_kses(trim($author_email[1]), $plugins_allowedtags);;

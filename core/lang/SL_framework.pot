@@ -562,7 +562,7 @@ msgstr ""
 #: core/zip.class.php:476
 #: core/database.class.php:109
 #: core/database.class.php:160
-#: core/database.class.php:210
+#: core/database.class.php:213
 #@ SL_framework
 msgid "The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions."
 msgstr ""
@@ -987,7 +987,7 @@ msgstr ""
 msgid "Un-select all"
 msgstr ""
 
-#: core/database.class.php:222
+#: core/database.class.php:225
 #@ SL_framework
 msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
 msgstr ""

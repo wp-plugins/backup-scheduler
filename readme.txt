@@ -33,7 +33,7 @@ This plugin is under GPL licence
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
 * Dutch (Netherlands) translation provided by Matrix
-* Polish (Poland) translation provided by Lukasz, pablo
+* Polish (Poland) translation provided by Opti, Lukasz, pablo
 * Portuguese (Portugal) translation provided by FranciscoRocha
 * Russian (Russia) translation provided by GerinG, Slawka
 * Swedish (Sweden) translation provided by 
@@ -67,6 +67,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.2.3 =
+* Bug with NULL values in the database
 
 = 1.2.1 =
 * Portuguese translation added (by FranciscoRocha)
@@ -134,4 +137,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:bff785673e2db7f45f294629fd2a2ddd
+InfoVersion:8636b646c19f415191ed95e3813ba2eb

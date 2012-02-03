@@ -399,8 +399,8 @@ msgstr ""
 #: core/database.class.php:55
 #: core/database.class.php:101
 #: core/database.class.php:168
-#: core/database.class.php:215
 #: core/database.class.php:218
+#: core/database.class.php:221
 #@ backup_scheduler
 msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
 msgstr ""
