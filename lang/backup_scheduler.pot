@@ -203,9 +203,14 @@ msgstr ""
 msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
 msgstr ""
 
-#: backup-scheduler.php:254
+#: backup-scheduler.php:253
 #@ backup_scheduler
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
+msgstr ""
+
+#: backup-scheduler.php:254
+#@ backup_scheduler
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
 msgstr ""
 
 #: backup-scheduler.php:255
@@ -349,130 +354,130 @@ msgstr ""
 msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
 msgstr ""
 
-#: backup-scheduler.php:494
+#: backup-scheduler.php:452
+#@ backup_scheduler
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr ""
+
+#: backup-scheduler.php:498
 #@ backup_scheduler
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr ""
 
-#: backup-scheduler.php:508
+#: backup-scheduler.php:513
 #@ backup_scheduler
 msgid "(SQL extraction)"
 msgstr ""
 
-#: backup-scheduler.php:523
+#: backup-scheduler.php:529
 #@ backup_scheduler
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
 msgstr ""
 
-#: backup-scheduler.php:567
+#: backup-scheduler.php:583
 #@ backup_scheduler
 msgid "(ZIP creation)"
 msgstr ""
 
-#: backup-scheduler.php:586
+#: backup-scheduler.php:602
 #@ backup_scheduler
 msgid "(FTP sending)"
 msgstr ""
 
-#: backup-scheduler.php:614
+#: backup-scheduler.php:630
 #@ backup_scheduler
 msgid "Backup of %s on %s (%s)"
 msgstr ""
 
-#: backup-scheduler.php:617
+#: backup-scheduler.php:633
 #@ backup_scheduler
 msgid "(MAIL sending)"
 msgstr ""
 
-#: backup-scheduler.php:621
+#: backup-scheduler.php:637
 #@ backup_scheduler
 msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
 msgstr ""
 
-#: backup-scheduler.php:626
-#: backup-scheduler.php:632
-#: backup-scheduler.php:680
-#: backup-scheduler.php:683
-#: backup-scheduler.php:688
-#: backup-scheduler.php:719
-#: backup-scheduler.php:730
-#: core/database.class.php:55
-#: core/database.class.php:101
-#: core/database.class.php:168
-#: core/database.class.php:218
-#: core/database.class.php:221
+#: backup-scheduler.php:642
+#: backup-scheduler.php:648
+#: backup-scheduler.php:686
+#: backup-scheduler.php:689
+#: backup-scheduler.php:708
+#: backup-scheduler.php:738
+#: backup-scheduler.php:749
 #@ backup_scheduler
 msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: backup-scheduler.php:643
+#: backup-scheduler.php:659
 #@ backup_scheduler
 msgid "An unknown error occured!"
 msgstr ""
 
-#: backup-scheduler.php:669
+#: backup-scheduler.php:696
 #@ backup_scheduler
 msgid "The process has been canceled by a third person"
 msgstr ""
 
-#: backup-scheduler.php:674
+#: backup-scheduler.php:701
 #@ backup_scheduler
 msgid "A new backup has been generated!"
 msgstr ""
 
-#: backup-scheduler.php:873
-#: backup-scheduler.php:917
+#: backup-scheduler.php:892
+#: backup-scheduler.php:936
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
 
-#: backup-scheduler.php:874
+#: backup-scheduler.php:893
 #@ backup_scheduler
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
-#: backup-scheduler.php:875
-#: backup-scheduler.php:919
+#: backup-scheduler.php:894
+#: backup-scheduler.php:938
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
-#: backup-scheduler.php:918
+#: backup-scheduler.php:937
 #@ backup_scheduler
 msgid "%s backup files has been successfully saved on your FTP (%s)"
 msgstr ""
 
-#: backup-scheduler.php:925
+#: backup-scheduler.php:944
 #@ backup_scheduler
 msgid "Backup of %s on %s - FTP confirmation"
 msgstr ""
 
-#: backup-scheduler.php:940
+#: backup-scheduler.php:959
 #@ backup_scheduler
 msgid "No host has been defined"
 msgstr ""
 
-#: backup-scheduler.php:948
+#: backup-scheduler.php:967
 #@ backup_scheduler
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
 msgstr ""
 
-#: backup-scheduler.php:955
+#: backup-scheduler.php:974
 #@ backup_scheduler
 msgid "The host %s cannot be resolved!"
 msgstr ""
 
-#: backup-scheduler.php:963
+#: backup-scheduler.php:982
 #@ backup_scheduler
 msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
 msgstr ""
 
-#: backup-scheduler.php:971
+#: backup-scheduler.php:990
 #@ backup_scheduler
 msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
 msgstr ""
 
-#: backup-scheduler.php:975
+#: backup-scheduler.php:994
 #@ backup_scheduler
 msgid "The login/password does not seems valid!"
 msgstr ""

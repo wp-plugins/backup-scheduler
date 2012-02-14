@@ -1309,41 +1309,37 @@ if (!class_exists('pluginSedLex')) {
 		/** ====================================================================================================================================================
 		* Ensure that the needed folders are writable by the webserver. 
 		* Will check usual folders and files.
-		* You may add this in your configuration page <code>$this->check_folder_rights( array(array($theFolderToCheck, "rwx")) ) ;</code>
+		* You may add this in your configuration page <code>$this->check_folder_rights( array(array($theFolderToCheck, "rw")) ) ;</code>
 		* If not a error msg is printed
 		* 
-		* @param array $folders list of array with a first element (the complete path of the folder to check) and a second element (the needed rights "r", "w" or "x" [or a combination of those])
+		* @param array $folders list of array with a first element (the complete path of the folder to check) and a second element (the needed rights "r", "w" [or a combination of those])
 		* @return void
 		*/
 		
 		public function check_folder_rights ($folders) {
-			$f = array(array(WP_CONTENT_DIR.'/sedlex/',"rwx"), 
+			$f = array(array(WP_CONTENT_DIR.'/sedlex/',"rw"), 
 					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'readme.txt',"rw"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'css/',"rx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'js/',"rx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'lang/',"rwx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/',"rx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/img/',"rx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/templates/',"rx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/lang/',"rwx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/js/',"rx"), 
-					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/css/',"rx")) ; 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'css/',"r"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'js/',"r"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'lang/',"rw"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/',"r"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/img/',"r"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/templates/',"r"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/lang/',"rw"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/js/',"r"), 
+					array(WP_PLUGIN_DIR.'/'.str_replace(basename( __FILE__),"",plugin_basename( __FILE__)) .'core/css/',"r")) ; 
 			$folders = array_merge($folders, $f) ; 
 			
 			$result = "" ; 
 			foreach ($folders as $f ) {
 				if ( (is_dir($f[0])) || (is_file($f[0])) ) {
-					$readable = is_readable($f[0]) ; 
-					$writable = is_writable($f[0]) ; 
-					$executable = is_executable($f[0]) ; 
+					$readable = Utils::is_readable($f[0]) ; 
+					$writable = Utils::is_writable($f[0]) ; 
 					
 					@chmod($f[0], 0755) ; 
 					
 					$pb = false ; 
 					if ((strpos($f[1], "r")!==false) && (!$readable)) {
-						$pb = true ; 
-					}
-					if ((strpos($f[1], "x")!==false) && (!$executable)) {
 						$pb = true ; 
 					}
 					if ((strpos($f[1], "w")!==false) && (!$writable)) {

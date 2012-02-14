@@ -68,6 +68,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.2.4 =
+* Tuning to be able to work with very huge database
+
 = 1.2.3 =
 * Bug with NULL values in the database
 
@@ -129,12 +132,12 @@ Have fun !
 
 * install a fresh version of Wordpress on your server ; 
 * unzip the backup (actually, the zip file comprises a plurality of files i.e. a multi-part zip (zip, z01, z02, etc.). These files should be saved in a same folder and your zip program (such as winzip, winrar, ...) will do the job for you...
-* If you have configured to save the entire installation, replace all the wordpress files by the one in the zip file and import the SQL file (at the root of the zip file) in your database (with for instance phpmyadmin). It is recommended to save your database first ;
-* In other cases, replace the 'plugins',  'themes', 'uploads' folders (in the wp-content folder) with the one in the archive, replace the wp-config.php (at the root of your wordpress repository) with the one at the root of the zip file and  import the SQL file (at the root of the zip file) in your database (with for instance phpmyadmin). It is recommended to save your database first.
+* If you have configured to save the entire installation, replace all the wordpress files by the one in the zip file and import the SQL files (at the root of the zip file, the files named *.sql1, *sql2, etc.) in your database (with for instance phpmyadmin). It is recommended to save your database first ;
+* In other cases, replace the 'plugins',  'themes', 'uploads' folders (in the wp-content folder) with the one in the archive, replace the wp-config.php (at the root of your wordpress repository) with the one at the root of the zip file and  import the SQL files (at the root of the zip file, the files named *.sql1, *sql2, etc.) in your database (with for instance phpmyadmin). It is recommended to save your database first.
 
 * Where can I read more?
 
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:8636b646c19f415191ed95e3813ba2eb
+InfoVersion:9a75a300eb3a1778b47d96b434f97acd

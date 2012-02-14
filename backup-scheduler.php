@@ -3,7 +3,7 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.2.3
+Version: 1.2.4
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -184,7 +184,7 @@ class backup_scheduler extends pluginSedLex {
 		<?php
 		
 			// On verifie que les droits sont corrects
-			$this->check_folder_rights( array(array(WP_CONTENT_DIR."/sedlex/backup-scheduler/", "rwx")) ) ; 
+			$this->check_folder_rights( array(array(WP_CONTENT_DIR."/sedlex/backup-scheduler/", "rw")) ) ; 
 			
 			// On verifie que la fonction exist
 			if (!@function_exists('gzcompress')) {
@@ -250,8 +250,8 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_param('max_allocated', __('What is the maximum size of allocated memory (in MB):',$this->pluginID)) ; 
 				$params->add_comment(__('On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error.',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('For your information, the memory limit of your webserver is %s whereas the present memory usage is %s.',$this->pluginID), ini_get('memory_limit'), Utils::byteSize(memory_get_usage()))) ; 
-				
 				$params->add_comment(__('It is recommended that the maximum attachment size is not set to a value higher than this one.',$this->pluginID)) ; 
+				$params->add_comment(__("Please note that the files greater than this limit won't be included in the zip file!",$this->pluginID)) ; 
 				$params->add_param('max_time', __('What is the maximum time for the php scripts execution (in seconds):',$this->pluginID)) ; 
 				$params->add_comment(__('Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster.',$this->pluginID)) ; 
 
@@ -446,9 +446,13 @@ class backup_scheduler extends pluginSedLex {
 		if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
 			return array('finished'=>false, 'error'=>__("Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first.", $this->pluginID)) ; 
 		}
-		file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock", 'lock') ; 
+		@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock", 'lock') ; 
 		clearstatcache() ; 
-	
+		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+			return array('finished'=>false, 'error'=>sprintf(__("It is impossible to create the %s file in the %s folder. Please check folder/file permissions.", $this->pluginID), "<code>.lock</code>", "<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/"."</code>")) ; 
+		}
+		
+		
 		@mkdir(WP_CONTENT_DIR."/sedlex/backup-scheduler/", 0777, true) ; 
 		if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess")) {
 			@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/.htaccess") ; 
@@ -493,7 +497,7 @@ class backup_scheduler extends pluginSedLex {
 				if ($ip['step'] == "in progress") {
 					return array('finished'=>false, 'error'=>sprintf(__("An other SQL extraction is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip['for'])) ; 
 				} else if ($ip['step'] == "error") {
-					return array('finished'=>false, 'error'=>$ip['msg']) ; 			
+					return array('finished'=>false, 'error'=>$ip['error']) ; 			
 				} else if ($ip['step'] == "nothing") {
 					$name = "BackupScheduler_".$rand.".sql" ; 
 				} else if ($ip['step'] == "to be completed") {
@@ -504,9 +508,11 @@ class backup_scheduler extends pluginSedLex {
 				// Check if the step should be modified
 				if ($res['finished']==true) {
 					@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "ZIP") ; 
+					$sqlfiles =  $res['path'] ; 
+				} else {
+					$res['text'] = ' '.sprintf(__('(SQL extraction)', $this->pluginID), $res['info']) ; 	
+					return $res ; 
 				}
-				$res['text'] = ' '.__('(SQL extraction)', $this->pluginID) ; 	
-				return $res ; 
 			} else {
 				// Nothing should be done, thus we go directly at the next step
 				@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "ZIP") ; 
@@ -522,7 +528,7 @@ class backup_scheduler extends pluginSedLex {
 			if ($ip['step'] == "in progress") {
 				return array('finished'=>false, 'error'=>sprintf(__("An other backup is still in progress (for %s seconds)... Please wait!", $this->pluginID),$ip['for'])) ; 
 			} else if ($ip['step'] == "error") {
-				return array('finished'=>false, 'error'=>$ip['msg']) ; 			
+				return array('finished'=>false, 'error'=>$ip['error']) ; 			
 			} else if ($ip['step'] == "nothing") {
 				if ($this->get_param('save_all')) {
 					$z -> addDir(ABSPATH, ABSPATH, "backup_".date("Ymd")."/", array(WP_CONTENT_DIR."/sedlex/"));
@@ -541,7 +547,9 @@ class backup_scheduler extends pluginSedLex {
 					$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php", WP_CONTENT_DIR."/sedlex/backup-scheduler/", "backup_".date("Ymd")."/");
 				}
 				if ($this->get_param('save_db')) {
-					$z -> addFile(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".sql", WP_CONTENT_DIR."/sedlex/backup-scheduler/", "backup_".date("Ymd")."/");
+					foreach($sqlfiles as $f) {
+						$z -> addFile($f, WP_CONTENT_DIR."/sedlex/backup-scheduler/", "backup_".date("Ymd")."/");
+					}
 				}
 					
 				$name = WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".zip" ; 
@@ -555,7 +563,15 @@ class backup_scheduler extends pluginSedLex {
 			if ($path['finished']==true) {
 				@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step", "FTP") ; 
 				// We delete the possible SQL file and config file
-				@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".sql") ; 
+				$num_i = 1 ; 
+				while (true) {
+					if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".sql".$num_i)) {
+						@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/BackupScheduler_".$rand.".sql".$num_i) ; 
+						$num_i ++ ; 
+					} else {
+						break ; 
+					}
+				}
 				@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/wp-config.php") ; 
 				$files_to_sent = $path['path'] ; 
 				// Reset this variable to avoid any conflicts
@@ -623,13 +639,13 @@ class backup_scheduler extends pluginSedLex {
 					return $path ; 
 				} else {
 					if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
-						return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
+						return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
 					}
 				}
 			} else {
 				// Nothing should be done, thus we go directly at the next step
 				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
-					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
+					return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
 				}
 			}
 		}
@@ -649,7 +665,7 @@ class backup_scheduler extends pluginSedLex {
 	* @return void
 	*/
 	function initBackupForce() {	
-		$pb = new progressBarAdmin(300, 20, 0, "") ; 
+		$pb = new progressBarAdmin(500, 20, 0, "") ; 
 		$this->only_cancelBackup() ; 
 		$pb->flush() ;
 		die() ; 
@@ -664,6 +680,17 @@ class backup_scheduler extends pluginSedLex {
 		$type_backup = $_POST['type_backup'] ;
 
 		$result = $this->create_zip($type_backup) ;
+		if (isset($result['error'])) {
+			echo "<div class='error fade'><p class='backupError'>".$result['error']."</p></div>" ; 
+			if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
+				return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
+			}
+			if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+				return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
+			}
+			die() ; 
+		}
+		
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
 			$this->only_cancelBackup() ; 
 			$result = array('finished'=>false, 'error'=>__("The process has been canceled by a third person", $this->pluginID)) ; 
@@ -671,22 +698,14 @@ class backup_scheduler extends pluginSedLex {
 		
 
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
-			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup has been generated!", $this->pluginID)."</p></div>" ; 
+			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup has been generated!", $this->pluginID)."</p>" ; 
+			echo "</div>" ; 
 			$this->only_cancelBackup() ; 
 		} else {
-			if (isset($result['error'])) {
-				echo "<div class='error fade'><p class='backupError'>".$result['error']."</p></div>" ; 
-				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step")) {
-					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.step"."</code>")) ; 
-				}
-				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
-					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
-				}
-			} else {
-				echo $result['nb_finished']."/".($result['nb_finished']+$result['nb_to_finished']).$result['text'] ; 
-				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
-					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
-				}
+			echo $result['nb_finished']."/".($result['nb_finished']+$result['nb_to_finished']).$result['text'] ; 
+			//echo print_r($result) ;// DEBUG
+			if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
+				echo "<div class='error fade'><p class='backupError'>".sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")."</p></div>" ; 
 			}
 		}
 		
@@ -716,7 +735,7 @@ class backup_scheduler extends pluginSedLex {
 			$filemtime = @filemtime(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock");  // returns FALSE if file does not exist
 			if ($filemtime>0 && (time() - $filemtime >= 200)){
 				if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
-					return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
+					return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
 				}
 			}
 			// Create backup
@@ -727,7 +746,7 @@ class backup_scheduler extends pluginSedLex {
 			} else {
 				if (!isset($result['error'])) {
 					if (!Utils::rm_rec(WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock")) {
-						return array("step"=>"error", "msg"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
+						return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', $this->pluginID),"<code>".WP_CONTENT_DIR."/sedlex/backup-scheduler/.lock"."</code>")) ; 
 					}
 					echo ">".@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/.step") ; 
 				} else {

@@ -72,9 +72,11 @@ function forceBackup(only) {
 		} else {
 			if (typeof(response)=='string') {
 				valeur = response.split(" ") ; 
-				valeur = valeur[0].split("/") ; 
-				progressBar_modifyProgression(Math.floor(valeur[0]/valeur[1]*100));
-				progressBar_modifyText(response);
+				valeur2 = valeur[0].split("/") ; 
+				valeur[0] = "" ; 
+				texte = valeur.join(" ") ; 
+				progressBar_modifyProgression(Math.floor(valeur2[0]/valeur2[1]*100));
+				progressBar_modifyText((Math.floor(valeur2[0]/valeur2[1]*1000)/10)+"% "+texte);
 				forceBackup(self.only_save);
 			} else {
 				jQuery("#backupInfo").html("TimeOut problem");
