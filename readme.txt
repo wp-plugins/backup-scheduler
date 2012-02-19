@@ -28,7 +28,7 @@ This plugin is under GPL licence
 
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab
 * English (United States), default language
-* Spanish (Spain) translation provided by Javier, AVfoto
+* Spanish (Spain) translation provided by Javier, AVfoto, charliechin
 * French (France) translation provided by SedLex
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
@@ -67,6 +67,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.2.5 =
+* Improving the translations management
 
 = 1.2.4 =
 * Tuning to be able to work with very huge database
@@ -140,4 +143,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:9a75a300eb3a1778b47d96b434f97acd
+InfoVersion:dbe4d98002a25344113bf9fb4fdf9adf

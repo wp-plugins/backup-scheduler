@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-31T15:25:46+00:00\n"
+"PO-Revision-Date: 2012-02-19T18:14:21+00:00\n"
 "Last-Translator: Faleddo <http://faleddo.x10.bz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,12 +38,6 @@ msgstr "Waktu backup:"
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "Harap diingat bahwa 0 berarti"
 
-msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
-msgstr ""
-
-msgid "Keep the backup files for (in days):"
-msgstr ""
-
 msgid "What do you want to save?"
 msgstr "Apa yang ingin anda simpan?"
 
@@ -59,110 +53,32 @@ msgstr "Pilih opsi ini jika anda ingin menyimpan semuanya. Hati-hati, file cadan
 msgid "The plugins directory:"
 msgstr "Folder plugin:"
 
-msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
-msgstr ""
-
 msgid "The themes directory:"
 msgstr "Folder tema"
-
-msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
-msgstr ""
 
 msgid "The upload directory:"
 msgstr "Folder upload"
 
-msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
-msgstr ""
-
 msgid "The SQL database:"
 msgstr "Basis data SQL"
-
-msgid "Check this option if you want to save the text of your posts, your configurations, etc."
-msgstr ""
 
 msgid "The maximum file size (in MB):"
 msgstr "Ukuran file maksimum(dalam MB):"
 
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
-msgstr ""
-
 msgid "Do you want that the backup is sent by email?"
 msgstr "Apakah anda ingin file cadangan dikirim melalui email?"
-
-msgid "Send the backup files by email:"
-msgstr ""
 
 msgid "If so, please enter your email:"
 msgstr "Jika ya,masukkan email anda"
 
-msgid "Do you want to add a suffix to sent files:"
-msgstr ""
-
-msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
-msgstr ""
-
-msgid "You do not need to fill this field if no mail is to be sent."
-msgstr ""
-
-msgid "Do you want that the backup is stored on a FTP?"
-msgstr ""
-
-msgid "Save the backup files on a FTP?"
-msgstr ""
-
 msgid "FTP host:"
 msgstr "Host FTP:"
-
-msgid "Should be at the form %s or %s"
-msgstr ""
 
 msgid "Your FTP login:"
 msgstr "Login FTP anda:"
 
 msgid "Your FTP pass:"
 msgstr "Kata sandi FTP anda:"
-
-msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
-msgstr ""
-
-msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
-msgstr ""
-
-msgid "Advanced - Memory and time management"
-msgstr ""
-
-msgid "What is the maximum size of allocated memory (in MB):"
-msgstr ""
-
-msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
-msgstr ""
-
-msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
-msgstr ""
-
-msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
-msgstr ""
-
-msgid "What is the maximum time for the php scripts execution (in seconds):"
-msgstr ""
-
-msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
-msgstr ""
-
-msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr ""
-
-msgid "An automatic backup will be launched in %s days and %s hours."
-msgstr ""
-
-msgid "The backup process has started %s hours ago but has not finished yet."
-msgstr ""
-
-msgid "Force a new backup (with Mail/FTP)"
-msgstr ""
-
-msgid "Force a new backup (without any external storage or sending)"
-msgstr ""
 
 msgid "Backups"
 msgstr "Backup"
@@ -188,53 +104,14 @@ msgstr "File backup"
 msgid "Part %s"
 msgstr "Bagian %s"
 
-msgid "Backup finished on %s at %s"
-msgstr ""
-
-msgid "The total size of the files is %s"
-msgstr ""
-
-msgid "These files will be deleted in %s days"
-msgstr ""
-
 msgid "Delete these backup files"
 msgstr "Hapus file backup"
-
-msgid "The process is still in progress for this backup (begun %s at %s)."
-msgstr ""
-
-msgid "The SQL extraction is in progress (%s tables extracted)."
-msgstr ""
-
-msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
-msgstr ""
-
-msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
-msgstr ""
-
-msgid "The MAIL sending is in progress (%s files has been sent)."
-msgstr ""
 
 msgid "Cancel this process"
 msgstr "Batalkan perintah"
 
 msgid "Please wait..."
 msgstr "Mohon tunggu.."
-
-msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
-msgstr ""
-
-msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
-msgstr ""
-
-msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
-msgstr ""
-
-msgid "(SQL extraction)"
-msgstr ""
-
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr ""
 
 msgid "(ZIP creation)"
 msgstr "(pembuatan ZIP)"
@@ -248,51 +125,36 @@ msgstr "Cadangan dari %s pada %s(%s)"
 msgid "(MAIL sending)"
 msgstr "(pengiriman email)"
 
-msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
-msgstr ""
+msgid "Keep the backup files for (in days):"
+msgstr "Simpan file cadangan untuk(dalam hari):"
 
-msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
-msgstr ""
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "Pilih opsi ini jika anda ingin menyimpan semua plugin yang anda install dan anda pakai di website ini."
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "Pilih opsi ini jika anda ingin menyimpan semua tema yang anda install dan anda pakai di website ini."
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr "Pilih opsi ini jika anda ingin menyimpan semua teks posting, pengaturan, dan lain lain."
+
+msgid "Send the backup files by email:"
+msgstr "Kirim backup melalui email:"
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr "Apakah anda ingin menyimpan file cadangan di FTP?"
+
+msgid "Save the backup files on a FTP?"
+msgstr "Simpan file cadangan di FTP?"
+
+msgid "Advanced - Memory and time management"
+msgstr "Tingkat lanjut - pengelolaan memori dan waktu"
+
+msgid "Backup finished on %s at %s"
+msgstr "Backup selesai %s pada %s"
+
+msgid "The total size of the files is %s"
+msgstr "Ukuran file total adalah %s"
 
 msgid "An unknown error occured!"
-msgstr ""
-
-msgid "The process has been canceled by a third person"
-msgstr ""
-
-msgid "A new backup has been generated!"
-msgstr ""
-
-msgid "Dear sirs,"
-msgstr ""
-
-msgid "Here is attached the %s on %s backup files for today"
-msgstr ""
-
-msgid "Best regards,"
-msgstr ""
-
-msgid "%s backup files has been successfully saved on your FTP (%s)"
-msgstr ""
-
-msgid "Backup of %s on %s - FTP confirmation"
-msgstr ""
-
-msgid "No host has been defined"
-msgstr ""
-
-msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
-msgstr ""
-
-msgid "The host %s cannot be resolved!"
-msgstr ""
-
-msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
-msgstr ""
-
-msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
-msgstr ""
-
-msgid "The login/password does not seems valid!"
-msgstr ""
+msgstr "Terjadi kesalahan!"
 
