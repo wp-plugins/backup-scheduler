@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-29T14:30:35+01:00\n"
+"PO-Revision-Date: 2012-02-25T10:54:07+00:00\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,16 +37,25 @@ msgstr "Tidpunkt för säkerhetskopieringen:"
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "Vänligen var uppmärksam på att &quot;0&quot; betyder midnatt, &quot;1&quot; betyder klockan 01, &quot;13&quot; betyder klockan 13 osv. Säkerhetskopian kommer att äga rum vid denna tidpunkt (aktuell servertid) så se till att din webbplats inte har allt för mycket trafik vid tillfäller för säkerhetskopieringen."
 
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr ""
+
 msgid "Keep the backup files for (in days):"
 msgstr "Spara de kopierade filerna (i antal dagar):"
 
 msgid "What do you want to save?"
 msgstr "Vad vill du spara?"
 
-msgid "The plugins directory:"
+msgid "All directories (the full Wordpress installation):"
 msgstr ""
 
 msgid "(i.e. %s)"
+msgstr ""
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr ""
+
+msgid "The plugins directory:"
 msgstr ""
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
@@ -70,22 +79,22 @@ msgstr "SQL-databasen"
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
 msgstr ""
 
+msgid "The maximum file size (in MB):"
+msgstr ""
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr ""
+
 msgid "Do you want that the backup is sent by email?"
 msgstr "Vill du ha säkerhetskopian sänt via e-post?"
+
+msgid "Send the backup files by email:"
+msgstr ""
 
 msgid "If so, please enter your email:"
 msgstr "Om så, ange din e-postadress:"
 
-msgid "The maximum attachment size (in MB):"
-msgstr "Bilagans maximala storlek (i MB):"
-
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr ""
-
-msgid "Do you want to rename the files?"
-msgstr "Vill du döpa om filerna?"
-
-msgid "What is the suffix of the file:"
+msgid "Do you want to add a suffix to sent files:"
 msgstr ""
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
@@ -93,6 +102,30 @@ msgstr ""
 
 msgid "You do not need to fill this field if no mail is to be sent."
 msgstr "Det här fältet behöver du inte fylla i om du inte önskar e-post."
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr ""
+
+msgid "Save the backup files on a FTP?"
+msgstr ""
+
+msgid "FTP host:"
+msgstr ""
+
+msgid "Should be at the form %s or %s"
+msgstr ""
+
+msgid "Your FTP login:"
+msgstr ""
+
+msgid "Your FTP pass:"
+msgstr ""
+
+msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
+msgstr ""
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr ""
 
 msgid "Advanced - Memory and time management"
 msgstr ""
@@ -109,6 +142,9 @@ msgstr ""
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr ""
 
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr ""
+
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr ""
 
@@ -121,11 +157,14 @@ msgstr ""
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr ""
 
-msgid "Force a new backup (with mail)"
-msgstr "Tvinga ny säkerhetskopiering (via mail)"
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr ""
 
-msgid "Force a new backup (without mail)"
-msgstr "Tvinga ny säkerhetskopiering (utan mail)"
+msgid "Force a new backup (with Mail/FTP)"
+msgstr ""
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr ""
 
 msgid "Backups"
 msgstr "Säkerhetskopior"
@@ -151,7 +190,7 @@ msgstr "Säkerhetskopior"
 msgid "Part %s"
 msgstr ""
 
-msgid "Backup completed on %s at %s"
+msgid "Backup finished on %s at %s"
 msgstr ""
 
 msgid "The total size of the files is %s"
@@ -163,22 +202,70 @@ msgstr "Dessa filer kommer raderas om %s dagar"
 msgid "Delete these backup files"
 msgstr "Radera dessa säkerhetskopior"
 
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr ""
+
+msgid "The SQL extraction is in progress (%s tables extracted)."
+msgstr ""
+
+msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
+msgstr ""
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr ""
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr ""
+
+msgid "Cancel this process"
+msgstr ""
+
+msgid "Please wait..."
+msgstr ""
+
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr ""
+
+msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
+msgstr ""
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr ""
+
+msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
+msgstr ""
+
+msgid "(SQL extraction)"
 msgstr ""
 
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
 msgstr "En annan säkerhetskopiering pågår fortfarande (i %s sekunder)... Vänligen vänta!"
 
-msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
+msgid "(ZIP creation)"
 msgstr ""
 
-msgid "An error occured while sending mail!"
-msgstr "Ett fel uppstod när e-post skulle skickas!"
+msgid "(FTP sending)"
+msgstr ""
+
+msgid "Backup of %s on %s (%s)"
+msgstr ""
+
+msgid "(MAIL sending)"
+msgstr ""
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr ""
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr ""
 
 msgid "An unknown error occured!"
 msgstr "Ett okänt fel har uppstått!"
 
-msgid "A new backup have been generated!"
+msgid "The process has been canceled by a third person"
+msgstr ""
+
+msgid "A new backup has been generated!"
 msgstr "En ny säkerhetskopia har gjorts!"
 
 msgid "Dear sirs,"
@@ -190,6 +277,27 @@ msgstr "Här är dagens %s filer för din säkerhetskopiering"
 msgid "Best regards,"
 msgstr "Med vänliga hälsningar"
 
-msgid "Backup of %s (%s)"
+msgid "%s backup files has been successfully saved on your FTP (%s)"
+msgstr ""
+
+msgid "Backup of %s on %s - FTP confirmation"
+msgstr ""
+
+msgid "No host has been defined"
+msgstr ""
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr ""
+
+msgid "The host %s cannot be resolved!"
+msgstr ""
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr ""
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr ""
+
+msgid "The login/password does not seems valid!"
 msgstr ""
 

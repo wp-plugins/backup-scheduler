@@ -30,6 +30,7 @@ This plugin is under GPL licence
 * English (United States), default language
 * Spanish (Spain) translation provided by Javier, AVfoto, charliechin
 * French (France) translation provided by SedLex
+* Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
 * Dutch (Netherlands) translation provided by Matrix
@@ -67,6 +68,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.2.6 =
+* Remove short_open_tag and add translations
 
 = 1.2.5 =
 * Improving the translations management
@@ -143,4 +147,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:dbe4d98002a25344113bf9fb4fdf9adf
+InfoVersion:26dee908eb26a870536af7e875018c4a

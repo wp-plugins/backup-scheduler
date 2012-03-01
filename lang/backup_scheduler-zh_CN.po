@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-15T12:33:25+00:00\n"
+"PO-Revision-Date: 2012-02-25T11:02:43+00:00\n"
 "Last-Translator: YiscaJoe <J.Yisca@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,17 +38,26 @@ msgstr "备份时间："
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "请注意0表示午夜，1表示凌晨1点，13表示下午1点等等。请确保您的网站在设置的时间进行备份不会造成系统过载。"
 
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr ""
+
 msgid "Keep the backup files for (in days):"
 msgstr "保存文件的时间（按天数）："
 
 msgid "What do you want to save?"
 msgstr "您要保存哪些文件呢？"
 
-msgid "The plugins directory:"
-msgstr "插件目录："
+msgid "All directories (the full Wordpress installation):"
+msgstr ""
 
 msgid "(i.e. %s)"
 msgstr "（即 %s）"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr ""
+
+msgid "The plugins directory:"
+msgstr "插件目录："
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
 msgstr "选中此项将保存所有您已经安装和使用的插件。"
@@ -71,29 +80,53 @@ msgstr "SQL数据库："
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
 msgstr "选中此项将保存您文章中的文字和设置等等。"
 
+msgid "The maximum file size (in MB):"
+msgstr ""
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr "请注意文件将可能被压缩并分割成多个压缩文件"
+
 msgid "Do you want that the backup is sent by email?"
 msgstr "您希望您的备份被发送到您的邮箱中么？"
+
+msgid "Send the backup files by email:"
+msgstr ""
 
 msgid "If so, please enter your email:"
 msgstr "如果需要发送，请输入您的邮箱账号："
 
-msgid "The maximum attachment size (in MB):"
-msgstr "最大附件大小（MB）："
-
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr "请注意文件将可能被压缩并分割成多个压缩文件"
-
-msgid "Do you want to rename the files?"
-msgstr "您希望重命名文件么？"
-
-msgid "What is the suffix of the file:"
-msgstr "文件后缀名："
+msgid "Do you want to add a suffix to sent files:"
+msgstr ""
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr "这项设置将允许该块通过一些电子邮件服务商对于zip附件的拦截（如GMail）。"
 
 msgid "You do not need to fill this field if no mail is to be sent."
 msgstr "如果不需要邮寄您的备份，您不需要填写该字段。"
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr ""
+
+msgid "Save the backup files on a FTP?"
+msgstr ""
+
+msgid "FTP host:"
+msgstr ""
+
+msgid "Should be at the form %s or %s"
+msgstr ""
+
+msgid "Your FTP login:"
+msgstr ""
+
+msgid "Your FTP pass:"
+msgstr ""
+
+msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
+msgstr ""
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr ""
 
 msgid "Advanced - Memory and time management"
 msgstr "高级 - 内存和时间管理"
@@ -110,6 +143,9 @@ msgstr "根据您的信息，服务器允许的最大内存值为 %s 而目前�
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr "这是建议设置的附件最高大小没有比这个更高的值了。"
 
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr ""
+
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr "PHP脚本执行的最长时间（按秒）："
 
@@ -122,11 +158,14 @@ msgstr "这是备份文件。你可以建立一个新的备份文件或者下载
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr "自动备份将在 %s天%s小时 后进行。"
 
-msgid "Force a new backup (with mail)"
-msgstr "强制建立一个新的备份（邮寄）"
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr ""
 
-msgid "Force a new backup (without mail)"
-msgstr "强制建立一个新的备份（不邮寄）"
+msgid "Force a new backup (with Mail/FTP)"
+msgstr ""
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr ""
 
 msgid "Backups"
 msgstr "备份"
@@ -152,8 +191,8 @@ msgstr "备份文件"
 msgid "Part %s"
 msgstr "第 %s 部分"
 
-msgid "Backup completed on %s at %s"
-msgstr "备份在 %s %s 完成"
+msgid "Backup finished on %s at %s"
+msgstr ""
 
 msgid "The total size of the files is %s"
 msgstr "文件大小合计为%s"
@@ -164,22 +203,70 @@ msgstr "这些文件将在 %s 天后删除"
 msgid "Delete these backup files"
 msgstr "删除这些备份文件"
 
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr ""
+
+msgid "The SQL extraction is in progress (%s tables extracted)."
+msgstr ""
+
+msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
+msgstr ""
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr ""
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr ""
+
+msgid "Cancel this process"
+msgstr ""
+
+msgid "Please wait..."
+msgstr ""
+
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "（现在，这里没有任何备份文件。你应该等待或者强行建立一个备份（看看下面））"
 
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr "另一个备份操作仍在进行（已运行 %s 秒）请稍等！"
+msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
+msgstr ""
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr ""
 
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr "另一个SQL数据提取仍在进行（已运行 %s 秒）请稍等！"
 
-msgid "An error occured while sending mail!"
-msgstr "在发送邮件时发生一个错误！"
+msgid "(SQL extraction)"
+msgstr ""
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "另一个备份操作仍在进行（已运行 %s 秒）请稍等！"
+
+msgid "(ZIP creation)"
+msgstr ""
+
+msgid "(FTP sending)"
+msgstr ""
+
+msgid "Backup of %s on %s (%s)"
+msgstr ""
+
+msgid "(MAIL sending)"
+msgstr ""
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr ""
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr ""
 
 msgid "An unknown error occured!"
 msgstr "发生了一个未知错误！"
 
-msgid "A new backup have been generated!"
+msgid "The process has been canceled by a third person"
+msgstr ""
+
+msgid "A new backup has been generated!"
 msgstr "已经产生了一个新的备份！"
 
 msgid "Dear sirs,"
@@ -191,6 +278,27 @@ msgstr "这里是今天 %s %s 备份文件的链接"
 msgid "Best regards,"
 msgstr "最亲切的问候，"
 
-msgid "Backup of %s (%s)"
-msgstr "%s 的备份（%s）"
+msgid "%s backup files has been successfully saved on your FTP (%s)"
+msgstr ""
+
+msgid "Backup of %s on %s - FTP confirmation"
+msgstr ""
+
+msgid "No host has been defined"
+msgstr ""
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr ""
+
+msgid "The host %s cannot be resolved!"
+msgstr ""
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr ""
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr ""
+
+msgid "The login/password does not seems valid!"
+msgstr ""
 

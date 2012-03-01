@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-28T11:03:30+00:00\n"
+"PO-Revision-Date: 2012-02-25T10:46:54+00:00\n"
 "Last-Translator: GerinG <http://gering111.com/>\n"
 "Last-Translator: Slawka <http://eth0.org.ru>\n"
 "Language-Team: \n"
@@ -39,17 +39,26 @@ msgstr "Время, когда создается бэкап"
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr ""
 
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr ""
+
 msgid "Keep the backup files for (in days):"
 msgstr "Время хранение копий (в днях):"
 
 msgid "What do you want to save?"
 msgstr "Что вы хотите сохранять?"
 
-msgid "The plugins directory:"
-msgstr "Каталог плагина:"
+msgid "All directories (the full Wordpress installation):"
+msgstr ""
 
 msgid "(i.e. %s)"
 msgstr ""
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr ""
+
+msgid "The plugins directory:"
+msgstr "Каталог плагина:"
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
 msgstr "Выберите этот пункт, если вы хотите сохранять все установленные плагины"
@@ -72,28 +81,52 @@ msgstr "База данных SQL"
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
 msgstr "Выберите этот пункт, если вы хотите сохранять все ваши записи, файлы конфигурации и прочее"
 
+msgid "The maximum file size (in MB):"
+msgstr ""
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr ""
+
 msgid "Do you want that the backup is sent by email?"
 msgstr "Вы хотите получать резервные копии на email?"
+
+msgid "Send the backup files by email:"
+msgstr ""
 
 msgid "If so, please enter your email:"
 msgstr "Если да, введите ваш emal:"
 
-msgid "The maximum attachment size (in MB):"
-msgstr "Максимальный размер вложения (в МБ)"
-
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
+msgid "Do you want to add a suffix to sent files:"
 msgstr ""
-
-msgid "Do you want to rename the files?"
-msgstr "Вы хотите переименовывать файлы?"
-
-msgid "What is the suffix of the file:"
-msgstr "Суффикс файла"
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr ""
 
 msgid "You do not need to fill this field if no mail is to be sent."
+msgstr ""
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr ""
+
+msgid "Save the backup files on a FTP?"
+msgstr ""
+
+msgid "FTP host:"
+msgstr ""
+
+msgid "Should be at the form %s or %s"
+msgstr ""
+
+msgid "Your FTP login:"
+msgstr ""
+
+msgid "Your FTP pass:"
+msgstr ""
+
+msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
+msgstr ""
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
 msgstr ""
 
 msgid "Advanced - Memory and time management"
@@ -111,6 +144,9 @@ msgstr ""
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr ""
 
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr ""
+
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr ""
 
@@ -123,11 +159,14 @@ msgstr ""
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr ""
 
-msgid "Force a new backup (with mail)"
-msgstr "Создать новый бэкап(с отправкой почты)"
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr ""
 
-msgid "Force a new backup (without mail)"
-msgstr "Создать новый бэкап(без отправки почты)"
+msgid "Force a new backup (with Mail/FTP)"
+msgstr ""
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr ""
 
 msgid "Backups"
 msgstr "Резервные копии"
@@ -153,7 +192,7 @@ msgstr ""
 msgid "Part %s"
 msgstr "Часть"
 
-msgid "Backup completed on %s at %s"
+msgid "Backup finished on %s at %s"
 msgstr ""
 
 msgid "The total size of the files is %s"
@@ -165,22 +204,70 @@ msgstr ""
 msgid "Delete these backup files"
 msgstr "Удалить эти резервные копии"
 
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr ""
+
+msgid "The SQL extraction is in progress (%s tables extracted)."
+msgstr ""
+
+msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
+msgstr ""
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr ""
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr ""
+
+msgid "Cancel this process"
+msgstr ""
+
+msgid "Please wait..."
+msgstr ""
+
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr ""
 
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
+msgstr ""
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
 msgstr ""
 
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr ""
 
-msgid "An error occured while sending mail!"
-msgstr "Ошибка отправки почты"
+msgid "(SQL extraction)"
+msgstr ""
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr ""
+
+msgid "(ZIP creation)"
+msgstr ""
+
+msgid "(FTP sending)"
+msgstr ""
+
+msgid "Backup of %s on %s (%s)"
+msgstr ""
+
+msgid "(MAIL sending)"
+msgstr ""
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr ""
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr ""
 
 msgid "An unknown error occured!"
 msgstr "Возникла неизвестная ошибка"
 
-msgid "A new backup have been generated!"
+msgid "The process has been canceled by a third person"
+msgstr ""
+
+msgid "A new backup has been generated!"
 msgstr "Новая резервная копия создана"
 
 msgid "Dear sirs,"
@@ -192,6 +279,27 @@ msgstr ""
 msgid "Best regards,"
 msgstr "С уважением"
 
-msgid "Backup of %s (%s)"
-msgstr "Копия "
+msgid "%s backup files has been successfully saved on your FTP (%s)"
+msgstr ""
+
+msgid "Backup of %s on %s - FTP confirmation"
+msgstr ""
+
+msgid "No host has been defined"
+msgstr ""
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr ""
+
+msgid "The host %s cannot be resolved!"
+msgstr ""
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr ""
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr ""
+
+msgid "The login/password does not seems valid!"
+msgstr ""
 

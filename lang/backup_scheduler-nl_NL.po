@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-26T20:21:12+01:00\n"
+"PO-Revision-Date: 2012-02-25T10:45:27+00:00\n"
 "Last-Translator: Matrix <http://www.pcbeveiligen.nl/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgid "This plugin enables scheduled backup of important part of your website : 
 msgstr "Met deze plugin is het mogelijk om je site geheel of gedeeltelijk te backuppen - Simpel en efficiënt!"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr "Sorry, je zult eerst %s moeten installeren/activeren. Dit is noodzakelijk voor de werking van deze plugin! "
+msgstr "Sorry, je zult eerst %s moeten installeren/activeren. Dit is noodzakelijk voor de werking van deze plugin!"
 
 msgid "How often do you want to backup your website?"
 msgstr "Hoevaak wil je een backup laten plaatsvinden?"
@@ -38,17 +38,26 @@ msgstr "Tijdstip van de backup:"
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "Let op: 0 staat voor 0:00, 1 staat voor 1:00, 13 staat voor 13:00 etc. The backup vindt plaats op die tijd (server tijd), zorg dus dat je site niet overactief is op dat tijdstip."
 
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr ""
+
 msgid "Keep the backup files for (in days):"
 msgstr "Bewaar de backups voor x dagen:"
 
 msgid "What do you want to save?"
 msgstr "Wat wil je opslaan?"
 
-msgid "The plugins directory:"
-msgstr "Plugins:"
+msgid "All directories (the full Wordpress installation):"
+msgstr ""
 
 msgid "(i.e. %s)"
 msgstr "(Oftewel %s)"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr ""
+
+msgid "The plugins directory:"
+msgstr "Plugins:"
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
 msgstr "Vink deze optie aan als je alle geïnstalleerde plugins wilt opslaan."
@@ -71,29 +80,53 @@ msgstr "SQL database:"
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
 msgstr "Vink deze optie aan als je de database wilt opslaan."
 
+msgid "The maximum file size (in MB):"
+msgstr ""
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr "Let op: het .zip bestand zal worden gesplitst indien deze de maximum grootte van de bijlage overschrijd."
+
 msgid "Do you want that the backup is sent by email?"
 msgstr "Wil je de database per email toegezonden krijgen?"
+
+msgid "Send the backup files by email:"
+msgstr ""
 
 msgid "If so, please enter your email:"
 msgstr "Zoja, voer hier je emailadres in:"
 
-msgid "The maximum attachment size (in MB):"
-msgstr "Maximale grootte bijlage (MB):"
-
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr "Let op: het .zip bestand zal worden gesplitst indien deze de maximum grootte van de bijlage overschrijd."
-
-msgid "Do you want to rename the files?"
-msgstr "Wil je de bestanden hernoemen?"
-
-msgid "What is the suffix of the file:"
-msgstr "Geef de extensie op?"
+msgid "Do you want to add a suffix to sent files:"
+msgstr ""
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
 msgstr "Deze optie geeft de mogelijkheid om bijvoorbeeld de blokkade van GMail op .zip bestanden te omzeilen."
 
 msgid "You do not need to fill this field if no mail is to be sent."
 msgstr "Dit veld hoeft niet te worden ingevuld indien er geen email wordt verstuurd."
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr ""
+
+msgid "Save the backup files on a FTP?"
+msgstr ""
+
+msgid "FTP host:"
+msgstr ""
+
+msgid "Should be at the form %s or %s"
+msgstr ""
+
+msgid "Your FTP login:"
+msgstr ""
+
+msgid "Your FTP pass:"
+msgstr ""
+
+msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
+msgstr ""
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr ""
 
 msgid "Advanced - Memory and time management"
 msgstr "Geavanceerd geheugen en tijdsbeheer"
@@ -110,6 +143,9 @@ msgstr "Ter info: het maximale geheugen van je webserver is %s, huidig geheugeng
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr "Het is niet aan te raden dat de maximale grootte deze waarde overschrijd."
 
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr ""
+
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr "Wat is de maximale tijdsduur voor uitvoering van de php scripts (in secondes):"
 
@@ -122,11 +158,14 @@ msgstr "Dit zijn de backup bestanden. Je kan een nieuwe backup forceren of een e
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr "Een automatische backup zal plaatsvinden over %s dag(en) en %s uur"
 
-msgid "Force a new backup (with mail)"
-msgstr "Forceer nieuwe backup (met email)"
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr ""
 
-msgid "Force a new backup (without mail)"
-msgstr "Forceer nieuwe backup (zonder email)"
+msgid "Force a new backup (with Mail/FTP)"
+msgstr ""
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr ""
 
 msgid "Backups"
 msgstr "Backups"
@@ -152,8 +191,8 @@ msgstr "Backup bestanden"
 msgid "Part %s"
 msgstr "Backup %s"
 
-msgid "Backup completed on %s at %s"
-msgstr "Backup afgerond op %s om %s"
+msgid "Backup finished on %s at %s"
+msgstr ""
 
 msgid "The total size of the files is %s"
 msgstr "Totale grootte van de bestanden is %s"
@@ -164,22 +203,70 @@ msgstr "Deze bestanden zullen verwijderd worden over %s dagen"
 msgid "Delete these backup files"
 msgstr "Verwijder deze backup bestanden"
 
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr ""
+
+msgid "The SQL extraction is in progress (%s tables extracted)."
+msgstr ""
+
+msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
+msgstr ""
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr ""
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr ""
+
+msgid "Cancel this process"
+msgstr ""
+
+msgid "Please wait..."
+msgstr ""
+
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "(Er is momenteel geen backup bestand.. Forceer een backup (zie onder))"
 
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr "Er is al een backup gaande (nog %s seconde) Even geduld aub.."
+msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
+msgstr ""
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr ""
 
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr "Er is al een database backup gaande (nog %s seconde) Even geduld aub.."
 
-msgid "An error occured while sending mail!"
-msgstr "Foutmelding tijdens versturen van email!"
+msgid "(SQL extraction)"
+msgstr ""
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "Er is al een backup gaande (nog %s seconde) Even geduld aub.."
+
+msgid "(ZIP creation)"
+msgstr ""
+
+msgid "(FTP sending)"
+msgstr ""
+
+msgid "Backup of %s on %s (%s)"
+msgstr ""
+
+msgid "(MAIL sending)"
+msgstr ""
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr ""
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr ""
 
 msgid "An unknown error occured!"
 msgstr "Onbekende fout opgetreden!"
 
-msgid "A new backup have been generated!"
+msgid "The process has been canceled by a third person"
+msgstr ""
+
+msgid "A new backup has been generated!"
 msgstr "Nieuwe backup gecreëerd!"
 
 msgid "Dear sirs,"
@@ -191,6 +278,27 @@ msgstr "Bijgaand treft u de backup bestanden van %s om %s vandaag"
 msgid "Best regards,"
 msgstr "Met vriendelijke groet,"
 
-msgid "Backup of %s (%s)"
-msgstr "Backup van %s (%s)"
+msgid "%s backup files has been successfully saved on your FTP (%s)"
+msgstr ""
+
+msgid "Backup of %s on %s - FTP confirmation"
+msgstr ""
+
+msgid "No host has been defined"
+msgstr ""
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr ""
+
+msgid "The host %s cannot be resolved!"
+msgstr ""
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr ""
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr ""
+
+msgid "The login/password does not seems valid!"
+msgstr ""
 

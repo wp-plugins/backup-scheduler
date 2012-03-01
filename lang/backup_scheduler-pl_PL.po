@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-30T21:38:39+00:00\n"
+"PO-Revision-Date: 2012-02-23T10:45:28+00:00\n"
 "Last-Translator: Opti <>\n"
 "Last-Translator: Lukasz <www.premiumaccount.co.ukwww.esteepc.co.uk>\n"
 "Last-Translator: pablo <pawel@dream.net.pl>\n"
@@ -297,4 +297,10 @@ msgstr "Folder %s nie istnieje. Proszę utworzyć folder aby transfer może się
 
 msgid "The login/password does not seems valid!"
 msgstr "Login / hasło nie wydaje się prawidłowe!"
+
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr "Pamiętaj, że pliki większe niż ten limit nie zostaną uwzględnione w pliku zip!"
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr "Niemożliwe jest stworzenie pliku %s w folderze %s. Proszę sprawdzić uprawnienia folderów lub plików ."
 

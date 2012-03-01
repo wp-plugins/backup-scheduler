@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-02-19T18:06:47+00:00\n"
+"PO-Revision-Date: 2012-02-25T10:42:54+00:00\n"
 "Last-Translator: Javier <>\n"
 "Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
 "Last-Translator: charliechin <http://www.twitter.com/charliechin>\n"
@@ -28,125 +28,14 @@ msgstr "Este plugin activa la copia de seguridad programada de partes importanes
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
 msgstr "Lo siento, pero debes de instalar/activar %s en tu website. De otra manera el plugin no funcionará correctamente !"
 
-msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr "Aquí están los archivos de la copia de seguridad. Puedes forzar a hacer una nueva copia de seguridad o descargar los anteriores."
-
-msgid "An automatic backup will be launched in %s days."
-msgstr "Una copia automática será realizada en %s dias."
-
-msgid "Force a new backup"
-msgstr "Forzar una nueva copia de seguridad."
-
-msgid "Backups"
-msgstr "Copias de seguridad."
-
 msgid "How often do you want to backup your website?"
 msgstr "Cada cuanto quieres realizar copia de seguridad de tu website?"
 
 msgid "Frequency (in days):"
 msgstr "Frecuencia (en dias):"
 
-msgid "Please note that the backup will occur at midnight to be sure that your website is not overloaded"
-msgstr "Por favor, fíjate que si la copia de seguridad va a ocurrir a media noche tu website no está sobrecargado."
-
-msgid "Keep the backup files for (in days):"
-msgstr "Guardar los archivos de copia por (en dias):"
-
-msgid "What do you want to save?"
-msgstr "¿Que quiere guardar?"
-
-msgid "The plugins directory:"
-msgstr "El directorio de plugins:"
-
-msgid "(i.e. %s)"
-msgstr "(por ejemplo %s)"
-
-msgid "The themes directory:"
-msgstr "El directorio de temas:"
-
-msgid "The upload directory:"
-msgstr "El directorio de subidas:"
-
-msgid "The SQL database:"
-msgstr "La base de datos SQL:"
-
-msgid "Do you want that the backup is sent by email?"
-msgstr "¿Quiere que la copia de seguridad le sea enviada por e-mail?"
-
-msgid "If so, please enter your email:"
-msgstr "Si es así, introduce tu e-mail:"
-
-msgid "The maximum attachment size (in MB):"
-msgstr "Tamaño máximo de adjuntos (in MB):"
-
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr "El archivo zip será dividido en múltiples archivos del tamaño máximo especificado."
-
-msgid "Do you want to rename the files?"
-msgstr "¿Quiere renombrar los archivos?"
-
-msgid "What is the suffix of the file:"
-msgstr "Cuál es el sufijo del archivo:"
-
-msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
-msgstr "Esta opción permite desactivar la función de bloqueo de algunos proveedores de correo que bloquean los correos con archivos adjuntos zip (como Gmail)."
-
-msgid "Parameters"
-msgstr "Parámetros"
-
-msgid "Manage translations"
-msgstr "Modificar traducciones"
-
-msgid "Give feedback"
-msgstr "Deje su comentario"
-
-msgid "Other plugins"
-msgstr "Otros plugins"
-
-msgid "Date of the backup"
-msgstr "Fecha de la copia de seguridad"
-
-msgid "Backup files"
-msgstr "Archivos en la copia de seguridad"
-
-msgid "Part %s"
-msgstr "Parte %s"
-
-msgid "Backup completed on %s at %s"
-msgstr "Copia de seguridad completada el %s a las %s"
-
-msgid "The total size of the files is %s"
-msgstr "El tamaño total de los archivos es %s"
-
-msgid "These files will be deleted in %s days"
-msgstr "Estos archivos serán eliminados en %s days"
-
-msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
-msgstr "(Por el momento, no hay archivos de copia de seguridad ... Espere o fuerce una copia de seguridad (ver más abajo))"
-
-msgid "An other backup is still in progress... Please wait!"
-msgstr "Otra copia de seguridad está ya en progreso... Espere por favor!"
-
-msgid "An error occured while sending mail!"
-msgstr "Ocurrió un error mientras se enviaba el correo."
-
-msgid "A new backup have been generated!"
-msgstr "Se ha creado una nueva copia de seguridad!"
-
-msgid "An error occurred"
-msgstr "Ocurrió un error"
-
-msgid "Dear sirs,"
-msgstr "Estimados señores,"
-
-msgid "Here is attached the %s on %s backup files for today"
-msgstr "Aquí se adjunta el % s en los archivos de copia de seguridad de % s para hoy"
-
-msgid "Best regards,"
-msgstr "Saludos cordiales,"
-
-msgid "Backup of %s (%s)"
-msgstr "Copia de seguridad de %s (%s)"
+msgid "Time of the backups:"
+msgstr ""
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "Tenga en cuenta que 0 significa medianoche, 1 significa 1am, 13 significa 13:00, etc... La copia de seguridad se producirá en ese momento (hora del servidor) Asegurese de que su sitio web no está demasiado sobrecargada en ese momento."
@@ -154,20 +43,41 @@ msgstr "Tenga en cuenta que 0 significa medianoche, 1 significa 1am, 13 signific
 msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
 msgstr "Por favor, tenga en cuenta que su copia de seguridad no finalizará exactamente a esa hora. El proceso de respaldo puede tardar hasta 6h ante todo si no dispone de mucho tráfico en su sitio web y/o la copia de seguridad es bastante grande."
 
+msgid "Keep the backup files for (in days):"
+msgstr "Guardar los archivos de copia por (en dias):"
+
+msgid "What do you want to save?"
+msgstr "¿Que quiere guardar?"
+
 msgid "All directories (the full Wordpress installation):"
 msgstr "Todos los directorios (La instalación completa de Wordpress)"
+
+msgid "(i.e. %s)"
+msgstr "(por ejemplo %s)"
 
 msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
 msgstr "Marca esta opción si deseas guardar todo. Tenga cuidado, ya que su copia de seguridad puede ser muy pesado"
 
+msgid "The plugins directory:"
+msgstr "El directorio de plugins:"
+
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
 msgstr "Marca esta opción si desea guardar todos los plugins que ha instalado y que usa en  este sitio web."
+
+msgid "The themes directory:"
+msgstr "El directorio de temas:"
 
 msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
 msgstr "Marca esta opción si desea guardar todos sus temas (themes) que tiene instalado y que usa en este sitio web."
 
+msgid "The upload directory:"
+msgstr "El directorio de subidas:"
+
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
 msgstr "Marca esta opción si desea guardar las imágenes, archivos, etc... que se han subido a su sitio web  para crear articulos/posts/páginas."
+
+msgid "The SQL database:"
+msgstr "La base de datos SQL:"
 
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
 msgstr "Marca esta opción si desea guardar el texto de sus posts, su configuración, etc..."
@@ -178,11 +88,20 @@ msgstr "Tamaño máximo de archivo (en MB):"
 msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
 msgstr "Por favor, tenga en cuenta que el archivo .zip será partido en multiples archivos para coincidir con el tamaño máximo de archivo que ha especificado."
 
+msgid "Do you want that the backup is sent by email?"
+msgstr "¿Quiere que la copia de seguridad le sea enviada por e-mail?"
+
 msgid "Send the backup files by email:"
 msgstr "Enviar copia de seguridad mediante email:"
 
+msgid "If so, please enter your email:"
+msgstr "Si es así, introduce tu e-mail:"
+
 msgid "Do you want to add a suffix to sent files:"
 msgstr "Desea añadir un sufijo para enviar los archivos:"
+
+msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
+msgstr "Esta opción permite desactivar la función de bloqueo de algunos proveedores de correo que bloquean los correos con archivos adjuntos zip (como Gmail)."
 
 msgid "You do not need to fill this field if no mail is to be sent."
 msgstr "No necesita rellenar este campo si no se va a enviar ningún correo"
@@ -195,6 +114,9 @@ msgstr "¿Guardar los archivos de la copia de seguridad en un FTP?"
 
 msgid "FTP host:"
 msgstr "Host FTP:"
+
+msgid "Should be at the form %s or %s"
+msgstr ""
 
 msgid "Your FTP login:"
 msgstr "Su login FTP:"
@@ -223,11 +145,17 @@ msgstr "Para su información, el límite de memoria de su servidor web es %s mie
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr "Se recomienda que el tamaño máximo de archivos adjuntos no supere este valor"
 
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr ""
+
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr "¿Cuál es el tiempo máximo para la ejecución de scripts php? (en segundos):"
 
 msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
 msgstr "Incluso si no tiene restricción de tiempo, se recomienda establecer este valor a 15 segundos con el fin de evitar cualquier muerte (kill) de los scripts PHP por su proveedor de alojamiento web."
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Aquí están los archivos de la copia de seguridad. Puedes forzar a hacer una nueva copia de seguridad o descargar los anteriores."
 
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr "Una copia de seguridad se pondrá en marcha en %s dias y %s horas."
@@ -241,8 +169,38 @@ msgstr "Forzar una nueva copia de seguridad (con FTP/email)"
 msgid "Force a new backup (without any external storage or sending)"
 msgstr "Forzar una nueva copia de seguridad (sin ningún tipo de almacenamiento externo o envío)"
 
+msgid "Backups"
+msgstr "Copias de seguridad."
+
+msgid "Parameters"
+msgstr "Parámetros"
+
+msgid "Manage translations"
+msgstr "Modificar traducciones"
+
+msgid "Give feedback"
+msgstr "Deje su comentario"
+
+msgid "Other plugins"
+msgstr "Otros plugins"
+
+msgid "Date of the backup"
+msgstr "Fecha de la copia de seguridad"
+
+msgid "Backup files"
+msgstr "Archivos en la copia de seguridad"
+
+msgid "Part %s"
+msgstr "Parte %s"
+
 msgid "Backup finished on %s at %s"
 msgstr "Copia de seguridad finalizada en %s al %s"
+
+msgid "The total size of the files is %s"
+msgstr "El tamaño total de los archivos es %s"
+
+msgid "These files will be deleted in %s days"
+msgstr "Estos archivos serán eliminados en %s days"
 
 msgid "Delete these backup files"
 msgstr "Eliminar estos archivos de la copia de seguridad"
@@ -268,8 +226,14 @@ msgstr "Cancelar este proceso"
 msgid "Please wait..."
 msgstr "Espere por favor..."
 
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr "(Por el momento, no hay archivos de copia de seguridad ... Espere o fuerce una copia de seguridad (ver más abajo))"
+
 msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
 msgstr "Por favor espere, ¡Se está realizando una copia de seguridad! Si desea forzar una nueva copia de seguirad, refresque esta página y finalice la copia de seguridad actual primero."
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr ""
 
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr "Otra extracción de SQL todavía está en marcha (por segundo %s) ... ¡Por favor, espere!"
@@ -306,6 +270,15 @@ msgstr "El proceso ha sido cancelado por una tercera persona"
 
 msgid "A new backup has been generated!"
 msgstr "¡Una nueva copia de seguridad ha sido generada!"
+
+msgid "Dear sirs,"
+msgstr "Estimados señores,"
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr "Aquí se adjunta el % s en los archivos de copia de seguridad de % s para hoy"
+
+msgid "Best regards,"
+msgstr "Saludos cordiales,"
 
 msgid "%s backup files has been successfully saved on your FTP (%s)"
 msgstr "%s archivos de su copia de seguridad han sido correctamente guardados en su FTP(%s)"

@@ -4,15 +4,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-02-25T10:48:19+00:00\n"
-"Last-Translator: FranciscoRocha <franciscorocha.paparoka.com>\n"
+"PO-Revision-Date: 2012-03-01T02:23:37+00:00\n"
+"Last-Translator: ceceparif <cerenauf.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Poedit-Language: Portuguese\n"
-"X-Poedit-Country: Portugal\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: Indonesia\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;\n"
 "X-Poedit-Basepath: \n"
@@ -21,88 +21,88 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
-msgstr "Este plugin activa os backups programados das partes importantes do sitio: simples de usar e eficiente!"
+msgstr "Plugin ini memungkinkan melakukan backup yang terjadwal dari bagian penting website mu: mudah digunakan dan efisien!"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr "Desculpe, mas você deve instalar / ativar % s no seu sitio. Caso contrário, este plugin não funcionará corretamente!"
+msgstr "maap, tetapi anda harus meng-install/aktivasi pada website mu. Jika tidak, plugin ini tidak dapat berpungsi dengan benar!"
 
 msgid "How often do you want to backup your website?"
-msgstr "Com qual frequencia quer realizar o backup do seu sitio?"
+msgstr "Seberapa sering kamu ingin melakukan backup websitemu?"
 
 msgid "Frequency (in days):"
-msgstr "Frequencia (em dias):"
+msgstr "Frekuensi (dalam hari):"
 
 msgid "Time of the backups:"
-msgstr "Hora do Backup:"
+msgstr "Waktu backup:"
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
-msgstr "Repare que 0 quer dizer meiad noirte , 1 quer dizer 1 am, 13 quer dizer 1 pm, etc. O backup vai ser despoletado a hora indicada (hora do servidor)  pelo que deve certificar-se de que o o horario indicado não é um momento com elevada carga no servidor."
+msgstr "Mohon dicatat bahwa 0 berarti tengah malam, 1 berarti 1am, 13 berarti 1pm, dll. Backup akan berlangsung pada waktu tersebut (waktu server) jadi pastikan bahwa website mu tidak terlalu overload pada waktu tersebut."
 
 msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
 msgstr ""
 
 msgid "Keep the backup files for (in days):"
-msgstr "Guardar os ficheiros de backup por (em dias):"
+msgstr "Simpan file backup selama (dalam hari):"
 
 msgid "What do you want to save?"
-msgstr "O que é que quer guardar?"
+msgstr "Apa yang ingin kamu simpan?"
 
 msgid "All directories (the full Wordpress installation):"
-msgstr ""
+msgstr "Semua direktori (installasi wordpress penuh)"
 
 msgid "(i.e. %s)"
-msgstr "(i.e. %s)"
+msgstr "misalnya"
 
 msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
-msgstr ""
+msgstr "cek pilihan ini jika kamu ingin menyimpan semuyanya. Hati-hati, karena backup akan cukup besar!"
 
 msgid "The plugins directory:"
-msgstr "O directorio de plugins:"
+msgstr ""
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
-msgstr "Selecione esta opção se pretende gravar todos os plugins que tem instalados no seu sitio."
+msgstr ""
 
 msgid "The themes directory:"
-msgstr "O directorio de Temas:"
+msgstr ""
 
 msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
-msgstr "Seleccione esta opção se pretende gravar todos os temas que tem instalados no seu sitio."
+msgstr ""
 
 msgid "The upload directory:"
-msgstr "O directorio de Upload:"
+msgstr ""
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
-msgstr "Seleccione esta opção se pretende gravar todas as imagens, ficheiros, etc. que foram descarregadas no seu sitio para criar artigos/entradas/paginas."
+msgstr ""
 
 msgid "The SQL database:"
-msgstr "A base de dados SQL:"
+msgstr ""
 
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
-msgstr "Seleccione esta opção se quer gravar o texto das suas entradas, a suas configurações, etc."
+msgstr ""
 
 msgid "The maximum file size (in MB):"
 msgstr ""
 
 msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
-msgstr "Porfavor repare que o zip vai ser partido em multiplos ficheiros em que cada um terá como tamanho maximo o tamanho que indique"
+msgstr ""
 
 msgid "Do you want that the backup is sent by email?"
-msgstr "Quer que o backup seja enviado por email?"
+msgstr ""
 
 msgid "Send the backup files by email:"
 msgstr ""
 
 msgid "If so, please enter your email:"
-msgstr "Por favor indique o seu email:"
+msgstr ""
 
 msgid "Do you want to add a suffix to sent files:"
 msgstr ""
 
 msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
-msgstr "Esta opção vai contornar a capacidade de bloqueio de alguns fornecedores de email quando os anexos têm o formato zip (como acontece com o Gmail)."
+msgstr ""
 
 msgid "You do not need to fill this field if no mail is to be sent."
-msgstr "Não é necessário colocar aqui nada se não quer que o backup seja enviado por email."
+msgstr ""
 
 msgid "Do you want that the backup is stored on a FTP?"
 msgstr ""
@@ -129,34 +129,34 @@ msgid "Your PHP installation does not support FTP features, thus this option has
 msgstr ""
 
 msgid "Advanced - Memory and time management"
-msgstr "Opções Avançadas - Gestão da memoria e do tempo"
+msgstr ""
 
 msgid "What is the maximum size of allocated memory (in MB):"
-msgstr "Tamanho maximo de memoria alocada (im MB)."
+msgstr ""
 
 msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
-msgstr "EM algumas instalações de Wordpress pode encontrar algums problemas com memoria. Nesses casos reduza o tamanho de memoria para evitar esses problemas."
+msgstr ""
 
 msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
-msgstr "Para sua informação , o limite de memoria do seu sevidor é %s e o valor de memoria usado neste momento é %s."
+msgstr ""
 
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
-msgstr "É recomendado que o tamanho maximo do anexo não ultrapasse o valor indicado."
+msgstr ""
 
 msgid "Please note that the files greater than this limit won't be included in the zip file!"
 msgstr ""
 
 msgid "What is the maximum time for the php scripts execution (in seconds):"
-msgstr "Tempo maximo de execução para os scripts PHP (em segundos)."
+msgstr ""
 
 msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
-msgstr "Mesmo que não tenham nenhum restrição de tempo, é recomendavel que coloque o valor de 15 seg. para permitir que sejam eliminados os processo php pelo seu servidor web."
+msgstr ""
 
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr "Aqui estão os seus ficheiros de backup. Pode forçar um novo backup ou descarregar um backup ja concluído."
+msgstr ""
 
 msgid "An automatic backup will be launched in %s days and %s hours."
-msgstr "Um backup automatico vai ser realizado dentro de %s dias e %s horas"
+msgstr ""
 
 msgid "The backup process has started %s hours ago but has not finished yet."
 msgstr ""
@@ -168,40 +168,40 @@ msgid "Force a new backup (without any external storage or sending)"
 msgstr ""
 
 msgid "Backups"
-msgstr "Backups"
+msgstr ""
 
 msgid "Parameters"
-msgstr "Parametros"
+msgstr ""
 
 msgid "Manage translations"
-msgstr "Gerir traduções"
+msgstr ""
 
 msgid "Give feedback"
-msgstr "De a sua opinião"
+msgstr ""
 
 msgid "Other plugins"
-msgstr "Outros plugins"
+msgstr ""
 
 msgid "Date of the backup"
-msgstr "Data do backup"
+msgstr ""
 
 msgid "Backup files"
-msgstr "Ficheiros de backup"
+msgstr ""
 
 msgid "Part %s"
-msgstr "Parte %s"
+msgstr ""
 
 msgid "Backup finished on %s at %s"
 msgstr ""
 
 msgid "The total size of the files is %s"
-msgstr "O tamanho total dos ficheiros é %s"
+msgstr ""
 
 msgid "These files will be deleted in %s days"
-msgstr "Estes ficheiros vão ser removidos em %s dias"
+msgstr ""
 
 msgid "Delete these backup files"
-msgstr "Remova estes ficheiros de backup"
+msgstr ""
 
 msgid "The process is still in progress for this backup (begun %s at %s)."
 msgstr ""
@@ -225,7 +225,7 @@ msgid "Please wait..."
 msgstr ""
 
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
-msgstr "(por agora, não existem ficheiros de backup... Pode aguardar ou forçar um backup."
+msgstr ""
 
 msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
 msgstr ""
@@ -234,13 +234,13 @@ msgid "It is impossible to create the %s file in the %s folder. Please check fol
 msgstr ""
 
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
-msgstr "Outra estração de SQL esta ser realizada (a $s segundos)... Por favor aguarde!"
+msgstr ""
 
 msgid "(SQL extraction)"
 msgstr ""
 
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr "Outro backup esta a ser realizado (a %s segundos) ... Porfavor aguarde!"
+msgstr ""
 
 msgid "(ZIP creation)"
 msgstr ""
@@ -261,31 +261,31 @@ msgid "The file %s cannot be deleted. You should have a problem with file permis
 msgstr ""
 
 msgid "An unknown error occured!"
-msgstr "Aconteceu um erro desconhecido!"
+msgstr ""
 
 msgid "The process has been canceled by a third person"
 msgstr ""
 
 msgid "A new backup has been generated!"
-msgstr "Um novo backup foi gerado!"
+msgstr "Backup baru telah dibuat!"
 
 msgid "Dear sirs,"
-msgstr "Estimado Sr."
+msgstr "Yang terhormat"
 
 msgid "Here is attached the %s on %s backup files for today"
-msgstr "Foi anexo o  %s no backup de %s ficheiros por hoje"
+msgstr ""
 
 msgid "Best regards,"
-msgstr "Melhores cumprimentos,"
+msgstr "Salam hangat,"
 
 msgid "%s backup files has been successfully saved on your FTP (%s)"
 msgstr ""
 
 msgid "Backup of %s on %s - FTP confirmation"
-msgstr ""
+msgstr "Backup dari % pada % - konfirmasi FTP"
 
 msgid "No host has been defined"
-msgstr ""
+msgstr "tidak ada host yang didefinisikan"
 
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
 msgstr ""
@@ -300,5 +300,5 @@ msgid "The specified folder %s does not exists. Please create it so that the tra
 msgstr ""
 
 msgid "The login/password does not seems valid!"
-msgstr ""
+msgstr "Login/password kamu kelihatannya tidak benar!"
 
