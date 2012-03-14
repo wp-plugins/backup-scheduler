@@ -69,6 +69,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.2.7 =
+* Some spanned zip files were corrupted due to a bug in the index
+
 = 1.2.6 =
 * Remove short_open_tag and add translations
 
@@ -147,4 +150,4 @@ Have fun !
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:26dee908eb26a870536af7e875018c4a
+InfoVersion:6708e72be34d075cc9a0a329047aac7e

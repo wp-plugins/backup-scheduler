@@ -547,16 +547,16 @@ msgstr ""
 #: core/zip.class.php:263
 #: core/zip.class.php:293
 #: core/zip.class.php:302
-#: core/zip.class.php:375
-#: core/zip.class.php:386
-#: core/zip.class.php:416
-#: core/zip.class.php:427
-#: core/zip.class.php:436
-#: core/zip.class.php:504
-#: core/zip.class.php:540
-#: core/zip.class.php:550
+#: core/zip.class.php:378
+#: core/zip.class.php:392
+#: core/zip.class.php:422
+#: core/zip.class.php:433
+#: core/zip.class.php:442
+#: core/zip.class.php:510
+#: core/zip.class.php:546
 #: core/zip.class.php:556
-#: core/zip.class.php:560
+#: core/zip.class.php:562
+#: core/zip.class.php:566
 #: core/database.class.php:55
 #: core/database.class.php:104
 #: core/database.class.php:179
@@ -580,13 +580,13 @@ msgstr ""
 
 #: core/zip.class.php:203
 #: core/zip.class.php:259
-#: core/zip.class.php:377
-#: core/zip.class.php:388
-#: core/zip.class.php:418
-#: core/zip.class.php:429
-#: core/zip.class.php:438
-#: core/zip.class.php:506
-#: core/zip.class.php:542
+#: core/zip.class.php:380
+#: core/zip.class.php:394
+#: core/zip.class.php:424
+#: core/zip.class.php:435
+#: core/zip.class.php:444
+#: core/zip.class.php:512
+#: core/zip.class.php:548
 #: core/database.class.php:112
 #: core/database.class.php:175
 #: core/database.class.php:227
@@ -605,7 +605,7 @@ msgstr ""
 msgid "The file %s cannot be compressed."
 msgstr ""
 
-#: core/zip.class.php:552
+#: core/zip.class.php:558
 #@ SL_framework
 msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
 msgstr ""
