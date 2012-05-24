@@ -123,7 +123,7 @@ You may experience some "corruption" error. It is mainly due that archive softwa
 
 These software are *not* compatible with multi-part archives: 
 
-*7-zip, and 
+* 7-zip, and 
 * the Windows Explorer embedded function.
 
 Do not hesitate to contact me if you face some issues.
