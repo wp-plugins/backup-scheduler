@@ -4,8 +4,9 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-05-06T21:55:24+00:00\n"
+"PO-Revision-Date: 2012-05-24T13:22:59+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
+"Last-Translator: wkpixearts <wkpixeartsforall@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,9 +237,6 @@ msgstr "(Pour l&#039;instant, il n&#039;y a pas de fichiers de sauvegarde... Vou
 msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
 msgstr "Merci d&#039;attendre, une sauvegarde est en cours ! Si vous voulez forcer une nouvelle sauvagarde, rafraichissez d&#039;abord cette page et terminez la sauvegarde en cours."
 
-msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
-msgstr ""
-
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr "Une autre extraction SQL est en cours (depuis %s secondes)... Merci de patienter !"
 
@@ -308,9 +306,42 @@ msgstr "Le répertoire spécifié %s n&#039;existe pas. Merci de le créer afin 
 msgid "The login/password does not seems valid!"
 msgstr "L&#039;identifiant et le mot de passe ne semble pas valide !"
 
+msgid "The upload directory for this blog:"
+msgstr "Le répertoire d&#039;envoi pour ce blog:"
+
+msgid "All upload directories (for this site and the sub-blogs):"
+msgstr "Tous les répertoires d&#039;envoi (pour ce site et tout les sous-blogs):"
+
+msgid "Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages."
+msgstr "Cocher cette option si vous voulez sauver les images, fichiers, etc... que les utilisateurs on envoyé sur leur sites web pour créer des messages/articles/pages."
+
+msgid "The upload directory for the main site:"
+msgstr "Le répertoire d&#039;envoi pour le site principal:"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
+msgstr "Cocher cette option si vous voulez sauver les images, fichiers, etc... que vous avez envoyé sur le site web principal pour créer des messages/articles/pages."
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr "Cocher cette option si vous voulez sauvegarder le texte de vos post, votre configuration, etc... Pour ce blog"
+
+msgid "All SQL databases:"
+msgstr "Toutes les bases de données SQL (db SQL)"
+
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr "Cocher cette option si vous voulez sauvegarder tout les textes de vos posts, configurations, etc... Pour tout les blog sur ce site."
+
+msgid "Only your SQL database:"
+msgstr "Seulement votre bases de données SQL"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
+msgstr "Cocher cette option si vous voulez sauvegarder le texte de vos post, vos configuration, etc... Pour le site principal"
+
 msgid "The folder %s does not seems to be writable"
-msgstr ""
+msgstr "Le dossier %s ne semble pas être accessible en écriture (vérifiez les droits d’accès)"
 
 msgid "Everything OK!"
-msgstr ""
+msgstr "Tout est Ok!"
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr "Il est impossible de créer le fichier %s dans le dossier %s. Merci de vérifier les droits d&#039;accès aux dossiers/fichiers."
 

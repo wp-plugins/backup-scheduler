@@ -22,7 +22,7 @@ You can choose:
 * whether your database should be saved; 
 * whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)
 
-This plugin is under GPL licence.
+This plugin is under GPL licence
 
 = Multisite - Wordpress MU =
 
@@ -35,7 +35,7 @@ Each blog administrator may save their own data. The super-admin may save either
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab
 * English (United States), default language
 * Spanish (Spain) translation provided by Javier, AVfoto, charliechin
-* French (France) translation provided by SedLex
+* French (France) translation provided by SedLex, wkpixearts
 * Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
@@ -145,4 +145,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:70cc27f7348ef08ea4987aa96113c2db
+InfoVersion:beb935139bfeb1d177ef5a8cec7e1f43
