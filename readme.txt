@@ -22,7 +22,13 @@ You can choose:
 * whether your database should be saved; 
 * whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)
 
-This plugin is under GPL licence
+This plugin is under GPL licence.
+
+= Multisite - Wordpress MU =
+
+This plugin is compatible with Multisite installation. 
+
+Each blog administrator may save their own data. The super-admin may save either its data or the whole website.
 
 = Localization =
 
@@ -69,68 +75,33 @@ Have fun !
 
 == Changelog ==
 
-= 1.2.7 =
-* Some spanned zip files were corrupted due to a bug in the index
-
-= 1.2.6 =
-* Remove short_open_tag and add translations
-
-= 1.2.5 =
-* Improving the translations management
-
-= 1.2.4 =
-* Tuning to be able to work with very huge database
-
-= 1.2.3 =
-* Bug with NULL values in the database
-
-= 1.2.1 =
-* Portuguese translation added (by FranciscoRocha)
+= 1.3.0 =
+* Multisite compatible
+* Improve the zip compatibilities
+* Add log features
 
 = 1.2.0 =
+* Some spanned zip files were corrupted due to a bug in the index
+* Remove short_open_tag 
+* Tuning to be able to work with very huge database
+* Bug with NULL values in the database
 * FTP support
 * Full site backup is now possible
 * Bug correction when SQL has NULL value
-
-= 1.1.2 =
 * Add a link to delete manually the backup (feature requested by Mirza)
 * You can also force a new update without sending the emails
-
-= 1.1.1 =
 * Improve error management and memory leakage
 
 = 1.1.0 =
 * Bug in the sql file : date and time managements were incorrect
-
-= 1.0.9 =
-* Russian translation (by Slawka)
 * Add a time option for choosing the best moment to perform an automatic backup
 * Display bug correction
 * Add instructions to restore the backup :)
-
-= 1.0.8 =
-* German-Switzerland translation (by BernhardKnab)
 * Improve memory and time management for database extraction
 * Add error messages if it is impossible to read/delete/modify files
-
-= 1.0.7 =
-* Polish translation (by Pablo)
-
-= 1.0.6 =
 * Add time and memory management for constrained configuration
-
-= 1.0.5 =
 * Improving zip decompression and path 
-
-= 1.0.4 =
-* Spanish translation (by AVfoto)
-* Italian translation (by PuntoCon)
 * Correction of a bug that occurs when server refuse to access / directory "open_basedir" restriction
-
-= 1.0.3 =
-* Improve the English text thanks to Rene 
-
-= 1.0.2 =
 * Update of the core
 
 = 1.0.1 =
@@ -138,16 +109,40 @@ Have fun !
 
 == Frequently Asked Questions ==
 
+= Compatible Archive Software =
+
+The backup will be in a multi-part format. In order to uncompress it, you should put all the backup in the same folder and open the .zip file with Winzip.
+
+You may experience some "corruption" error. It is mainly due that archive software are not compatible with multi-part archives. I have tried with success:
+
+* Winzip (version 16.0 tested),
+* WinRar (some issue with UTF8 characters), and 
+* IZArc (some issue with UTF8 characters). 
+
+= NOT-Compatible Archive Software =
+
+These software are *not* compatible with multi-part archives: 
+
+*7-zip, and 
+* the Windows Explorer embedded function.
+
+Do not hesitate to contact me if you face some issues.
+
 = To restore the backups =
 
 * install a fresh version of Wordpress on your server ; 
-* unzip the backup (actually, the zip file comprises a plurality of files i.e. a multi-part zip (zip, z01, z02, etc.). These files should be saved in a same folder and your zip program (such as winzip, winrar, ...) will do the job for you...
+* unzip the backup (actually, the zip file comprises a plurality of files i.e. a multi-part zip (zip, z01, z02, etc.). These files should be saved in a same folder and your zip program (such as IZArc, Winzip, Winrar, ...) will do the job for you...
 * If you have configured to save the entire installation, replace all the wordpress files by the one in the zip file and import the SQL files (at the root of the zip file, the files named *.sql1, *sql2, etc.) in your database (with for instance phpmyadmin). It is recommended to save your database first ;
 * In other cases, replace the 'plugins',  'themes', 'uploads' folders (in the wp-content folder) with the one in the archive, replace the wp-config.php (at the root of your wordpress repository) with the one at the root of the zip file and  import the SQL files (at the root of the zip file, the files named *.sql1, *sql2, etc.) in your database (with for instance phpmyadmin). It is recommended to save your database first.
+
+= The backup files are corrupted =
+
+Be sure that all thz zip files (i.e. .zip, .z01, z02, etc.) are in the same folder.
+If you have still this issue, please try with Winzip software.
 
 * Where can I read more?
 
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:6708e72be34d075cc9a0a329047aac7e
+InfoVersion:70cc27f7348ef08ea4987aa96113c2db

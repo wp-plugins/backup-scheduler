@@ -26,6 +26,35 @@ function initForceBackup(only) {
 
 /* =====================================================================================
 *
+*  Test FTP
+*
+*/
+
+function testFTP() {
+	jQuery("#wait_testFTP").show();
+	jQuery("#testFTP_button").attr('disabled', 'disabled');
+	
+	ftp_host = jQuery("#ftp_host").val();
+	ftp_login = jQuery("#ftp_login").val();
+	ftp_pass = jQuery("#ftp_pass").val();
+	
+	var arguments = {
+		action: 'testFTP', 
+		ftp_host: ftp_host ,
+		ftp_login: ftp_login ,
+		ftp_pass: ftp_pass 
+	} 
+	  
+	//POST the data and append the results to the results div
+	jQuery.post(ajaxurl, arguments, function(response) {
+		jQuery("#testFTP_info").html(response);
+		jQuery("#wait_testFTP").hide();
+		jQuery("#testFTP_button").removeAttr('disabled');
+	});    
+}
+
+/* =====================================================================================
+*
 *  Force a backup
 *
 */

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-29T15:48:15+00:00\n"
+"PO-Revision-Date: 2012-05-06T21:55:24+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgid "Sorry, but you should install/activate %s on your website. Otherwise, thi
 msgstr "Désolé, mais vous devez activer %s sur votre site web. Autrement, ce plugin ne fonctionnera pas proprement !"
 
 msgid "How often do you want to backup your website?"
-msgstr "Vous voulez sauvegarder votre site web tout les combien de temps ?"
+msgstr "Vous voulez sauvegarder votre site web tous les combien de temps ?"
 
 msgid "Frequency (in days):"
 msgstr "Fréquence (en jours) :"
@@ -122,6 +122,12 @@ msgstr "Votre identifiant FTP :"
 msgid "Your FTP pass:"
 msgstr "Votre mot de passe FTP :"
 
+msgid "Click on that button %s to test if the above information is correct"
+msgstr "Cliquez sur ce bouton %s pour verifier si les informations ci-dessus sont correctes"
+
+msgid "Test"
+msgstr "Tester"
+
 msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
 msgstr "Si vous voulez être notifié quand le stockage FTP est terminé, merci d&#039;indiquer votre email :"
 
@@ -142,6 +148,9 @@ msgstr "Pour votre information, la limite d&#039;allocation mémoire de votre se
 
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr "Il est recommandé que la taille maximale des pièces-jointes ne soit pas plus grande que cette valeur."
+
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr "Merci de noter que les fichiers plus grand que cette taille ne seront pas inclues dans le fichier zip !"
 
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr "Quel est le temps maximal d&#039;execution des scripts PHP (en seconde) :"
@@ -227,6 +236,9 @@ msgstr "(Pour l&#039;instant, il n&#039;y a pas de fichiers de sauvegarde... Vou
 msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
 msgstr "Merci d&#039;attendre, une sauvegarde est en cours ! Si vous voulez forcer une nouvelle sauvagarde, rafraichissez d&#039;abord cette page et terminez la sauvegarde en cours."
 
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr ""
+
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr "Une autre extraction SQL est en cours (depuis %s secondes)... Merci de patienter !"
 
@@ -295,4 +307,10 @@ msgstr "Le répertoire spécifié %s n&#039;existe pas. Merci de le créer afin 
 
 msgid "The login/password does not seems valid!"
 msgstr "L&#039;identifiant et le mot de passe ne semble pas valide !"
+
+msgid "The folder %s does not seems to be writable"
+msgstr ""
+
+msgid "Everything OK!"
+msgstr ""
 
