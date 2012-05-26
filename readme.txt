@@ -75,6 +75,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.3.1 =
+* Add deletion features when uninstalling the plugin
+
 = 1.3.0 =
 * Multisite compatible
 * Improve the zip compatibilities
@@ -145,4 +148,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:0a25aedf467807550ea1668ea142cc27
+InfoVersion:cd670c67b81ca1fbd55bcf5477b83f82
