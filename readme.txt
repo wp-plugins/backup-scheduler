@@ -75,6 +75,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.3.2 =
+* There was a bug in the regexp when the ftp were directed to the root folder without any slash at the end.
+
 = 1.3.1 =
 * Add deletion features when uninstalling the plugin
 
@@ -148,4 +151,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:c08fd2ddffec8f36fa240eb3f661b6b3
+InfoVersion:5de11a72c06f812815561d37707d00a5

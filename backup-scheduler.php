@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.3.1
+Version: 1.3.2
+
 
 Framework: SL_Framework
 Author: SedLex
@@ -1136,14 +1137,14 @@ class backup_scheduler extends pluginSedLex {
 		
 		$conn=false ; 
 		
-		if (preg_match("/ftp:\/\/([^\/]*?)(\/.*)/i", $this->get_param('ftp_host'), $match)) {
+		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
 			$conn = @ftp_connect($match[1]); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
 				SL_Debug::log(get_class(), "The PHP installation does not support SSL features" , 1) ; 
 				return array("transfer"=>false, "error"=>sprintf(__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
 			}
-			if (preg_match("/ftps:\/\/([^\/]*?)(\/.*)/i", $this->get_param('ftp_host'), $match)) {
+			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
 				$conn = @ftp_ssl_connect($match[1]); 
 			}
 		}
@@ -1200,14 +1201,14 @@ class backup_scheduler extends pluginSedLex {
 		
 		$conn=false ; 
 		
-		if (preg_match("/ftp:\/\/([^\/]*?)(\/.*)/i", $ftp_host, $match)) {
+		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $ftp_host, $match)) {
 			$conn = @ftp_connect($match[1]); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
 				echo "<p style='color:red;'>".__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID)."</p>" ; 
 				die() ; 
 			}
-			if (preg_match("/ftps:\/\/([^\/]*?)(\/.*)/i", $ftp_host, $match)) {
+			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $ftp_host, $match)) {
 				$conn = @ftp_ssl_connect($match[1]); 
 			}
 		}
