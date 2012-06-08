@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-02-25T10:42:54+00:00\n"
+"PO-Revision-Date: 2012-06-07T21:34:55+00:00\n"
 "Last-Translator: Javier <>\n"
 "Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
 "Last-Translator: charliechin <http://www.twitter.com/charliechin>\n"
@@ -33,9 +33,6 @@ msgstr "Cada cuanto quieres realizar copia de seguridad de tu website?"
 
 msgid "Frequency (in days):"
 msgstr "Frecuencia (en dias):"
-
-msgid "Time of the backups:"
-msgstr ""
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "Tenga en cuenta que 0 significa medianoche, 1 significa 1am, 13 significa 13:00, etc... La copia de seguridad se producirá en ese momento (hora del servidor) Asegurese de que su sitio web no está demasiado sobrecargada en ese momento."
@@ -115,9 +112,6 @@ msgstr "¿Guardar los archivos de la copia de seguridad en un FTP?"
 msgid "FTP host:"
 msgstr "Host FTP:"
 
-msgid "Should be at the form %s or %s"
-msgstr ""
-
 msgid "Your FTP login:"
 msgstr "Su login FTP:"
 
@@ -144,9 +138,6 @@ msgstr "Para su información, el límite de memoria de su servidor web es %s mie
 
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr "Se recomienda que el tamaño máximo de archivos adjuntos no supere este valor"
-
-msgid "Please note that the files greater than this limit won't be included in the zip file!"
-msgstr ""
 
 msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr "¿Cuál es el tiempo máximo para la ejecución de scripts php? (en segundos):"
@@ -232,9 +223,6 @@ msgstr "(Por el momento, no hay archivos de copia de seguridad ... Espere o fuer
 msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
 msgstr "Por favor espere, ¡Se está realizando una copia de seguridad! Si desea forzar una nueva copia de seguirad, refresque esta página y finalice la copia de seguridad actual primero."
 
-msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
-msgstr ""
-
 msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
 msgstr "Otra extracción de SQL todavía está en marcha (por segundo %s) ... ¡Por favor, espere!"
 
@@ -303,4 +291,16 @@ msgstr "La carpeta específica %s no existe. ¡Por favor cree la carpeta para qu
 
 msgid "The login/password does not seems valid!"
 msgstr "Login/contraseña  incorrectos"
+
+msgid "Time of the backups:"
+msgstr "Horario de la copia de seguridad:"
+
+msgid "The upload directory for this blog:"
+msgstr "El directorio de subidas de este blog:"
+
+msgid "All upload directories (for this site and the sub-blogs):"
+msgstr "Todos los directorios de subidas (para este blog y los sub-blogs):"
+
+msgid "The upload directory for the main site:"
+msgstr "El directorio de subidas del sitio principal:"
 
