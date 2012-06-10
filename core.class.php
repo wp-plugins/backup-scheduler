@@ -1229,21 +1229,20 @@ if (!class_exists('pluginSedLex')) {
 			
 			// 3) SVN update
 			
-			if ((!$toBeDone)) {
-				$toBePrint .=  "<p style='".$styleToDo."'>" ; 
-				$toBeDone = true ; 
-			} else {
-				$toBePrint .=  "<p style='".$styleDone."'>" ; 		
-			}
 			if ($version_on_wordpress == $info['Version']) {
-				$toBePrint .= $version_on_wordpress.".".$info['Version'] ; 
+				$toBePrint .=  "<p style='".$styleDone."'>" ; 	
 				$toBePrint .= " <a href='#' onClick='showSvnPopup(\"".md5($url)."\", \"".$plugin_name."\"); return false;'>" ;
 				$toBePrint .= sprintf(__("3) Update the SVN repository (without modifying the version)", 'SL_framework'), $info['Version']) ;
 				$toBePrint .=  "</a>" ;
 				$toBePrint .= "<img id='wait_popup_".md5($url)."' src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/ajax-loader.gif' style='display:none;'>" ; 
 				$toBePrint .=  "</p>" ;
 			} else {
-				$toBePrint .= " <a href='#' onClick='showSvnPopup(\"".md5($url)."\", \"".$plugin_name."\"); return false;'>" ;
+				if ((!$toBeDone)) {
+					$toBePrint .=  "<p style='".$styleToDo."'>" ; 
+					$toBeDone = true ; 
+				} else {
+					$toBePrint .=  "<p style='".$styleDone."'>" ; 		
+				}
 				$toBePrint .= sprintf(__("3) Update the SVN repository (and release a new version %s)", 'SL_framework'), $info['Version']) ;
 				$toBePrint .=  "</a>" ;
 				$toBePrint .= "<img id='wait_popup_".md5($url)."' src='".WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/ajax-loader.gif' style='display:none;'>" ; 
