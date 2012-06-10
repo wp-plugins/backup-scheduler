@@ -1236,6 +1236,7 @@ if (!class_exists('pluginSedLex')) {
 				$toBePrint .=  "<p style='".$styleDone."'>" ; 		
 			}
 			if ($version_on_wordpress == $info['Version']) {
+				$toBePrint .= $version_on_wordpress.".".$info['Version'] ; 
 				$toBePrint .= " <a href='#' onClick='showSvnPopup(\"".md5($url)."\", \"".$plugin_name."\"); return false;'>" ;
 				$toBePrint .= sprintf(__("3) Update the SVN repository (without modifying the version)", 'SL_framework'), $info['Version']) ;
 				$toBePrint .=  "</a>" ;

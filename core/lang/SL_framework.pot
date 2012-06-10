@@ -201,7 +201,7 @@ msgid "Version: %s by %s"
 msgstr ""
 
 #: core.class.php:926
-#: core.class.php:1433
+#: core.class.php:1434
 #: core/svn.class.php:860
 #@ SL_framework
 msgid "Getting SVN information..."
@@ -313,103 +313,103 @@ msgstr ""
 msgid "2) Modify the readme.txt (as the version has been already changed)"
 msgstr ""
 
-#: core.class.php:1240
+#: core.class.php:1241
 #@ SL_framework
 msgid "3) Update the SVN repository (without modifying the version)"
 msgstr ""
 
-#: core.class.php:1246
+#: core.class.php:1247
 #@ SL_framework
 msgid "3) Update the SVN repository (and release a new version %s)"
 msgstr ""
 
-#: core.class.php:1252
+#: core.class.php:1253
 #@ SL_framework
 msgid "Refresh"
 msgstr ""
 
-#: core.class.php:1307
+#: core.class.php:1308
 #@ SL_framework
 msgid "Change the plugin version for %s"
 msgstr ""
 
-#: core.class.php:1311
+#: core.class.php:1312
 #@ SL_framework
 msgid "Version number"
 msgstr ""
 
-#: core.class.php:1312
+#: core.class.php:1313
 #@ SL_framework
 msgid "The current version of the plugin %s is %s."
 msgstr ""
 
-#: core.class.php:1313
+#: core.class.php:1314
 #@ SL_framework
 msgid "Please modify the version:"
 msgstr ""
 
-#: core.class.php:1314
+#: core.class.php:1315
 #@ SL_framework
 msgid "Readme file"
 msgstr ""
 
-#: core.class.php:1315
+#: core.class.php:1316
 #@ SL_framework
 msgid "The current content of %s is:"
 msgstr ""
 
-#: core.class.php:1419
+#: core.class.php:1420
 #@ SL_framework
 msgid "The current text"
 msgstr ""
 
-#: core.class.php:1419
+#: core.class.php:1420
 #@ SL_framework
 msgid "The proposed text"
 msgstr ""
 
-#: core.class.php:1425
+#: core.class.php:1426
 #@ SL_framework
 msgid "Save these data"
 msgstr ""
 
-#: core.class.php:1428
+#: core.class.php:1429
 #@ SL_framework
 msgid "There is a problem with the header of %s. It appears that there is no Version header."
 msgstr ""
 
-#: core.class.php:1472
+#: core.class.php:1473
 #@ SL_framework
 msgid "The data has been saved. You may close this window."
 msgstr ""
 
-#: core.class.php:1734
+#: core.class.php:1735
 #@ SL_framework
 msgid "The folder %s is not %s !"
 msgstr ""
 
-#: core.class.php:1736
+#: core.class.php:1737
 #@ SL_framework
 msgid "The file %s is not %s !"
 msgstr ""
 
-#: core.class.php:1743
-#: core.class.php:1750
+#: core.class.php:1744
+#: core.class.php:1751
 #@ SL_framework
 msgid "The folder %s does not exists and cannot be created !"
 msgstr ""
 
-#: core.class.php:1755
+#: core.class.php:1756
 #@ SL_framework
 msgid "The file %s does not exists and cannot be created !"
 msgstr ""
 
-#: core.class.php:1762
+#: core.class.php:1763
 #@ SL_framework
 msgid "There are some issues with folders rights. Please corret them as soon as possible as they could induce bugs and instabilities."
 msgstr ""
 
-#: core.class.php:1762
+#: core.class.php:1763
 #@ SL_framework
 msgid "Please see below:"
 msgstr ""
