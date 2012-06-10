@@ -1160,10 +1160,15 @@ if (!class_exists('pluginSedLex')) {
 			} else {
 				$res = unserialize($request['body']);
 				if ( ! $res ) {
-					echo "<p style='".$styleError."'>" ; 
-					echo __('An error occured when retrieving the version of the plugin on Wordpress.org. Please retry!', 'SL_framework')." <a href='#' onclick='coreInfo(\"".$md5."\", \"".$url."\", \"".$plugin_name."\", \"".$current_core_used."\", \"".$current_core_used."\", \"".$current_fingerprint_core_used."\", \"".$src_wait."\", \"".$msg_wait."\")'>[RETRY]</a>" ; 
-					echo "</p>" ; 	
-					die() ; 
+					$trunk = @file_get_contents('http://svn.wp-plugins.org/'.$plugin_name.'/trunk/' ) ;
+					if ($trunk!="") {
+						$version_on_wordpress = 0 ; 
+					} else {
+						echo "<p style='".$styleError."'>" ; 
+						echo __('An error occured when retrieving the version of the plugin on Wordpress.org. Please retry!', 'SL_framework')." <a href='#' onclick='coreInfo(\"".$md5."\", \"".$url."\", \"".$plugin_name."\", \"".$current_core_used."\", \"".$current_core_used."\", \"".$current_fingerprint_core_used."\", \"".$src_wait."\", \"".$msg_wait."\")'>[RETRY]</a>" ; 
+						echo "</p>" ; 	
+						die() ;
+					} 
 				} else {
 					$version_on_wordpress = $res->version ; 
 				}
