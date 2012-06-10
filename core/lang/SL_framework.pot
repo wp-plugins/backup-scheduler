@@ -1288,17 +1288,17 @@ msgstr ""
 msgid "The commit has ended [ %s ]... You should received an email quickly ! You may close the window or wait for the automatic closing."
 msgstr ""
 
-#: core/svn.class.php:1257
+#: core/svn.class.php:1260
 #@ SL_framework
 msgid "The commit has ended but there is an error!"
 msgstr ""
 
-#: core/svn.class.php:1277
+#: core/svn.class.php:1280
 #@ SL_framework
 msgid "Sending to the local files in progress..."
 msgstr ""
 
-#: core/svn.class.php:1340
+#: core/svn.class.php:1343
 #@ SL_framework
 msgid "The rollback has ended ..."
 msgstr ""
