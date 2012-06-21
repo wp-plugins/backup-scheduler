@@ -419,6 +419,156 @@ msgstr ""
 msgid "Please see below:"
 msgstr ""
 
+#: core/otherplugins.class.php:52
+#@ SL_framework
+msgid "Plugins that you may install"
+msgstr ""
+
+#: core/otherplugins.class.php:54
+#@ SL_framework
+msgid "The following plugins have been developed by the author and are not yet installed:"
+msgstr ""
+
+#: core/otherplugins.class.php:56
+#@ SL_framework
+msgid "Plugin not yet installed"
+msgstr ""
+
+#: core/otherplugins.class.php:56
+#: core/otherplugins.class.php:84
+#@ SL_framework
+msgid "Description and Screenshots"
+msgstr ""
+
+#: core/otherplugins.class.php:75
+#@ SL_framework
+msgid "All author's plugins have been installed. Thank you!"
+msgstr ""
+
+#: core/otherplugins.class.php:81
+#@ SL_framework
+msgid "Installed plugins"
+msgstr ""
+
+#: core/otherplugins.class.php:82
+#@ SL_framework
+msgid "You have already installed the following author's plugins:"
+msgstr ""
+
+#: core/otherplugins.class.php:84
+#@ SL_framework
+msgid "Plugin already installed"
+msgstr ""
+
+#: core/otherplugins.class.php:182
+#@ SL_framework
+msgid "Number of download:"
+msgstr ""
+
+#: core/svn.class.php:689
+#@ SL_framework
+msgid "Your credentials do not seem to be correct. Please check them!"
+msgstr ""
+
+#: core/svn.class.php:693
+#@ SL_framework
+msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
+msgstr ""
+
+#: core/svn.class.php:803
+#@ SL_framework
+msgid "SVN client for %s"
+msgstr ""
+
+#: core/svn.class.php:822
+#@ SL_framework
+msgid "Updating the local cache"
+msgstr ""
+
+#: core/svn.class.php:829
+#@ SL_framework
+msgid "folder created"
+msgstr ""
+
+#: core/svn.class.php:831
+#@ SL_framework
+msgid "folder creation has failed !"
+msgstr ""
+
+#: core/svn.class.php:835
+#@ SL_framework
+msgid "%s bytes transfered"
+msgstr ""
+
+#: core/svn.class.php:849
+#@ SL_framework
+msgid "An error occurred during the retrieval of files on the server ! Sorry ..."
+msgstr ""
+
+#: core/svn.class.php:883
+#: core/svn.class.php:903
+#@ SL_framework
+msgid "Local to SVN repository"
+msgstr ""
+
+#: core/svn.class.php:884
+#: core/svn.class.php:906
+#@ SL_framework
+msgid "Comparing %s with %s"
+msgstr ""
+
+#: core/svn.class.php:892
+#: core/svn.class.php:914
+#@ SL_framework
+msgid "Confirmation"
+msgstr ""
+
+#: core/svn.class.php:894
+#@ SL_framework
+msgid "Commit comment:"
+msgstr ""
+
+#: core/svn.class.php:896
+#@ SL_framework
+msgid "Yes, the SVN version will be deleted and be replaced by the local version"
+msgstr ""
+
+#: core/svn.class.php:905
+#: core/svn.class.php:923
+#@ SL_framework
+msgid "SVN repository to Local"
+msgstr ""
+
+#: core/svn.class.php:916
+#@ SL_framework
+msgid "Yes, the local version will be overwritten with the repository files"
+msgstr ""
+
+#: core/svn.class.php:947
+#@ SL_framework
+msgid "Sending to the repository in progress..."
+msgstr ""
+
+#: core/svn.class.php:1254
+#@ SL_framework
+msgid "The commit has ended [ %s ]... You should received an email quickly ! You may close the window or wait for the automatic closing."
+msgstr ""
+
+#: core/svn.class.php:1260
+#@ SL_framework
+msgid "The commit has ended but there is an error!"
+msgstr ""
+
+#: core/svn.class.php:1280
+#@ SL_framework
+msgid "Sending to the local files in progress..."
+msgstr ""
+
+#: core/svn.class.php:1343
+#@ SL_framework
+msgid "The rollback has ended ..."
+msgstr ""
+
 #: core/parameters.class.php:147
 #@ SL_framework
 msgid "Error: the submitted value is not an integer and thus, the parameter has not been updated!"
@@ -497,158 +647,88 @@ msgstr ""
 msgid "Parameters have been updated successfully!"
 msgstr ""
 
-#: core/zip.class.php:24
+#: core/utils.class.php:145
 #@ SL_framework
-msgid "Error: %s function is not found"
+msgid "KB"
 msgstr ""
 
-#: core/zip.class.php:114
-#: core/zip.class.php:186
-#: core/zip.class.php:232
-#: core/zip.class.php:433
-#: core/database.class.php:54
-#: core/database.class.php:103
-#: core/database.class.php:133
+#: core/utils.class.php:149
 #@ SL_framework
-msgid "The file %s cannot be read. You should have a problem with file permissions or security restrictions."
+msgid "MB"
 msgstr ""
 
-#: core/zip.class.php:123
-#: core/zip.class.php:183
-#: core/zip.class.php:193
-#: core/zip.class.php:211
-#: core/zip.class.php:230
-#: core/zip.class.php:252
-#: core/zip.class.php:316
-#: core/zip.class.php:352
-#: core/zip.class.php:386
-#: core/zip.class.php:395
-#: core/zip.class.php:431
-#: core/zip.class.php:444
-#: core/zip.class.php:527
-#: core/zip.class.php:545
-#: core/zip.class.php:570
-#: core/zip.class.php:587
-#: core/zip.class.php:600
-#: core/zip.class.php:665
-#: core/zip.class.php:706
-#: core/zip.class.php:722
-#: core/zip.class.php:735
-#: core/zip.class.php:757
-#: core/zip.class.php:768
-#: core/zip.class.php:770
-#: core/zip.class.php:777
-#: core/database.class.php:62
-#: core/database.class.php:111
-#: core/database.class.php:186
-#: core/database.class.php:238
-#: core/database.class.php:241
+#: core/utils.class.php:152
 #@ SL_framework
-msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgid "GB"
 msgstr ""
 
-#: core/zip.class.php:132
-#: core/database.class.php:70
+#: core/feedback.class.php:34
 #@ SL_framework
-msgid "The folder %s cannot be opened. You should have a problem with folder permissions or security restrictions."
+msgid "Feedback form"
 msgstr ""
 
-#: core/zip.class.php:196
-#: core/database.class.php:108
+#: core/feedback.class.php:35
 #@ SL_framework
-msgid "An other process is still running (it runs for %s seconds)"
+msgid "This form is an easy way to contact the author and to discuss issues/incompatibilities/etc. with him"
 msgstr ""
 
-#: core/zip.class.php:213
-#: core/zip.class.php:318
-#: core/zip.class.php:354
-#: core/zip.class.php:388
-#: core/zip.class.php:529
-#: core/zip.class.php:547
-#: core/zip.class.php:572
-#: core/zip.class.php:589
-#: core/zip.class.php:602
-#: core/zip.class.php:667
-#: core/zip.class.php:708
-#: core/zip.class.php:724
-#: core/database.class.php:119
-#: core/database.class.php:182
-#: core/database.class.php:234
+#: core/feedback.class.php:42
 #@ SL_framework
-msgid "The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions."
+msgid "Contact the author"
 msgstr ""
 
-#: core/zip.class.php:254
-#: core/database.class.php:154
+#: core/feedback.class.php:44
+#: core/translation.class.php:220
+#: core/translation.class.php:330
 #@ SL_framework
-msgid "The file %s cannot be created. You should have a problem with file permissions or security restrictions."
+msgid "Your name:"
 msgstr ""
 
-#: core/zip.class.php:446
+#: core/feedback.class.php:48
 #@ SL_framework
-msgid "The file %s cannot be compressed."
+msgid "Your email:"
 msgstr ""
 
-#: core/zip.class.php:737
-#: core/zip.class.php:759
+#: core/feedback.class.php:48
 #@ SL_framework
-msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
+msgid "Useful... so that the author will be able to anwser you."
 msgstr ""
 
-#: core/otherplugins.class.php:52
+#: core/feedback.class.php:52
 #@ SL_framework
-msgid "Plugins that you may install"
+msgid "Your comments:"
 msgstr ""
 
-#: core/otherplugins.class.php:54
+#: core/feedback.class.php:52
 #@ SL_framework
-msgid "The following plugins have been developed by the author and are not yet installed:"
+msgid "Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)"
 msgstr ""
 
-#: core/otherplugins.class.php:56
+#: core/feedback.class.php:58
 #@ SL_framework
-msgid "Plugin not yet installed"
+msgid "Send feedback"
 msgstr ""
 
-#: core/otherplugins.class.php:56
-#: core/otherplugins.class.php:84
+#: core/feedback.class.php:63
 #@ SL_framework
-msgid "Description and Screenshots"
+msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
 msgstr ""
 
-#: core/otherplugins.class.php:75
+#: core/feedback.class.php:150
 #@ SL_framework
-msgid "All author's plugins have been installed. Thank you!"
+msgid "The feedback has been sent"
 msgstr ""
 
-#: core/otherplugins.class.php:81
+#: core/feedback.class.php:155
+#: core/translation.class.php:988
 #@ SL_framework
-msgid "Installed plugins"
+msgid "An error occured sending the email."
 msgstr ""
 
-#: core/otherplugins.class.php:82
+#: core/feedback.class.php:155
+#: core/translation.class.php:988
 #@ SL_framework
-msgid "You have already installed the following author's plugins:"
-msgstr ""
-
-#: core/otherplugins.class.php:84
-#@ SL_framework
-msgid "Plugin already installed"
-msgstr ""
-
-#: core/otherplugins.class.php:182
-#@ SL_framework
-msgid "Number of download:"
-msgstr ""
-
-#: core/database.class.php:178
-#@ SL_framework
-msgid "The file %s cannot be modified. You should have a problem with file permissions or security restrictions."
-msgstr ""
-
-#: core/popup.class.php:74
-#@ SL_framework
-msgid "Close popup"
+msgid "Make sure that your wordpress is able to send email."
 msgstr ""
 
 #: core/translation.class.php:141
@@ -692,13 +772,6 @@ msgstr ""
 #: core/translation.class.php:254
 #@ SL_framework
 msgid "Translation"
-msgstr ""
-
-#: core/translation.class.php:220
-#: core/translation.class.php:330
-#: core/feedback.class.php:44
-#@ SL_framework
-msgid "Your name:"
 msgstr ""
 
 #: core/translation.class.php:220
@@ -839,18 +912,6 @@ msgstr ""
 #: core/translation.class.php:983
 #@ SL_framework
 msgid "The translation %s have been sent"
-msgstr ""
-
-#: core/translation.class.php:988
-#: core/feedback.class.php:155
-#@ SL_framework
-msgid "An error occured sending the email."
-msgstr ""
-
-#: core/translation.class.php:988
-#: core/feedback.class.php:155
-#@ SL_framework
-msgid "Make sure that your wordpress is able to send email."
 msgstr ""
 
 #: core/translation.class.php:1139
@@ -1046,56 +1107,6 @@ msgstr ""
 msgid "Send to the author of the framework"
 msgstr ""
 
-#: core/feedback.class.php:34
-#@ SL_framework
-msgid "Feedback form"
-msgstr ""
-
-#: core/feedback.class.php:35
-#@ SL_framework
-msgid "This form is an easy way to contact the author and to discuss issues/incompatibilities/etc. with him"
-msgstr ""
-
-#: core/feedback.class.php:42
-#@ SL_framework
-msgid "Contact the author"
-msgstr ""
-
-#: core/feedback.class.php:48
-#@ SL_framework
-msgid "Your email:"
-msgstr ""
-
-#: core/feedback.class.php:48
-#@ SL_framework
-msgid "Useful... so that the author will be able to anwser you."
-msgstr ""
-
-#: core/feedback.class.php:52
-#@ SL_framework
-msgid "Your comments:"
-msgstr ""
-
-#: core/feedback.class.php:52
-#@ SL_framework
-msgid "Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)"
-msgstr ""
-
-#: core/feedback.class.php:58
-#@ SL_framework
-msgid "Send feedback"
-msgstr ""
-
-#: core/feedback.class.php:63
-#@ SL_framework
-msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
-msgstr ""
-
-#: core/feedback.class.php:150
-#@ SL_framework
-msgid "The feedback has been sent"
-msgstr ""
-
 #: core/folder_diff.class.php:150
 #: core/folder_diff.class.php:192
 #@ SL_framework
@@ -1106,6 +1117,114 @@ msgstr ""
 #: core/folder_diff.class.php:193
 #@ SL_framework
 msgid "Un-select all"
+msgstr ""
+
+#: core/zip.class.php:24
+#@ SL_framework
+msgid "Error: %s function is not found"
+msgstr ""
+
+#: core/zip.class.php:114
+#: core/zip.class.php:186
+#: core/zip.class.php:232
+#: core/zip.class.php:433
+#: core/database.class.php:54
+#: core/database.class.php:103
+#: core/database.class.php:133
+#@ SL_framework
+msgid "The file %s cannot be read. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/zip.class.php:123
+#: core/zip.class.php:183
+#: core/zip.class.php:193
+#: core/zip.class.php:211
+#: core/zip.class.php:230
+#: core/zip.class.php:252
+#: core/zip.class.php:316
+#: core/zip.class.php:352
+#: core/zip.class.php:386
+#: core/zip.class.php:395
+#: core/zip.class.php:431
+#: core/zip.class.php:444
+#: core/zip.class.php:527
+#: core/zip.class.php:545
+#: core/zip.class.php:570
+#: core/zip.class.php:587
+#: core/zip.class.php:600
+#: core/zip.class.php:665
+#: core/zip.class.php:706
+#: core/zip.class.php:722
+#: core/zip.class.php:735
+#: core/zip.class.php:757
+#: core/zip.class.php:768
+#: core/zip.class.php:770
+#: core/zip.class.php:777
+#: core/database.class.php:62
+#: core/database.class.php:111
+#: core/database.class.php:186
+#: core/database.class.php:238
+#: core/database.class.php:241
+#@ SL_framework
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/zip.class.php:132
+#: core/database.class.php:70
+#@ SL_framework
+msgid "The folder %s cannot be opened. You should have a problem with folder permissions or security restrictions."
+msgstr ""
+
+#: core/zip.class.php:196
+#: core/database.class.php:108
+#@ SL_framework
+msgid "An other process is still running (it runs for %s seconds)"
+msgstr ""
+
+#: core/zip.class.php:213
+#: core/zip.class.php:318
+#: core/zip.class.php:354
+#: core/zip.class.php:388
+#: core/zip.class.php:529
+#: core/zip.class.php:547
+#: core/zip.class.php:572
+#: core/zip.class.php:589
+#: core/zip.class.php:602
+#: core/zip.class.php:667
+#: core/zip.class.php:708
+#: core/zip.class.php:724
+#: core/database.class.php:119
+#: core/database.class.php:182
+#: core/database.class.php:234
+#@ SL_framework
+msgid "The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/zip.class.php:254
+#: core/database.class.php:154
+#@ SL_framework
+msgid "The file %s cannot be created. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/zip.class.php:446
+#@ SL_framework
+msgid "The file %s cannot be compressed."
+msgstr ""
+
+#: core/zip.class.php:737
+#: core/zip.class.php:759
+#@ SL_framework
+msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/database.class.php:178
+#@ SL_framework
+msgid "The file %s cannot be modified. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+#: core/popup.class.php:74
+#@ SL_framework
+msgid "Close popup"
 msgstr ""
 
 #: core/phpdoc.class.php:238
@@ -1187,124 +1306,5 @@ msgstr ""
 #: core/phpdoc.class.php:373
 #@ SL_framework
 msgid "[CLASS]"
-msgstr ""
-
-#: core/utils.class.php:145
-#@ SL_framework
-msgid "KB"
-msgstr ""
-
-#: core/utils.class.php:149
-#@ SL_framework
-msgid "MB"
-msgstr ""
-
-#: core/utils.class.php:152
-#@ SL_framework
-msgid "GB"
-msgstr ""
-
-#: core/svn.class.php:689
-#@ SL_framework
-msgid "Your credentials do not seem to be correct. Please check them!"
-msgstr ""
-
-#: core/svn.class.php:693
-#@ SL_framework
-msgid "This file have not been written in the repository due to server problem. Nevertheless, you should retry as it often works better with a second try !"
-msgstr ""
-
-#: core/svn.class.php:803
-#@ SL_framework
-msgid "SVN client for %s"
-msgstr ""
-
-#: core/svn.class.php:822
-#@ SL_framework
-msgid "Updating the local cache"
-msgstr ""
-
-#: core/svn.class.php:829
-#@ SL_framework
-msgid "folder created"
-msgstr ""
-
-#: core/svn.class.php:831
-#@ SL_framework
-msgid "folder creation has failed !"
-msgstr ""
-
-#: core/svn.class.php:835
-#@ SL_framework
-msgid "%s bytes transfered"
-msgstr ""
-
-#: core/svn.class.php:849
-#@ SL_framework
-msgid "An error occurred during the retrieval of files on the server ! Sorry ..."
-msgstr ""
-
-#: core/svn.class.php:883
-#: core/svn.class.php:903
-#@ SL_framework
-msgid "Local to SVN repository"
-msgstr ""
-
-#: core/svn.class.php:884
-#: core/svn.class.php:906
-#@ SL_framework
-msgid "Comparing %s with %s"
-msgstr ""
-
-#: core/svn.class.php:892
-#: core/svn.class.php:914
-#@ SL_framework
-msgid "Confirmation"
-msgstr ""
-
-#: core/svn.class.php:894
-#@ SL_framework
-msgid "Commit comment:"
-msgstr ""
-
-#: core/svn.class.php:896
-#@ SL_framework
-msgid "Yes, the SVN version will be deleted and be replaced by the local version"
-msgstr ""
-
-#: core/svn.class.php:905
-#: core/svn.class.php:923
-#@ SL_framework
-msgid "SVN repository to Local"
-msgstr ""
-
-#: core/svn.class.php:916
-#@ SL_framework
-msgid "Yes, the local version will be overwritten with the repository files"
-msgstr ""
-
-#: core/svn.class.php:947
-#@ SL_framework
-msgid "Sending to the repository in progress..."
-msgstr ""
-
-#: core/svn.class.php:1254
-#@ SL_framework
-msgid "The commit has ended [ %s ]... You should received an email quickly ! You may close the window or wait for the automatic closing."
-msgstr ""
-
-#: core/svn.class.php:1260
-#@ SL_framework
-msgid "The commit has ended but there is an error!"
-msgstr ""
-
-#: core/svn.class.php:1280
-#@ SL_framework
-msgid "Sending to the local files in progress..."
-msgstr ""
-
-#: core/svn.class.php:1343
-#@ SL_framework
-msgid "The rollback has ended ..."
 msgstr ""
 
