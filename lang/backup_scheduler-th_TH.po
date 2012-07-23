@@ -4,7 +4,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-01-26T05:09:42+00:00\n"
+"PO-Revision-Date: 2012-07-20T15:18:46+00:00\n"
+"Last-Translator: tontan <zxcvbm4@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,162 +35,102 @@ msgstr "ความถี่ (วัน)"
 msgid "Time of the backups:"
 msgstr "ระยะเวลาในการสำรองข้อมูล"
 
-msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
-msgstr ""
-
 msgid "Keep the backup files for (in days):"
 msgstr "ระยะเวลาเก็บข้อมูลที่สำรองแล้ว ?"
-
-msgid "What do you want to save?"
-msgstr ""
 
 msgid "The plugins directory:"
 msgstr "สถานที่ที่เก็บ Plugin ?"
 
-msgid "(i.e. %s)"
-msgstr ""
-
-msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
-msgstr ""
-
 msgid "The themes directory:"
 msgstr "สถานที่ที่เก็บ Themes ?"
-
-msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
-msgstr ""
 
 msgid "The upload directory:"
 msgstr "สถานที่ที่เก็บ File Upload ?"
 
-msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
-msgstr ""
-
-msgid "The SQL database:"
-msgstr ""
-
-msgid "Check this option if you want to save the text of your posts, your configurations, etc."
-msgstr ""
-
-msgid "Do you want that the backup is sent by email?"
-msgstr ""
-
-msgid "If so, please enter your email:"
-msgstr ""
-
-msgid "The maximum attachment size (in MB):"
-msgstr ""
-
-msgid "Please note that the zip file will be split into multiple files to comply with the maximum attachment size you have indicated"
-msgstr ""
-
-msgid "Do you want to rename the files?"
-msgstr ""
-
-msgid "What is the suffix of the file:"
-msgstr ""
-
-msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
-msgstr ""
-
-msgid "You do not need to fill this field if no mail is to be sent."
-msgstr ""
-
-msgid "Advanced - Memory and time management"
-msgstr ""
-
-msgid "What is the maximum size of allocated memory (in MB):"
-msgstr ""
-
-msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
-msgstr ""
-
-msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
-msgstr ""
-
-msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
-msgstr ""
-
-msgid "What is the maximum time for the php scripts execution (in seconds):"
-msgstr ""
-
-msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
-msgstr ""
-
-msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr ""
-
-msgid "An automatic backup will be launched in %s days and %s hours."
-msgstr ""
-
-msgid "Force a new backup (with mail)"
-msgstr ""
-
-msgid "Force a new backup (without mail)"
-msgstr ""
-
 msgid "Backups"
 msgstr "สำรองข้อมูล"
-
-msgid "Parameters"
-msgstr ""
-
-msgid "Manage translations"
-msgstr ""
-
-msgid "Give feedback"
-msgstr ""
-
-msgid "Other plugins"
-msgstr ""
 
 msgid "Date of the backup"
 msgstr "วันที่สำรองข้อมูล"
 
-msgid "Backup files"
-msgstr ""
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "โปรดทราบว่าหมายถึงเที่ยงคืน 0, 1 หมายถึง 01:00 วันที่ 13 หมายถึง 01:00 ฯลฯ สำรองข้อมูลจะเกิดขึ้นได้ตลอดเวลา (เวลาของเซิร์ฟเวอร์) ที่เพื่อให้แน่ใจว่าเว็บไซต์ของคุณเป็นไม่มากเกินไปมากเกินไปในเวลานั้น"
 
-msgid "Part %s"
-msgstr ""
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr "โปรดทราบว่าการสำรองข้อมูลจะไม่ถูกวางตรงเวลานั้นกระบวนการสำรองข้อมูลอาจใช้เวลาถึง 6h โดยเฉพาะอย่างยิ่งถ้าคุณไม่ได้มากจากการจราจรบนเว็บไซต์ของคุณและ / หรือถ้าการสำรองข้อมูลเป็นอย่างมากทีเดียว"
 
-msgid "Backup completed on %s at %s"
-msgstr ""
+msgid "What do you want to save?"
+msgstr "สิ่งที่คุณต้องการบันทึก?"
 
-msgid "The total size of the files is %s"
-msgstr ""
+msgid "All directories (the full Wordpress installation):"
+msgstr "ไดเรกทอรีทั้งหมด (ติดตั้ง Wordpress เต็ม):"
 
-msgid "These files will be deleted in %s days"
-msgstr ""
+msgid "(i.e. %s)"
+msgstr "(i.e. %s)"
 
-msgid "Delete these backup files"
-msgstr ""
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการที่จะบันทึกทุกอย่าง โปรดใช้ความระมัดระวังเนื่องจากการสำรองข้อมูลที่อาจจะใหญ่มาก!"
 
-msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
-msgstr ""
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการบันทึกปลั๊กอินทั้งหมดที่คุณได้ติดตั้งและที่คุณใช้บนเว็บไซต์นี้"
 
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr ""
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการที่จะบันทึกทุกรูปแบบที่คุณได้ติดตั้งและที่คุณใช้บนเว็บไซต์นี้"
 
-msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
-msgstr ""
+msgid "The upload directory for this blog:"
+msgstr "ไดเรกทอรีอัปโหลดสำหรับบล็อกนี้:"
 
-msgid "An error occured while sending mail!"
-msgstr ""
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการบันทึกภาพไฟล์ ฯลฯ ที่คุณได้อัปโหลดบนเว็บไซต์ของคุณเพื่อสร้างบทความ / โพสต์ / หน้าเว็บของคุณ"
 
-msgid "An unknown error occured!"
-msgstr ""
+msgid "All upload directories (for this site and the sub-blogs):"
+msgstr "ทั้งหมดไดเรกทอรีอัพโหลด (สำหรับเว็บไซต์นี้และบล็อกย่อย):"
 
-msgid "A new backup have been generated!"
-msgstr ""
+msgid "Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages."
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการบันทึกภาพไฟล์ ฯลฯ ที่ผู้คนได้อัปโหลดบนเว็บไซต์ของตนเพื่อสร้างบทความ / โพสต์ / หน้า"
 
-msgid "Dear sirs,"
-msgstr ""
+msgid "The upload directory for the main site:"
+msgstr "ไดเรกทอรีอัปโหลดสำหรับเว็บไซต์หลัก:"
 
-msgid "Here is attached the %s on %s backup files for today"
-msgstr ""
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการบันทึกภาพไฟล์ ฯลฯ ที่คุณได้อัปโหลดบนเว็บไซต์หลักของคุณเพื่อสร้างบทความ / โพสต์ / หน้าเว็บของคุณ"
 
-msgid "Best regards,"
-msgstr ""
+msgid "The SQL database:"
+msgstr "ฐานข้อมูล SQL:"
 
-msgid "Backup of %s (%s)"
-msgstr ""
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการบันทึกข้อความจากการโพสของคุณกำหนดค่าของคุณ ฯลฯ สำหรับบล็อกนี้"
+
+msgid "All SQL databases:"
+msgstr "ทั้งหมดฐานข้อมูล SQL:"
+
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr "ตรวจสอบตัวเลือกนี้ถ้าคุณต้องการบันทึกข้อความทั้งหมดของโพสต์, การกำหนดค่า ฯลฯ สำหรับบล็อกทั้งหมดในเว็บไซต์นี้"
+
+msgid "Only your SQL database:"
+msgstr "เฉพาะฐานข้อมูล SQL ของคุณ:"
+
+msgid "No host has been defined"
+msgstr "พื้นที่ยังไม่มีการได้รับการกำหนด"
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr "การติดตั้ง PHP ของคุณไม่สนับสนุนคุณสมบัติ SSL ... ดังนั้นโปรดใช้มาตรฐาน FTP และไม่ FTPS!"
+
+msgid "The host %s cannot be resolved!"
+msgstr "โฮสต์ %s  ไม่สามารถแก้ไขได้!"
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr "แฟ้ม %s ไม่สามารถโอนไปยังพื้นที่เก็บข้อมูล FTP!ส่งกลับฟังก์ชัน ftp_put: %s"
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr "โฟลเดอร์ของ %s ระบุไม่อยู่ โปรดให้สร้างขึ้นเพื่อให้การถ่ายโอนอาจเริ่มต้น!"
+
+msgid "The login/password does not seems valid!"
+msgstr "รหัสผ่านเข้าสู่ระบบ / ไม่ดูเหมือนถูกต้อง!"
+
+msgid "The folder %s does not seems to be writable"
+msgstr "โฟลเดอร์ %s ไม่น่าจะเป็นเขียนได้"
+
+msgid "Everything OK!"
+msgstr "ทุกอย่าง OK!"
 
