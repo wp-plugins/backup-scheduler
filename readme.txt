@@ -75,6 +75,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.3.3 =
+* Bug with multisite and remove a false positive error with wordfence
+
 = 1.3.2 =
 * There was a bug in the regexp when the ftp were directed to the root folder without any slash at the end.
 
@@ -151,4 +154,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:70459f88188051c7f8498dc78e01aee8
+InfoVersion:81975fe0ea3b96720d9d4cd05b080d12

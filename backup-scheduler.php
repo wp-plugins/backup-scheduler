@@ -3,7 +3,7 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.3.2
+Version: 1.3.3
 
 
 Framework: SL_Framework
@@ -239,7 +239,7 @@ class backup_scheduler extends pluginSedLex {
 					$params->add_param('save_upload', __('The upload directory for this blog:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/".$blog_id)) ; 
 					$params->add_comment(__('Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages.',$this->pluginID)) ; 					
-				} else if ((!is_multisite())||((is_multisite())&&($blog_id == 1))) {
+				} else if (is_multisite()&&($blog_id == 1)) {
 					$params->add_param('save_upload_all', __('All upload directories (for this site and the sub-blogs):',$this->pluginID), "", "", array("!save_upload")) ; 
 					$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/")) ; 
 					$params->add_comment(__('Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages.',$this->pluginID)) ; 					
@@ -255,7 +255,7 @@ class backup_scheduler extends pluginSedLex {
 				if (is_multisite()&&($blog_id != 1)) {
 					$params->add_param('save_db', __('The SQL database:',$this->pluginID)) ;
 					$params->add_comment(__('Check this option if you want to save the text of your posts, your configurations, etc. for this blog',$this->pluginID)) ; 
-				} else if ((!is_multisite())||((is_multisite())&&($blog_id == 1))) {
+				} else if (is_multisite()&&($blog_id == 1)) {
 					$params->add_param('save_db_all', __('All SQL databases:',$this->pluginID), "", "", array("!save_db")) ; 
 					$params->add_comment(__('Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website',$this->pluginID)) ; 
 					$params->add_param('save_db', __('Only your SQL database:',$this->pluginID)) ;
@@ -587,7 +587,7 @@ class backup_scheduler extends pluginSedLex {
 				if (!is_multisite()) {
 					// We create the SQL file
 					$sql = new SL_Database() ; 	
-				} else if ((is_multisite())&&($blog_id == 1)) {
+				} else if (is_multisite()&&($blog_id == 1)) {
 					if ($this->get_param('save_db_all')) {
 						$sql = new SL_Database() ; 
 					} else {
@@ -712,7 +712,9 @@ class backup_scheduler extends pluginSedLex {
 		
 		// STEP FTP
 		if (@file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.".step")=="FTP") {	
+			
 			if (($this->get_param('ftp'))&&($type_backup=="external")) {
+			
 				// On envoie le premier fichier en FTP
 				$files_to_sent = $this->get_param('ftp_to_be_sent') ; 
 				$files_sent = $this->get_param('ftp_sent') ; 
@@ -726,14 +728,14 @@ class backup_scheduler extends pluginSedLex {
 					SL_Debug::log(get_class(), "FTP file to be sent: " .$file_to_sent, 4) ; 
 					$res = $this->sendFTP(array($file_to_sent)) ; 
 					if ($res['transfer']) {
-						$res['text'] = ' '.__('(FTP sending)', $this->pluginID) ; 	
+						$res['text'] = ' '.__('(FTP sending)', $this->pluginID); 	
 						$res['nb_finished'] = count($files_sent) ; 
 						$res['nb_to_finished'] = count($files_to_sent) ; 
 					} 
 					return $res ; 
 				} else {
 					SL_Debug::log(get_class(), "Email to summarize the number of FTP files sent.", 4) ; 
-					$this->sendFTPEmail(count($files_sent)) ; 
+					$this->sendFTPEmail($files_sent) ; 
 					@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.".step", "MAIL") ; 
 				}
 			} else {
@@ -1122,13 +1124,25 @@ class backup_scheduler extends pluginSedLex {
 	* @return void
 	*/
 	
-	function sendFTPEmail($nb) {
+	function sendFTPEmail($files) {
+		$nb = count($files) ; 
 		if (trim($this->get_param('ftp_mail'))=="")
 			return ;
 			
 		$message = "" ; 
 		$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
-		$message .= "<p>".sprintf(__("%s backup files has been successfully saved on your FTP (%s)", $this->pluginID), $nb, $this->get_param('ftp_host'))."</p><p>&nbsp;</p>" ; 
+		$message .= "<p>".sprintf(__("%s backup files has been successfully saved on your FTP (%s)", $this->pluginID), $nb, $this->get_param('ftp_host'))."</p>" ; 
+		$message .= "<p>".__("To download them, please click on the following links:", $this->pluginID) ;
+		$message .= "<ul>" ; 
+		preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match) ; 
+		foreach ($files as $f) {
+			if (trim($f)!="") {
+				$link = str_replace(":/", "://", str_replace("//", "/", $this->get_param('ftp_host')."/".basename($f))) ; 
+				$message .= "<li><a href='$link'>$link</a></li>" ; 
+			}
+		}
+		$message .= "</ul></p>" ; 
+		$message .= "</p><p>&nbsp;</p>" ; 
 		$message .= "<p>".__("Best regards,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
 		
 		$headers= "MIME-Version: 1.0\n" .
@@ -1155,20 +1169,21 @@ class backup_scheduler extends pluginSedLex {
 	*/
 	
 	function sendFTP($attach) {
+		$pasv = false ; 
 		if ($this->get_param('ftp_host')=='') 
 			return array("transfer"=>false, "error"=>__('No host has been defined', $this->pluginID)) ; 
 		
 		$conn=false ; 
 		
 		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
-			$conn = @ftp_connect($match[1]); 
+			$conn = @ftp_connect($match[1], 21, 50); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
 				SL_Debug::log(get_class(), "The PHP installation does not support SSL features" , 1) ; 
 				return array("transfer"=>false, "error"=>sprintf(__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
 			}
 			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
-				$conn = @ftp_ssl_connect($match[1]); 
+				$conn = @ftp_ssl_connect($match[1], 21, 50); 
 			}
 		}
 		if ($conn===false) {
@@ -1181,16 +1196,28 @@ class backup_scheduler extends pluginSedLex {
 						ob_start() ; 
 						$res = ftp_put($conn, basename($attach[$i]), $attach[$i], FTP_BINARY);
 						if (!$res) {
-							$value = ob_get_clean() ; 
-							SL_Debug::log(get_class(), "Problem with FTP transferring: ".$value , 2) ; 
-							return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".$value."</code>")) ; 
+							$pasv = true ; 
+							if (@ftp_pasv($conn, true)) {
+								$res = ftp_put($conn, basename($attach[$i]), $attach[$i], FTP_BINARY);
+								if (!$res) {
+									$value = ob_get_clean() ; 
+									SL_Debug::log(get_class(), "Problem with FTP transferring: ".$value , 2) ; 
+									return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".$value."</code>")) ; 
+								} else {
+									SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_param('ftp_host'), 4) ; 
+								}								
+							} else {
+								$value = ob_get_clean() ; 
+								SL_Debug::log(get_class(), "Problem with PASV mode: ".$value , 2) ; 
+								return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".$value."</code>")) ; 
+							}						
 						} else {
 							SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_param('ftp_host'), 4) ; 
 						}
 						$vide = ob_get_clean() ; 
 					}
 					@ftp_close($conn) ; 
-					return array("transfer"=>true) ; 
+					return array("transfer"=>true, 'pasv'=>$pasv, 'file'=>$attach, 'ftp_host'=>$match[1], 'ftp_dir'=>$match[2]) ; 
 				} else {
 				 	@ftp_close($conn) ; 
 					SL_Debug::log(get_class(), "Problem with FTP chdir to ".$match[2] , 2) ; 
@@ -1202,7 +1229,7 @@ class backup_scheduler extends pluginSedLex {
 				return array("transfer"=>false, "error"=>__('The login/password does not seems valid!', $this->pluginID)) ; 
 			}
 		}
-		return array("transfer"=>true) ; 
+		return array("transfer"=>true, 'pasv'=>$pasv, 'file'=>$attach, 'ftp_host'=>$match[1], 'ftp_dir'=>$match[2]) ; 
 	}	
 	
 	/** ====================================================================================================================================================
@@ -1213,6 +1240,7 @@ class backup_scheduler extends pluginSedLex {
 	*/
 	
 	function testFTP() {
+
 		$ftp_host =  $_POST['ftp_host'] ;
 		$ftp_login =  $_POST['ftp_login'] ;
 		$ftp_pass =  $_POST['ftp_pass'] ;
@@ -1225,14 +1253,14 @@ class backup_scheduler extends pluginSedLex {
 		$conn=false ; 
 		
 		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $ftp_host, $match)) {
-			$conn = @ftp_connect($match[1]); 
+			$conn = ftp_connect($match[1], 21, 50); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
 				echo "<p style='color:red;'>".__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID)."</p>" ; 
 				die() ; 
 			}
 			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $ftp_host, $match)) {
-				$conn = @ftp_ssl_connect($match[1]); 
+				$conn = ftp_ssl_connect($match[1], 21, 50); 
 			}
 		}
 		if ($conn===false) {
@@ -1241,12 +1269,20 @@ class backup_scheduler extends pluginSedLex {
 		} else {
 			if (@ftp_login($conn, $ftp_login, $ftp_pass)) {
 				if (@ftp_chdir($conn, $match[2])) {
-					$res = ftp_put($conn, "test_write.txt", WP_CONTENT_DIR."/index.php", FTP_BINARY);
+					$res = @ftp_put($conn, "test_write.txt", WP_CONTENT_DIR."/index.php", FTP_BINARY);
 					if (!$res) {
-						echo "<p style='color:red;'>".sprintf(__('The folder %s does not seems to be writable', $this->pluginID), $match[2])."</p>" ; 
-						die() ; 
+						if (@ftp_pasv($conn, true)) {
+							$res = @ftp_put($conn, "test_write.txt", WP_CONTENT_DIR."/index.php", FTP_BINARY);
+							if (!$res) {
+								echo "<p style='color:red;'>".sprintf(__('The folder %s does not seems to be writable', $this->pluginID), $match[2])."</p>" ; 
+								die() ; 
+							}								
+						} else {
+							echo "<p style='color:red;'>".__('It seems impossible to switch to PASV mode', $this->pluginID)."</p>" ; 
+							die() ; 						
+						}
 					} 
-					$res = @ftp_delete($conn, ".test_write");
+					$res = @ftp_delete($conn, "test_write.txt");
 					@ftp_close($conn) ; 
 					echo "<p style='color:green;'>".sprintf(__('Everything OK!', $this->pluginID), $match[2])."</p>" ; 
 					die() ; 

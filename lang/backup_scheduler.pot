@@ -502,120 +502,135 @@ msgstr ""
 msgid "(ZIP creation)"
 msgstr ""
 
-#: backup-scheduler.php:729
+#: backup-scheduler.php:731
 #@ backup_scheduler
 msgid "(FTP sending)"
 msgstr ""
 
-#: backup-scheduler.php:760
+#: backup-scheduler.php:762
 #@ backup_scheduler
 msgid "Backup of %s on %s (%s)"
 msgstr ""
 
-#: backup-scheduler.php:763
+#: backup-scheduler.php:765
 #@ backup_scheduler
 msgid "(MAIL sending)"
 msgstr ""
 
-#: backup-scheduler.php:769
+#: backup-scheduler.php:771
 #@ backup_scheduler
 msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
 msgstr ""
 
-#: backup-scheduler.php:775
-#: backup-scheduler.php:782
-#: backup-scheduler.php:831
-#: backup-scheduler.php:835
-#: backup-scheduler.php:857
-#: backup-scheduler.php:895
-#: backup-scheduler.php:908
+#: backup-scheduler.php:777
+#: backup-scheduler.php:784
+#: backup-scheduler.php:833
+#: backup-scheduler.php:837
+#: backup-scheduler.php:859
+#: backup-scheduler.php:897
+#: backup-scheduler.php:910
 #@ backup_scheduler
 msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
 msgstr ""
 
-#: backup-scheduler.php:794
+#: backup-scheduler.php:796
 #@ backup_scheduler
 msgid "An unknown error occured!"
 msgstr ""
 
-#: backup-scheduler.php:843
+#: backup-scheduler.php:845
 #@ backup_scheduler
 msgid "The process has been canceled by a third person"
 msgstr ""
 
-#: backup-scheduler.php:849
+#: backup-scheduler.php:851
 #@ backup_scheduler
 msgid "A new backup has been generated!"
 msgstr ""
 
-#: backup-scheduler.php:1082
-#: backup-scheduler.php:1130
+#: backup-scheduler.php:1084
+#: backup-scheduler.php:1133
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
 
-#: backup-scheduler.php:1083
+#: backup-scheduler.php:1085
 #@ backup_scheduler
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
-#: backup-scheduler.php:1084
-#: backup-scheduler.php:1132
+#: backup-scheduler.php:1086
+#: backup-scheduler.php:1146
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
-#: backup-scheduler.php:1131
+#: backup-scheduler.php:1134
 #@ backup_scheduler
 msgid "%s backup files has been successfully saved on your FTP (%s)"
 msgstr ""
 
-#: backup-scheduler.php:1138
+#: backup-scheduler.php:1135
+#@ backup_scheduler
+msgid "To download them, please click on the following links:"
+msgstr ""
+
+#: backup-scheduler.php:1152
 #@ backup_scheduler
 msgid "Backup of %s on %s - FTP confirmation"
 msgstr ""
 
-#: backup-scheduler.php:1159
-#: backup-scheduler.php:1221
+#: backup-scheduler.php:1174
+#: backup-scheduler.php:1249
 #@ backup_scheduler
 msgid "No host has been defined"
 msgstr ""
 
-#: backup-scheduler.php:1168
-#: backup-scheduler.php:1231
+#: backup-scheduler.php:1183
+#: backup-scheduler.php:1259
 #@ backup_scheduler
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
 msgstr ""
 
-#: backup-scheduler.php:1176
-#: backup-scheduler.php:1239
+#: backup-scheduler.php:1191
+#: backup-scheduler.php:1267
 #@ backup_scheduler
 msgid "The host %s cannot be resolved!"
 msgstr ""
 
-#: backup-scheduler.php:1186
+#: backup-scheduler.php:1205
 #@ backup_scheduler
 msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
 msgstr ""
 
-#: backup-scheduler.php:1197
-#: backup-scheduler.php:1255
+#: backup-scheduler.php:1212
+#@ backup_scheduler
+msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
+msgstr ""
+
+#: backup-scheduler.php:1224
+#: backup-scheduler.php:1291
 #@ backup_scheduler
 msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
 msgstr ""
 
-#: backup-scheduler.php:1202
-#: backup-scheduler.php:1260
+#: backup-scheduler.php:1229
+#: backup-scheduler.php:1296
 #@ backup_scheduler
 msgid "The login/password does not seems valid!"
 msgstr ""
 
-#: backup-scheduler.php:1246
+#: backup-scheduler.php:1277
 #@ backup_scheduler
 msgid "The folder %s does not seems to be writable"
 msgstr ""
 
-#: backup-scheduler.php:1251
+#: backup-scheduler.php:1281
+#@ backup_scheduler
+msgid "It seems impossible to switch to PASV mode"
+msgstr ""
+
+#: backup-scheduler.php:1287
 #@ backup_scheduler
 msgid "Everything OK!"
 msgstr ""

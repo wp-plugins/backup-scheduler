@@ -50,6 +50,10 @@ function testFTP() {
 		jQuery("#testFTP_info").html(response);
 		jQuery("#wait_testFTP").hide();
 		jQuery("#testFTP_button").removeAttr('disabled');
+	}).error(function() { 
+		jQuery("#wait_testFTP").hide();
+		jQuery("#testFTP_button").removeAttr('disabled');
+		alert("Please retry - Problem"); 
 	});    
 }
 
