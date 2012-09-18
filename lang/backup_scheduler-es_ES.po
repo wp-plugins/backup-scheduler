@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-09-03T10:31:46+00:00\n"
+"PO-Revision-Date: 2012-09-18T12:35:08+00:00\n"
 "Last-Translator: Javier <>\n"
 "Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
 "Last-Translator: charliechin <http://www.twitter.com/charliechin>\n"
@@ -78,7 +78,7 @@ msgid "The SQL database:"
 msgstr "La base de datos SQL:"
 
 msgid "Check this option if you want to save the text of your posts, your configurations, etc."
-msgstr "Marca esta opción si desea guardar el texto de sus posts, su configuración, etc..."
+msgstr "Marque esta opción si desea guardar el texto de sus posts, su configuración, etc."
 
 msgid "The maximum file size (in MB):"
 msgstr "Tamaño máximo de archivo (en MB):"
@@ -111,7 +111,7 @@ msgid "Save the backup files on a FTP?"
 msgstr "¿Guardar los archivos de la copia de seguridad en un FTP?"
 
 msgid "FTP host:"
-msgstr "Host FTP:"
+msgstr "Servidor FTP:"
 
 msgid "Your FTP login:"
 msgstr "Su login FTP:"
@@ -129,7 +129,7 @@ msgid "Advanced - Memory and time management"
 msgstr "Avanzado - Gestión de memoria y tiempo"
 
 msgid "What is the maximum size of allocated memory (in MB):"
-msgstr "¿Cuál es el tamaño máximo de memoria asignada (en MB):"
+msgstr "¿Cuál es el tamaño máximo de memoria asignada (en MB)?:"
 
 msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
 msgstr "En algunas instalaciones de Wordpress, puede tener problemas de memoria. Por lo tanto, intente reducir este número si se enfrentan a tal error."
@@ -147,7 +147,7 @@ msgid "Even if you do not have time restriction, it is recommended to set this v
 msgstr "Incluso si no tiene restricción de tiempo, se recomienda establecer este valor a 15 segundos con el fin de evitar cualquier muerte (kill) de los scripts PHP por su proveedor de alojamiento web."
 
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
-msgstr "Aquí están los archivos de la copia de seguridad. Puedes forzar a hacer una nueva copia de seguridad o descargar los anteriores."
+msgstr "Aquí están los archivos de la copia de seguridad. Puede forzar a hacer una nueva copia de seguridad o descargar los anteriores."
 
 msgid "An automatic backup will be launched in %s days and %s hours."
 msgstr "Una copia de seguridad se pondrá en marcha en %s dias y %s horas."
@@ -276,13 +276,13 @@ msgid "Backup of %s on %s - FTP confirmation"
 msgstr "Copia de seguridad de %s en %s - Confirmación FTP"
 
 msgid "No host has been defined"
-msgstr "No se ha definido ningún host"
+msgstr "No se ha definido ningún servidor"
 
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
 msgstr "Su instalación PHP no soporta características SSL. Asi que, por favor, ¡use un FTP estandar y no uno FTPS!"
 
 msgid "The host %s cannot be resolved!"
-msgstr "¡El host %s no puede ser resuelto!"
+msgstr "¡El nombre de servidor %s no puede ser resuelto!"
 
 msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
 msgstr "¡El archivo %s no puede ser transferido al FTP especificado! La función ftp_put devuelve: %s"
@@ -379,4 +379,13 @@ msgstr "Parece imposible pasar a modo PASV"
 
 msgid "Everything OK!"
 msgstr "¡Todo bien!"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus configuraciones, etc., para este blog"
+
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus configuraciones, etc., para todos los blogs de este sitio web"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
+msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus configuraciones, etc., para el sitio web principal"
 

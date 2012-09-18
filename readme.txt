@@ -75,6 +75,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.3.4 =
+* Add a drop if exist in SQL table
+
 = 1.3.3 =
 * Bug with multisite and remove a false positive error with wordfence
 
@@ -154,4 +157,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:421a41a2299a88906fee3fb83983cef1
+InfoVersion:612e73414b3ec700f054c3a75ab70d4a
