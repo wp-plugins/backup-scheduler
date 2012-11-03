@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.3.4
+Version: 1.3.5
+
 
 
 Framework: SL_Framework
@@ -143,6 +144,7 @@ class backup_scheduler extends pluginSedLex {
 			
 			case 'ftp' 		: return false 		; break ; 
 			case 'ftp_host' 		: return "" 		; break ; 
+			case 'ftp_port' 		: return 21 		; break ; 
 			case 'ftp_login' 		: return "" 		; break ; 
 			case 'ftp_pass' 		: return "[password]" 		; break ; 
 			case 'ftp_mail' 		: return "" 		; break ; 
@@ -280,6 +282,8 @@ class backup_scheduler extends pluginSedLex {
 					$params->add_param('ftp', __('Save the backup files on a FTP?',$this->pluginID), '', '', array('ftp_host', 'ftp_login', 'ftp_pass', 'ftp_root')) ; 
 					$params->add_param('ftp_host', __('FTP host:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('Should be at the form %s or %s',$this->pluginID), '<code>ftp://domain.tld/root_folder/</code>', '<code>ftps://domain.tld/root_folder/</code>')) ; 
+					$params->add_param('ftp_port', __('FTP port:',$this->pluginID)) ; 
+					$params->add_comment(sprintf(__('By default the port is %s',$this->pluginID), '<code>21</code>')) ; 
 					$params->add_param('ftp_login', __('Your FTP login:',$this->pluginID)) ; 
 					$params->add_param('ftp_pass', __('Your FTP pass:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('Click on that button %s to test if the above information is correct',$this->pluginID)."<span id='testFTP_info'></span>", "<input type='button' id='testFTP_button' class='button validButton' onClick='testFTP();'  value='". __('Test',$this->pluginID)."' /><img id='wait_testFTP' src='".WP_PLUGIN_URL."/".str_replace(basename(__FILE__),"",plugin_basename( __FILE__))."core/img/ajax-loader.gif' style='display: none;'>")) ; 			
@@ -536,7 +540,7 @@ class backup_scheduler extends pluginSedLex {
 		clearstatcache() ; 
 		if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.".lock")) {
 			SL_Debug::log(get_class(), "A lock file is still here." , 2) ; 
-			return array('finished'=>false, 'error'=>__("Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first.", $this->pluginID)) ; 
+			return array('finished'=>false, 'error'=>__("Please wait, a backup is in progress!", $this->pluginID)."<br/>".__("This error message may also be generated if the chunk size is to high: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly...", $this->pluginID)) ; 
 		}
 		@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.".lock", 'lock') ; 
 		clearstatcache() ; 
@@ -1176,14 +1180,14 @@ class backup_scheduler extends pluginSedLex {
 		$conn=false ; 
 		
 		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
-			$conn = @ftp_connect($match[1], 21, 50); 
+			$conn = @ftp_connect($match[1], $this->get_param('ftp_port'), 50); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
 				SL_Debug::log(get_class(), "The PHP installation does not support SSL features" , 1) ; 
 				return array("transfer"=>false, "error"=>sprintf(__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
 			}
 			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
-				$conn = @ftp_ssl_connect($match[1], 21, 50); 
+				$conn = @ftp_ssl_connect($match[1], $this->get_param('ftp_port'), 50); 
 			}
 		}
 		if ($conn===false) {
@@ -1253,14 +1257,14 @@ class backup_scheduler extends pluginSedLex {
 		$conn=false ; 
 		
 		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $ftp_host, $match)) {
-			$conn = ftp_connect($match[1], 21, 50); 
+			$conn = ftp_connect($match[1], $this->get_param('ftp_port'), 50); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
 				echo "<p style='color:red;'>".__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID)."</p>" ; 
 				die() ; 
 			}
 			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $ftp_host, $match)) {
-				$conn = ftp_ssl_connect($match[1], 21, 50); 
+				$conn = ftp_ssl_connect($match[1], $this->get_param('ftp_port'), 50); 
 			}
 		}
 		if ($conn===false) {

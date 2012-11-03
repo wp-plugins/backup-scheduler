@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/extend/plugins/backup-scheduler/
 Tags: backup, schedule, plugin, save, database, zip
 Requires at least: 3.0
-Tested up to: 3.3.1
+Tested up to: 3.4.2
 Stable tag: trunk
 
 With this plugin, you may plan the backup of your entire website (folders, files and/or database).
@@ -32,19 +32,23 @@ Each blog administrator may save their own data. The super-admin may save either
 
 = Localization =
 
+* Afrikaans (South Africa) translation provided by SedLex
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab
+* German (Germany) translation provided by agent-test, agent
 * English (United States), default language
-* Spanish (Spain) translation provided by Javier, AVfoto, charliechin
-* French (France) translation provided by SedLex, wkpixearts
+* Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo
+* French (France) translation provided by SedLex, wkpixearts, Matthieu
 * Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
-* Dutch (Netherlands) translation provided by Matrix
+* Dutch (Netherlands) translation provided by Matrix, WybAnema, Jay
 * Polish (Poland) translation provided by Opti, Lukasz, pablo
+* Portuguese (Brazil) translation provided by RainilsonRodriguis
 * Portuguese (Portugal) translation provided by FranciscoRocha
 * Russian (Russia) translation provided by GerinG, Slawka
 * Swedish (Sweden) translation provided by 
-* Thai (Thailand) translation provided by 
+* Thai (Thailand) translation provided by tontan
+* Turkish (Turkey) translation provided by UfukArt
 * Chinese (People's Republic of China) translation provided by YiscaJoe
 
 = Features of the framework =
@@ -74,6 +78,10 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.3.5 =
+* FTP port may be changed
+* The error message is muck more explicit
 
 = 1.3.4 =
 * Add a drop if exist in SQL table
@@ -121,6 +129,14 @@ Have fun !
 
 == Frequently Asked Questions ==
 
+= I have an error message indicating that another backup is running =
+
+This message may happen if the chunk size is set quite high. For instance, 40 Mo is clearly too big and server  server configuration of many webhosters will kill scripts which use too much memory.
+
+Most of the case 5Mo is ok.
+
+If you get this error, set the chunk size to 1Mo and if it solves your problem, increase this chunk size.
+
 = Compatible Archive Software =
 
 The backup will be in a multi-part format. In order to uncompress it, you should put all the backup in the same folder and open the .zip file with Winzip.
@@ -157,4 +173,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:612e73414b3ec700f054c3a75ab70d4a
+InfoVersion:c40400a64f5459b77e0f66af6db5108d
