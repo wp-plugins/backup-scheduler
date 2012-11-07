@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.3.5
+Version: 1.3.6
+
 
 
 
@@ -279,9 +280,10 @@ class backup_scheduler extends pluginSedLex {
 
 				$params->add_title(sprintf(__('Do you want that the backup is stored on a FTP?',$this->pluginID), $title)) ;
 				if (function_exists("ftp_connect")) {
-					$params->add_param('ftp', __('Save the backup files on a FTP?',$this->pluginID), '', '', array('ftp_host', 'ftp_login', 'ftp_pass', 'ftp_root')) ; 
+					$params->add_param('ftp', __('Save the backup files on a FTP?',$this->pluginID), '', '', array('ftp_host', 'ftp_login', 'ftp_pass', 'ftp_root', 'ftp_port', 'ftp_mail')) ; 
 					$params->add_param('ftp_host', __('FTP host:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('Should be at the form %s or %s',$this->pluginID), '<code>ftp://domain.tld/root_folder/</code>', '<code>ftps://domain.tld/root_folder/</code>')) ; 
+					$params->add_comment(sprintf(__('If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s.',$this->pluginID), '<code>ftp://</code>')) ; 
 					$params->add_param('ftp_port', __('FTP port:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('By default the port is %s',$this->pluginID), '<code>21</code>')) ; 
 					$params->add_param('ftp_login', __('Your FTP login:',$this->pluginID)) ; 
@@ -1128,20 +1130,37 @@ class backup_scheduler extends pluginSedLex {
 	* @return void
 	*/
 	
+	function get_ftp_host() {
+		$ftp_host = $this->get_param('ftp_host') ; 
+		if ((strpos($ftp_host, "ftps://")===FALSE)&&(strpos($ftp_host, "ftp://")===FALSE)) {
+			$ftp_host = "ftp://".$ftp_host ; 
+		}
+		return $ftp_host ; 
+	}
+	/** ====================================================================================================================================================
+	* Send Email with the backup files
+	*
+	* @param $attach the backup file paths
+	* @return void
+	*/
+	
 	function sendFTPEmail($files) {
 		$nb = count($files) ; 
 		if (trim($this->get_param('ftp_mail'))=="")
 			return ;
 			
+		
+		
+			
 		$message = "" ; 
 		$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
-		$message .= "<p>".sprintf(__("%s backup files has been successfully saved on your FTP (%s)", $this->pluginID), $nb, $this->get_param('ftp_host'))."</p>" ; 
+		$message .= "<p>".sprintf(__("%s backup files has been successfully saved on your FTP (%s)", $this->pluginID), $nb, $this->get_ftp_host())."</p>" ; 
 		$message .= "<p>".__("To download them, please click on the following links:", $this->pluginID) ;
 		$message .= "<ul>" ; 
-		preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match) ; 
+		preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_ftp_host(), $match) ; 
 		foreach ($files as $f) {
 			if (trim($f)!="") {
-				$link = str_replace(":/", "://", str_replace("//", "/", $this->get_param('ftp_host')."/".basename($f))) ; 
+				$link = str_replace(":/", "://", str_replace("//", "/", $this->get_ftp_host()."/".basename($f))) ; 
 				$message .= "<li><a href='$link'>$link</a></li>" ; 
 			}
 		}
@@ -1174,19 +1193,19 @@ class backup_scheduler extends pluginSedLex {
 	
 	function sendFTP($attach) {
 		$pasv = false ; 
-		if ($this->get_param('ftp_host')=='') 
+		if ($this->get_ftp_host()=='') 
 			return array("transfer"=>false, "error"=>__('No host has been defined', $this->pluginID)) ; 
 		
 		$conn=false ; 
 		
-		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
+		if (preg_match("/ftp:\/\/([^\/]*)(\/*.*)/i", $this->get_ftp_host(), $match)) {
 			$conn = @ftp_connect($match[1], $this->get_param('ftp_port'), 50); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
 				SL_Debug::log(get_class(), "The PHP installation does not support SSL features" , 1) ; 
 				return array("transfer"=>false, "error"=>sprintf(__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
 			}
-			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $this->get_param('ftp_host'), $match)) {
+			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $this->get_ftp_host(), $match)) {
 				$conn = @ftp_ssl_connect($match[1], $this->get_param('ftp_port'), 50); 
 			}
 		}
@@ -1208,7 +1227,7 @@ class backup_scheduler extends pluginSedLex {
 									SL_Debug::log(get_class(), "Problem with FTP transferring: ".$value , 2) ; 
 									return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".$value."</code>")) ; 
 								} else {
-									SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_param('ftp_host'), 4) ; 
+									SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_ftp_host(), 4) ; 
 								}								
 							} else {
 								$value = ob_get_clean() ; 
@@ -1216,7 +1235,7 @@ class backup_scheduler extends pluginSedLex {
 								return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".$value."</code>")) ; 
 							}						
 						} else {
-							SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_param('ftp_host'), 4) ; 
+							SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_ftp_host(), 4) ; 
 						}
 						$vide = ob_get_clean() ; 
 					}

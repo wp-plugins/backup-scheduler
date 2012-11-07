@@ -79,6 +79,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.3.6 =
+* FTP bug with some webhosting service
+
 = 1.3.5 =
 * FTP port may be changed
 * The error message is muck more explicit
@@ -173,4 +176,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:c40400a64f5459b77e0f66af6db5108d
+InfoVersion:b428f44065afa4b2a2959548374135c4
