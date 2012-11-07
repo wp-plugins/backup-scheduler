@@ -3,7 +3,7 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.3.6
+Version: 1.3.7
 
 
 
@@ -283,7 +283,7 @@ class backup_scheduler extends pluginSedLex {
 					$params->add_param('ftp', __('Save the backup files on a FTP?',$this->pluginID), '', '', array('ftp_host', 'ftp_login', 'ftp_pass', 'ftp_root', 'ftp_port', 'ftp_mail')) ; 
 					$params->add_param('ftp_host', __('FTP host:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('Should be at the form %s or %s',$this->pluginID), '<code>ftp://domain.tld/root_folder/</code>', '<code>ftps://domain.tld/root_folder/</code>')) ; 
-					$params->add_comment(sprintf(__('If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s.',$this->pluginID), '<code>ftp://</code>')) ; 
+					$params->add_comment(sprintf(__('If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s.',$this->pluginID), '<code>ftp://</code>', '<code>ftp://</code>')) ; 
 					$params->add_param('ftp_port', __('FTP port:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('By default the port is %s',$this->pluginID), '<code>21</code>')) ; 
 					$params->add_param('ftp_login', __('Your FTP login:',$this->pluginID)) ; 
@@ -1130,8 +1130,12 @@ class backup_scheduler extends pluginSedLex {
 	* @return void
 	*/
 	
-	function get_ftp_host() {
-		$ftp_host = $this->get_param('ftp_host') ; 
+	function get_ftp_host($ftp="") {
+		if ($ftp=="") {
+			$ftp_host = $this->get_param('ftp_host') ; 
+		} else {
+			$ftp_host=$ftp ; 
+		}
 		if ((strpos($ftp_host, "ftps://")===FALSE)&&(strpos($ftp_host, "ftp://")===FALSE)) {
 			$ftp_host = "ftp://".$ftp_host ; 
 		}
@@ -1149,8 +1153,6 @@ class backup_scheduler extends pluginSedLex {
 		if (trim($this->get_param('ftp_mail'))=="")
 			return ;
 			
-		
-		
 			
 		$message = "" ; 
 		$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
@@ -1272,6 +1274,8 @@ class backup_scheduler extends pluginSedLex {
 			echo "<p style='color:red;'>".__('No host has been defined', $this->pluginID)."</p>" ; 
 			die() ; 
 		}
+		
+		$ftp_host = $this->get_ftp_host($ftp_host) ; 
 		
 		$conn=false ; 
 		

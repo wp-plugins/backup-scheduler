@@ -220,7 +220,7 @@ msgstr ""
 
 #: backup-scheduler.php:286
 #@ backup_scheduler
-msgid "If %s is omitted then it is automatically added when connecting to your FTP"
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
 msgstr ""
 
 #: backup-scheduler.php:287
@@ -569,7 +569,7 @@ msgid "A new backup has been generated!"
 msgstr ""
 
 #: backup-scheduler.php:1090
-#: backup-scheduler.php:1156
+#: backup-scheduler.php:1158
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
@@ -580,77 +580,77 @@ msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
 #: backup-scheduler.php:1092
-#: backup-scheduler.php:1169
+#: backup-scheduler.php:1171
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
-#: backup-scheduler.php:1157
+#: backup-scheduler.php:1159
 #@ backup_scheduler
 msgid "%s backup files has been successfully saved on your FTP (%s)"
 msgstr ""
 
-#: backup-scheduler.php:1158
+#: backup-scheduler.php:1160
 #@ backup_scheduler
 msgid "To download them, please click on the following links:"
 msgstr ""
 
-#: backup-scheduler.php:1175
+#: backup-scheduler.php:1177
 #@ backup_scheduler
 msgid "Backup of %s on %s - FTP confirmation"
 msgstr ""
 
-#: backup-scheduler.php:1197
-#: backup-scheduler.php:1272
+#: backup-scheduler.php:1199
+#: backup-scheduler.php:1274
 #@ backup_scheduler
 msgid "No host has been defined"
 msgstr ""
 
-#: backup-scheduler.php:1206
-#: backup-scheduler.php:1282
+#: backup-scheduler.php:1208
+#: backup-scheduler.php:1286
 #@ backup_scheduler
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
 msgstr ""
 
-#: backup-scheduler.php:1214
-#: backup-scheduler.php:1290
+#: backup-scheduler.php:1216
+#: backup-scheduler.php:1294
 #@ backup_scheduler
 msgid "The host %s cannot be resolved!"
 msgstr ""
 
-#: backup-scheduler.php:1228
+#: backup-scheduler.php:1230
 #@ backup_scheduler
 msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
 msgstr ""
 
-#: backup-scheduler.php:1235
+#: backup-scheduler.php:1237
 #@ backup_scheduler
 msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
 msgstr ""
 
-#: backup-scheduler.php:1247
-#: backup-scheduler.php:1314
+#: backup-scheduler.php:1249
+#: backup-scheduler.php:1318
 #@ backup_scheduler
 msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
 msgstr ""
 
-#: backup-scheduler.php:1252
-#: backup-scheduler.php:1319
+#: backup-scheduler.php:1254
+#: backup-scheduler.php:1323
 #@ backup_scheduler
 msgid "The login/password does not seems valid!"
 msgstr ""
 
-#: backup-scheduler.php:1300
+#: backup-scheduler.php:1304
 #@ backup_scheduler
 msgid "The folder %s does not seems to be writable"
 msgstr ""
 
-#: backup-scheduler.php:1304
+#: backup-scheduler.php:1308
 #@ backup_scheduler
 msgid "It seems impossible to switch to PASV mode"
 msgstr ""
 
-#: backup-scheduler.php:1310
+#: backup-scheduler.php:1314
 #@ backup_scheduler
 msgid "Everything OK!"
 msgstr ""

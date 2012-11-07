@@ -79,7 +79,7 @@ Have fun !
 
 == Changelog ==
 
-= 1.3.6 =
+= 1.3.6 and 1.3.7 =
 * FTP bug with some webhosting service
 
 = 1.3.5 =
@@ -176,4 +176,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b428f44065afa4b2a2959548374135c4
+InfoVersion:3d7fb5468fb85d73660e536fdb6b76c8
