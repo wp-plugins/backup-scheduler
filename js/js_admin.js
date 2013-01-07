@@ -19,7 +19,7 @@ function initForceBackup(only) {
   
 	//POST the data and append the results to the results div
 	jQuery.post(ajaxurl, arguments, function(response) {
-		jQuery("#backupInfo").html(response);
+		jQuery("#zipfile").html(response);
 		forceBackup(self.only_save) ; 
 	});    
 }
@@ -76,54 +76,33 @@ function forceBackup(only) {
 		if ((""+response+ "").indexOf("backupEnd") !=-1) {
 			progressBar_modifyProgression(100);
 			progressBar_modifyText("");
-			jQuery("#backupEnd").html(response);
 			var arguments2 = {
 				action: 'updateBackupTable'
 			} 	
 			jQuery.post(ajaxurl, arguments2, function(response) {
-				jQuery("#backupInfo").html("");
 				jQuery("#zipfile").html(response);
 				jQuery("#backupButton").removeAttr('disabled');
 				jQuery("#backupButton2").removeAttr('disabled');
 				jQuery("#wait_backup").hide();
 			}) ; 
-		} else if ((""+response+ "").indexOf("backupError") !=-1) {
-			jQuery("#backupInfo").html(response);
-			jQuery("#backupButton").removeAttr('disabled');
-			jQuery("#backupButton2").removeAttr('disabled');
-			jQuery("#wait_backup").hide();
-		} else if ((""+response+ "").indexOf("error") !=-1) {
-			jQuery("#backupInfo").html(response);
-			jQuery("#backupButton").removeAttr('disabled');
-			jQuery("#backupButton2").removeAttr('disabled');
-			jQuery("#wait_backup").hide();
-		} else if ((""+response+ "").indexOf("Error") !=-1) {
-			jQuery("#backupInfo").html(response);
-			jQuery("#backupButton").removeAttr('disabled');
-			jQuery("#backupButton2").removeAttr('disabled');
-			jQuery("#wait_backup").hide();
 		} else {
-			if (typeof(response)=='string') {
-				valeur = response.split(" ") ; 
-				valeur2 = valeur[0].split("/") ; 
-				valeur[0] = "" ; 
-				texte = valeur.join(" ") ; 
-				progressBar_modifyProgression(Math.floor(valeur2[0]/valeur2[1]*100));
-				progressBar_modifyText((Math.floor(valeur2[0]/valeur2[1]*1000)/10)+"% "+texte);
-				forceBackup(self.only_save);
-			} else {
-				jQuery("#backupInfo").html("TimeOut problem");
-				jQuery("#backupButton").removeAttr('disabled');
-				jQuery("#backupButton2").removeAttr('disabled');
-				jQuery("#wait_backup").hide();
-			}
+			jQuery("#zipfile").html(response);
+			forceBackup(self.only_save);
+		} 
+	}).error(function(x,e) { 
+		if (x.status==0){
+			//Offline
+		} else if (x.status==500){
+			jQuery("#zipfile").html("Error 500: The ajax request is retried");
+			forceBackup(self.only_save) ; 
+		} else {
+			alert("Error "+x.status) ; 
+			jQuery("#backupButton").removeAttr('disabled');
+			jQuery("#backupButton2").removeAttr('disabled');
+			jQuery("#wait_backup").hide();
 		}
-	}).error(function(jqXHR, textStatus, errorThrown) { 
-		jQuery("#backupInfo").html(textStatus+" " + errorThrown);
-		jQuery("#backupButton").removeAttr('disabled');
-		jQuery("#backupButton2").removeAttr('disabled');
-		jQuery("#wait_backup").hide();
-	});    
+	});
+		
 }
 
 /* =====================================================================================

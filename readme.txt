@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/extend/plugins/backup-scheduler/
 Tags: backup, schedule, plugin, save, database, zip
 Requires at least: 3.0
-Tested up to: 3.4.2
+Tested up to: 3.5
 Stable tag: trunk
 
 With this plugin, you may plan the backup of your entire website (folders, files and/or database).
@@ -32,17 +32,17 @@ Each blog administrator may save their own data. The super-admin may save either
 
 = Localization =
 
-* Afrikaans (South Africa) translation provided by SedLex
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab
 * German (Germany) translation provided by agent-test, agent
 * English (United States), default language
-* Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo
+* Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives
+* Finnish (Finland) translation provided by AnttiSilvola
 * French (France) translation provided by SedLex, wkpixearts, Matthieu
 * Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
 * Dutch (Netherlands) translation provided by Matrix, WybAnema, Jay
-* Polish (Poland) translation provided by Opti, Lukasz, pablo
+* Polish (Poland) translation provided by Opti, Lukasz, pablo, Misiek
 * Portuguese (Brazil) translation provided by RainilsonRodriguis
 * Portuguese (Portugal) translation provided by FranciscoRocha
 * Russian (Russia) translation provided by GerinG, Slawka
@@ -79,31 +79,25 @@ Have fun !
 
 == Changelog ==
 
-= 1.3.6 and 1.3.7 =
-* FTP bug with some webhosting service
+= 1.4.0 =
+* Enhance the performance of the backup process and ensure error protection
+* Improve the mail summary
+* Enhance the feedback tab
+* Improve the core
 
-= 1.3.5 =
+= 1.3.0 -&gt; 1.3.7 =
+* FTP bug with some webhosting service
 * FTP port may be changed
 * The error message is muck more explicit
-
-= 1.3.4 =
 * Add a drop if exist in SQL table
-
-= 1.3.3 =
 * Bug with multisite and remove a false positive error with wordfence
-
-= 1.3.2 =
 * There was a bug in the regexp when the ftp were directed to the root folder without any slash at the end.
-
-= 1.3.1 =
 * Add deletion features when uninstalling the plugin
-
-= 1.3.0 =
 * Multisite compatible
 * Improve the zip compatibilities
 * Add log features
 
-= 1.2.0 =
+= 1.2.0 -&gt; 1.2.8 =
 * Some spanned zip files were corrupted due to a bug in the index
 * Remove short_open_tag 
 * Tuning to be able to work with very huge database
@@ -115,7 +109,7 @@ Have fun !
 * You can also force a new update without sending the emails
 * Improve error management and memory leakage
 
-= 1.1.0 =
+= 1.1.0 -&gt; 1.1.5 =
 * Bug in the sql file : date and time managements were incorrect
 * Add a time option for choosing the best moment to perform an automatic backup
 * Display bug correction
@@ -176,4 +170,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:3d7fb5468fb85d73660e536fdb6b76c8
+InfoVersion:1eb6e964fe8d867670fad279f4c6b27e

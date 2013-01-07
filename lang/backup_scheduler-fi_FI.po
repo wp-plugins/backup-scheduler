@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-11-05T10:39:23+00:00\n"
+"PO-Revision-Date: 2012-12-19T12:13:43+00:00\n"
 "Last-Translator: AnttiSilvola <antti.silvola@seamk.fi>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -304,4 +304,19 @@ msgstr "PASV-moodin siirtyminen ei ole mahdollista"
 
 msgid "Everything OK!"
 msgstr "Kaikki kunnossa!"
+
+msgid "Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first)."
+msgstr "Palauta SQL-tiedostot (*.sql1,*.sql2 jne.) phpmyadminilla. (On suositeltavaa tallentaa tietokanta ensin..)"
+
+msgid "To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:"
+msgstr "Palauttaaksesi varmuuskopioita vain joistan hakemistoista, seuraa näitä ohjeita:"
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr "Tiedoston %s luominen hkemistoon %s ei onnistu. Ole hyvä ja tarkista luku- ja kirjoitusoikeudet"
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "Toinen varmuuskopiointi on vielä kesken (%s sekuntia)... Ole hyvä ja odota!"
+
+msgid "The host %s cannot be resolved!"
+msgstr "Isäntää ei tavoiteta!"
 

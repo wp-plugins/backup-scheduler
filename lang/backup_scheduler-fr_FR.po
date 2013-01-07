@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-09-26T13:35:33+00:00\n"
+"PO-Revision-Date: 2012-12-22T14:58:53+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Last-Translator: wkpixearts <wkpixeartsforall@gmail.com>\n"
 "Last-Translator: Matthieu <www.cliczone.fr>\n"
@@ -148,6 +148,15 @@ msgstr "Hôte FTP:"
 msgid "Should be at the form %s or %s"
 msgstr "Devrait être de la forme %s ou %s"
 
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr ""
+
+msgid "FTP port:"
+msgstr "Port FTP :"
+
+msgid "By default the port is %s"
+msgstr "Par défaut, le port FTP est %s"
+
 msgid "Your FTP login:"
 msgstr "Votre identifiant FTP :"
 
@@ -263,7 +272,7 @@ msgid "Part %s"
 msgstr "Partie %s"
 
 msgid "Backup finished on %s at %s"
-msgstr "Sauvegarde terminé le %s à %s"
+msgstr "Sauvegarde terminée le %s à %s"
 
 msgid "The total size of the files is %s"
 msgstr "La taille totale des fichiers est %s"
@@ -298,8 +307,11 @@ msgstr "Merci de patienter ..."
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "(Pour l&#039;instant, il n&#039;y a pas de fichiers de sauvegarde... Vous devriez attendre ou vous pouvez forcer une sauvegarde (voir ci-dessous) )"
 
-msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
-msgstr "Merci d&#039;attendre, une sauvegarde est en cours ! Si vous voulez forcer une nouvelle sauvagarde, rafraichissez d&#039;abord cette page et terminez la sauvegarde en cours."
+msgid "Please wait, a backup is in progress!"
+msgstr "Merci d&#039;attendre, une sauvegarde est en cours !"
+
+msgid "This error message may also be generated if the chunk size is to high: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr ""
 
 msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
 msgstr "Il est impossible de créer le fichier %s dans le dossier %s. Merci de vérifier les droits d&#039;accès aux dossiers/fichiers."

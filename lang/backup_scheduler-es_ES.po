@@ -4,11 +4,12 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-09-18T12:35:08+00:00\n"
+"PO-Revision-Date: 2012-11-09T12:46:26+00:00\n"
 "Last-Translator: Javier <>\n"
 "Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
 "Last-Translator: charliechin <http://www.twitter.com/charliechin>\n"
 "Last-Translator: IgnacioCalvo <http://ignaciocalvo.com>\n"
+"Last-Translator: JordiVives <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -388,4 +389,16 @@ msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus confi
 
 msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
 msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus configuraciones, etc., para el sitio web principal"
+
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr "Si %s se omite, entonces se añadirá automáticamente cuando conecte con el FTP. Esto es útil si obtienes un error 404 cuando mandas los parámetros con %s."
+
+msgid "FTP port:"
+msgstr "Puerto FTP:"
+
+msgid "By default the port is %s"
+msgstr "El puerto por defecto es %s"
+
+msgid "Please wait, a backup is in progress!"
+msgstr "Por favor, espere. ¡Backup en progreso!"
 

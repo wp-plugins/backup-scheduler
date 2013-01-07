@@ -4,10 +4,11 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-08-25T13:31:20+00:00\n"
+"PO-Revision-Date: 2012-11-29T18:28:29+00:00\n"
 "Last-Translator: Opti <>\n"
 "Last-Translator: Lukasz <www.premiumaccount.co.ukwww.esteepc.co.uk>\n"
 "Last-Translator: pablo <pawel@dream.net.pl>\n"
+"Last-Translator: Misiek <klimatyzowanydom.pl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,13 +27,13 @@ msgid "This plugin enables scheduled backup of important part of your website : 
 msgstr "Ten plugin umożliwia zaplanowaną kopię ważnych elementów twojej witryny internetowej: łatwy i wydajny w użyciu!"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr "Obawiam się, ze powinieneś zainstalować/zaktywować- install/activate %s na swojej stronie. W przeciwnym razie wtyczka nie bedzię działać poprawnie!"
+msgstr "Obawiam się, ze powinieneś zainstalować/zaktywować %s na swojej stronie. W przeciwnym razie wtyczka nie będzię działać poprawnie!"
 
 msgid "How often do you want to backup your website?"
 msgstr "Jak często chcesz wykonywać kopię swojej witryny?"
 
 msgid "Frequency (in days):"
-msgstr "Częstotliwość (dni)"
+msgstr "Częstotliwość (dni):"
 
 msgid "Time of the backups:"
 msgstr "Czas wykonania backupu:"
@@ -44,16 +45,16 @@ msgid "Please also note that the backup won't be end exactly at that time. The b
 msgstr "Należy również pamiętać, że kopia zapasowa nie będzie końca dokładnie w tym czasie. Proces wykonywania kopii zapasowej może potrwać do 6h zwłaszcza jeśli nie masz dużo ruchu na swojej stronie i / lub jeśli kopia zapasowa jest dość duża."
 
 msgid "Keep the backup files for (in days):"
-msgstr "Trzymaj kopie zapasową przez (dni)"
+msgstr "Trzymaj kopie zapasową przez (dni):"
 
 msgid "What do you want to save?"
 msgstr "Co chcesz zachować?"
 
 msgid "All directories (the full Wordpress installation):"
-msgstr "Wszystkie katalogi (cała instalacja Wordpress)"
+msgstr "Wszystkie katalogi (cała instalacja Wordpress):"
 
 msgid "(i.e. %s)"
-msgstr "np. %s"
+msgstr "(np. %s)"
 
 msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
 msgstr "Zaznacz tę opcję jeśli chcesz zachować wszystko. Uważaj, kopia może mieć duży rozmiar."
@@ -233,7 +234,7 @@ msgid "An other SQL extraction is still in progress (for %s seconds)... Please w
 msgstr "Inny proces wypakowywania bazy SQL ciągle trwa (  dla %s sekund)...Proszę czekać"
 
 msgid "(SQL extraction)"
-msgstr "(wypakowywanie SQL)"
+msgstr "(Wydobywanie SQL)"
 
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
 msgstr "Inna kopia jest ciągle w trakcie wykonywania.. (przez %s sekund)... Proszę czekać!"
@@ -263,7 +264,7 @@ msgid "The process has been canceled by a third person"
 msgstr "Proces został odwołany przez osobę trzecią"
 
 msgid "A new backup has been generated!"
-msgstr "Nowej kopii zapasowej został wygenerowany!"
+msgstr "Nowa kopia zapasowa została wygenerowana!"
 
 msgid "Dear sirs,"
 msgstr "Szanowny użytkowniku,"
@@ -341,7 +342,7 @@ msgid "Test"
 msgstr "Test"
 
 msgid "Please note that the current GMT time of the server is %s. If it is not correct, please configure the Wordpress installation correctly."
-msgstr "Proszę pamiętać, że obecny czas GMT z serwera jest %s. Jeśli nie jest prawidłowy, należy skonfigurować instalację Wordpress poprawnie."
+msgstr "Proszę pamiętać, że obecny czas GMT z serwera to %s. Jeśli nie jest prawidłowy, należy skonfigurować instalację Wordpress poprawnie."
 
 msgid "How to restore the backup files?"
 msgstr "Jak przywrócić pliki kopii zapasowej?"
@@ -380,11 +381,26 @@ msgid "The file %s cannot be transfered to the FTP repository and PASV mode cann
 msgstr "Plik %s nie może być przeniesiony do repozytorium FTP i nie można wprowadzić trybu PASV :%s"
 
 msgid "The folder %s does not seems to be writable"
-msgstr "folder %s nie ma praw zapisu"
+msgstr "Folder %s nie ma praw zapisu"
 
 msgid "It seems impossible to switch to PASV mode"
 msgstr "Nie da się przełączyć w tryb PASV"
 
 msgid "Everything OK!"
 msgstr "Wszystko jest OK!"
+
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr "Jeśli %s zostanie pominięty, zostanie on automatycznie dodany podczas łączenia się z serwerem FTP. Jest to przydatne, jeśli pojawi się błąd 404 z parametrem %s."
+
+msgid "FTP port:"
+msgstr "port FTP:"
+
+msgid "By default the port is %s"
+msgstr "Domyślny port to %s"
+
+msgid "Please wait, a backup is in progress!"
+msgstr "Proszę czekać - wykonuję backup."
+
+msgid "This error message may also be generated if the chunk size is to high: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr "Ten błąd może być również generowane, jeśli rozmiar kopii jest za wysoki: spróbuj najpierw ustawić rozmiar kawałka do 1Mo aby uniknąć przepełnienia pamięci serwera i zwiększaj go powoli ..."
 
