@@ -527,235 +527,235 @@ msgstr ""
 msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
 msgstr ""
 
-#: backup-scheduler.php:728
+#: backup-scheduler.php:726
 #@ backup_scheduler
 msgid "(SQL extraction - ending)"
 msgstr ""
 
-#: backup-scheduler.php:730
+#: backup-scheduler.php:728
 #@ backup_scheduler
 msgid "(SQL extraction)"
 msgstr ""
 
-#: backup-scheduler.php:737
+#: backup-scheduler.php:735
 #@ backup_scheduler
 msgid "(SQL extraction - nothing to be done)"
 msgstr ""
 
-#: backup-scheduler.php:810
+#: backup-scheduler.php:815
 #@ backup_scheduler
 msgid "(ZIP creation)"
 msgstr ""
 
-#: backup-scheduler.php:838
+#: backup-scheduler.php:843
 #@ backup_scheduler
 msgid "(FTP sending)"
 msgstr ""
 
-#: backup-scheduler.php:846
+#: backup-scheduler.php:851
 #@ backup_scheduler
 msgid "(FTP sending - ending)"
 msgstr ""
 
-#: backup-scheduler.php:852
+#: backup-scheduler.php:857
 #@ backup_scheduler
 msgid "(FTP sending - nothing to be done)"
 msgstr ""
 
-#: backup-scheduler.php:878
+#: backup-scheduler.php:883
 #@ backup_scheduler
 msgid "Backup of %s on %s (%s)"
 msgstr ""
 
-#: backup-scheduler.php:881
+#: backup-scheduler.php:886
 #@ backup_scheduler
 msgid "(MAIL sending)"
 msgstr ""
 
-#: backup-scheduler.php:887
+#: backup-scheduler.php:892
 #@ backup_scheduler
 msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
 msgstr ""
 
-#: backup-scheduler.php:893
+#: backup-scheduler.php:898
 #@ backup_scheduler
 msgid "(MAIL sending - ending)"
 msgstr ""
 
-#: backup-scheduler.php:899
+#: backup-scheduler.php:904
 #@ backup_scheduler
 msgid "(MAIL sending - nothing to be done)"
 msgstr ""
 
-#: backup-scheduler.php:927
+#: backup-scheduler.php:932
 #@ backup_scheduler
 msgid "(END - ending)"
 msgstr ""
 
-#: backup-scheduler.php:931
+#: backup-scheduler.php:936
 #@ backup_scheduler
 msgid "An unknown error occured!"
 msgstr ""
 
-#: backup-scheduler.php:979
+#: backup-scheduler.php:984
 #@ backup_scheduler
 msgid "A new backup has been generated!"
 msgstr ""
 
-#: backup-scheduler.php:1170
-#: backup-scheduler.php:1233
+#: backup-scheduler.php:1177
+#: backup-scheduler.php:1245
 #@ backup_scheduler
 msgid "Dear sirs,"
 msgstr ""
 
-#: backup-scheduler.php:1171
+#: backup-scheduler.php:1178
 #@ backup_scheduler
 msgid "Here is attached the %s on %s backup files for today"
 msgstr ""
 
-#: backup-scheduler.php:1172
-#: backup-scheduler.php:1294
+#: backup-scheduler.php:1179
+#: backup-scheduler.php:1306
 #@ backup_scheduler
 msgid "Best regards,"
 msgstr ""
 
-#: backup-scheduler.php:1234
+#: backup-scheduler.php:1246
 #@ backup_scheduler
 msgid "Please find hereafter a summary of the backup process."
 msgstr ""
 
-#: backup-scheduler.php:1240
+#: backup-scheduler.php:1252
 #@ backup_scheduler
 msgid "Global synthesis"
 msgstr ""
 
-#: backup-scheduler.php:1241
+#: backup-scheduler.php:1253
 #@ backup_scheduler
 msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
 msgstr ""
 
-#: backup-scheduler.php:1244
+#: backup-scheduler.php:1256
 #@ backup_scheduler
 msgid "SQL synthesis"
 msgstr ""
 
-#: backup-scheduler.php:1247
+#: backup-scheduler.php:1259
 #@ backup_scheduler
 msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
 msgstr ""
 
-#: backup-scheduler.php:1248
+#: backup-scheduler.php:1260
 #@ backup_scheduler
 msgid "%s entries have been extracted and have been stored in %s files."
 msgstr ""
 
-#: backup-scheduler.php:1251
-#: backup-scheduler.php:1275
+#: backup-scheduler.php:1263
+#: backup-scheduler.php:1287
 #@ backup_scheduler
 msgid "%s created on %s"
 msgstr ""
 
-#: backup-scheduler.php:1256
+#: backup-scheduler.php:1268
 #@ backup_scheduler
 msgid "ZIP synthesis"
 msgstr ""
 
-#: backup-scheduler.php:1259
+#: backup-scheduler.php:1271
 #@ backup_scheduler
 msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
 msgstr ""
 
-#: backup-scheduler.php:1260
+#: backup-scheduler.php:1272
 #@ backup_scheduler
 msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
 msgstr ""
 
-#: backup-scheduler.php:1262
+#: backup-scheduler.php:1274
 #@ backup_scheduler
 msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
 msgstr ""
 
-#: backup-scheduler.php:1266
+#: backup-scheduler.php:1278
 #@ backup_scheduler
 msgid "%s (size %s)"
 msgstr ""
 
-#: backup-scheduler.php:1271
+#: backup-scheduler.php:1283
 #@ backup_scheduler
 msgid "These zip files are accessible for %s days at the following path:"
 msgstr ""
 
-#: backup-scheduler.php:1281
+#: backup-scheduler.php:1293
 #@ backup_scheduler
 msgid "FTP synthesis"
 msgstr ""
 
-#: backup-scheduler.php:1282
+#: backup-scheduler.php:1294
 #@ backup_scheduler
 msgid "The %s zip files have been stored on the specified FTP: %s"
 msgstr ""
 
-#: backup-scheduler.php:1287
+#: backup-scheduler.php:1299
 #@ backup_scheduler
 msgid "%s stored on %s"
 msgstr ""
 
-#: backup-scheduler.php:1300
+#: backup-scheduler.php:1312
 #@ backup_scheduler
 msgid "Backup of %s on %s"
 msgstr ""
 
-#: backup-scheduler.php:1322
-#: backup-scheduler.php:1399
+#: backup-scheduler.php:1334
+#: backup-scheduler.php:1411
 #@ backup_scheduler
 msgid "No host has been defined"
 msgstr ""
 
-#: backup-scheduler.php:1331
-#: backup-scheduler.php:1411
+#: backup-scheduler.php:1343
+#: backup-scheduler.php:1423
 #@ backup_scheduler
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
 msgstr ""
 
-#: backup-scheduler.php:1339
-#: backup-scheduler.php:1419
+#: backup-scheduler.php:1351
+#: backup-scheduler.php:1431
 #@ backup_scheduler
 msgid "The host %s cannot be resolved!"
 msgstr ""
 
-#: backup-scheduler.php:1354
+#: backup-scheduler.php:1366
 #@ backup_scheduler
 msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
 msgstr ""
 
-#: backup-scheduler.php:1362
+#: backup-scheduler.php:1374
 #@ backup_scheduler
 msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
 msgstr ""
 
-#: backup-scheduler.php:1374
-#: backup-scheduler.php:1443
+#: backup-scheduler.php:1386
+#: backup-scheduler.php:1455
 #@ backup_scheduler
 msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
 msgstr ""
 
-#: backup-scheduler.php:1379
-#: backup-scheduler.php:1448
+#: backup-scheduler.php:1391
+#: backup-scheduler.php:1460
 #@ backup_scheduler
 msgid "The login/password does not seems valid!"
 msgstr ""
 
-#: backup-scheduler.php:1429
+#: backup-scheduler.php:1441
 #@ backup_scheduler
 msgid "The folder %s does not seems to be writable"
 msgstr ""
 
-#: backup-scheduler.php:1433
+#: backup-scheduler.php:1445
 #@ backup_scheduler
 msgid "It seems impossible to switch to PASV mode"
 msgstr ""
 
-#: backup-scheduler.php:1439
+#: backup-scheduler.php:1451
 #@ backup_scheduler
 msgid "Everything OK!"
 msgstr ""

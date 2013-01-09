@@ -79,6 +79,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.4.1 =
+* A bug that do not delete the lock file when reseting the backup process
+
 = 1.4.0 =
 * Enhance the performance of the backup process and ensure error protection
 * Improve the mail summary
@@ -170,4 +173,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:1eb6e964fe8d867670fad279f4c6b27e
+InfoVersion:478119b7f25e42c636436d304f40b3e8

@@ -3,7 +3,7 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.4.0
+Version: 1.4.1
 
 Framework: SL_Framework
 Author: SedLex
@@ -685,8 +685,7 @@ class backup_scheduler extends pluginSedLex {
 			$state = array(
 				"rand"=>date_i18n("YmdHis")."_".Utils::rand_str(10, "abcdefghijklmnopqrstuvwxyz0123456789"), 
 				"step"=>"SQL"
-			) ; 
-			
+			) ;			
 			$summary['start'] = time() ; 
 			$this->set_param('info_process', $summary) ;
 		}
@@ -700,7 +699,7 @@ class backup_scheduler extends pluginSedLex {
 
 				// We create the SQL file
 				if (!is_multisite()) {
-					$sql = new SL_Database() ; 	
+					$sql = new SL_Database() ; 
 				} else if (is_multisite()&&($blog_id == 1)) {
 					if ($this->get_param('save_db_all')) {
 						$sql = new SL_Database() ; 
@@ -711,7 +710,6 @@ class backup_scheduler extends pluginSedLex {
 					$sql = new SL_Database($wpdb->prefix) ; 
 				}
 				$res = $sql->createSQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."BackupScheduler".$this->get_param('add_name')."_".$state['rand'], $this->get_param('max_time'),ceil(($this->get_param('max_allocated')-0.5)*1024*1024)); // We remove 0.5Mo to ensure that the sql file will be included in the backup
-				
 				// Check if the step should be modified
 				if ($res['finished']==true) {
 					SL_Debug::log(get_class(), "SQL extraction finished", 4) ; 
@@ -874,7 +872,7 @@ class backup_scheduler extends pluginSedLex {
 				$this->set_param('mail_sent', $files_sent) ; 
 				
 				if (is_file($file_to_sent)) {
-					SL_Debug::log(get_class(), "Email the backup file: ".file_to_sent , 4) ; 
+					SL_Debug::log(get_class(), "Email the backup file: ".$file_to_sent , 4) ; 
 					$subject = sprintf(__("Backup of %s on %s (%s)", $this->pluginID), get_bloginfo('name') , date_i18n('Y-m-d'), count($files_sent)."/".(count($files_to_sent)+count($files_sent)) ) ; 
 					$res = $this->sendEmail(array($file_to_sent), $subject) ; 
 					if ($res===true) {
@@ -979,7 +977,7 @@ class backup_scheduler extends pluginSedLex {
 			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup has been generated!", $this->pluginID)."</p></div>" ; 
 		} else {
 			echo "<span class='continueBackupProcess'></span>" ;
-			if ((isset($result['nb_finished']))&&(isset($result['nb_to_finished']))) {
+			if ((isset($result['nb_finished']))&&(isset($result['nb_to_finished']))&&(0!=($result['nb_finished']))&&(0!=($result['nb_to_finished']))) {
 				$pb = new progressBarAdmin(500, 20, ceil($result['nb_finished']/($result['nb_finished']+$result['nb_to_finished'])*100),ceil($result['nb_finished']/($result['nb_finished']+$result['nb_to_finished'])*100)."% ".$result['text']) ; 
 			} else {
 				$pb = new progressBarAdmin(500, 20, 100, $result['text']) ; 
@@ -1164,41 +1162,46 @@ class backup_scheduler extends pluginSedLex {
 	*/
 	
 	function sendEmail($attach, $subject="Backup") {
+		
+		if (preg_match('/(?:[a-z0-9!#$%&*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/', $this->get_param('email'))) {
 
-		for ($i=0 ; $i<count($attach) ; $i++) {
-			$message = "" ; 
-			$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
-			$message .= "<p>".sprintf(__("Here is attached the %s on %s backup files for today", $this->pluginID), $i+1, count($attach))."</p><p>&nbsp;</p>" ; 
-			$message .= "<p>".__("Best regards,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
-			
-			$headers= "MIME-Version: 1.0\n" .
-					"Content-Type: text/html; charset=\"" .
-					get_option('blog_charset') . "\"\n";
-					
-			// We rename the zip files if needed
-			if ($this->get_param('rename')!="") {
-				@rename($attach[$i], $attach[$i].$this->get_param('rename')) ; 
-				$attachments = array($attach[$i].$this->get_param('rename'));
-			} else {
-				$attachments = array($attach[$i]);
-			}
-			
+			for ($i=0 ; $i<count($attach) ; $i++) {
+				$message = "" ; 
+				$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
+				$message .= "<p>".sprintf(__("Here is attached the %s on %s backup files for today", $this->pluginID), $i+1, count($attach))."</p><p>&nbsp;</p>" ; 
+				$message .= "<p>".__("Best regards,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
+				
+				$headers= "MIME-Version: 1.0\n" .
+						"Content-Type: text/html; charset=\"" .
+						get_option('blog_charset') . "\"\n";
 						
-			// send the email
-			$res = wp_mail($this->get_param('email'), $subject, $message, $headers, $attachments ) ; 
-			
-			// We unrename the file 
-			if ($this->get_param('rename')!="") {
-				@rename($attach[$i].$this->get_param('rename'), $attach[$i]) ; 
+				// We rename the zip files if needed
+				if ($this->get_param('rename')!="") {
+					@rename($attach[$i], $attach[$i].$this->get_param('rename')) ; 
+					$attachments = array($attach[$i].$this->get_param('rename'));
+				} else {
+					$attachments = array($attach[$i]);
+				}
+				
+							
+				// send the email
+				$res = wp_mail($this->get_param('email'), $subject, $message, $headers, $attachments ) ; 
+				
+				// We unrename the file 
+				if ($this->get_param('rename')!="") {
+					@rename($attach[$i].$this->get_param('rename'), $attach[$i]) ; 
+				}
+				
+				if (!$res) {
+					SL_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('email')." with ".$attach[$i] , 2) ; 
+					return false ; 			
+				} else {
+					SL_Debug::log(get_class(), "The email has been successfully sent to ".$this->get_param('email')." with ".$attach[$i] , 4) ; 
+				}
+	
 			}
-			
-			if (!$res) {
-				SL_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('email')." with ".$attach[$i] , 2) ; 
-				return false ; 			
-			} else {
-				SL_Debug::log(get_class(), "The email has been successfully sent to ".$this->get_param('email')." with ".$attach[$i] , 4) ; 
-			}
-
+		} else {
+			return false ; 
 		}
 		return true ; 
 	}	
@@ -1229,84 +1232,86 @@ class backup_scheduler extends pluginSedLex {
 	
 	function sendSummaryEmail() {
 		
-		$message = "" ; 
-		$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
-		$message .= "<p>".__("Please find hereafter a summary of the backup process.", $this->pluginID)."</p>" ;
-		
-		$info = $this->get_param('info_process') ; 
-		
-		$seconds = ($info['end']-$info['start'])%60 ; 
-		$minutes = floor(($info['end']-$info['start'])/60) ; 
-		$message .= "<h3>".__("Global synthesis", $this->pluginID)."</h3>" ;
-		$message .= "<p>".sprintf(__("The backup process has started on %s and have lasted %s minutes and %s seconds", $this->pluginID), date_i18n("F j, Y H:i:s", $info['start']), $minutes, $seconds)."</p>" ; 
-		
-		if (isset($info['sql'])) {
-			$message .= "<h3>".__("SQL synthesis", $this->pluginID)."</h3>" ;
-			$seconds = ($info['sql']['end']-$info['sql']['start'])%60 ; 
-			$minutes = floor(($info['sql']['end']-$info['sql']['start'])/60) ; 
-			$message .= "<p>".sprintf(__("The SQL extraction has started on %s and have lasted %s minutes and %s seconds", $this->pluginID), date_i18n("F j, Y H:i:s", $info['sql']['start']), $minutes, $seconds)."</p>" ; 
-			$message .= "<p>".sprintf(__("%s entries have been extracted and have been stored in %s files.", $this->pluginID), $info['sql']['total_entries'], count($info['sql']['files']))."</p>" ; 
-			foreach ($info['sql']['files'] as $time=>$f) {
-				$message .= "<li>" ; 	
-				$message .= sprintf(__("%s created on %s", $this->pluginID), basename($f), date_i18n("F j, Y H:i:s", $time)) ; 					
-				$message .= "</li>" ; 	
-			}		
-			$message .= "</ul>" ; 		}	
-		if (isset($info['zip'])) {
-			$message .= "<h3>".__("ZIP synthesis", $this->pluginID)."</h3>" ;
-			$seconds = ($info['zip']['end']-$info['zip']['start'])%60 ; 
-			$minutes = floor(($info['zip']['end']-$info['zip']['start'])/60) ; 
-			$message .= "<p>".sprintf(__("The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds", $this->pluginID), date_i18n("F j, Y H:i:s", $info['zip']['start']), $minutes, $seconds)."</p>" ; 
-			$message .= "<p>".sprintf(__("%s files have been stored into %s split files (zip, z01, z02, etc.).", $this->pluginID), $info['zip']['total_entries'], count($info['zip']['files']))."</p>" ; 
-			if (count(count($info['zip']['excluded_entries']))!=0) {
-				$message .= "<p>".sprintf(__("Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo).", $this->pluginID), count($info['zip']['excluded_entries']), $this->get_param('max_allocated'))."</p>" ; 
-				$message .= "<ul>" ; 	
-				foreach ($info['zip']['excluded_entries'] as $f) {
+		if (preg_match('/(?:[a-z0-9!#$%&*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/', $this->get_param('ftp_mail'))) {
+
+			$message = "" ; 
+			$message .= "<p>".__("Dear sirs,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
+			$message .= "<p>".__("Please find hereafter a summary of the backup process.", $this->pluginID)."</p>" ;
+			
+			$info = $this->get_param('info_process') ; 
+			
+			$seconds = ($info['end']-$info['start'])%60 ; 
+			$minutes = floor(($info['end']-$info['start'])/60) ; 
+			$message .= "<h3>".__("Global synthesis", $this->pluginID)."</h3>" ;
+			$message .= "<p>".sprintf(__("The backup process has started on %s and have lasted %s minutes and %s seconds", $this->pluginID), date_i18n("F j, Y H:i:s", $info['start']), $minutes, $seconds)."</p>" ; 
+			
+			if (isset($info['sql'])) {
+				$message .= "<h3>".__("SQL synthesis", $this->pluginID)."</h3>" ;
+				$seconds = ($info['sql']['end']-$info['sql']['start'])%60 ; 
+				$minutes = floor(($info['sql']['end']-$info['sql']['start'])/60) ; 
+				$message .= "<p>".sprintf(__("The SQL extraction has started on %s and have lasted %s minutes and %s seconds", $this->pluginID), date_i18n("F j, Y H:i:s", $info['sql']['start']), $minutes, $seconds)."</p>" ; 
+				$message .= "<p>".sprintf(__("%s entries have been extracted and have been stored in %s files.", $this->pluginID), $info['sql']['total_entries'], count($info['sql']['files']))."</p>" ; 
+				foreach ($info['sql']['files'] as $time=>$f) {
 					$message .= "<li>" ; 	
-					$message .= sprintf(__("%s (size %s)", $this->pluginID), str_replace(ABSPATH, "", $f), Utils::byteSize(filesize($f))) ; 					
+					$message .= sprintf(__("%s created on %s", $this->pluginID), basename($f), date_i18n("F j, Y H:i:s", $time)) ; 					
 					$message .= "</li>" ; 	
 				}		
-				$message .= "</ul>" ; 	
-			}
-			$message .= "<p>".sprintf(__("These zip files are accessible for %s days at the following path:", $this->pluginID), $this->get_param('delete_after'))."</p>" ; 			
-			$message .= "<ul>" ; 	
-			foreach ($info['zip']['files'] as $time=>$f) {
-				$message .= "<li>" ; 	
-				$message .= sprintf(__("%s created on %s", $this->pluginID), "<a href='".str_replace(WP_CONTENT_DIR, WP_CONTENT_URL, $f)."'>".basename($f)."</a>", date_i18n("F j, Y H:i:s", $time)) ; 					
-				$message .= "</li>" ; 	
-			}		
-			$message .= "</ul>" ; 			
-		}	
-		if (isset($info['ftp'])) {
-			$message .= "<h3>".__("FTP synthesis", $this->pluginID)."</h3>" ;
-			$message .= "<p>".sprintf(__("The %s zip files have been stored on the specified FTP: %s", $this->pluginID), count($info['ftp']), $this->get_ftp_host())."</p>" ; 			
-			$message .= "<ul>" ; 	
-			foreach ($info['ftp'] as $fi) {
-				if (is_file($fi['file'])) {
+				$message .= "</ul>" ; 		}	
+			if (isset($info['zip'])) {
+				$message .= "<h3>".__("ZIP synthesis", $this->pluginID)."</h3>" ;
+				$seconds = ($info['zip']['end']-$info['zip']['start'])%60 ; 
+				$minutes = floor(($info['zip']['end']-$info['zip']['start'])/60) ; 
+				$message .= "<p>".sprintf(__("The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds", $this->pluginID), date_i18n("F j, Y H:i:s", $info['zip']['start']), $minutes, $seconds)."</p>" ; 
+				$message .= "<p>".sprintf(__("%s files have been stored into %s split files (zip, z01, z02, etc.).", $this->pluginID), $info['zip']['total_entries'], count($info['zip']['files']))."</p>" ; 
+				if (count(count($info['zip']['excluded_entries']))!=0) {
+					$message .= "<p>".sprintf(__("Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo).", $this->pluginID), count($info['zip']['excluded_entries']), $this->get_param('max_allocated'))."</p>" ; 
+					$message .= "<ul>" ; 	
+					foreach ($info['zip']['excluded_entries'] as $f) {
+						$message .= "<li>" ; 	
+						$message .= sprintf(__("%s (size %s)", $this->pluginID), str_replace(ABSPATH, "", $f), Utils::byteSize(filesize($f))) ; 					
+						$message .= "</li>" ; 	
+					}		
+					$message .= "</ul>" ; 	
+				}
+				$message .= "<p>".sprintf(__("These zip files are accessible for %s days at the following path:", $this->pluginID), $this->get_param('delete_after'))."</p>" ; 			
+				$message .= "<ul>" ; 	
+				foreach ($info['zip']['files'] as $time=>$f) {
 					$message .= "<li>" ; 	
-					$message .= sprintf(__("%s stored on %s", $this->pluginID),"<a href='".$this->get_ftp_host()."/".basename($fi['file'])."'>".basename($fi['file'])."</a>", date_i18n("F j, Y H:i:s", $fi['date']))   ; 					
-					$message .= "</li>" ;
-				} 	
-			}		
-			$message .= "</ul>" ; 			
-		}
-				
-		$message .= "<p>".__("Best regards,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
-		
-		$headers= "MIME-Version: 1.0\n" .
-				"Content-Type: text/html; charset=\"" .
-				get_option('blog_charset') . "\"\n";
-		
-		$subject = sprintf(__("Backup of %s on %s", $this->pluginID), get_bloginfo('name') , date_i18n('Y-m-d') ) ; 
-		
-		// send the email
-		$res = wp_mail($this->get_param('ftp_mail'), $subject, $message, $headers) ; 
-		if (!$res) {
-			SL_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('ftp_mail') , 2) ; 
-		} else {
-			SL_Debug::log(get_class(), "The email has been successfully sent  to ".$this->get_param('ftp_mail') , 4) ; 
-		}
-		
+					$message .= sprintf(__("%s created on %s", $this->pluginID), "<a href='".str_replace(WP_CONTENT_DIR, WP_CONTENT_URL, $f)."'>".basename($f)."</a>", date_i18n("F j, Y H:i:s", $time)) ; 					
+					$message .= "</li>" ; 	
+				}		
+				$message .= "</ul>" ; 			
+			}	
+			if (isset($info['ftp'])) {
+				$message .= "<h3>".__("FTP synthesis", $this->pluginID)."</h3>" ;
+				$message .= "<p>".sprintf(__("The %s zip files have been stored on the specified FTP: %s", $this->pluginID), count($info['ftp']), $this->get_ftp_host())."</p>" ; 			
+				$message .= "<ul>" ; 	
+				foreach ($info['ftp'] as $fi) {
+					if (is_file($fi['file'])) {
+						$message .= "<li>" ; 	
+						$message .= sprintf(__("%s stored on %s", $this->pluginID),"<a href='".$this->get_ftp_host()."/".basename($fi['file'])."'>".basename($fi['file'])."</a>", date_i18n("F j, Y H:i:s", $fi['date']))   ; 					
+						$message .= "</li>" ;
+					} 	
+				}		
+				$message .= "</ul>" ; 			
+			}
+					
+			$message .= "<p>".__("Best regards,", $this->pluginID)."</p><p>&nbsp;</p>" ; 
+			
+			$headers= "MIME-Version: 1.0\n" .
+					"Content-Type: text/html; charset=\"" .
+					get_option('blog_charset') . "\"\n";
+			
+			$subject = sprintf(__("Backup of %s on %s", $this->pluginID), get_bloginfo('name') , date_i18n('Y-m-d') ) ; 
+			
+			// send the email
+			$res = wp_mail($this->get_param('ftp_mail'), $subject, $message, $headers) ; 
+			if (!$res) {
+				SL_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('ftp_mail') , 2) ; 
+			} else {
+				SL_Debug::log(get_class(), "The email has been successfully sent  to ".$this->get_param('ftp_mail') , 4) ; 
+			}
+		} 
 	}	
 	
 	/** ====================================================================================================================================================
