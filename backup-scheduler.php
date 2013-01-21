@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.4.1
+Version: 1.4.2
+
 
 Framework: SL_Framework
 Author: SedLex
@@ -17,6 +18,9 @@ License: GPL3
 //Including the framework in order to make the plugin work
 
 require_once('core.php') ; 
+
+require_once('include/zip.class.php') ; 
+require_once('include/database.class.php') ; 
 
 /** ====================================================================================================================================================
 * This class has to be extended from the pluginSedLex class which is defined in the framework

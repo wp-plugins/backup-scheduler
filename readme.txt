@@ -66,7 +66,7 @@ Have fun !
 
 == Installation ==
 
-1. Upload this folder to your plugin directory (for instance '/wp-content/plugins/')
+1. Upload this folder backup-scheduler to your plugin directory (for instance '/wp-content/plugins/')
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Navigate to the 'SL plugins' box
 4. All plugins developed with the SL core will be listed in this box
@@ -78,6 +78,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.4.1 =
+* Cleaning the framework to avoid unnecessarly code
 
 = 1.4.1 =
 * A bug that do not delete the lock file when reseting the backup process
@@ -173,4 +176,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:478119b7f25e42c636436d304f40b3e8
+InfoVersion:a9d58a316445a6449ce9dc9990f5bf74
