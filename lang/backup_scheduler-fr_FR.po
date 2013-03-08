@@ -4,10 +4,11 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-12-22T14:58:53+00:00\n"
+"PO-Revision-Date: 2013-02-15T12:44:32+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Last-Translator: wkpixearts <wkpixeartsforall@gmail.com>\n"
 "Last-Translator: Matthieu <www.cliczone.fr>\n"
+"Last-Translator: mutmut <smuteau@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,9 +148,6 @@ msgstr "Hôte FTP:"
 
 msgid "Should be at the form %s or %s"
 msgstr "Devrait être de la forme %s ou %s"
-
-msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
-msgstr ""
 
 msgid "FTP port:"
 msgstr "Port FTP :"
@@ -310,9 +308,6 @@ msgstr "(Pour l&#039;instant, il n&#039;y a pas de fichiers de sauvegarde... Vou
 msgid "Please wait, a backup is in progress!"
 msgstr "Merci d&#039;attendre, une sauvegarde est en cours !"
 
-msgid "This error message may also be generated if the chunk size is to high: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
-msgstr ""
-
 msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
 msgstr "Il est impossible de créer le fichier %s dans le dossier %s. Merci de vérifier les droits d&#039;accès aux dossiers/fichiers."
 
@@ -399,4 +394,70 @@ msgstr "Il semble impossible de passer en mode PASV"
 
 msgid "Everything OK!"
 msgstr "Tout est Ok!"
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr "Si vous voulez être notifié quand la sauvegarde est terminée, merci de mettre votre e-mail :"
+
+msgid "Customize the name of the files?"
+msgstr "Personnaliser le nom des fichiers ?"
+
+msgid "Add this string to the name of the files:"
+msgstr "Ajouter cette chaîne de caractères au nom des fichiers :"
+
+msgid "The name of the files will be %s."
+msgstr "Le nom des fichiers sera %s."
+
+msgid "% is the string of the present option. You may set this option to %s."
+msgstr "% est la chaîne de caractère de cette option. Vous devriez mettre cette option à %s."
+
+msgid "% is a random string for security reasons."
+msgstr "% est une chaîne de caractère aléatoire pour des raisons de sécurité."
+
+msgid "% is the extension (i.e. %s)."
+msgstr "% est l&#039;extension (c&#039;est-à-dire %s)."
+
+msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
+msgstr "Veuillez patienter, une sauvegarde est en ours pour %s secondes ! Attendez pendant %s secondes pour une redémarrage automatique."
+
+msgid "(SQL extraction - ending)"
+msgstr "(Extraction SQL - fin)"
+
+msgid "(SQL extraction - nothing to be done)"
+msgstr "(Extraction SQL - rien à faire)"
+
+msgid "(FTP sending - ending)"
+msgstr "(Envoi FTP - fin)"
+
+msgid "(FTP sending - nothing to be done)"
+msgstr "(Envoi FTP - rien à faire)"
+
+msgid "(MAIL sending - ending)"
+msgstr "(Envoi Mail - fin)"
+
+msgid "(MAIL sending - nothing to be done)"
+msgstr "(Envoi Mail - rien à faire)"
+
+msgid "(END - ending)"
+msgstr "(FIN - fin"
+
+msgid "Global synthesis"
+msgstr "Synthèse globale"
+
+msgid "SQL synthesis"
+msgstr "Synthèse SQL"
+
+msgid "ZIP synthesis"
+msgstr "Synthèse ZIP"
+
+msgid "%s (size %s)"
+msgstr "%s (taille %s)"
+
+msgid "FTP synthesis"
+msgstr "Synthèse FTP"
+
+msgid "%s stored on %s"
+msgstr "%s stocké sur %s"
+
+msgid "Backup of %s on %s"
+msgstr "Sauvegarde de %s sur %s"
 

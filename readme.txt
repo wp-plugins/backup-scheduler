@@ -32,12 +32,12 @@ Each blog administrator may save their own data. The super-admin may save either
 
 = Localization =
 
-* German (Switzerland) translation provided by PeterDbbert, BernhardKnab
+* German (Switzerland) translation provided by PeterDbbert, BernhardKnab, scream
 * German (Germany) translation provided by agent-test, agent
 * English (United States), default language
 * Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives
 * Finnish (Finland) translation provided by AnttiSilvola
-* French (France) translation provided by SedLex, wkpixearts, Matthieu
+* French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut
 * Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
@@ -79,7 +79,10 @@ Have fun !
 
 == Changelog ==
 
-= 1.4.1 =
+= 1.4.2 =
+* Some issues in the framework
+
+= 1.4.2 =
 * Cleaning the framework to avoid unnecessarly code
 
 = 1.4.1 =
@@ -176,4 +179,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:a9d58a316445a6449ce9dc9990f5bf74
+InfoVersion:b2bfbb5bfddec7c97e0d4e86ef1e4126
