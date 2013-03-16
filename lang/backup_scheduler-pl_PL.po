@@ -4,11 +4,12 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-11-29T18:28:29+00:00\n"
+"PO-Revision-Date: 2013-03-10T21:10:39+00:00\n"
 "Last-Translator: Opti <>\n"
 "Last-Translator: Lukasz <www.premiumaccount.co.ukwww.esteepc.co.uk>\n"
 "Last-Translator: pablo <pawel@dream.net.pl>\n"
 "Last-Translator: Misiek <klimatyzowanydom.pl>\n"
+"Last-Translator: MarekMackiewicz <ickam89.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,22 +25,22 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
-msgstr "Ten plugin umożliwia zaplanowaną kopię ważnych elementów twojej witryny internetowej: łatwy i wydajny w użyciu!"
+msgstr "Ten plugin umożliwia planowanie kopii ważnych elementów twojej witryny internetowej: łatwy i wydajny w użyciu!"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr "Obawiam się, ze powinieneś zainstalować/zaktywować %s na swojej stronie. W przeciwnym razie wtyczka nie będzię działać poprawnie!"
+msgstr "Zainstaluj/Aktywuj %s. W przeciwnym razie wtyczka nie będzię działać poprawnie!"
 
 msgid "How often do you want to backup your website?"
-msgstr "Jak często chcesz wykonywać kopię swojej witryny?"
+msgstr "Jak często chcesz wykonywać kopię swojej strony?"
 
 msgid "Frequency (in days):"
 msgstr "Częstotliwość (dni):"
 
 msgid "Time of the backups:"
-msgstr "Czas wykonania backupu:"
+msgstr "Czas wykonania kopii:"
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
-msgstr "Proszę pamiętać, że 0 oznacza północ, 1 oznacza 1. w nocy, 13am 1. po południu, itd. Backup nastąpi o (czas zgodny z godziną serwera), wiec upewnij sie, że twoja strona nie jest przeciążona w tych godzinach."
+msgstr "Pamiętaj, że 0 oznacza północ, 1 oznacza 1. w nocy, 13am 1. po południu, itd. Backup nastąpi o (czas zgodny z godziną serwera), wiec upewnij sie, że twoja strona nie jest przeciążona w tych godzinach."
 
 msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
 msgstr "Należy również pamiętać, że kopia zapasowa nie będzie końca dokładnie w tym czasie. Proces wykonywania kopii zapasowej może potrwać do 6h zwłaszcza jeśli nie masz dużo ruchu na swojej stronie i / lub jeśli kopia zapasowa jest dość duża."
@@ -72,7 +73,7 @@ msgid "Check this option if you want to save all themes that you have installed 
 msgstr "Zaznacz tą opcje, jeśli chcesz zachować kopie wszystkich kompozycji, które zainstalowałes i które używasz na swojej stronie."
 
 msgid "The upload directory:"
-msgstr "Folder upload:"
+msgstr "Folder uploadu:"
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
 msgstr "Zaznacz tą opcje jeśli chcesz zachować kopie wszystkich zdjęc, plików które zainstalowaleś i które używasz na swojej stronie by pisać i tworzyć posty/ strony"
@@ -177,7 +178,7 @@ msgid "Manage translations"
 msgstr "Zarządzaj tłumaczeniami"
 
 msgid "Give feedback"
-msgstr "Podziel się z nami twoją opinią, by usprawnić dzialanie naszej wtyczki"
+msgstr "Wyślij nam swoją opinię"
 
 msgid "Other plugins"
 msgstr "Inne pluginy"
@@ -222,7 +223,7 @@ msgid "Cancel this process"
 msgstr "Anuluj ten proces"
 
 msgid "Please wait..."
-msgstr "Proszę czekaj..."
+msgstr "Proszę czekać..."
 
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "Nie znaleziono żadnych kopii zapasowych, powinieneś poczekać albo wykonać ją teraz (patrz poniżej)"
@@ -234,7 +235,7 @@ msgid "An other SQL extraction is still in progress (for %s seconds)... Please w
 msgstr "Inny proces wypakowywania bazy SQL ciągle trwa (  dla %s sekund)...Proszę czekać"
 
 msgid "(SQL extraction)"
-msgstr "(Wydobywanie SQL)"
+msgstr "(Wyodrębnianie SQL)"
 
 msgid "An other backup is still in progress (for %s seconds)... Please wait!"
 msgstr "Inna kopia jest ciągle w trakcie wykonywania.. (przez %s sekund)... Proszę czekać!"
@@ -243,16 +244,16 @@ msgid "(ZIP creation)"
 msgstr "(Tworzę archiwum ZIP)"
 
 msgid "(FTP sending)"
-msgstr "(Wysyłam na FTP)"
+msgstr "(Wysyłanie na serwer)"
 
 msgid "Backup of %s on %s (%s)"
 msgstr "Backup z %s na %s (%s)"
 
 msgid "(MAIL sending)"
-msgstr "(Wysyłam na email)"
+msgstr "(Wysyłanie na e-mail)"
 
 msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
-msgstr "Twoja instalacja Wordpress nie mogą wysyłać e-mail (z ciężkim załącznikami)!"
+msgstr "Twoja instalacja Wordpress nie mogą wysyłać e-mail (zbyt duże załącznikii)!"
 
 msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
 msgstr "Plik% s nie może zostać usunięty. Powinieneś mieć problem z uprawnieniami do pliku lub wymogów bezpieczeństwa."
@@ -264,13 +265,13 @@ msgid "The process has been canceled by a third person"
 msgstr "Proces został odwołany przez osobę trzecią"
 
 msgid "A new backup has been generated!"
-msgstr "Nowa kopia zapasowa została wygenerowana!"
+msgstr "Nowa kopia zapasowa została utworzona!"
 
 msgid "Dear sirs,"
 msgstr "Szanowny użytkowniku,"
 
 msgid "Here is attached the %s on %s backup files for today"
-msgstr "Tutaj znajdziesz załączone %s z %s kopii zapasowej plików zaplanowanych na dzisiaj"
+msgstr "Do niniejszej wiadomości załączono %s z %s kopii zapasowej plików zaplanowanych na dzisiaj"
 
 msgid "Best regards,"
 msgstr "Z poważaniem,"
@@ -285,7 +286,7 @@ msgid "No host has been defined"
 msgstr "Nie został ustawiony serwer FTP"
 
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
-msgstr "Twoja instalacja PHP nie obsługuje funkcji protokołu SSL ... Tak więc, proszę używać standardowego FTP a nie FTPS!"
+msgstr "Twoja instalacja PHP nie obsługuje funkcji protokołu SSL ... Użyj FTP zamiast FTPS!"
 
 msgid "The host %s cannot be resolved!"
 msgstr "Nie można znaleźć serwera %s!"
@@ -294,10 +295,10 @@ msgid "The file %s cannot be transfered to the FTP repository! The ftp_put funct
 msgstr "Plik %s nie może być przeniesione do repozytorium FTP! Zwraca ftp_put funkcji: %s"
 
 msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
-msgstr "Folder %s nie istnieje. Proszę utworzyć folder aby transfer może się rozpoczął!"
+msgstr "Folder %s nie istnieje. Utwórz folder aby rozpocząc transfer."
 
 msgid "The login/password does not seems valid!"
-msgstr "Login / hasło nie wydaje się prawidłowe!"
+msgstr "Login / hasło nieprawidłowe!"
 
 msgid "Please note that the files greater than this limit won't be included in the zip file!"
 msgstr "Pamiętaj, że pliki większe niż ten limit nie zostaną uwzględnione w pliku zip!"
@@ -315,7 +316,7 @@ msgid "Check this option if you want to save the images, the files, etc. that pe
 msgstr "Zaznacz tę opcję, jeśli chcesz, aby zapisać zdjęcia, pliki, itp., które ludzie załadowali do tworzenia artykułów / postów / stron."
 
 msgid "The upload directory for the main site:"
-msgstr "Katalog upload  dla głównej strony:"
+msgstr "Folder uploadu dla strony głównej:"
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
 msgstr "Zaznacz tę opcję, jeśli chcesz, aby zapisać zdjęcia, pliki itd., które zostały przesłane na Twoją główną stronę do tworzenia artykułów / postów / stron."
@@ -403,4 +404,103 @@ msgstr "Proszę czekać - wykonuję backup."
 
 msgid "This error message may also be generated if the chunk size is to high: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
 msgstr "Ten błąd może być również generowane, jeśli rozmiar kopii jest za wysoki: spróbuj najpierw ustawić rozmiar kawałka do 1Mo aby uniknąć przepełnienia pamięci serwera i zwiększaj go powoli ..."
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr "Jeśli chcesz otrzymać maila potwierdzającego wykonanie kopii zapasowej, wpisz tutaj swój adres"
+
+msgid "Customize the name of the files?"
+msgstr "Czy chcesz wprowadzić własną nazwę dla plików?"
+
+msgid "Add this string to the name of the files:"
+msgstr "Tutaj wpisz własną nazwę"
+
+msgid "The name of the files will be %s."
+msgstr "Ustawiono nazwę plików %s."
+
+msgid "% is a random string for security reasons."
+msgstr "%s jest przydzielana losowo ze względów bezpieczeństwa"
+
+msgid "% is the extension (i.e. %s)."
+msgstr "%s to rozszerzenie (czyli %s)."
+
+msgid "The SQL extraction is in progress (%s entries extracted)."
+msgstr "Trwa wyodrębnianie SQL (wyodrębniono %s rekordów)"
+
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr "Tworzenie archiwum ZIP (spakowano %s plików, w %s części. Obecny rozmiar archiwum to: %s."
+
+msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
+msgstr "Od %s sekund trwa zapis kopii zapasowej. Poczekaj %s sekund na ponowne uruchomienie"
+
+msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr "Ten błąd może się pojawiać jeśli kopia jest zbyt duża. Ustaw rozmiar kopii na 1Mb i zwiększaj go stopniowo."
+
+msgid "(SQL extraction - ending)"
+msgstr "(Wyodrębnianie SQL - kończenie)"
+
+msgid "(SQL extraction - nothing to be done)"
+msgstr "Nie trzeba wyodrębniać SQL"
+
+msgid "(FTP sending - ending)"
+msgstr "(Wysyłanie na serwer - kończenie)"
+
+msgid "(FTP sending - nothing to be done)"
+msgstr "Nie trzeba wysyłać na serwer"
+
+msgid "(MAIL sending - ending)"
+msgstr "(Wysyłanie na e-mail - kończenie)"
+
+msgid "(MAIL sending - nothing to be done)"
+msgstr "Nie trzeba wysyłać na e-mail"
+
+msgid "(END - ending)"
+msgstr "Kończenie"
+
+msgid "Please find hereafter a summary of the backup process."
+msgstr "Poniżej znajduje się podsumowanie procesu wykonania kopii zapasowej"
+
+msgid "Global synthesis"
+msgstr "Podsumowanie ogólne"
+
+msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
+msgstr "Backup rozpoczął się o %s i trwał %s minut(y) i %s sekund(y)."
+
+msgid "SQL synthesis"
+msgstr "Podsumowanie SQL"
+
+msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
+msgstr "Wyodrębnianie SQL rozpoczęło się o %s i trwało %s minut(y) i %s sekund(y)."
+
+msgid "%s entries have been extracted and have been stored in %s files."
+msgstr "Wyodrębniono %s rekordów i zapisano je w %s plikach"
+
+msgid "%s created on %s"
+msgstr "Utworzono %s o %s"
+
+msgid "ZIP synthesis"
+msgstr "Podsumowanie pakowania"
+
+msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
+msgstr "Tworzenie archiwum rozpoczęło się o %s i trwało %s minut(y) i %s sekund(y)."
+
+msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
+msgstr "Spakowano %s plików do %s części (zip, z01, z02, itd.)"
+
+msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
+msgstr "Uwaga! %s plików wyłączono z kopii zapasowej, ponieważ były za duże. (Dopuszczalny rozmiar kopii to %s MB)"
+
+msgid "%s (size %s)"
+msgstr "%s (rozmiar %s)"
+
+msgid "These zip files are accessible for %s days at the following path:"
+msgstr "Te pliki będą dostępne przez %s dni pod tym adresem:"
+
+msgid "FTP synthesis"
+msgstr "Podsumowanie FTP"
+
+msgid "The %s zip files have been stored on the specified FTP: %s"
+msgstr "%s archiwów znajduje się na serwerze %s"
+
+msgid "% is the string of the present option. You may set this option to %s."
+msgstr "Obecne ustawienie to %s. Możesz je zmienić na %s"
 

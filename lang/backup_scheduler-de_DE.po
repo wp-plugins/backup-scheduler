@@ -4,9 +4,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-10-31T11:03:07+00:00\n"
+"PO-Revision-Date: 2013-03-15T22:00:57+00:00\n"
 "Last-Translator: agent-test <http://www.simonlang.com/>\n"
 "Last-Translator: agent <www.simonlang.com>\n"
+"Last-Translator: bartdev2000 <benedikt.muessig@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -376,7 +377,7 @@ msgid "The process is still in progress for this backup (begun %s at %s)."
 msgstr "Der Vorgang für dieses Backup wird bereits ausgeführt ( begonnen %s am %s )."
 
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
-msgstr "( Bis jetzt gibt es keine Backup - Dateien... Sie sollten warten oder ein Backup ausführen ( siehe unten )"
+msgstr "(Bis jetzt gibt es keine Backups! Sie sollten warten oder ein Backup ausführen (s. unten))"
 
 msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
 msgstr "Bitte warten, ein Backup wird ausgeführt! Wenn Sie ein neues Backup ausühren wollen, aktualisieren Sie diese Seite und beenden vorher das aktuelle Backup."
@@ -386,4 +387,31 @@ msgstr "Es ist unmöglich die Datei %s im Ordner %s zu erzeugen. Bitte überprü
 
 msgid "Backup of %s on %s - FTP confirmation"
 msgstr "Backup von %s auf %s - FTP bestätigung"
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr "Wenn Sie nach dem Backupvorgangs benachrichtigt werden wollen, so geben sie bitte ihre Email ein:"
+
+msgid "Customize the name of the files?"
+msgstr "Wollen Sie den Dateinamen selbst verändern?"
+
+msgid "Add this string to the name of the files:"
+msgstr "Diesen String zum Dateinamen hinzufügen:"
+
+msgid "The name of the files will be %s."
+msgstr "Der Dateiname wird wie folgt sein: %s"
+
+msgid "FTP port:"
+msgstr "FTP Port:"
+
+msgid "By default the port is %s"
+msgstr "Standart: Port %s"
+
+msgid "% is a random string for security reasons."
+msgstr "% ist ein zufälliger String (zu Sicherheitszwecken)."
+
+msgid "% is the extension (i.e. %s)."
+msgstr "% ist die Dateiendung (z.B. %s)."
+
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr "Das ZIP Archiv wird erstellt... [%s Dateien in %s ZIP Archiven; Aktuelle Größe der ZIP Archive ist %s]"
 
