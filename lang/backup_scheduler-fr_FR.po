@@ -4,11 +4,12 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-02-15T12:44:32+00:00\n"
+"PO-Revision-Date: 2013-04-01T19:17:05+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Last-Translator: wkpixearts <wkpixeartsforall@gmail.com>\n"
 "Last-Translator: Matthieu <www.cliczone.fr>\n"
 "Last-Translator: mutmut <smuteau@gmail.com>\n"
+"Last-Translator: anonymous <tomdomenge@hotmail.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -460,4 +461,13 @@ msgstr "%s stocké sur %s"
 
 msgid "Backup of %s on %s"
 msgstr "Sauvegarde de %s sur %s"
+
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr "si %s est omis, alors il est automatiquement quand le plugin se connecte au FTP. c&#039;est très utile si vous avez une erreur 404 quand vous envoyez ces paramètres avec %s"
+
+msgid "The SQL extraction is in progress (%s entries extracted)."
+msgstr "L&#039;extraction SQL est en cours (%s tables extraites"
+
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr "La création du ZIP est en cours (%s fichiers ont été ajoutés dans le fichier zip et la taille actuelle du zip est de %s)."
 
