@@ -3,7 +3,7 @@
 Author: SedLex
 Contributors: SedLex
 Author URI: http://www.sedlex.fr/
-Plugin URI: http://wordpress.org/extend/plugins/backup-scheduler/
+Plugin URI: http://wordpress.org/plugins/backup-scheduler/
 Tags: backup, schedule, plugin, save, database, zip
 Requires at least: 3.0
 Tested up to: 3.5
@@ -33,16 +33,16 @@ Each blog administrator may save their own data. The super-admin may save either
 = Localization =
 
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab, scream
-* German (Germany) translation provided by agent-test, agent
+* German (Germany) translation provided by agent-test, agent, bartdev2000
 * English (United States), default language
 * Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives
 * Finnish (Finland) translation provided by AnttiSilvola
-* French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut
+* French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut, anonymous
 * Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
 * Dutch (Netherlands) translation provided by Matrix, WybAnema, Jay
-* Polish (Poland) translation provided by Opti, Lukasz, pablo, Misiek
+* Polish (Poland) translation provided by Opti, Lukasz, pablo, Misiek, MarekMackiewicz
 * Portuguese (Brazil) translation provided by RainilsonRodriguis
 * Portuguese (Portugal) translation provided by FranciscoRocha
 * Russian (Russia) translation provided by GerinG, Slawka
@@ -78,6 +78,12 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.4.4 =
+* Change the URL of the plugin on Wordpress
+
+= 1.4.3 =
+* Some modification
 
 = 1.4.2 =
 * Some issues in the framework
@@ -135,6 +141,18 @@ Have fun !
 
 == Frequently Asked Questions ==
 
+= Forced backup never ends (but there is no displayed error) =
+
+Be sure to stay on the configuration page : if you quit the page, the forced backup process will be killed !
+
+= Scheduled backup is stucked =
+
+Scheduled backup only works on website that have traffic.
+
+Indeed, each visits triggers a piece of the backup process. 
+
+Thus, if there is no traffic, the schedule backup process wont't occur. If there is very little traffic, the backup will be very long, etc
+
 = I have an error message indicating that another backup is running =
 
 This message may happen if the chunk size is set quite high. For instance, 40 Mo is clearly too big and server  server configuration of many webhosters will kill scripts which use too much memory.
@@ -179,4 +197,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:f4afc826dadc1adeef9c64a70d22e4f7
+InfoVersion:939f68c7c9da8e82ac314fece0161ab7

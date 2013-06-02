@@ -4,15 +4,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-12-19T12:13:43+00:00\n"
+"PO-Revision-Date: 2013-04-07T14:09:18+00:00\n"
 "Last-Translator: AnttiSilvola <antti.silvola@seamk.fi>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"
-"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: Finland\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;\n"
 "X-Poedit-Basepath: \n"
@@ -22,6 +22,9 @@ msgstr ""
 
 msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
 msgstr "Tämä lisäosa mahdollistaa sivustosi ajastetun varmuuskopioinnin - helposti ja tehokkaasti!"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr ""
 
 msgid "How often do you want to backup your website?"
 msgstr "Kuinka usein haluat varmuuskopioida sivustosi?"
@@ -40,6 +43,27 @@ msgstr "Huomioi myös, että varmuuskopiointi vie aikaa, etenkin jos sivustolla 
 
 msgid "Keep the backup files for (in days):"
 msgstr "Säilytä varmuuskopiot (päivää):"
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr ""
+
+msgid "Customize the name of the files?"
+msgstr ""
+
+msgid "Add this string to the name of the files:"
+msgstr ""
+
+msgid "The name of the files will be %s."
+msgstr ""
+
+msgid "% is the string of the present option. You may set this option to %s."
+msgstr ""
+
+msgid "% is a random string for security reasons."
+msgstr ""
+
+msgid "% is the extension (i.e. %s)."
+msgstr ""
 
 msgid "What do you want to save?"
 msgstr "Mitä tallennetaan?"
@@ -89,11 +113,23 @@ msgstr "Latauskansio:"
 msgid "The SQL database:"
 msgstr "SQL-tietokanta:"
 
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr ""
+
 msgid "All SQL databases:"
 msgstr "kaikki SQL-tietokannat:"
 
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr ""
+
 msgid "Only your SQL database:"
 msgstr "Vain sinun SQL-tietokantasi:"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
+msgstr ""
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr ""
 
 msgid "The maximum file size (in MB):"
 msgstr "Tiedoston maksimikoko (MB):"
@@ -131,6 +167,9 @@ msgstr "FTP-isäntä:"
 msgid "Should be at the form %s or %s"
 msgstr "Muodossa %s tai %s"
 
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr ""
+
 msgid "FTP port:"
 msgstr "FTP-portti:"
 
@@ -144,13 +183,10 @@ msgid "Your FTP pass:"
 msgstr "FTP-salasana"
 
 msgid "Click on that button %s to test if the above information is correct"
-msgstr "Paina nappia  varmistaaksesi antamiesi tietojen toimivuuden."
+msgstr "Paina nappia %s varmistaaksesi antamiesi tietojen toimivuuden."
 
 msgid "Test"
 msgstr "Kokeile"
-
-msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
-msgstr "Jos haluat ilmoituksen FTP-tallennuksen valmistuttua, syötä sähköpostiosoitteesi:"
 
 msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
 msgstr "PHP-asennuksesi ei tie FTP-ominaisuuksia, joten tätä ominaisuutta ei voida käyttää. Pahoittelumme."
@@ -161,8 +197,23 @@ msgstr "Lisäasetukset:"
 msgid "What is the maximum size of allocated memory (in MB):"
 msgstr "Käytettävän muistin enimmäismäärä (MB):"
 
+msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
+msgstr ""
+
+msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
+msgstr ""
+
+msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
+msgstr ""
+
 msgid "Please note that the files greater than this limit won't be included in the zip file!"
 msgstr "Huomaa, että tätä suurempia tiedostoja ei sisällytetä zip-tiedostoon!"
+
+msgid "What is the maximum time for the php scripts execution (in seconds):"
+msgstr ""
+
+msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
+msgstr ""
 
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
 msgstr "Tässä ovat varmuuskopiosi. Voit pakottaa uuden varmuuskopioinnin tai ladata vanhoja varmuuskopioita."
@@ -196,6 +247,12 @@ msgstr "Pura nämä tiedostot purkuohjelmalla, joka tukee moniosaisia zip-pakett
 
 msgid "Save the extracted files on your webserver."
 msgstr "Tallenna puretut tiedostot palvelimelle."
+
+msgid "Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first)."
+msgstr "Palauta SQL-tiedostot (*.sql1,*.sql2 jne.) phpmyadminilla. (On suositeltavaa tallentaa tietokanta ensin..)"
+
+msgid "To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:"
+msgstr "Palauttaaksesi varmuuskopioita vain joistan hakemistoista, seuraa näitä ohjeita:"
 
 msgid "Install a fresh version of Wordpress on your webserver."
 msgstr "Asenna puhdas Wordpress palvelimellesi."
@@ -231,7 +288,7 @@ msgid "Part %s"
 msgstr "Osa %s"
 
 msgid "Backup finished on %s at %s"
-msgstr "Varmuuskopiointi valmistunut %s"
+msgstr "Varmuuskopiointi valmistunut %s at %s"
 
 msgid "The total size of the files is %s"
 msgstr "Tiedostojen lukumäärä on %s"
@@ -243,13 +300,16 @@ msgid "Delete these backup files"
 msgstr "Poista nämä varmuuskopiot"
 
 msgid "The process is still in progress for this backup (begun %s at %s)."
-msgstr "Prosessi on vielä kesken."
+msgstr "Prosessi on vielä kesken (begun %s at %s)."
 
-msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
-msgstr "Zip-paketin luonti kesken (%s tiedostoa lisätty pakettiin, paketin tämänhetkinen koko on %s)."
+msgid "The SQL extraction is in progress (%s entries extracted)."
+msgstr ""
+
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr ""
 
 msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
-msgstr "FTP-lähetys on kesken (% tiedostoa tallennettu FTP-palvelimelle)."
+msgstr "FTP-lähetys on kesken (%s tiedostoa tallennettu FTP-palvelimelle)."
 
 msgid "The MAIL sending is in progress (%s files has been sent)."
 msgstr "Sähköpostin lähetys on kesken (%s tiedostoa lähetetty)."
@@ -263,8 +323,20 @@ msgstr "Ole hyvä ja odota..."
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "Toistaiseksi varmuuskopiota ei ole. Odota tai pakota varmuuskopiointi (katso alta)."
 
-msgid "Please wait, a backup is in progress!"
-msgstr "Ole hyvä ja odota, varmuuskopiointi kesken!"
+msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
+msgstr ""
+
+msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr ""
+
+msgid "(SQL extraction - ending)"
+msgstr ""
+
+msgid "(SQL extraction)"
+msgstr ""
+
+msgid "(SQL extraction - nothing to be done)"
+msgstr ""
 
 msgid "(ZIP creation)"
 msgstr "(ZIP-tiedoston luonti)"
@@ -272,14 +344,32 @@ msgstr "(ZIP-tiedoston luonti)"
 msgid "(FTP sending)"
 msgstr "(FTP-lähetys)"
 
+msgid "(FTP sending - ending)"
+msgstr ""
+
+msgid "(FTP sending - nothing to be done)"
+msgstr ""
+
+msgid "Backup of %s on %s (%s)"
+msgstr ""
+
 msgid "(MAIL sending)"
 msgstr "(Sähköpostin lähetys)"
 
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr ""
+
+msgid "(MAIL sending - ending)"
+msgstr ""
+
+msgid "(MAIL sending - nothing to be done)"
+msgstr ""
+
+msgid "(END - ending)"
+msgstr ""
+
 msgid "An unknown error occured!"
 msgstr "Tuntematon virhe!"
-
-msgid "The process has been canceled by a third person"
-msgstr "Prosessi peruttu"
 
 msgid "A new backup has been generated!"
 msgstr "Uusi varmuuskopio luotu!"
@@ -287,11 +377,80 @@ msgstr "Uusi varmuuskopio luotu!"
 msgid "Dear sirs,"
 msgstr "Hei!"
 
+msgid "Here is attached the %s on %s backup files for today"
+msgstr ""
+
 msgid "Best regards,"
 msgstr "Terveisin,"
 
+msgid "Please find hereafter a summary of the backup process."
+msgstr ""
+
+msgid "Global synthesis"
+msgstr ""
+
+msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "SQL synthesis"
+msgstr ""
+
+msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s entries have been extracted and have been stored in %s files."
+msgstr ""
+
+msgid "%s created on %s"
+msgstr ""
+
+msgid "ZIP synthesis"
+msgstr ""
+
+msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
+msgstr ""
+
+msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
+msgstr ""
+
+msgid "%s (size %s)"
+msgstr ""
+
+msgid "These zip files are accessible for %s days at the following path:"
+msgstr ""
+
+msgid "FTP synthesis"
+msgstr ""
+
+msgid "The %s zip files have been stored on the specified FTP: %s"
+msgstr ""
+
+msgid "%s stored on %s"
+msgstr ""
+
+msgid "Backup of %s on %s"
+msgstr ""
+
 msgid "No host has been defined"
 msgstr "Isäntää ei ole määritelty"
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr ""
+
+msgid "The host %s cannot be resolved!"
+msgstr "Isäntää %s ei tavoiteta!"
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr ""
+
+msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
+msgstr ""
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr ""
 
 msgid "The login/password does not seems valid!"
 msgstr "Käyttäjätunnus/salasana virheellinen!"
@@ -304,19 +463,4 @@ msgstr "PASV-moodin siirtyminen ei ole mahdollista"
 
 msgid "Everything OK!"
 msgstr "Kaikki kunnossa!"
-
-msgid "Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first)."
-msgstr "Palauta SQL-tiedostot (*.sql1,*.sql2 jne.) phpmyadminilla. (On suositeltavaa tallentaa tietokanta ensin..)"
-
-msgid "To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:"
-msgstr "Palauttaaksesi varmuuskopioita vain joistan hakemistoista, seuraa näitä ohjeita:"
-
-msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
-msgstr "Tiedoston %s luominen hkemistoon %s ei onnistu. Ole hyvä ja tarkista luku- ja kirjoitusoikeudet"
-
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr "Toinen varmuuskopiointi on vielä kesken (%s sekuntia)... Ole hyvä ja odota!"
-
-msgid "The host %s cannot be resolved!"
-msgstr "Isäntää ei tavoiteta!"
 

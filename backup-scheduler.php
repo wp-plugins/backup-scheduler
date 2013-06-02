@@ -3,15 +3,13 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.4.3
-
-
+Version: 1.4.4
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
 Framework Email: sedlex@sedlex.fr
 Author URI: http://www.sedlex.fr/
-Plugin URI: http://wordpress.org/extend/plugins/backup-scheduler/
+Plugin URI: http://wordpress.org/plugins/backup-scheduler/
 License: GPL3
 */
 
@@ -302,9 +300,9 @@ class backup_scheduler extends pluginSedLex {
 				$params->add_title(__('Customize the name of the files?',$this->pluginID)) ; 
 				$params->add_param('add_name', __('Add this string to the name of the files:',$this->pluginID)) ; 
 				$params->add_comment(sprintf(__('The name of the files will be %s.',$this->pluginID), "<code>BackupScheduler<%addname%>_<%date%>_<%random%>.<%extension%></code>")) ; 
-				$params->add_comment(sprintf(__('% is the string of the present option. You may set this option to %s.',$this->pluginID), "<code><%addname%></code>","<code>_CustomName</code>")) ; 
-				$params->add_comment(sprintf(__('% is a random string for security reasons.',$this->pluginID), "<code><%random%></code>")) ; 
-				$params->add_comment(sprintf(__('% is the extension (i.e. %s).',$this->pluginID), "<code><%extension%></code>", "<code>zip</code>, <code>z01</code>, <code>z02</code>, <code>z03</code>, ...")) ; 
+				$params->add_comment(sprintf(__('%s is the string of the present option. You may set this option to %s.',$this->pluginID), "<code><%addname%></code>","<code>_CustomName</code>")) ; 
+				$params->add_comment(sprintf(__('%s is a random string for security reasons.',$this->pluginID), "<code><%random%></code>")) ; 
+				$params->add_comment(sprintf(__('%s is the extension (i.e. %s).',$this->pluginID), "<code><%extension%></code>", "<code>zip</code>, <code>z01</code>, <code>z02</code>, <code>z03</code>, ...")) ; 
 				
 				$params->add_title(__('What do you want to save?',$this->pluginID)) ; 
 				

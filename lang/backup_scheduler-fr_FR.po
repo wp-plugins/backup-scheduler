@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-04-01T19:17:05+00:00\n"
+"PO-Revision-Date: 2013-04-07T14:12:17+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Last-Translator: wkpixearts <wkpixeartsforall@gmail.com>\n"
 "Last-Translator: Matthieu <www.cliczone.fr>\n"
@@ -47,6 +47,27 @@ msgstr "Merci de noter également que la sauvegarde ne se terminera pas exacteme
 
 msgid "Keep the backup files for (in days):"
 msgstr "Garder les fichiers de sauvegardes pendant (en jours) :"
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr "Si vous voulez être notifié quand la sauvegarde est terminée, merci de mettre votre e-mail :"
+
+msgid "Customize the name of the files?"
+msgstr "Personnaliser le nom des fichiers ?"
+
+msgid "Add this string to the name of the files:"
+msgstr "Ajouter cette chaîne de caractères au nom des fichiers :"
+
+msgid "The name of the files will be %s."
+msgstr "Le nom des fichiers sera %s."
+
+msgid "% is the string of the present option. You may set this option to %s."
+msgstr "% est la chaîne de caractère de cette option. Vous devriez mettre cette option à %s."
+
+msgid "% is a random string for security reasons."
+msgstr "% est une chaîne de caractère aléatoire pour des raisons de sécurité."
+
+msgid "% is the extension (i.e. %s)."
+msgstr "% est l&#039;extension (c&#039;est-à-dire %s)."
 
 msgid "What do you want to save?"
 msgstr "Que voulez-vous sauvegarder ?"
@@ -150,6 +171,9 @@ msgstr "Hôte FTP:"
 msgid "Should be at the form %s or %s"
 msgstr "Devrait être de la forme %s ou %s"
 
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr "si %s est omis, alors il est automatiquement quand le plugin se connecte au FTP. c&#039;est très utile si vous avez une erreur 404 quand vous envoyez ces paramètres avec %s"
+
 msgid "FTP port:"
 msgstr "Port FTP :"
 
@@ -167,9 +191,6 @@ msgstr "Cliquez sur ce bouton %s pour verifier si les informations ci-dessus son
 
 msgid "Test"
 msgstr "Tester"
-
-msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
-msgstr "Si vous voulez être notifié quand le stockage FTP est terminé, merci d&#039;indiquer votre email :"
 
 msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
 msgstr "Votre Installation PHP ne supporte pas les fonctionnalités FTP, ainsi, cette option a été desactivée! Désolée..."
@@ -285,11 +306,11 @@ msgstr "Effacer ces fichiers de sauvegarde"
 msgid "The process is still in progress for this backup (begun %s at %s)."
 msgstr "Le processus est toujours en cours pour cette sauvegarde (commencé le %s à %s)"
 
-msgid "The SQL extraction is in progress (%s tables extracted)."
-msgstr "L&#039;extraction SQL est en cours (%s tables extraites)."
+msgid "The SQL extraction is in progress (%s entries extracted)."
+msgstr "L&#039;extraction SQL est en cours (%s tables extraites"
 
-msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
-msgstr "La création du ZIP est en cours (%s fichiers ont été ajoutés dans le fichier zip et la taille actuelle du zip est de %s)."
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr "La création du ZIP est en cours (%s fichiers ont été ajoutés dans le fichier zip %s et la taille actuelle du zip est de %s)."
 
 msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
 msgstr "L&#039;envoi FTP est en cours (%s fichiers ont été stockés sur le FTP)."
@@ -306,26 +327,32 @@ msgstr "Merci de patienter ..."
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "(Pour l&#039;instant, il n&#039;y a pas de fichiers de sauvegarde... Vous devriez attendre ou vous pouvez forcer une sauvegarde (voir ci-dessous) )"
 
-msgid "Please wait, a backup is in progress!"
-msgstr "Merci d&#039;attendre, une sauvegarde est en cours !"
+msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
+msgstr "Veuillez patienter, une sauvegarde est en ours pour %s secondes ! Attendez pendant %s secondes pour une redémarrage automatique."
 
-msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
-msgstr "Il est impossible de créer le fichier %s dans le dossier %s. Merci de vérifier les droits d&#039;accès aux dossiers/fichiers."
+msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr ""
 
-msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
-msgstr "Une autre extraction SQL est en cours (depuis %s secondes)... Merci de patienter !"
+msgid "(SQL extraction - ending)"
+msgstr "(Extraction SQL - fin)"
 
 msgid "(SQL extraction)"
 msgstr "(Extraction SQL)"
 
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr "Une autre sauvegarde est en cours (depuis %s secondes)... Merci de patienter !"
+msgid "(SQL extraction - nothing to be done)"
+msgstr "(Extraction SQL - rien à faire)"
 
 msgid "(ZIP creation)"
 msgstr "(Création du ZIP)"
 
 msgid "(FTP sending)"
 msgstr "(Envoi FTP)"
+
+msgid "(FTP sending - ending)"
+msgstr "(Envoi FTP - fin)"
+
+msgid "(FTP sending - nothing to be done)"
+msgstr "(Envoi FTP - rien à faire)"
 
 msgid "Backup of %s on %s (%s)"
 msgstr "Sauvegarde de %s le %s (%s)"
@@ -336,14 +363,17 @@ msgstr "(Envoi Mail)"
 msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
 msgstr "Votre installation de Wordpress ne peut pas envoyer de mail (avec de lourdes pièces-jointes) !"
 
-msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
-msgstr "Le fichier %s ne peut pas être effacé. Vous devez avoir un problème avec les droits d&#039;accès aux fichiers ou des restrictions de sécurité."
+msgid "(MAIL sending - ending)"
+msgstr "(Envoi Mail - fin)"
+
+msgid "(MAIL sending - nothing to be done)"
+msgstr "(Envoi Mail - rien à faire)"
+
+msgid "(END - ending)"
+msgstr "(FIN - fin"
 
 msgid "An unknown error occured!"
 msgstr "Une erreur inconnue est survenue"
-
-msgid "The process has been canceled by a third person"
-msgstr "Le processus a été annulé par une tierce personne."
 
 msgid "A new backup has been generated!"
 msgstr "Une nouvelle sauvegarde a été générée !"
@@ -357,14 +387,56 @@ msgstr "Voici en pièce-jointe le %s sur %s fichiers de sauvegarde pour aujourd&
 msgid "Best regards,"
 msgstr "Salutations,"
 
-msgid "%s backup files has been successfully saved on your FTP (%s)"
-msgstr "%s fichiers de sauvegarde ont été sauvés sur votre FTP (%s)"
+msgid "Please find hereafter a summary of the backup process."
+msgstr ""
 
-msgid "To download them, please click on the following links:"
-msgstr "Pour les télécharger, merci de cliquer sur les liens ci-dessous:"
+msgid "Global synthesis"
+msgstr "Synthèse globale"
 
-msgid "Backup of %s on %s - FTP confirmation"
-msgstr "Sauvegarde de %s le %s - Confirmation FTP"
+msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "SQL synthesis"
+msgstr "Synthèse SQL"
+
+msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s entries have been extracted and have been stored in %s files."
+msgstr ""
+
+msgid "%s created on %s"
+msgstr ""
+
+msgid "ZIP synthesis"
+msgstr "Synthèse ZIP"
+
+msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
+msgstr ""
+
+msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
+msgstr ""
+
+msgid "%s (size %s)"
+msgstr "%s (taille %s)"
+
+msgid "These zip files are accessible for %s days at the following path:"
+msgstr ""
+
+msgid "FTP synthesis"
+msgstr "Synthèse FTP"
+
+msgid "The %s zip files have been stored on the specified FTP: %s"
+msgstr ""
+
+msgid "%s stored on %s"
+msgstr "%s stocké sur %s"
+
+msgid "Backup of %s on %s"
+msgstr "Sauvegarde de %s sur %s"
 
 msgid "No host has been defined"
 msgstr "Aucun hôte n&#039;a été défini"
@@ -395,79 +467,4 @@ msgstr "Il semble impossible de passer en mode PASV"
 
 msgid "Everything OK!"
 msgstr "Tout est Ok!"
-
-msgid "If you want to be notify when the backup process is finished, please enter your email:"
-msgstr "Si vous voulez être notifié quand la sauvegarde est terminée, merci de mettre votre e-mail :"
-
-msgid "Customize the name of the files?"
-msgstr "Personnaliser le nom des fichiers ?"
-
-msgid "Add this string to the name of the files:"
-msgstr "Ajouter cette chaîne de caractères au nom des fichiers :"
-
-msgid "The name of the files will be %s."
-msgstr "Le nom des fichiers sera %s."
-
-msgid "% is the string of the present option. You may set this option to %s."
-msgstr "% est la chaîne de caractère de cette option. Vous devriez mettre cette option à %s."
-
-msgid "% is a random string for security reasons."
-msgstr "% est une chaîne de caractère aléatoire pour des raisons de sécurité."
-
-msgid "% is the extension (i.e. %s)."
-msgstr "% est l&#039;extension (c&#039;est-à-dire %s)."
-
-msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
-msgstr "Veuillez patienter, une sauvegarde est en ours pour %s secondes ! Attendez pendant %s secondes pour une redémarrage automatique."
-
-msgid "(SQL extraction - ending)"
-msgstr "(Extraction SQL - fin)"
-
-msgid "(SQL extraction - nothing to be done)"
-msgstr "(Extraction SQL - rien à faire)"
-
-msgid "(FTP sending - ending)"
-msgstr "(Envoi FTP - fin)"
-
-msgid "(FTP sending - nothing to be done)"
-msgstr "(Envoi FTP - rien à faire)"
-
-msgid "(MAIL sending - ending)"
-msgstr "(Envoi Mail - fin)"
-
-msgid "(MAIL sending - nothing to be done)"
-msgstr "(Envoi Mail - rien à faire)"
-
-msgid "(END - ending)"
-msgstr "(FIN - fin"
-
-msgid "Global synthesis"
-msgstr "Synthèse globale"
-
-msgid "SQL synthesis"
-msgstr "Synthèse SQL"
-
-msgid "ZIP synthesis"
-msgstr "Synthèse ZIP"
-
-msgid "%s (size %s)"
-msgstr "%s (taille %s)"
-
-msgid "FTP synthesis"
-msgstr "Synthèse FTP"
-
-msgid "%s stored on %s"
-msgstr "%s stocké sur %s"
-
-msgid "Backup of %s on %s"
-msgstr "Sauvegarde de %s sur %s"
-
-msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
-msgstr "si %s est omis, alors il est automatiquement quand le plugin se connecte au FTP. c&#039;est très utile si vous avez une erreur 404 quand vous envoyez ces paramètres avec %s"
-
-msgid "The SQL extraction is in progress (%s entries extracted)."
-msgstr "L&#039;extraction SQL est en cours (%s tables extraites"
-
-msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
-msgstr "La création du ZIP est en cours (%s fichiers ont été ajoutés dans le fichier zip et la taille actuelle du zip est de %s)."
 

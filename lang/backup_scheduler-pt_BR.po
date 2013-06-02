@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-08-17T03:44:01+00:00\n"
+"PO-Revision-Date: 2013-04-07T14:27:38+00:00\n"
 "Last-Translator: RainilsonRodriguis <www.upclassificados.com.br>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgid "This plugin enables scheduled backup of important part of your website : 
 msgstr "Este plugin permite backup agendado de uma parte importante do seu site: simples de usar e eficiente!"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr "Desculpe, mas você deve instalar / ativar% s em seu site. Caso contrário, este plugin não funcionará corretamente!"
+msgstr "Desculpe, mas você deve instalar / ativar %s em seu site. Caso contrário, este plugin não funcionará corretamente!"
 
 msgid "How often do you want to backup your website?"
 msgstr "Quantas vezes você quer fazer backup de seu site?"
@@ -44,11 +44,32 @@ msgstr "Observe também que o backup não será terminar exatamente naquele mome
 msgid "Keep the backup files for (in days):"
 msgstr "Mantenha os arquivos de backup (em dias):"
 
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr ""
+
+msgid "Customize the name of the files?"
+msgstr ""
+
+msgid "Add this string to the name of the files:"
+msgstr ""
+
+msgid "The name of the files will be %s."
+msgstr ""
+
+msgid "% is the string of the present option. You may set this option to %s."
+msgstr ""
+
+msgid "% is a random string for security reasons."
+msgstr ""
+
+msgid "% is the extension (i.e. %s)."
+msgstr ""
+
 msgid "What do you want to save?"
 msgstr "O que você quer salvar?"
 
 msgid "All directories (the full Wordpress installation):"
-msgstr " Todos os diretórios (a instalação Wordpress completo):"
+msgstr "Todos os diretórios (a instalação Wordpress completo):"
 
 msgid "(i.e. %s)"
 msgstr "(i.e. %s)"
@@ -69,7 +90,7 @@ msgid "Check this option if you want to save all themes that you have installed 
 msgstr "Marque esta opção se você quer salvar todos os temas que você tenha instalado e que você usa no site."
 
 msgid "The upload directory for this blog:"
-msgstr " O diretório de upload para este blog"
+msgstr "O diretório de upload para este blog"
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
 msgstr "Marque esta opção se você deseja salvar as imagens, os arquivos, etc, que você enviou em seu site para criar os seus artigos / posts / páginas."
@@ -81,7 +102,7 @@ msgid "Check this option if you want to save the images, the files, etc. that pe
 msgstr "Marque esta opção se você deseja salvar as imagens, os arquivos, etc, que as pessoas adicionaram em seus sites para criar artigos / posts / páginas."
 
 msgid "The upload directory for the main site:"
-msgstr " O diretório de upload para o site principal:"
+msgstr "O diretório de upload para o site principal:"
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
 msgstr "Marque esta opção se você deseja salvar as imagens, os arquivos, etc, que você enviou em seu site principal para criar seus artigos / posts / páginas."
@@ -144,7 +165,16 @@ msgid "FTP host:"
 msgstr "Host FTP:"
 
 msgid "Should be at the form %s or %s"
-msgstr "Deve estar no formulário% s ou% s"
+msgstr "Deve estar no formulário %s ou %s"
+
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr ""
+
+msgid "FTP port:"
+msgstr ""
+
+msgid "By default the port is %s"
+msgstr ""
 
 msgid "Your FTP login:"
 msgstr "Seu login FTP:"
@@ -153,13 +183,10 @@ msgid "Your FTP pass:"
 msgstr "Seu passe FTP:"
 
 msgid "Click on that button %s to test if the above information is correct"
-msgstr "Clique nesse botão% s para testar se a informação acima está correta"
+msgstr "Clique nesse botão %s para testar se a informação acima está correta"
 
 msgid "Test"
 msgstr "Teste"
-
-msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
-msgstr "Se você quiser ser notificado quando o armazenamento FTP terminar, digite seu e-mail:"
 
 msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
 msgstr "Sua instalação do PHP não suporta as funcionalidades de FTP, assim, esta opção foi desabilitada! Desculpe ..."
@@ -174,7 +201,7 @@ msgid "On some Wordpress installation, you may have memory issues. Thus, try to 
 msgstr "Em alguns instalação Wordpress, você pode ter problemas de memória. Assim, tentar reduzir este número se você enfrentar tal erro."
 
 msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
-msgstr "Para sua informação, o limite de memória do seu servidor é% s enquanto que o uso de memória atual é% s."
+msgstr "Para sua informação, o limite de memória do seu servidor é %s enquanto que o uso de memória atual é %s."
 
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr "Recomenda-se que o tamanho máximo de anexo não está definido para um valor maior do que este."
@@ -192,13 +219,13 @@ msgid "Here is the backup files. You can force a new backup or download previous
 msgstr "Aqui está os arquivos de backup. Você pode forçar um novo backup ou download de arquivos de backup anteriores."
 
 msgid "Please note that the current GMT time of the server is %s. If it is not correct, please configure the Wordpress installation correctly."
-msgstr "Por favor, note que o tempo atual GMT do servidor é% s. Se não é correto, por favor configure a instalação Wordpress corretamente."
+msgstr "Por favor, note que o tempo atual GMT do servidor é %s. Se não é correto, por favor configure a instalação Wordpress corretamente."
 
 msgid "An automatic backup will be launched in %s days and %s hours."
-msgstr "Um backup automático será lançado no dia% s horas e% s."
+msgstr "Um backup automático será lançado no dia %s horas e %s."
 
 msgid "The backup process has started %s hours ago but has not finished yet."
-msgstr "O processo de backup foi iniciado hora% s atrás, mas não terminou ainda."
+msgstr "O processo de backup foi iniciado hora %s atrás, mas não terminou ainda."
 
 msgid "Force a new backup (with Mail/FTP)"
 msgstr "Forçar uma nova cópia de segurança (com Mail / FTP)"
@@ -246,7 +273,7 @@ msgid "Manage translations"
 msgstr "Gerir traduções"
 
 msgid "Give feedback"
-msgstr " Dê feedback"
+msgstr "Dê feedback"
 
 msgid "Other plugins"
 msgstr "Outros plugins"
@@ -258,34 +285,34 @@ msgid "Backup files"
 msgstr "Os arquivos de backup"
 
 msgid "Part %s"
-msgstr "Parte% s"
+msgstr "Parte %s"
 
 msgid "Backup finished on %s at %s"
-msgstr "Backup foi concluído em% s em% s"
+msgstr "Backup foi concluído em %s em %s"
 
 msgid "The total size of the files is %s"
-msgstr "O tamanho total dos arquivos é% s"
+msgstr "O tamanho total dos arquivos é %s"
 
 msgid "These files will be deleted in %s days"
-msgstr "Esses arquivos serão excluídos no dia% s"
+msgstr "Esses arquivos serão excluídos no dia %s"
 
 msgid "Delete these backup files"
 msgstr "Excluir esses arquivos de backup"
 
 msgid "The process is still in progress for this backup (begun %s at %s)."
-msgstr "O processo ainda está em andamento para este backup (% s começou em% s)."
+msgstr "O processo ainda está em andamento para este backup (%s começou em %s)."
 
-msgid "The SQL extraction is in progress (%s tables extracted)."
-msgstr "A extração SQL está em andamento (tabelas% s extraído)."
+msgid "The SQL extraction is in progress (%s entries extracted)."
+msgstr ""
 
-msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
-msgstr "A criação ZIP está em andamento (arquivos% s foi adicionado no arquivo zip e o tamanho atual do zip é% s)."
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr ""
 
 msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
-msgstr "O envio FTP está em andamento (arquivos% s foi armazenado no FTP)."
+msgstr "O envio FTP está em andamento (arquivos %s foi armazenado no FTP)."
 
 msgid "The MAIL sending is in progress (%s files has been sent)."
-msgstr "O envio de email está em andamento (arquivos% s foi enviado)."
+msgstr "O envio de email está em andamento (arquivos %s foi enviado)."
 
 msgid "Cancel this process"
 msgstr "Cancelar este processo de"
@@ -296,20 +323,20 @@ msgstr "Por favor, aguarde ..."
 msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
 msgstr "(Por enquanto, não há arquivos de backup ... Você deve esperar ou forçar um backup (veja abaixo))"
 
-msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
-msgstr "Aguarde, um backup está em andamento! Se você quiser forçar uma nova cópia de segurança, atualize a página e acabar com a cópia de segurança actual primeiro."
+msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
+msgstr ""
 
-msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
-msgstr "É impossível criar o arquivo% s na pasta% s. Por favor, verifique pasta / arquivo permissões."
+msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr ""
 
-msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
-msgstr " Uma extração SQL outro ainda está em andamento (por segundo% s) ... Por favor, aguarde!"
+msgid "(SQL extraction - ending)"
+msgstr ""
 
 msgid "(SQL extraction)"
 msgstr "(Extração SQL)"
 
-msgid "An other backup is still in progress (for %s seconds)... Please wait!"
-msgstr "Um backup outro ainda está em andamento (por segundo% s) ... Por favor, aguarde!"
+msgid "(SQL extraction - nothing to be done)"
+msgstr ""
 
 msgid "(ZIP creation)"
 msgstr "(Criação ZIP)"
@@ -317,8 +344,14 @@ msgstr "(Criação ZIP)"
 msgid "(FTP sending)"
 msgstr "(Envio FTP)"
 
+msgid "(FTP sending - ending)"
+msgstr ""
+
+msgid "(FTP sending - nothing to be done)"
+msgstr ""
+
 msgid "Backup of %s on %s (%s)"
-msgstr "Backup de% s em% s (% s)"
+msgstr "Backup de %s em %s (%s)"
 
 msgid "(MAIL sending)"
 msgstr "(Envio de email)"
@@ -326,14 +359,17 @@ msgstr "(Envio de email)"
 msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
 msgstr "Sua instalação Wordpress não pode enviar e-mails (com anexos pesados)!"
 
-msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
-msgstr "O arquivo% s não pode ser excluído. Você deve ter um problema com permissões de arquivos ou restrições de segurança."
+msgid "(MAIL sending - ending)"
+msgstr ""
+
+msgid "(MAIL sending - nothing to be done)"
+msgstr ""
+
+msgid "(END - ending)"
+msgstr ""
 
 msgid "An unknown error occured!"
 msgstr "Ocorreu um erro desconhecido!"
-
-msgid "The process has been canceled by a third person"
-msgstr "O processo foi cancelado por uma terceira pessoa"
 
 msgid "A new backup has been generated!"
 msgstr "Um novo backup foi gerado!"
@@ -342,19 +378,61 @@ msgid "Dear sirs,"
 msgstr "Prezados senhores,"
 
 msgid "Here is attached the %s on %s backup files for today"
-msgstr "Aqui está ligado a% s em arquivos de backup% s para hoje"
+msgstr "Aqui está ligado a %s em arquivos de backup %s para hoje"
 
 msgid "Best regards,"
 msgstr "Com os melhores cumprimentos,"
 
-msgid "%s backup files has been successfully saved on your FTP (%s)"
-msgstr "Arquivos de backup% s foi salva com sucesso em seu FTP (% s)"
+msgid "Please find hereafter a summary of the backup process."
+msgstr ""
 
-msgid "To download them, please click on the following links:"
-msgstr "Para baixá-los, clique nos links abaixo:"
+msgid "Global synthesis"
+msgstr ""
 
-msgid "Backup of %s on %s - FTP confirmation"
-msgstr "Backup de% s em% s - confirmação FTP"
+msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "SQL synthesis"
+msgstr ""
+
+msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s entries have been extracted and have been stored in %s files."
+msgstr ""
+
+msgid "%s created on %s"
+msgstr ""
+
+msgid "ZIP synthesis"
+msgstr ""
+
+msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
+msgstr ""
+
+msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
+msgstr ""
+
+msgid "%s (size %s)"
+msgstr ""
+
+msgid "These zip files are accessible for %s days at the following path:"
+msgstr ""
+
+msgid "FTP synthesis"
+msgstr ""
+
+msgid "The %s zip files have been stored on the specified FTP: %s"
+msgstr ""
+
+msgid "%s stored on %s"
+msgstr ""
+
+msgid "Backup of %s on %s"
+msgstr ""
 
 msgid "No host has been defined"
 msgstr "Nenhum host foi definido"
@@ -363,22 +441,22 @@ msgid "Your PHP installation does not support SSL features... Thus, please use a
 msgstr "Sua instalação do PHP não suporta as funcionalidades SSL ... Assim, por favor use um FTP padrão e não um FTPS!"
 
 msgid "The host %s cannot be resolved!"
-msgstr "O host% s não pode ser resolvido!"
+msgstr "O host %s não pode ser resolvido!"
 
 msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
-msgstr "O arquivo% s não pode ser transferido para o repositório FTP! Os ftp_put função retorna:% s"
+msgstr "O arquivo %s não pode ser transferido para o repositório FTP! Os ftp_put função retorna: %s"
 
 msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
-msgstr " O arquivo% s não pode ser transferido para o repositório FTP e modo PASV não podem ser inseridos:% s"
+msgstr "O arquivo %s não pode ser transferido para o repositório FTP e modo PASV não podem ser inseridos: %s"
 
 msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
-msgstr "O% s especificado pasta não existe. Por favor, crie-o de modo que a transferência pode começar!"
+msgstr "O %s especificado pasta não existe. Por favor, crie-o de modo que a transferência pode começar!"
 
 msgid "The login/password does not seems valid!"
 msgstr "A senha de login / não parece válido!"
 
 msgid "The folder %s does not seems to be writable"
-msgstr "A pasta% s não parece ser gravável"
+msgstr "A pasta %s não parece ser gravável"
 
 msgid "It seems impossible to switch to PASV mode"
 msgstr "Parece impossível para mudar para o modo PASV"
