@@ -197,6 +197,8 @@ if (!class_exists("SL_Zip")) {
 			$data_segments = "" ; 
 			$files_not_included_due_to_filesize = array() ; 
 			
+			$this->allocatedSize = 0 ; 
+			
 			//  We check whether a process is running
 			//----------------------------------------------
 
@@ -262,7 +264,7 @@ if (!class_exists("SL_Zip")) {
 				// We add the signature in the zip file
 				
 				$r = @file_put_contents($path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ,$split_signature) ; 
-				$pathToReturn[time()] = $path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ;
+				$pathToReturn[time()." ".sprintf("%02d",$disk_number)] = $path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ;
 				if ($r===FALSE) {
 					SL_Debug::log(get_class(), "The signature of the zip file cannot be added to ".$path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number), 2) ; 
 					if (!Utils::rm_rec($path."/zip_in_progress")) {
@@ -385,7 +387,7 @@ if (!class_exists("SL_Zip")) {
 				$remove_t = $filename_array[1] ; 
 				$filename = $filename_array[0] ; 
 				
-				//  If the time limit / memory limit exceed, we save into temp files
+				//  If the time limit exceed, we save into temp files
 				//----------------------------------------------
 				
 				$nowtime = microtime(true) ; 
@@ -411,7 +413,38 @@ if (!class_exists("SL_Zip")) {
 							SL_Debug::log(get_class(), "The file ".$path."/zip_in_progress cannot be deleted", 2) ; 
 							return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/zip_in_progress</code>")) ; 
 						}
-						SL_Debug::log(get_class(), "The Zip process is delayed (".$nbentry."/".(count($this->filelist)+$nbentry)." files)", 4) ; 
+						SL_Debug::log(get_class(), "The Zip process is delayed due to time execution limitation (".$nbentry."/".(count($this->filelist)+$nbentry)." files)", 4) ; 
+						return  array('finished'=>false, 'nb_to_finished' => count($this->filelist), 'nb_finished' => $nbentry, 'not_included'=>$files_not_included_due_to_filesize) ; 
+					}
+				}
+				
+				//  If the memory limit exceed, we save into temp files
+				//----------------------------------------------
+				
+				
+				if ($maxAllocatedMemory!=0) {
+					if ($this->allocatedSize > 2*$maxAllocatedMemory){
+						// We remove the files already inserted in the zip
+						$this->filelist =  array_slice($this->filelist,$k);
+						// We save the content on the disk
+						
+						$r = @file_put_contents($splitfilename.".tmp" ,serialize(array($nbentry, $nbfolder, $pathToReturn, $disk_number, $this->filelist, $files_not_included_due_to_filesize))) ; 
+						if ($r===FALSE) {
+							SL_Debug::log(get_class(), "The serialized information cannot be written in ".$splitfilename.".tmp", 2) ; 
+							if (!Utils::rm_rec($path."/zip_in_progress")) {
+								SL_Debug::log(get_class(), "The file ".$path."/zip_in_progress cannot be deleted", 2) ; 
+								return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/zip_in_progress</code>")) ; 
+							}
+							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$splitfilename.".tmp</code>")) ; 
+						} else {
+							SL_Debug::log(get_class(), "The serialized information has been written successfully in ".$splitfilename.".tmp", 4) ; 
+						}
+						// we inform that the process is finished
+						if (!Utils::rm_rec($path."/zip_in_progress")) {
+							SL_Debug::log(get_class(), "The file ".$path."/zip_in_progress cannot be deleted", 2) ; 
+							return array("step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/zip_in_progress</code>")) ; 
+						}
+						SL_Debug::log(get_class(), "The Zip process is delayed due to memory allocation limitation (".$nbentry."/".(count($this->filelist)+$nbentry)." files)", 4) ; 
 						return  array('finished'=>false, 'nb_to_finished' => count($this->filelist), 'nb_finished' => $nbentry, 'not_included'=>$files_not_included_due_to_filesize) ; 
 					}
 				}
@@ -432,6 +465,8 @@ if (!class_exists("SL_Zip")) {
 					SL_Debug::log(get_class(), "The file ".$filename." is too big (i.e. ".@filesize($filename).") and is then ignored", 3) ; 
 					$files_not_included_due_to_filesize[] = $filename ; 
 					continue ; 
+				} else {
+					$this->allocatedSize += @filesize($filename) ; 
 				}
 				
 				//  Compress
@@ -553,7 +588,7 @@ if (!class_exists("SL_Zip")) {
 					// We get the index of the file
 					$relative_offset_in_disk = 0 ; 
 					
-					$pathToReturn[time()] = $path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ;
+					$pathToReturn[time()." ".sprintf("%02d",$disk_number)] = $path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ;
 					$r = @file_put_contents($path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ,$local_file_header) ; 
 					if ($r===FALSE) {
 						SL_Debug::log(get_class(), "The local file header of the file cannot be been added to ".$path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number), 2) ; 
@@ -608,7 +643,7 @@ if (!class_exists("SL_Zip")) {
 						SL_Debug::log(get_class(), "The first part of the compressed content of the file has been added to ".$path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number), 5) ; 
 					}
 					$disk_number ++ ; 
-					$pathToReturn[time()] = $path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ;
+					$pathToReturn[time()." ".sprintf("%02d",$disk_number)] = $path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ;
 					$r = @file_put_contents($path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number) ,$part2) ; 
 					if ($r===FALSE) {
 						SL_Debug::log(get_class(), "The second part of the compressed content of the file cannot be added to ".$path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number), 2) ; 
@@ -755,7 +790,7 @@ if (!class_exists("SL_Zip")) {
 			} else {
 				SL_Debug::log(get_class(), "The file ".$path . basename ($splitfilename,".zip") . ".z" . sprintf("%02d",$disk_number)." has been renamed into ".$splitfilename, 4) ; 
 			}
-			$pathToReturn[time()] = $splitfilename ;
+			$pathToReturn[time()." ".sprintf("%02d",$disk_number)] = $splitfilename ;
 			$newpathToReturn = array() ; 
 
 			// Remove from the above list the last file (because it has just been renamed)

@@ -4,12 +4,13 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-04-07T14:12:17+00:00\n"
+"PO-Revision-Date: 2013-12-09T13:38:23+00:00\n"
 "Last-Translator: SedLex <http://www.sedlex.fr/>\n"
 "Last-Translator: wkpixearts <wkpixeartsforall@gmail.com>\n"
 "Last-Translator: Matthieu <www.cliczone.fr>\n"
 "Last-Translator: mutmut <smuteau@gmail.com>\n"
 "Last-Translator: anonymous <tomdomenge@hotmail.fr>\n"
+"Last-Translator: noaneo <webmaster@noaneo.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,14 +61,14 @@ msgstr "Ajouter cette chaîne de caractères au nom des fichiers :"
 msgid "The name of the files will be %s."
 msgstr "Le nom des fichiers sera %s."
 
-msgid "% is the string of the present option. You may set this option to %s."
-msgstr "% est la chaîne de caractère de cette option. Vous devriez mettre cette option à %s."
+msgid "%s is the string of the present option. You may set this option to %s."
+msgstr "%s est la chaîne de la présente option. Vous pouvez définir cette option à %s."
 
-msgid "% is a random string for security reasons."
-msgstr "% est une chaîne de caractère aléatoire pour des raisons de sécurité."
+msgid "%s is a random string for security reasons."
+msgstr "%s est une chaîne aléatoire pour des raisons de sécurité."
 
-msgid "% is the extension (i.e. %s)."
-msgstr "% est l&#039;extension (c&#039;est-à-dire %s)."
+msgid "%s is the extension (i.e. %s)."
+msgstr "%s est l&#039;extension (i.e.%s)."
 
 msgid "What do you want to save?"
 msgstr "Que voulez-vous sauvegarder ?"
@@ -307,7 +308,7 @@ msgid "The process is still in progress for this backup (begun %s at %s)."
 msgstr "Le processus est toujours en cours pour cette sauvegarde (commencé le %s à %s)"
 
 msgid "The SQL extraction is in progress (%s entries extracted)."
-msgstr "L&#039;extraction SQL est en cours (%s tables extraites"
+msgstr "L&#039;extraction SQL est en cours (%s tables extraites)"
 
 msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
 msgstr "La création du ZIP est en cours (%s fichiers ont été ajoutés dans le fichier zip %s et la taille actuelle du zip est de %s)."
@@ -331,7 +332,7 @@ msgid "Please wait, a backup is in progress for %s seconds! Wait until %s second
 msgstr "Veuillez patienter, une sauvegarde est en ours pour %s secondes ! Attendez pendant %s secondes pour une redémarrage automatique."
 
 msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
-msgstr ""
+msgstr "Ce message d&#039;erreur peut également être générée si la taille du morceau est trop gros: essayez d&#039;abord de définir la taille du morceau de 1Mo afin d&#039;éviter toute saturation de la mémoire de votre serveur et ensuite augmenter lentement ..."
 
 msgid "(SQL extraction - ending)"
 msgstr "(Extraction SQL - fin)"
@@ -388,52 +389,55 @@ msgid "Best regards,"
 msgstr "Salutations,"
 
 msgid "Please find hereafter a summary of the backup process."
-msgstr ""
+msgstr "S&#039;il vous plaît trouver ci-après un résumé du processus de sauvegarde."
 
 msgid "Global synthesis"
 msgstr "Synthèse globale"
 
 msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
-msgstr ""
+msgstr "Le processus de sauvegarde a commencé le %s et a duré %s minutes et %s secondes"
 
 msgid "SQL synthesis"
 msgstr "Synthèse SQL"
 
 msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
-msgstr ""
+msgstr "L&#039;extraction SQL a démarré le %s et a duré %s minutes et %s secondes"
 
 msgid "%s entries have been extracted and have been stored in %s files."
-msgstr ""
+msgstr "%s entrées ont été extraites et ont été stockées dans %s fichiers."
 
 msgid "%s created on %s"
-msgstr ""
+msgstr "%s créés sur %s"
 
 msgid "ZIP synthesis"
 msgstr "Synthèse ZIP"
 
 msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
-msgstr ""
+msgstr "La création des ZIP a commencé le %s et a duré %s minutes et %s secondes"
 
 msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
-msgstr ""
+msgstr "%s fichiers ont été stockés dans %s fichiers partagés (zip, z01, z02, etc.)"
 
 msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
-msgstr ""
+msgstr "Veuillez noter que %s fichiers ont été exclus de la procédure de sauvegarde en raison de leurs dimensions dépassent la taille de bloc (ie %s Mo)."
 
 msgid "%s (size %s)"
 msgstr "%s (taille %s)"
 
 msgid "These zip files are accessible for %s days at the following path:"
-msgstr ""
+msgstr "Ces fichiers zip sont accessibles %s jours sur le chemin suivant :"
 
 msgid "FTP synthesis"
 msgstr "Synthèse FTP"
 
 msgid "The %s zip files have been stored on the specified FTP: %s"
-msgstr ""
+msgstr "Les fichiers zip %s ont été stockés sur le serveur FTP spécifié: %s"
 
 msgid "%s stored on %s"
 msgstr "%s stocké sur %s"
+
+msgid "ERROR: %s has not been stored. The error message was: %s"
+msgstr "ERREUR : %s n&#039;a pas été stocké. Le message d&#039;erreur est le suivant : %s"
 
 msgid "Backup of %s on %s"
 msgstr "Sauvegarde de %s sur %s"

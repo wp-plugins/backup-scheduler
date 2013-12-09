@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/backup-scheduler/
 Tags: backup, schedule, plugin, save, database, zip
 Requires at least: 3.0
-Tested up to: 3.5
+Tested up to: 3.7.1
 Stable tag: trunk
 
 With this plugin, you may plan the backup of your entire website (folders, files and/or database).
@@ -37,7 +37,7 @@ Each blog administrator may save their own data. The super-admin may save either
 * English (United States), default language
 * Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives
 * Finnish (Finland) translation provided by AnttiSilvola
-* French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut, anonymous
+* French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut, anonymous, noaneo
 * Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
@@ -49,7 +49,7 @@ Each blog administrator may save their own data. The super-admin may save either
 * Swedish (Sweden) translation provided by 
 * Thai (Thailand) translation provided by tontan
 * Turkish (Turkey) translation provided by UfukArt
-* Chinese (People's Republic of China) translation provided by YiscaJoe
+* Chinese (People's Republic of China) translation provided by YiscaJoe, jeffli
 
 = Features of the framework =
 
@@ -79,22 +79,16 @@ Have fun !
 
 == Changelog ==
 
-= 1.4.4 =
+= 1.5.0 =
+* Major improvement of the database backup
+* the summary mail now displays the issues with the ftp transfer
+
+= 1.4.0 -&gt; 1.4.4 =
 * Change the URL of the plugin on Wordpress
-
-= 1.4.3 =
 * Some modification
-
-= 1.4.2 =
 * Some issues in the framework
-
-= 1.4.2 =
 * Cleaning the framework to avoid unnecessarly code
-
-= 1.4.1 =
 * A bug that do not delete the lock file when reseting the backup process
-
-= 1.4.0 =
 * Enhance the performance of the backup process and ensure error protection
 * Improve the mail summary
 * Enhance the feedback tab
@@ -197,4 +191,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:939f68c7c9da8e82ac314fece0161ab7
+InfoVersion:ec344a192edbc0d4fbb81e723ebb10f4

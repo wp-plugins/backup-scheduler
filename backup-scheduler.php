@@ -3,7 +3,7 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.4.4
+Version: 1.5.0
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -662,7 +662,7 @@ class backup_scheduler extends pluginSedLex {
 				$starttime = $state['start'] ;
 			}
 			if (time()-$starttime>($this->get_param('max_time')*3)) {
-				// on reset ce qui doi être reseter
+				// on reset ce qui doi ê´²e reseter
 				if ((isset($state['step']))&&($state['step']=='SQL')) {
 					SL_Database::reset(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold) ; 	
 				}
@@ -778,7 +778,7 @@ class backup_scheduler extends pluginSedLex {
 					}
 				}
 				if ($this->get_param('save_db')||$this->get_param('save_db_all')) {
-					foreach($state['sqlfile']  as $f) {
+					foreach($state['sqlfile']  as $f=>$t) {
 						$z -> addFile($f, WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold, "backup_".date_i18n("Ymd")."/");
 						SL_Debug::log(get_class(), "ZIP backup of " .$f, 4) ; 
 					}
@@ -819,17 +819,9 @@ class backup_scheduler extends pluginSedLex {
 				$files_to_sent = $this->get_param('ftp_to_be_sent') ; 
 				$files_sent = $this->get_param('ftp_sent') ; 
 				$file_to_sent = array_pop ($files_to_sent) ; 
-				array_push($files_sent, $file_to_sent) ; 
 				
 				//new log
 				$summary = $this->get_param('info_process') ;
-				$temp_truc = array('file'=> $file_to_sent, 'date'=>time()) ; 
-				$summary['ftp'][] = $temp_truc ; 
-				$this->set_param('info_process', $summary) ;
-				
-				// Mise a jour 
-				$this->set_param('ftp_to_be_sent', $files_to_sent) ; 
-				$this->set_param('ftp_sent', $files_sent) ; 
 				
 				if (is_file($file_to_sent)) {
 					SL_Debug::log(get_class(), "FTP file to be sent: " .$file_to_sent, 4) ; 
@@ -838,9 +830,26 @@ class backup_scheduler extends pluginSedLex {
 						$res['text'] = ' '.__('(FTP sending)', $this->pluginID); 	
 						$res['nb_finished'] = count($files_sent) ; 
 						$res['nb_to_finished'] = count($files_to_sent) ; 
-					} 
+						array_push($files_sent, $file_to_sent) ; 
+						// Store result
+						$temp_truc = array('file'=> $file_to_sent, 'date'=>time(), 'error'=>false, 'error_msg'=>'') ; 
+						$summary['ftp'][] = $temp_truc ; 
+						$this->set_param('info_process', $summary) ;
+					} else {
+						array_push($files_sent, $res['error'].": ".$file_to_sent) ; 
+						// Store result
+						$temp_truc = array('file'=> $file_to_sent, 'date'=>time(), 'error'=>true, 'error_msg'=>$res['error']) ; 
+						$summary['ftp'][] = $temp_truc ; 
+						$this->set_param('info_process', $summary) ;
+					}
+					// Mise a jour 
+					$this->set_param('ftp_to_be_sent', $files_to_sent) ; 
+					$this->set_param('ftp_sent', $files_sent) ; 
 					return $res ; 
 				} else {
+					// Mise a jour 
+					$this->set_param('ftp_to_be_sent', $files_to_sent) ; 
+					$this->set_param('ftp_sent', $files_sent) ; 
 					$state['step'] = "MAIL" ; 
 					$this->set_param('process_state', $state) ; 
 					return array('text'=>__('(FTP sending - ending)', $this->pluginID) ) ; 
@@ -861,17 +870,12 @@ class backup_scheduler extends pluginSedLex {
 				$files_to_sent = $this->get_param('mail_to_be_sent') ; 
 				$files_sent = $this->get_param('mail_sent') ; 
 				$file_to_sent = array_pop ($files_to_sent) ; 
-				array_push($files_sent, $file_to_sent ) ; 
 
 				//new log
 				$summary = $this->get_param('info_process') ;
 				$temp_truc = array('file'=> $file_to_sent, 'date'=>time()) ; 
 				$summary['mail'][] = $temp_truc ;
 				$this->set_param('info_process', $summary) ;
-
-				// Mise a jour 
-				$this->set_param('mail_to_be_sent', $files_to_sent) ; 
-				$this->set_param('mail_sent', $files_sent) ; 
 				
 				if (is_file($file_to_sent)) {
 					SL_Debug::log(get_class(), "Email the backup file: ".$file_to_sent , 4) ; 
@@ -882,12 +886,20 @@ class backup_scheduler extends pluginSedLex {
 						$path['nb_finished'] = count($files_sent) ; 
 						$path['nb_to_finished'] = count($files_to_sent) ; 
 						SL_Debug::log(get_class(), "Email sent.", 4) ; 
+						array_push($files_sent, $file_to_sent ) ; 
 					} else {
 						SL_Debug::log(get_class(), "Email failed to be sent.", 2) ; 
 						$path['error'] = __("Your Wordpress installation cannot send emails (with heavy attachments)!", $this->pluginID)  ; 
+						array_push($files_sent, __("Your Wordpress installation cannot send emails (with heavy attachments)!", $this->pluginID).": ".$file_to_sent ) ; 
 					}
+					// Mise a jour 
+					$this->set_param('mail_to_be_sent', $files_to_sent) ; 
+					$this->set_param('mail_sent', $files_sent) ; 
 					return $path ; 
 				} else {
+					// Mise a jour 
+					$this->set_param('mail_to_be_sent', $files_to_sent) ; 
+					$this->set_param('mail_sent', $files_sent) ; 
 					$state['step'] = "END" ; 
 					$this->set_param('process_state', $state) ; 	
 					return array('text'=>__('(MAIL sending - ending)', $this->pluginID) ) ; 
@@ -1253,7 +1265,7 @@ class backup_scheduler extends pluginSedLex {
 				$minutes = floor(($info['sql']['end']-$info['sql']['start'])/60) ; 
 				$message .= "<p>".sprintf(__("The SQL extraction has started on %s and have lasted %s minutes and %s seconds", $this->pluginID), date_i18n("F j, Y H:i:s", $info['sql']['start']), $minutes, $seconds)."</p>" ; 
 				$message .= "<p>".sprintf(__("%s entries have been extracted and have been stored in %s files.", $this->pluginID), $info['sql']['total_entries'], count($info['sql']['files']))."</p>" ; 
-				foreach ($info['sql']['files'] as $time=>$f) {
+				foreach ($info['sql']['files'] as $f=>$time) {
 					$message .= "<li>" ; 	
 					$message .= sprintf(__("%s created on %s", $this->pluginID), basename($f), date_i18n("F j, Y H:i:s", $time)) ; 					
 					$message .= "</li>" ; 	
@@ -1290,9 +1302,15 @@ class backup_scheduler extends pluginSedLex {
 				$message .= "<ul>" ; 	
 				foreach ($info['ftp'] as $fi) {
 					if (is_file($fi['file'])) {
-						$message .= "<li>" ; 	
-						$message .= sprintf(__("%s stored on %s", $this->pluginID),"<a href='".$this->get_ftp_host()."/".basename($fi['file'])."'>".basename($fi['file'])."</a>", date_i18n("F j, Y H:i:s", $fi['date']))   ; 					
-						$message .= "</li>" ;
+						if (is_file($fi['error'])) {
+							$message .= "<li>" ; 	
+							$message .= sprintf(__("%s stored on %s", $this->pluginID),"<a href='".$this->get_ftp_host()."/".basename($fi['file'])."'>".basename($fi['file'])."</a>", date_i18n("F j, Y H:i:s", $fi['date']))   ; 					
+							$message .= "</li>" ;
+						} else {
+							$message .= "<li>" ; 	
+							$message .= sprintf(__("ERROR: %s has not been stored. The error message was: %s", $this->pluginID),basename($fi['file']), "<code>".$fi['error_msg']."</code>")   ; 					
+							$message .= "</li>" ;
+						}
 					} 	
 				}		
 				$message .= "</ul>" ; 			

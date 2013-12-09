@@ -107,7 +107,7 @@ if (!class_exists("SL_Database")) {
 			// Default value
 			$current_index = 0 ; 
 			$current_offset = 0 ; 
-			$max_size = 50 ; 
+			$max_size = 10 ; 
 			$contentOfTable = "" ; 
 				
 			// We look if the .sql.tmp file exists, if so, it means that we have to restart the zip process where it stopped
@@ -140,7 +140,7 @@ if (!class_exists("SL_Database")) {
 				if ($r===FALSE) {
 					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql".$extension."</code>")) ; 
 				}
-				$all_path_files[time()] = $sqlfilename.".sql".$extension ; 
+				$all_path_files[$sqlfilename.".sql".$extension] = time() ; 
 			}
 				
 			// We create the sql file
@@ -149,32 +149,8 @@ if (!class_exists("SL_Database")) {
 				
 				$nb_response = $max_size ;
 				
-				while ($nb_response==$max_size) {
-					// We check that the time is not exceeded
-					$nowtime = microtime(true) ; 
-					if ($maxExecutionTime!=0) {
-						if (($nowtime - $this->starttime > $maxExecutionTime) || ($maxAllocatedMemory/3<=strlen($contentOfTable))){
-							// We check if the file is too big
-							if ($maxAllocatedMemory<strlen($contentOfTable)+filesize($sqlfilename.".sql".$extension)) {
-								$extension++ ; 
-								$all_path_files[time()] = $sqlfilename.".sql".$extension ; 
-							}
-							// We save the content on the disk
-							$r = @file_put_contents($sqlfilename.".sql".$extension, $contentOfTable, FILE_APPEND) ; 
-							if ($r===FALSE) {
-								return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql".$extension."</code>")) ; 
-							}
-							$r = @file_put_contents($sqlfilename.".sql.tmp" ,serialize(array($list_table, $i, $current_offset, $nb_entry_total, $nb_entry_current, $sqlfilename, $extension, $all_path_files, $timedebut))) ; 
-							if ($r===FALSE) {
-								return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql.tmp</code>")) ; 
-							}
-							// we inform that the process is finished
-							if (!Utils::rm_rec($path."/sql_in_progress")) {
-								return array('finished'=>false, "step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/sql_in_progress"."</code>")) ; 
-							}
-							return  array('finished'=>false, 'nb_to_finished' => $nb_entry_total-$nb_entry_current, 'nb_finished' => $nb_entry_current, 'info' => $table[0], 'start'=>$timedebut) ; 
-						}
-					}
+				while ($nb_response==$max_size) { // We check whether there is no more entry in that table
+
 					// Now we retrieve the content.
 					if ($current_offset==0) {
 						$contentOfTable .= "\n\n";
@@ -183,11 +159,12 @@ if (!class_exists("SL_Database")) {
 						$contentOfTable .= "-- -----------------------------\n\n";
 					}
 					$lignes = $wpdb->get_results("SELECT * FROM ".$table[0]." LIMIT ".$current_offset.",".$max_size, ARRAY_N);
-					$current_offset += $max_size ; 
-					$nb_response = count($lignes) ; 
-					$nb_entry_current += $nb_response ; 
+					
+					$nb_response = count($lignes) ;  
 										
 					foreach ( $lignes as $ligne ) {
+						$current_offset ++ ; 
+						$nb_entry_current ++ ; 
 						$contentOfTable .= "INSERT INTO ".$table[0]." VALUES(";
 						for($ii=0; $ii < count($ligne); $ii++) {
 							if($ii != 0) 
@@ -205,6 +182,36 @@ if (!class_exists("SL_Database")) {
 							$contentOfTable .= $delimit.addslashes($ligne[$ii]).$delimit;
 						}
 						$contentOfTable .=  ");\n";
+						
+						// WE SAVE THE DATA in THE FILE
+						// We check if the file is too big
+						clearstatcache() ; 
+						if ($maxAllocatedMemory*2/3<strlen($contentOfTable)+filesize($sqlfilename.".sql".$extension)) {
+							$extension++ ; 
+							$all_path_files[$sqlfilename.".sql".$extension] = time(); 
+						}
+						// We save the content on the disk and we restart
+						$r = @file_put_contents($sqlfilename.".sql".$extension, $contentOfTable, FILE_APPEND) ; 
+						$contentOfTable = "" ;  
+						if ($r===FALSE) {
+							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql".$extension."</code>")) ; 
+						}
+						
+						// We check that the time is not exceeded
+						$nowtime = microtime(true) ; 
+						if ($maxExecutionTime!=0) {
+							if ($nowtime - $this->starttime > $maxExecutionTime){
+								$r = @file_put_contents($sqlfilename.".sql.tmp" ,serialize(array($list_table, $i, $current_offset, $nb_entry_total, $nb_entry_current, $sqlfilename, $extension, $all_path_files, $timedebut))) ; 
+								if ($r===FALSE) {
+									return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql.tmp</code>")) ; 
+								}
+								// we inform that the process is finished
+								if (!Utils::rm_rec($path."/sql_in_progress")) {
+									return array('finished'=>false, "step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/sql_in_progress"."</code>")) ; 
+								}
+								return  array('finished'=>false, 'nb_to_finished' => $nb_entry_total-$nb_entry_current, 'nb_finished' => $nb_entry_current, 'info' => $table[0], 'start'=>$timedebut) ; 
+							}
+						}
 					}
 				}
 				$current_offset=0 ; 
@@ -212,7 +219,7 @@ if (!class_exists("SL_Database")) {
 			
 			if ($maxAllocatedMemory<strlen($contentOfTable)+filesize($sqlfilename.".sql".$extension)) {
 				$extension++ ; 
-				$all_path_files[time()] = $sqlfilename.".sql".$extension ; 
+				$all_path_files[$sqlfilename.".sql".$extension] = time() ; 
 			}
 			// We complete the tmp files with current content
 			$r = @file_put_contents($sqlfilename.".sql".$extension ,$contentOfTable, FILE_APPEND) ; 
