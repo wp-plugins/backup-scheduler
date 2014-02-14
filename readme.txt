@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/backup-scheduler/
 Tags: backup, schedule, plugin, save, database, zip
 Requires at least: 3.0
-Tested up to: 3.7.1
+Tested up to: 3.8.1
 Stable tag: trunk
 
 With this plugin, you may plan the backup of your entire website (folders, files and/or database).
@@ -35,7 +35,8 @@ Each blog administrator may save their own data. The super-admin may save either
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab, scream
 * German (Germany) translation provided by agent-test, agent, bartdev2000
 * English (United States), default language
-* Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives
+* Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives, FelipeJAG
+* Farsi (Iran) translation provided by 
 * Finnish (Finland) translation provided by AnttiSilvola
 * French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut, anonymous, noaneo
 * Indonesian (Indonesia) translation provided by ceceparif
@@ -78,6 +79,11 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.5.1 =
+* BUG: improve the summary mail
+* NEW: indicate if the FTP transfer has been successful in the backend
+* NEW: few enhancement in the framework
 
 = 1.5.0 =
 * Major improvement of the database backup
@@ -191,4 +197,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:ec344a192edbc0d4fbb81e723ebb10f4
+InfoVersion:4ecefe3f0654d59f4005f7e538eb59a3

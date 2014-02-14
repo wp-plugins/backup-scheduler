@@ -3,7 +3,7 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.5.0
+Version: 1.5.1
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -511,14 +511,31 @@ class backup_scheduler extends pluginSedLex {
 					
 					while (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)) {
 						SL_Debug::log(get_class(), "The sub-backup ".$racine." has been found" , 5) ; 
-						$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$racine."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)).") | "  ; 
+						$ftp_transfer_info = "" ; 
+						if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_ok")) {
+							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#006600'>".__("FTP transfer OK",$this->pluginID)."</span>)</span>" ; 
+						} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_ko")) {
+							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#A31919'>".sprintf(__("FTP transfer KO: %s",$this->pluginID), strip_tags(file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_ko")))."</span>)</span>" ; 
+						} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_progress")) {
+							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#B84A00'>".__("FTP transfer reset",$this->pluginID)."</span>)</span>" ; 
+						}
+						$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$racine."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)).") $ftp_transfer_info | "  ; 
 						$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine) ; 
 						//MAJ
 						$i++ ; 
 						$racine = str_replace(".zip",".z". sprintf("%02d",$i), $f) ; 
 					}
+					
+					$ftp_transfer_info = "" ; 
+					if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_ok")) {
+						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#006600'>".__("FTP transfer OK",$this->pluginID)."</span>)</span>" ; 
+					} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_ko")) {
+						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#A31919'>".sprintf(__("FTP transfer KO: %s",$this->pluginID), strip_tags(file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_ko")))."</span>)</span>" ; 
+					} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_progress")) {
+						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#B84A00'>".__("FTP transfer reset",$this->pluginID)."</span>)</span>" ; 
+					}
 					$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f) ; 
-					$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$f."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f)).")"  ; 
+					$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$f."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f)).") $ftp_transfer_info"  ; 
 					$lien .= "<p>" ; 
 					
 					// We compute in how many days the backup will be deleted
@@ -825,6 +842,7 @@ class backup_scheduler extends pluginSedLex {
 				
 				if (is_file($file_to_sent)) {
 					SL_Debug::log(get_class(), "FTP file to be sent: " .$file_to_sent, 4) ; 
+					file_put_contents ($file_to_sent.".ftp_progress","in progress") ; 
 					$res = $this->sendFTP(array($file_to_sent)) ; 
 					if ($res['transfer']) {
 						$res['text'] = ' '.__('(FTP sending)', $this->pluginID); 	
@@ -832,13 +850,20 @@ class backup_scheduler extends pluginSedLex {
 						$res['nb_to_finished'] = count($files_to_sent) ; 
 						array_push($files_sent, $file_to_sent) ; 
 						// Store result
-						$temp_truc = array('file'=> $file_to_sent, 'date'=>time(), 'error'=>false, 'error_msg'=>'') ; 
+						$temp_truc = array('file'=> $file_to_sent, 'date'=>time(), 'error'=>false, 'error_msg'=>'') ;
+						// On supprime le fichier d'attente
+						@unlink($file_to_sent.".ftp_progress") ;  
+						file_put_contents ($file_to_sent.".ftp_ok","ok") ; 
+						
 						$summary['ftp'][] = $temp_truc ; 
 						$this->set_param('info_process', $summary) ;
 					} else {
 						array_push($files_sent, $res['error'].": ".$file_to_sent) ; 
 						// Store result
 						$temp_truc = array('file'=> $file_to_sent, 'date'=>time(), 'error'=>true, 'error_msg'=>$res['error']) ; 
+						// On supprime le fichier d'attente
+						@unlink($file_to_sent.".ftp_progress") ;  
+						file_put_contents ($file_to_sent.".ftp_ko",$res['error']." ") ; 
 						$summary['ftp'][] = $temp_truc ; 
 						$this->set_param('info_process', $summary) ;
 					}
@@ -1302,7 +1327,7 @@ class backup_scheduler extends pluginSedLex {
 				$message .= "<ul>" ; 	
 				foreach ($info['ftp'] as $fi) {
 					if (is_file($fi['file'])) {
-						if (is_file($fi['error'])) {
+						if (!$fi['error']) {
 							$message .= "<li>" ; 	
 							$message .= sprintf(__("%s stored on %s", $this->pluginID),"<a href='".$this->get_ftp_host()."/".basename($fi['file'])."'>".basename($fi['file'])."</a>", date_i18n("F j, Y H:i:s", $fi['date']))   ; 					
 							$message .= "</li>" ;
