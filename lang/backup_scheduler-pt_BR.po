@@ -4,8 +4,9 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-04-07T14:27:38+00:00\n"
+"PO-Revision-Date: 2014-02-17T16:10:54+00:00\n"
 "Last-Translator: RainilsonRodriguis <www.upclassificados.com.br>\n"
+"Last-Translator: GuiBeloto <guibeloto@yahoo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,24 +46,24 @@ msgid "Keep the backup files for (in days):"
 msgstr "Mantenha os arquivos de backup (em dias):"
 
 msgid "If you want to be notify when the backup process is finished, please enter your email:"
-msgstr ""
+msgstr "Se você quer ser notificado quando o backup terminar, insira seu e-mail:"
 
 msgid "Customize the name of the files?"
-msgstr ""
+msgstr "Personalizar o nome dos arquivos?"
 
 msgid "Add this string to the name of the files:"
 msgstr ""
 
 msgid "The name of the files will be %s."
+msgstr "O nome do(s) arquivo(s) será(ão) %s."
+
+msgid "%s is the string of the present option. You may set this option to %s."
 msgstr ""
 
-msgid "% is the string of the present option. You may set this option to %s."
+msgid "%s is a random string for security reasons."
 msgstr ""
 
-msgid "% is a random string for security reasons."
-msgstr ""
-
-msgid "% is the extension (i.e. %s)."
+msgid "%s is the extension (i.e. %s)."
 msgstr ""
 
 msgid "What do you want to save?"
@@ -284,6 +285,15 @@ msgstr "Data do backup"
 msgid "Backup files"
 msgstr "Os arquivos de backup"
 
+msgid "FTP transfer OK"
+msgstr ""
+
+msgid "FTP transfer KO: %s"
+msgstr ""
+
+msgid "FTP transfer reset"
+msgstr ""
+
 msgid "Part %s"
 msgstr "Parte %s"
 
@@ -324,7 +334,7 @@ msgid "(For now, there is no backup files... You should wait or force a backup (
 msgstr "(Por enquanto, não há arquivos de backup ... Você deve esperar ou forçar um backup (veja abaixo))"
 
 msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
-msgstr ""
+msgstr "Por favor espere. O backup está em progresso por %s segundos! Espere %s segundos para a reinicialização automática do backup."
 
 msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
 msgstr ""
@@ -429,6 +439,9 @@ msgid "The %s zip files have been stored on the specified FTP: %s"
 msgstr ""
 
 msgid "%s stored on %s"
+msgstr ""
+
+msgid "ERROR: %s has not been stored. The error message was: %s"
 msgstr ""
 
 msgid "Backup of %s on %s"
