@@ -1,3 +1,1 @@
-Save into a FTP folder by date
-delete old backup on the FTP
-Password protected Alexander Dippold (Alexander.Dippold at gmail)
+Password protected Alexander Dippold (Alexander.Dippold gmail)

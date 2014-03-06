@@ -44,7 +44,7 @@ Each blog administrator may save their own data. The super-admin may save either
 * Italian (Italy) translation provided by PuntoCon
 * Dutch (Netherlands) translation provided by Matrix, WybAnema, Jay
 * Polish (Poland) translation provided by Opti, Lukasz, pablo, Misiek, MarekMackiewicz
-* Portuguese (Brazil) translation provided by RainilsonRodriguis
+* Portuguese (Brazil) translation provided by RainilsonRodriguis, GuiBeloto
 * Portuguese (Portugal) translation provided by FranciscoRocha
 * Russian (Russia) translation provided by GerinG, Slawka
 * Swedish (Sweden) translation provided by 
@@ -79,6 +79,10 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.5.2 =
+* NEW: You may now create subfolder in the FTP directory
+* NEW: improve the look of the configuration page
 
 = 1.5.1 =
 * BUG: improve the summary mail
@@ -197,4 +201,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:b73c6867d73fd2e58697a3840cf8d990
+InfoVersion:1422d2d1f2cab782592453369f8dae44

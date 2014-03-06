@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.5.1
+Version: 1.5.2
+
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -222,6 +223,9 @@ class backup_scheduler extends pluginSedLex {
 			case 'ftp_mail' 		: return "" 		; break ; 
 			case 'ftp_to_be_sent' 		: return array()		; break ; 
 			case 'ftp_sent' 		: return array()		; break ; 
+			case 'ftp_create_folder' 		: return false		; break ; 
+			case 'ftp_prefix_folder' 		: return ""		; break ; 
+			
 
 			case 'email_check' 		: return true 		; break ; 
 			case 'email' 		: return "" 		; break ; 
@@ -260,13 +264,15 @@ class backup_scheduler extends pluginSedLex {
 		SL_Debug::log(get_class(), "Display the configuration page" , 4) ;
 		
 		?>
-		<div class="wrap">
-			<div id="icon-themes" class="icon32"><br></div>
+		<div class="plugin-titleSL">
 			<h2><?php echo $this->pluginName ?></h2>
 		</div>
-		<div style="padding:20px;">
+		
+		<div class="plugin-contentSL">		
 			<?php echo $this->signature ; ?>
-			<p><?php echo __('This plugin enables scheduled backup of important part of your website : simple to use and efficient !', $this->pluginID) ; ?></p>
+			
+			<p><?php echo __('This plugin enables scheduled backups of important parts of your website!', $this->pluginID) ; ?></p>
+			<p><?php echo __('Just configure the schedule and the content to be save and enjoy: a background process will be triggered by the person who visits your website!', $this->pluginID) ; ?></p>
 		<?php
 		
 			// On verifie que les droits sont corrects
@@ -281,7 +287,6 @@ class backup_scheduler extends pluginSedLex {
 			//==========================================================================================
 			//
 			// Mise en place du systeme d'onglet
-			//		(bien mettre a jour les liens contenu dans les <li> qui suivent)
 			//
 			//==========================================================================================
 			$tabs = new adminTabs() ; 
@@ -362,7 +367,7 @@ class backup_scheduler extends pluginSedLex {
 
 				$params->add_title(__('Do you want that the backup is stored on a FTP?',$this->pluginID)) ;
 				if (function_exists("ftp_connect")) {
-					$params->add_param('ftp', __('Save the backup files on a FTP?',$this->pluginID), '', '', array('ftp_host', 'ftp_login', 'ftp_pass', 'ftp_root', 'ftp_port')) ; 
+					$params->add_param('ftp', __('Save the backup files on a FTP?',$this->pluginID), '', '', array('ftp_host', 'ftp_login', 'ftp_pass', 'ftp_root', 'ftp_port', 'ftp_create_folder')) ; 
 					$params->add_param('ftp_host', __('FTP host:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('Should be at the form %s or %s',$this->pluginID), '<code>ftp://domain.tld/root_folder/</code>', '<code>ftps://domain.tld/root_folder/</code>')) ; 
 					$params->add_comment(sprintf(__('If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s.',$this->pluginID), '<code>ftp://</code>', '<code>ftp://</code>')) ; 
@@ -371,6 +376,8 @@ class backup_scheduler extends pluginSedLex {
 					$params->add_param('ftp_login', __('Your FTP login:',$this->pluginID)) ; 
 					$params->add_param('ftp_pass', __('Your FTP pass:',$this->pluginID)) ; 
 					$params->add_comment(sprintf(__('Click on that button %s to test if the above information is correct',$this->pluginID)."<span id='testFTP_info'></span>", "<input type='button' id='testFTP_button' class='button validButton' onClick='testFTP();'  value='". __('Test',$this->pluginID)."' /><img id='wait_testFTP' src='".WP_PLUGIN_URL."/".str_replace(basename(__FILE__),"",plugin_basename( __FILE__))."core/img/ajax-loader.gif' style='display: none;'>")) ; 			
+					$params->add_param('ftp_create_folder', __('Create sub-folder with date in your FTP repository for all backup files:',$this->pluginID),'','',array('ftp_prefix_folder')) ; 
+					$params->add_param('ftp_prefix_folder', __('Add a prefix to the created folder:',$this->pluginID)) ; 
 				} else {
 					$params->add_comment(__('Your PHP installation does not support FTP features, thus this option has been disabled! Sorry...',$this->pluginID)) ; 
 				}
@@ -406,7 +413,7 @@ class backup_scheduler extends pluginSedLex {
 				
 				echo "<p>" ; 
 				echo "<img id='wait_backup' src='".WP_PLUGIN_URL."/".str_replace(basename(__FILE__),"",plugin_basename( __FILE__))."core/img/ajax-loader.gif' style='display: none;'>" ; 
-				echo "<input type='button' id='backupButton' class='button-primary validButton' onClick='initForceBackup(\"external\")'  value='". __('Force a new backup (with Mail/FTP)',$this->pluginID)."' />" ; 
+				echo " <input type='button' id='backupButton' class='button-primary validButton' onClick='initForceBackup(\"external\")'  value='". __('Force a new backup (with Mail/FTP)',$this->pluginID)."' />" ; 
 				echo "<script>jQuery('#backupButton').removeAttr('disabled');</script>" ; 
 				echo " <input type='button' id='backupButton2' class='button validButton' onClick='initForceBackup(\"internal\")'  value='". __('Force a new backup (without any external storage or sending)',$this->pluginID)."' />" ; 
 				echo "<script>jQuery('#backupButton2').removeAttr('disabled');</script>" ; 
@@ -512,11 +519,11 @@ class backup_scheduler extends pluginSedLex {
 					while (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)) {
 						SL_Debug::log(get_class(), "The sub-backup ".$racine." has been found" , 5) ; 
 						$ftp_transfer_info = "" ; 
-						if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_ok")) {
+						if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp.ok")) {
 							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#006600'>".__("FTP transfer OK",$this->pluginID)."</span>)</span>" ; 
-						} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_ko")) {
-							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#A31919'>".sprintf(__("FTP transfer KO: %s",$this->pluginID), strip_tags(file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_ko")))."</span>)</span>" ; 
-						} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp_progress")) {
+						} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp.ko")) {
+							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#A31919'>".sprintf(__("FTP transfer KO: %s",$this->pluginID), strip_tags(file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp.ko")))."</span>)</span>" ; 
+						} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp.progress")) {
 							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#B84A00'>".__("FTP transfer reset",$this->pluginID)."</span>)</span>" ; 
 						}
 						$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$racine."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)).") $ftp_transfer_info | "  ; 
@@ -527,11 +534,11 @@ class backup_scheduler extends pluginSedLex {
 					}
 					
 					$ftp_transfer_info = "" ; 
-					if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_ok")) {
+					if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp.ok")) {
 						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#006600'>".__("FTP transfer OK",$this->pluginID)."</span>)</span>" ; 
-					} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_ko")) {
-						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#A31919'>".sprintf(__("FTP transfer KO: %s",$this->pluginID), strip_tags(file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_ko")))."</span>)</span>" ; 
-					} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp_progress")) {
+					} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp.ko")) {
+						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#A31919'>".sprintf(__("FTP transfer KO: %s",$this->pluginID), strip_tags(file_get_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp.ko")))."</span>)</span>" ; 
+					} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f.".ftp.progress")) {
 						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#B84A00'>".__("FTP transfer reset",$this->pluginID)."</span>)</span>" ; 
 					}
 					$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f) ; 
@@ -842,7 +849,7 @@ class backup_scheduler extends pluginSedLex {
 				
 				if (is_file($file_to_sent)) {
 					SL_Debug::log(get_class(), "FTP file to be sent: " .$file_to_sent, 4) ; 
-					file_put_contents ($file_to_sent.".ftp_progress","in progress") ; 
+					file_put_contents ($file_to_sent.".ftp.progress","in progress") ; 
 					$res = $this->sendFTP(array($file_to_sent)) ; 
 					if ($res['transfer']) {
 						$res['text'] = ' '.__('(FTP sending)', $this->pluginID); 	
@@ -852,9 +859,8 @@ class backup_scheduler extends pluginSedLex {
 						// Store result
 						$temp_truc = array('file'=> $file_to_sent, 'date'=>time(), 'error'=>false, 'error_msg'=>'') ;
 						// On supprime le fichier d'attente
-						@unlink($file_to_sent.".ftp_progress") ;  
-						file_put_contents ($file_to_sent.".ftp_ok","ok") ; 
-						
+						@unlink($file_to_sent.".ftp.progress") ;  
+						file_put_contents ($file_to_sent.".ftp.ok","ok") ; 
 						$summary['ftp'][] = $temp_truc ; 
 						$this->set_param('info_process', $summary) ;
 					} else {
@@ -862,8 +868,8 @@ class backup_scheduler extends pluginSedLex {
 						// Store result
 						$temp_truc = array('file'=> $file_to_sent, 'date'=>time(), 'error'=>true, 'error_msg'=>$res['error']) ; 
 						// On supprime le fichier d'attente
-						@unlink($file_to_sent.".ftp_progress") ;  
-						file_put_contents ($file_to_sent.".ftp_ko",$res['error']." ") ; 
+						@unlink($file_to_sent.".ftp.progress") ;  
+						file_put_contents ($file_to_sent.".ftp.ko",$res['error']." ") ; 
 						$summary['ftp'][] = $temp_truc ; 
 						$this->set_param('info_process', $summary) ;
 					}
@@ -1082,7 +1088,9 @@ class backup_scheduler extends pluginSedLex {
 				$delta = intval($s/86400);   
 				if ($delta >= $this->get_param("delete_after")) {
 					@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f) ; 
-					SL_Debug::log(get_class(), "The backup file ".$f." has been deleted because it is to old" , 4) ; 
+					SL_Debug::log(get_class(), "The backup file ".$f." has been deleted because it is too old" , 4) ; 
+					
+					echo "File $f has been deleted as ".$new_date." and ".$date." is seperated of $delta days and should be deleted after ".$this->get_param("delete_after")." days\n" ; 
 				}
 			} 
 		}
@@ -1390,18 +1398,36 @@ class backup_scheduler extends pluginSedLex {
 		} else {
 			if (@ftp_login($conn, $this->get_param('ftp_login'), $this->get_param('ftp_pass'))) {
 				if (@ftp_chdir($conn, $match[2])) {
+					// Si on doit creer un nouveau repertoire pour chaque backup
+					if ($this->get_param('ftp_create_folder')) {
+						if (@ftp_chdir($conn, str_replace("//","/",$match[2]."/".$this->get_param('ftp_prefix_folder').date('Ymd')))) { 
+							// Nothing to do ...
+						} else {
+							if (@ftp_mkdir($conn, str_replace("//","/",$match[2]."/".$this->get_param('ftp_prefix_folder').date('Ymd')))) {
+								// nikel ... maintenant que c'est crée ...
+								if (@ftp_chdir($conn, str_replace("//","/",$match[2]."/".$this->get_param('ftp_prefix_folder').date('Ymd')))) { 
+									// Nothing to do ...
+								} else {
+									SL_Debug::log(get_class(), "Problem for going into subdir: ".$this->get_param('ftp_prefix_folder').$str_replace("//","/",$match[2]."/".date('Ymd')) , 2) ; 
+								}
+							} else {
+								SL_Debug::log(get_class(), "Problem with creation of subdir: ".$this->get_param('ftp_prefix_folder').$str_replace("//","/",$match[2]."/".date('Ymd')) , 2) ; 
+								return array("transfer"=>false, "error"=>sprintf(__('The folder %s cannot be created on the FTP repository!', $this->pluginID), "<code>".$this->get_param('ftp_prefix_folder').str_replace("//","/",$match[2]."/".date('Ymd'))."</code>")) ; 
+							}
+						}
+					}
 					for ($i=0 ; $i<count($attach) ; $i++) {
 						ob_start() ; 
-						$res = ftp_put($conn, basename($attach[$i]), $attach[$i], FTP_BINARY);
+						$res = @ftp_put($conn, basename($attach[$i]), $attach[$i], FTP_BINARY);
 						if (!$res) {
 							$pasv = true ; 
 							if (@ftp_pasv($conn, true)) {
-								$res = ftp_put($conn, basename($attach[$i]), $attach[$i], FTP_BINARY);
+								$res = @ftp_put($conn, basename($attach[$i]), $attach[$i], FTP_BINARY);
 								if (!$res) {
 									$value = ob_get_clean() ; 
 									@ftp_close($conn) ; 
 									SL_Debug::log(get_class(), "Problem with FTP transferring: ".$value , 2) ; 
-									return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".$value."</code>")) ; 
+									return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository %s! The ftp_put function returns: %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".ftp_pwd($conn)."</code>", "<code>".$value."</code>")) ; 
 								} else {
 									SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_ftp_host(), 4) ; 
 								}								
