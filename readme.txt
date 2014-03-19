@@ -36,14 +36,14 @@ Each blog administrator may save their own data. The super-admin may save either
 * German (Germany) translation provided by agent-test, agent, bartdev2000
 * English (United States), default language
 * Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives, FelipeJAG
-* Farsi (Iran) translation provided by 
+* Farsi (Iran) translation provided by sehrama.ir
 * Finnish (Finland) translation provided by AnttiSilvola
 * French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut, anonymous, noaneo
 * Indonesian (Indonesia) translation provided by ceceparif
 * Indonesian (Indonesia) translation provided by Faleddo
 * Italian (Italy) translation provided by PuntoCon
 * Dutch (Netherlands) translation provided by Matrix, WybAnema, Jay
-* Polish (Poland) translation provided by Opti, Lukasz, pablo, Misiek, MarekMackiewicz
+* Polish (Poland) translation provided by Opti, Lukasz, pablo, Misiek, MarekMackiewicz, Darbo
 * Portuguese (Brazil) translation provided by RainilsonRodriguis, GuiBeloto
 * Portuguese (Portugal) translation provided by FranciscoRocha
 * Russian (Russia) translation provided by GerinG, Slawka
@@ -79,6 +79,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.5.3 =
+* BUG: On some configuration, &lt;? is not supported 
 
 = 1.5.2 =
 * NEW: You may now create subfolder in the FTP directory
@@ -201,4 +204,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:1422d2d1f2cab782592453369f8dae44
+InfoVersion:389efa7ac92c4313e76a7bf76effb457

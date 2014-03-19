@@ -4,12 +4,13 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-04-07T15:21:15+00:00\n"
+"PO-Revision-Date: 2014-03-14T17:14:12+00:00\n"
 "Last-Translator: Opti <>\n"
 "Last-Translator: Lukasz <www.premiumaccount.co.ukwww.esteepc.co.uk>\n"
 "Last-Translator: pablo <pawel@dream.net.pl>\n"
 "Last-Translator: Misiek <klimatyzowanydom.pl>\n"
 "Last-Translator: MarekMackiewicz <ickam89.com>\n"
+"Last-Translator: Darbo <darek@kobla.pl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,8 +25,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
-msgstr "Ten plugin umożliwia planowanie kopii ważnych elementów twojej witryny internetowej: łatwy i wydajny w użyciu!"
+msgid "This plugin enables scheduled backups of important parts of your website!"
+msgstr "Ten plugin pozwala na wykonywanie kopii zapasowej wybranych części Twojej strony!"
+
+msgid "Just configure the schedule and the content to be save and enjoy: a background process will be triggered by the person who visits your website!"
+msgstr "Po prostu skonfiguruj harmonogram i treści do zachowania i ciesz się: proces zostanie uruchomiony przez osobę odwiedzającą Twoją stronę!"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
 msgstr "Zainstaluj/Aktywuj %s. W przeciwnym razie wtyczka nie będzię działać poprawnie!"
@@ -61,13 +65,13 @@ msgid "The name of the files will be %s."
 msgstr "Ustawiono nazwę plików %s."
 
 msgid "%s is the string of the present option. You may set this option to %s."
-msgstr ""
+msgstr "%s to fraza aktualnej opcji. Możesz ustawić tą opcję na %s."
 
 msgid "%s is a random string for security reasons."
-msgstr ""
+msgstr "%s to losowa fraza używana w celach bezpieczeństwa."
 
 msgid "%s is the extension (i.e. %s)."
-msgstr ""
+msgstr "%s to rozwinięcie (np. %s)."
 
 msgid "What do you want to save?"
 msgstr "Co chcesz zachować?"
@@ -192,6 +196,12 @@ msgstr "Kliknij na ten przycisk %s, aby sprawdzić, czy powyższe informacje są
 msgid "Test"
 msgstr "Test"
 
+msgid "Create sub-folder with date in your FTP repository for all backup files:"
+msgstr "Stwórz podfolder z datą w swoim repozytorium FTP dla wszystkich plików kopii zapasowych:"
+
+msgid "Add a prefix to the created folder:"
+msgstr "Dodaj prefix do stworzonego folderu:"
+
 msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
 msgstr "Twoja instalacja PHP nie obsługuje funkcji FTP, ponieważ ta opcja jest wyłączona! Przepraszamy ..."
 
@@ -205,7 +215,7 @@ msgid "On some Wordpress installation, you may have memory issues. Thus, try to 
 msgstr "Niektóre aplikacje Wordpressa moga kolidować z pamiecia, więc staraj sie zminimalizowac jej ilość jeśli napotykasz takie problemy."
 
 msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
-msgstr "Limit ilośći pamieci serwera wynosi  %s, podczas gdy obecne zużycie pamięci to %s."
+msgstr "Limit ilośći pamieci serwera wynosi %s, podczas gdy obecne zużycie pamięci to %s."
 
 msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
 msgstr "Zaleca się aby maksymalna wielkość załącznika nie była większa niż ta wartość."
@@ -217,7 +227,7 @@ msgid "What is the maximum time for the php scripts execution (in seconds):"
 msgstr "Jaki jest maksymalny czas na wypakowanie plików php (w sekundach):"
 
 msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
-msgstr "Nawet jeśli nie masz limitu czasowego, zalecamy by ustawić  wartość czas na 15s by uniknać problemów związanych z przetwarzaiem skryptów php przez twego dostawce."
+msgstr "Nawet jeśli nie masz limitu czasowego, zalecamy by ustawić wartość czas na 15s by uniknać problemów związanych z przetwarzaiem skryptów php przez twego dostawce."
 
 msgid "Here is the backup files. You can force a new backup or download previous backup files."
 msgstr "Tutaj znajdują się pliki archiwum. Możesz wykonać nową kopię zapasową teraz lub ściągnać starsze pliki arichiwum."
@@ -287,6 +297,15 @@ msgstr "Data kopii zapasowej"
 
 msgid "Backup files"
 msgstr "Zarchiwizowane pliki"
+
+msgid "FTP transfer OK"
+msgstr "Transfer FTP OK"
+
+msgid "FTP transfer KO: %s"
+msgstr "Transfer FTP KO: %s"
+
+msgid "FTP transfer reset"
+msgstr "Transfer FTP zresetowany"
 
 msgid "Part %s"
 msgstr "Część %s"
@@ -433,13 +452,16 @@ msgid "The %s zip files have been stored on the specified FTP: %s"
 msgstr "%s archiwów znajduje się na serwerze %s"
 
 msgid "%s stored on %s"
-msgstr ""
+msgstr "%s zachowano w %s"
+
+msgid "ERROR: %s has not been stored. The error message was: %s"
+msgstr "BŁĄD: %s nie został zapisany. Komunikat błędu: %s"
 
 msgid "Backup of %s on %s"
-msgstr ""
+msgstr "Kopia z %s na %s"
 
 msgid "No host has been defined"
-msgstr "Nie został ustawiony serwer FTP"
+msgstr "Nie zdefiniowano hosta"
 
 msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
 msgstr "Twoja instalacja PHP nie obsługuje funkcji protokołu SSL ... Użyj FTP zamiast FTPS!"
@@ -447,8 +469,11 @@ msgstr "Twoja instalacja PHP nie obsługuje funkcji protokołu SSL ... Użyj FTP
 msgid "The host %s cannot be resolved!"
 msgstr "Nie można znaleźć serwera %s!"
 
-msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
-msgstr "Plik %s nie może być przeniesione do repozytorium FTP! Zwraca ftp_put funkcji: %s"
+msgid "The folder %s cannot be created on the FTP repository!"
+msgstr "Folder %s nie może zostać utworzony w repozytorium FTP"
+
+msgid "The file %s cannot be transfered to the FTP repository %s! The ftp_put function returns: %s"
+msgstr "Plik %s nie może zostać przesłany do repozytorium FTP %s! Funkcja ftp_put zwróciła: %s"
 
 msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
 msgstr "Plik %s nie może być przeniesiony do repozytorium FTP i nie można wprowadzić trybu PASV :%s"
@@ -460,7 +485,7 @@ msgid "The login/password does not seems valid!"
 msgstr "Login / hasło nieprawidłowe!"
 
 msgid "The folder %s does not seems to be writable"
-msgstr "Folder %s nie ma praw zapisu"
+msgstr "Folder %s nie ma praw do zapisu"
 
 msgid "It seems impossible to switch to PASV mode"
 msgstr "Nie da się przełączyć w tryb PASV"
