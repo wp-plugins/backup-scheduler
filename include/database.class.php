@@ -16,9 +16,10 @@ if (!class_exists("SL_Database")) {
 		* @param string $filter the beginning of the table name for instance "wp3_" for the tables of the blog n°3. If not provided, it will take all tables
 		*/
 
-		function SL_Database($filter="") {
+		function SL_Database($filter="", $sepBlog = "") {
 			$this->starttime = microtime(true) ; 
 			$this->filter = $filter ; 
+			$this->sepBlog = $sepBlog ; 
 		}
 		
 		/** ====================================================================================================================================================
@@ -54,7 +55,7 @@ if (!class_exists("SL_Database")) {
 			$files = scandir($path) ; 
 			foreach ($files as $f) {
 				// Fichier tmp
-				if (preg_match("/\.sql\.tmp$/", $f, $match)) {
+				if (preg_match("/^(.*)\.sql\.tmp$/", $f, $match)) {
 					unlink($path."/".$f) ; 
 					$i = 0 ; 
 					while (true) {
@@ -81,7 +82,9 @@ if (!class_exists("SL_Database")) {
 		function createSQL($sqlfilename, $maxExecutionTime=20, $maxAllocatedMemory=4000000) {
 			global $wpdb ; 
 			
-			$extension = 1 ; 
+			$sepBlog = $this->sepBlog ; 
+
+			$extension = array() ; 
 			$timedebut=time() ; 
 			$all_path_files = array() ; 
 			
@@ -119,28 +122,12 @@ if (!class_exists("SL_Database")) {
 				}
 				list($list_table, $current_index, $current_offset, $nb_entry_total, $nb_entry_current, $sqlfilename, $extension, $all_path_files, $timedebut) = unserialize($content) ; 
 			} else {	
-				
-				$entete  = "-- -------------------------------------------------\n";
-				$entete .= "-- ".DB_NAME." - ".date("d-M-Y")."\n";
-				$entete .= "-- -----------------------------------------------\n";
-				
 				$list_table = $wpdb->get_results("show tables LIKE '".$this->filter."%'", ARRAY_N);
 				$nb_entry_total = 0 ; 
 				$nb_entry_current = 0 ; 
 				foreach ($list_table as $table) {
-					$entete .= "\n\n";
-					$entete .= "-- -----------------------------\n";
-					$entete .= "-- CREATE ".$table[0]."\n";
-					$entete .= "-- -----------------------------\n";
-					$entete .= "DROP TABLE IF EXISTS ".$table[0].";\n";
-					$entete .= $wpdb->get_var("show create table ".$table[0], 1).";";
 					$nb_entry_total += $wpdb->get_var("SELECT COUNT(*) FROM ".$table[0]);
 				}
-				$r = @file_put_contents($sqlfilename.".sql".$extension ,$entete) ; 
-				if ($r===FALSE) {
-					return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql".$extension."</code>")) ; 
-				}
-				$all_path_files[$sqlfilename.".sql".$extension] = time() ; 
 			}
 				
 			// We create the sql file
@@ -149,10 +136,38 @@ if (!class_exists("SL_Database")) {
 				
 				$nb_response = $max_size ;
 				
+				$ext_blog = "" ; 
+				if (!isset($extension[$ext_blog])) {
+					$extension[$ext_blog] = 1 ; 
+					$all_path_files[$sqlfilename.$ext_blog.".sql1"] = time() ; 
+				}	
+				
 				while ($nb_response==$max_size) { // We check whether there is no more entry in that table
-
+				
 					// Now we retrieve the content.
 					if ($current_offset==0) {
+					
+						// On doit separer les différents blogs
+						if ($sepBlog!="") {
+							if (preg_match("/^".$sepBlog."([0-9]*)_/",$table[0], $match)) {
+								if ($ext_blog != "_blog".$match[1]) {
+									$ext_blog = "_blog".$match[1] ; 
+									if (!isset($extension[$ext_blog])) {
+										$extension[$ext_blog] = 1 ; 
+									}	
+									if (!is_file($sqlfilename.$ext_blog.".sql".$extension[$ext_blog])) {
+										$all_path_files[$sqlfilename.$ext_blog.".sql".$extension[$ext_blog]] = time() ; 
+									}
+								} 
+							} 
+						}
+						
+						$contentOfTable .= "\n\n";
+						$contentOfTable .= "-- -----------------------------\n";
+						$contentOfTable .= "-- CREATE ".$table[0]."DEBUG".$sepBlog."/^".$sepBlog."([0-9]*)_/"."\n"; 
+						$contentOfTable .= "-- -----------------------------\n";
+						$contentOfTable .= "DROP TABLE IF EXISTS ".$table[0].";\n";
+
 						$contentOfTable .= "\n\n";
 						$contentOfTable .= "-- -----------------------------\n";
 						$contentOfTable .= "-- INSERT INTO ".$table[0]."\n";
@@ -186,15 +201,19 @@ if (!class_exists("SL_Database")) {
 						// WE SAVE THE DATA in THE FILE
 						// We check if the file is too big
 						clearstatcache() ; 
-						if ($maxAllocatedMemory*2/3<strlen($contentOfTable)+filesize($sqlfilename.".sql".$extension)) {
-							$extension++ ; 
-							$all_path_files[$sqlfilename.".sql".$extension] = time(); 
+						$filesizeSQL = 0 ; 
+						if (is_file($sqlfilename.$ext_blog.".sql".$extension[$ext_blog])) {
+							$filesizeSQL = filesize($sqlfilename.$ext_blog.".sql".$extension[$ext_blog]) ; 
+						}
+						if ($maxAllocatedMemory*2/3<strlen($contentOfTable)+$filesizeSQL) {
+							$extension[$ext_blog]++ ; 
+							$all_path_files[$sqlfilename.$ext_blog.".sql".$extension[$ext_blog]] = time(); 
 						}
 						// We save the content on the disk and we restart
-						$r = @file_put_contents($sqlfilename.".sql".$extension, $contentOfTable, FILE_APPEND) ; 
+						$r = @file_put_contents($sqlfilename.$ext_blog.".sql".$extension[$ext_blog], $contentOfTable, FILE_APPEND) ; 
 						$contentOfTable = "" ;  
 						if ($r===FALSE) {
-							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql".$extension."</code>")) ; 
+							return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.$ext_blog.".sql".$extension[$ext_blog]."</code>")) ; 
 						}
 						
 						// We check that the time is not exceeded
@@ -216,13 +235,16 @@ if (!class_exists("SL_Database")) {
 				}
 				$current_offset=0 ; 
 			}
-			
-			if ($maxAllocatedMemory<strlen($contentOfTable)+filesize($sqlfilename.".sql".$extension)) {
-				$extension++ ; 
-				$all_path_files[$sqlfilename.".sql".$extension] = time() ; 
+			$filesizeSQL = 0 ; 
+			if (is_file($sqlfilename.$ext_blog.".sql".$extension[$ext_blog])) {
+				$filesizeSQL = filesize($sqlfilename.$ext_blog.".sql".$extension[$ext_blog]) ; 
+			}
+			if ($maxAllocatedMemory<strlen($contentOfTable)+$filesizeSQL) {
+				$extension[$ext_blog]++ ; 
+				$all_path_files[$sqlfilename.$ext_blog.".sql".$extension[$ext_blog]] = time() ; 
 			}
 			// We complete the tmp files with current content
-			$r = @file_put_contents($sqlfilename.".sql".$extension ,$contentOfTable, FILE_APPEND) ; 
+			$r = @file_put_contents($sqlfilename.$ext_blog.".sql".$extension[$ext_blog] ,$contentOfTable, FILE_APPEND) ; 
 			if ($r===FALSE) {
 				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql.tmp</code>")) ; 
 			}

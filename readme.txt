@@ -28,7 +28,9 @@ This plugin is under GPL licence
 
 This plugin is compatible with Multisite installation. 
 
-Each blog administrator may save their own data. The super-admin may save either its data or the whole website.
+Each blog administrator may save their own data. 
+
+The super-admin may save either its data or the whole website. By saving the whole site, the admin may create different SQL files for the subsite in order to ease the restoration of a single sub-site.
 
 = Localization =
 
@@ -79,6 +81,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.5.4 =
+NEW : By saving the whole site, the admin may create different SQL files for the subsite in order to ease the restoration of a single sub-site.
 
 = 1.5.3 =
 * BUG: On some configuration, &lt;? is not supported 
@@ -204,4 +209,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:91e9b3ae0406fd79e6d8660ac3c775e2
+InfoVersion:70bb1f2f9bb0d4862df983f99360ff70

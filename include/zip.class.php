@@ -111,7 +111,7 @@ if (!class_exists("SL_Zip")) {
 			$files = scandir($path) ; 
 			foreach ($files as $f) {
 				// Fichier tmp
-				if (preg_match("/\.zip\.tmp$/", $f, $match)) {
+				if (preg_match("/^(.*)\.zip\.tmp$/", $f, $match)) {
 					unlink($path."/".$f) ; 
 					if (is_file($path."/".$match[1]."zip")) {
 						unlink($path."/".$match[1]."zip") ; 

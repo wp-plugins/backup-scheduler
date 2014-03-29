@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.5.3
+Version: 1.5.4
+
 
 Framework: SL_Framework
 Author: SedLex
@@ -242,6 +243,8 @@ class backup_scheduler extends pluginSedLex {
 			case 'save_all' 		: return false				; break ; 
 			case 'save_db' 		: return true				; break ; 
 			case 'save_db_all' 		: return false				; break ; 
+			case 'save_db_diff_blog' 		: return false				; break ; 
+			
 			case 'max_allocated' 		: return 5				; break ;
 			case 'max_time' 		: return 15				; break ;
 		}
@@ -350,6 +353,7 @@ class backup_scheduler extends pluginSedLex {
 					$params->add_comment(__('Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website',$this->pluginID)) ; 
 					$params->add_param('save_db', __('Only your SQL database:',$this->pluginID)) ;
 					$params->add_comment(__('Check this option if you want to save the text of your posts, your configurations, etc. for the main website',$this->pluginID)) ; 
+					$params->add_param('save_db_diff_blog', __('Save the SQL content of the sub-sites in different files:',$this->pluginID)) ;
 				} else {
 					$params->add_param('save_db', __('The SQL database:',$this->pluginID)) ;
 					$params->add_comment(__('Check this option if you want to save the text of your posts, your configurations, etc.',$this->pluginID)) ; 
@@ -728,9 +732,17 @@ class backup_scheduler extends pluginSedLex {
 					$sql = new SL_Database() ; 
 				} else if (is_multisite()&&($blog_id == 1)) {
 					if ($this->get_param('save_db_all')) {
-						$sql = new SL_Database() ; 
+						if ($this->get_param('save_db_diff_blog')) {
+							$sql = new SL_Database("", $wpdb->prefix) ; 
+						} else {
+							$sql = new SL_Database() ; 
+						}
 					} else {
-						$sql = new SL_Database($wpdb->prefix) ; 
+						if ((is_multisite())&&($blog_id == 1)&&($this->get_param('save_db_diff_blog'))) {
+							$sql = new SL_Database($wpdb->prefix, $wpdb->prefix) ; 
+						} else {
+							$sql = new SL_Database($wpdb->prefix) ; 
+						}
 					}
 				} else {
 					$sql = new SL_Database($wpdb->prefix) ; 
