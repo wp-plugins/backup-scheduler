@@ -77,11 +77,14 @@ Have fun !
 
 == Changelog ==
 
+= 1.5.6 =
+* BUG : Problem of activation with version of PHP below 5.2
+
 = 1.5.5 =
-NEW : Take into account blogs.dir and site
+* NEW : Take into account blogs.dir and site
 
 = 1.5.4 =
-NEW : By saving the whole site, the admin may create different SQL files for the subsite in order to ease the restoration of a single sub-site.
+* NEW : By saving the whole site, the admin may create different SQL files for the subsite in order to ease the restoration of a single sub-site.
 
 = 1.5.3 =
 * BUG: On some configuration, &lt;? is not supported 
@@ -207,4 +210,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:56686a2fd1f6c5e9e8053b98cf672d3b
+InfoVersion:5563ec387c16fb8c6e189fdce7ed4511

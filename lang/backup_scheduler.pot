@@ -816,23 +816,3 @@ msgstr ""
 msgid "Everything OK!"
 msgstr ""
 
-#: core.class.php:1648
-#@ backup_scheduler
-msgid "Standard"
-msgstr ""
-
-#: core.class.php:1649
-#@ backup_scheduler
-msgid "under Plugins"
-msgstr ""
-
-#: core.class.php:1650
-#@ backup_scheduler
-msgid "under Tools"
-msgstr ""
-
-#: core.class.php:1651
-#@ backup_scheduler
-msgid "under Settings"
-msgstr ""
-
