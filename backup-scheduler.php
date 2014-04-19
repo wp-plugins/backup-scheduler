@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.5.4
+Version: 1.5.5
+
 
 
 Framework: SL_Framework
@@ -295,6 +296,9 @@ class backup_scheduler extends pluginSedLex {
 			$tabs = new adminTabs() ; 
 			
 			ob_start() ; 
+				$upload_dir = wp_upload_dir();
+				$upload_dir = $upload_dir['basedir']."/";
+			
 				$params = new parametersSedLex($this) ; 
 				
 				$params->add_title(__('How often do you want to backup your website?',$this->pluginID)) ; 
@@ -328,19 +332,43 @@ class backup_scheduler extends pluginSedLex {
 				
 				if (is_multisite()&&($blog_id != 1)) {
 					$params->add_param('save_upload', __('The upload directory for this blog:',$this->pluginID)) ; 
-					$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/".$blog_id)) ; 
+					// blogs.dir n'est plus utilisé pour les nouveaux blogs MU
+					if (is_dir(WP_CONTENT_DIR."/blogs.dir/".$blog_id)) {
+						$params->add_comment(sprintf(__('(i.e. %s and %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/".$blog_id, $upload_dir)) ; 
+					} else {
+						$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), $upload_dir)) ; 
+					}
 					$params->add_comment(__('Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages.',$this->pluginID)) ; 					
 				} else if (is_multisite()&&($blog_id == 1)) {
 					$params->add_param('save_upload_all', __('All upload directories (for this site and the sub-blogs):',$this->pluginID), "", "", array("!save_upload")) ; 
-					$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/")) ; 
+					// blogs.dir n'est plus utilisé pour les nouveaux blogs MU
+					if (is_dir(WP_CONTENT_DIR."/blogs.dir/")) {
+						$params->add_comment(sprintf(__('(i.e. %s and %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/", $upload_dir)) ; 
+					} else {
+						$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), $upload_dir)) ; 
+					}
 					$params->add_comment(__('Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages.',$this->pluginID)) ; 					
+					// blogs.dir n'est plus utilisé pour les nouveaux blogs MU
 					$params->add_param('save_upload', __('The upload directory for the main site:',$this->pluginID)) ; 
-					$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/".$blog_id)) ; 
-					$params->add_comment(__('Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages.',$this->pluginID)) ; 					
+					if (is_dir(WP_CONTENT_DIR."/blogs.dir/".$blog_id)) {
+						$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), WP_CONTENT_DIR."/blogs.dir/".$blog_id)) ; 
+					} else {
+						$root = scandir($upload_dir);
+						$val_folder = "" ; 
+        				foreach($root as $value){
+        					if (($value!=="sites")&&($value!==".")&&($value!=="..")) {
+        						if ($val_folder!="") {
+        						$val_folder .= "," ; 
+        						}
+								$val_folder .= $upload_dir.$value ; 
+        					}
+        				}
+        				$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), $val_folder)) ; 
+        			}
+        			$params->add_comment(__('Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages.',$this->pluginID)) ; 					
+
 				} else {
 					$params->add_param('save_upload', __('The upload directory:',$this->pluginID)) ; 
-					$upload_dir = wp_upload_dir();
-					$upload_dir = $upload_dir['basedir']."/";
 					$params->add_comment(sprintf(__('(i.e. %s)',$this->pluginID), $upload_dir)) ; 
 					$params->add_comment(__('Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages.',$this->pluginID)) ; 
 				}
@@ -781,6 +809,9 @@ class backup_scheduler extends pluginSedLex {
 				$summary = $this->get_param('info_process') ;
 				$summary['zip']['start'] = time() ; 
 				$this->set_param('info_process', $summary) ;
+				
+				$upload_dir = wp_upload_dir();
+				$upload_dir = $upload_dir['basedir']."/";
 
 				if ( ( (is_multisite()&&($blog_id == 1))||(!is_multisite()) ) && ($this->get_param('save_all')) ) {
 					SL_Debug::log(get_class(), "ZIP backup of " .ABSPATH, 4) ; 
@@ -801,12 +832,32 @@ class backup_scheduler extends pluginSedLex {
 						$z->addDir($upload_dir, WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
 					}
 					if  ( is_multisite() && ($this->get_param('save_upload')) ) {
-						SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", 4) ; 
-						$z->addDir(WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						// blogs.dir n'est plus utilisé pour les nouveaux blogs MU
+						if (is_dir(WP_CONTENT_DIR."/blogs.dir/".$blog_id)) {
+							SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", 4) ; 
+							$z->addDir(WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						} 
+						if ($blog_id != 1) {
+							SL_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
+							$z->addDir($upload_dir, WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						} else {
+							$root = scandir($upload_dir);
+        					foreach($root as $value){
+        						if (($value!=="sites")&&($value!==".")&&($value!=="..")) {
+ 									SL_Debug::log(get_class(), "ZIP backup of " .$upload_dir.$value."/", 4) ; 
+									$z->addDir($upload_dir.$value."/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+        						}
+        					}
+						}
 					}
 					if  ( is_multisite() && ($blog_id == 1) && ($this->get_param('save_upload_all')) ) {
-						SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/", 4) ; 
-						$z->addDir(WP_CONTENT_DIR."/blogs.dir/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						// blogs.dir n'est plus utilisé pour les nouveaux blogs MU
+						if (is_dir(WP_CONTENT_DIR."/blogs.dir/")) {
+							SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", 4) ; 
+							$z->addDir(WP_CONTENT_DIR."/blogs.dir/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						} 
+						SL_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
+						$z->addDir($upload_dir, $upload_dir, "backup_".date_i18n("Ymd")."/");
 					}
 					if  ( (is_multisite()&&($blog_id == 1))||(!is_multisite()) ) {
 						SL_Debug::log(get_class(), "ZIP backup of " .ABSPATH."/wp-config.php", 4) ; 

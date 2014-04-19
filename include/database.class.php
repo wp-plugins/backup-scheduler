@@ -163,13 +163,14 @@ if (!class_exists("SL_Database")) {
 						}
 						
 						$contentOfTable .= "\n\n";
-						$contentOfTable .= "-- -----------------------------\n";
-						$contentOfTable .= "-- CREATE ".$table[0]."DEBUG".$sepBlog."/^".$sepBlog."([0-9]*)_/"."\n"; 
+						$contentOfTable .= "-- ===============================================================\n";
+						$contentOfTable .= "\n";
+						$contentOfTable .= "-- DROP and CREATE ".$table[0]."\n"; 
 						$contentOfTable .= "-- -----------------------------\n";
 						$contentOfTable .= "DROP TABLE IF EXISTS ".$table[0].";\n";
+						$contentOfTable .= $wpdb->get_var("show create table ".$table[0], 1).";";
 
 						$contentOfTable .= "\n\n";
-						$contentOfTable .= "-- -----------------------------\n";
 						$contentOfTable .= "-- INSERT INTO ".$table[0]."\n";
 						$contentOfTable .= "-- -----------------------------\n\n";
 					}

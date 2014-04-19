@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-03-14T17:14:12+00:00\n"
+"PO-Revision-Date: 2014-04-16T22:06:04+00:00\n"
 "Last-Translator: Opti <>\n"
 "Last-Translator: Lukasz <www.premiumaccount.co.ukwww.esteepc.co.uk>\n"
 "Last-Translator: pablo <pawel@dream.net.pl>\n"
@@ -492,4 +492,7 @@ msgstr "Nie da się przełączyć w tryb PASV"
 
 msgid "Everything OK!"
 msgstr "Wszystko jest OK!"
+
+msgid "Save the SQL content of the sub-sites in different files:"
+msgstr "Zapisz zawartość SQL z treścią pod-witryn w innych plikach:"
 
