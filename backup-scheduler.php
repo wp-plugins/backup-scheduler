@@ -3,10 +3,7 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.5.6
-
-
-
+Version: 1.5.7
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -133,7 +130,7 @@ class backup_scheduler extends pluginSedLex {
 	*/
 	
 	public function _update() {
-		SL_Debug::log(get_class(), "Update the plugin" , 4) ; 
+		SLFramework_Debug::log(get_class(), "Update the plugin" , 4) ; 
 	}
 	
 	/**====================================================================================================================================================
@@ -228,6 +225,7 @@ class backup_scheduler extends pluginSedLex {
 			case 'ftp_create_folder' 		: return false		; break ; 
 			case 'ftp_prefix_folder' 		: return ""		; break ; 
 			
+			case 'exclude_folder' 		: return "*"		; break ; 
 
 			case 'email_check' 		: return true 		; break ; 
 			case 'email' 		: return "" 		; break ; 
@@ -265,7 +263,7 @@ class backup_scheduler extends pluginSedLex {
 		global $blog_id;
 		
 		$table_name = $wpdb->prefix . $this->pluginID;
-		SL_Debug::log(get_class(), "Display the configuration page" , 4) ;
+		SLFramework_Debug::log(get_class(), "Display the configuration page" , 4) ;
 		
 		?>
 		<div class="plugin-titleSL">
@@ -284,7 +282,7 @@ class backup_scheduler extends pluginSedLex {
 			
 			// On verifie que la fonction exist
 			if (!@function_exists('gzcompress')) {
-				SL_Debug::log(get_class(), "GZCompress function is not supported on this server.", 1) ; 
+				SLFramework_Debug::log(get_class(), "GZCompress function is not supported on this server.", 1) ; 
 				echo "<div class='error fade'><p>".sprintf(__('Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!', $this->pluginID), "<code>gzcompress()</code>")."</p><div>";
 			}
 			
@@ -293,13 +291,13 @@ class backup_scheduler extends pluginSedLex {
 			// Mise en place du systeme d'onglet
 			//
 			//==========================================================================================
-			$tabs = new adminTabs() ; 
+			$tabs = new SLFramework_Tabs() ; 
 			
 			ob_start() ; 
 				$upload_dir = wp_upload_dir();
 				$upload_dir = $upload_dir['basedir']."/";
 			
-				$params = new parametersSedLex($this) ; 
+				$params = new SLFramework_Parameters($this) ; 
 				
 				$params->add_title(__('How often do you want to backup your website?',$this->pluginID)) ; 
 				$params->add_param('frequency', __('Frequency (in days):',$this->pluginID)) ; 
@@ -387,8 +385,11 @@ class backup_scheduler extends pluginSedLex {
 					$params->add_comment(__('Check this option if you want to save the text of your posts, your configurations, etc.',$this->pluginID)) ; 
 				}
 
-				$params->add_param('chunk', __('The maximum file size (in MB):',$this->pluginID)) ; 
+				$params->add_param('chunk', __('The maximum zip file size (in MB, namely the chunck size):',$this->pluginID)) ; 
 				$params->add_comment(__('Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated',$this->pluginID)) ; 
+				
+				$params->add_param('exclude_folder', __('Exclude these folders:',$this->pluginID)) ; 
+				$params->add_comment(__('Please enter one name of folder to be excluded per line',$this->pluginID)) ; 
 
 				$params->add_title(__('Do you want that the backup is sent by email?',$this->pluginID)) ; 
 				$params->add_param('email_check', __('Send the backup files by email:',$this->pluginID), '', '', array('email', 'rename')) ; 
@@ -416,10 +417,8 @@ class backup_scheduler extends pluginSedLex {
 								
 				$params->add_title(__('Advanced - Memory and time management',$this->pluginID)) ; 
 				$params->add_param('max_allocated', __('What is the maximum size of allocated memory (in MB):',$this->pluginID)) ; 
+				$params->add_comment(__("The files greater than this limit won't be included in the zip file!",$this->pluginID)) ; 
 				$params->add_comment(__('On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error.',$this->pluginID)) ; 
-				$params->add_comment(sprintf(__('For your information, the memory limit of your webserver is %s whereas the present memory usage is %s.',$this->pluginID), ini_get('memory_limit'), Utils::byteSize(memory_get_usage()))) ; 
-				$params->add_comment(__('It is recommended that the maximum attachment size is not set to a value higher than this one.',$this->pluginID)) ; 
-				$params->add_comment(__("Please note that the files greater than this limit won't be included in the zip file!",$this->pluginID)) ; 
 				$params->add_param('max_time', __('What is the maximum time for the php scripts execution (in seconds):',$this->pluginID)) ; 
 				$params->add_comment(__('Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster.',$this->pluginID)) ; 
 
@@ -451,41 +450,104 @@ class backup_scheduler extends pluginSedLex {
 				echo "<script>jQuery('#backupButton2').removeAttr('disabled');</script>" ; 
 				echo "</p>" ; 
 				
-				echo "<br/><h3>".__("How to restore the backup files?", $this->pluginID)."</h3>" ; 
-				
-				echo "<p>".__("To restore the backups, and if you have backuped the full installation, you will have to execute the following steps:", $this->pluginID)."</p>" ; 
-				echo "<ul>" ; 
-				echo "<li style='padding-left:50px;'>".__("Save all zip files (i.e. *.zip, *.z01, *.z02, etc.) in a single folder on your hard disk.", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Unzip these files by using IZArc, Winzip, or Winrar (others software could not support these multipart zip and consider that the archive is corrupted).", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Save the extracted files on your webserver.", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first).", $this->pluginID)."</li>" ; 
-				echo "</ul>" ; 
-				echo "<p>".__("To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:", $this->pluginID)."</p>" ; 
-				echo "<ul>" ; 
-				echo "<li style='padding-left:50px;'>".__("Install a fresh version of Wordpress on your webserver.", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Save all zip files (i.e. *.zip, *.z01, *.z02, etc.) in a single folder on your hard disk.", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Unzip these files by using IZArc, Winzip, or Winrar (others software could not support these multipart zip and consider that the archive is corrupted).", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Replace the folders (i.e. 'plugins',  'themes', and/or 'uploads') of the root of your webserver by the extracted folders.", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first).", $this->pluginID)."</li>" ; 
-				echo "<li style='padding-left:50px;'>".__("Replace the wp-config.php (at the root of your webserver) with the extracted one.", $this->pluginID)."</li>" ; 
-				echo "</ul>" ; 
-
 			$tabs->add_tab(__('Backups',  $this->pluginID), ob_get_clean() ) ; 	
 
 			$tabs->add_tab(__('Parameters',  $this->pluginID), $parameters , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_param.png") ; 	
+			
+			// HOW To
+
+			ob_start() ;
+				echo "<p>".__("There is two different ways to create a backup:", $this->pluginID)."</p>" ; 
+				echo "<ul style='list-style-type: disc;padding-left:40px;'>" ; 
+					echo "<li><p>".__("an automatic process (namely background process):", $this->pluginID)."</p></li>" ; 
+						echo "<ul style='list-style-type: circle;padding-left:40px;'>" ; 
+							echo "<li><p>".__("Every time a user visits a page of the frontside of your website, a small portion of the backup process is performed;", $this->pluginID)."</p></li>" ; 
+							echo "<li><p>".__("Note that if you have very few visits, a complete backup may be quite long.", $this->pluginID)."</p></li>" ; 
+						echo "</ul>" ;
+					echo "<li><p>".__("a forced process:", $this->pluginID)."</p></li>" ; 
+						echo "<ul style='list-style-type: circle;padding-left:40px;'>" ; 
+							echo "<li><p>".__("The button that triggers this forced process may be found in the Backup tab;", $this->pluginID)."</p></li>" ; 
+							echo "<li><p>".__("You have to stay on that page for processing all attachments: if you go on another page (or if you reload the page), the process will be stopped.", $this->pluginID)."</p></li>" ; 
+						echo "</ul>" ;				
+				echo "</ul>" ; 
+			$howto1 = new SLFramework_Box (__("How to backup the site?", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".__("When forcing a backup process, the plugin indicates that another process is running.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("99% of the time, it means that the memory limit and/or the chunck size have been increased and that you exceed the maximum memory limit authorized by your server: therefore, the PHP process related to the backup is killed.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("Most of the time, this chunk size and memory limit do not have to be higher than 15Mo.", $this->pluginID)."</p>" ; 
+				echo "<p><b>".__("DO NOT contact me before trying to reduce the chunk size and the memory limit: 250Mo is, for instance, often not a good idea...", $this->pluginID)."</b></p>" ; 
+			$howto2 = new SLFramework_Box (__("The backup process cannot end", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".__("This plugin create a plurality of split zip.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("Indeed, a PHP process is not able, most of the time, to create, manipulate and handle files that exceed a certain amount of data.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("In order to be able to backup websites of a size of a couple gigabytes, the plugin create different files.", $this->pluginID)."</p>" ; 
+			$howto3 = new SLFramework_Box (__("Why the plugin creates multi-part zip?", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".__("To open the backups, you will have to execute the following steps:", $this->pluginID)."</p>" ; 
+				echo "<ul style='list-style-type: disc;padding-left:40px;'>" ; 
+					echo "<li><p>".__("Save all zip files (i.e. *.zip, *.z01, *.z02, etc.) in a single folder on your hard disk.", $this->pluginID)."</p></li>" ; 
+					echo "<li><p>".__("Unzip these files by using a software that support multi-part zip files (it is often indicated in the readme):", $this->pluginID)."</p></li>" ; 
+					echo "<ul style='list-style-type: disc;padding-left:40px;'>" ; 
+						echo "<li><p>IZArc (Windows)</p></li>" ; 
+						echo "<li><p>Winzip (Windows)</p></li>" ; 
+						echo "<li><p>Winrar (Windows)</p></li>" ; 
+						echo "<li><p>The UnArchiver (MacOS)</p></li>" ; 
+						echo "<li><p>".__("Other software may works ... do not hesitate to inform me!", $this->pluginID)."</p></li>" ; 
+					echo "</ul>" ; 
+				echo "</ul>" ; 
+			$howto4 = new SLFramework_Box (__("How to open the split zip files?", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".__("No this plugin does not propose a 'one-click restoration'.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("Indeed, how a plugin may restore an installation of Wordpress if Wordpress does not exists (it has to be restored) to run the plugin? I believe I made my point ...", $this->pluginID)."</p>" ; 
+				echo "<p>".__("Keep in mind that the restoration of a website may be a technical and long process (it depends on what you want to restore). For instance, you need to be familiar with manipulating FTP for accessing your website.", $this->pluginID)."</p>" ; 
+			$howto5 = new SLFramework_Box (__("One click restoration?", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".__("In the zip, you will find some sql files.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("You could either:", $this->pluginID)."</p>" ; 
+				echo "<ul style='list-style-type: disc;padding-left:40px;'>" ; 
+					echo "<li><p>".sprintf(__("Import each file in your new database (for instance, thanks to %s), in the alphabetical order of the files.", $this->pluginID), "phpMyAdmin")."</p></li>" ; 
+					echo "<li><p>".sprintf(__("Concatenate the sql files in one big file and import this latter file in your new database (for instance, thanks to %s).", $this->pluginID), "phpMyAdmin")."</p></li>" ; 
+				echo "</ul>" ; 
+				echo "<p>".sprintf(__("Please note that if you choose to save the SQL content of the sub-sites in different files, you will also have some %s files (with %s the index of the blog). You can separately handle these files.", $this->pluginID), "<code>blogx.sql</code>", "<code>x</code>")."</p>" ; 
+			$howto6 = new SLFramework_Box (__("How to restore the database?", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".__("If you have backuped the entire website, the restoration is quite simple: you just have to copy the files in the zip files into your webserver.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("If you have backuped only some folders, you will have to execute the following steps:", $this->pluginID)."</p>" ; 
+				echo "<ul style='list-style-type: disc;padding-left:40px;'>" ; 
+					echo "<li><p>".__("Install a fresh version of Wordpress on your webserver.", $this->pluginID)."</p></li>" ; 
+					echo "<li><p>".sprintf(__("Replace the folders (i.e. %s,  %s, and/or %s) of the root of your webserver by the extracted folders.", $this->pluginID), "'<code>plugins</code>'", "'<code>themes</code>'", "'<code>uploads</code>'")."</p></li>" ; 
+					echo "<li><p>".sprintf(__("Replace the %s (at the root of your webserver) with the extracted one.", $this->pluginID), "<code>wp-config.php</code>")."</p></li>" ; 
+				echo "</ul>" ; 
+				echo "<p>".sprintf(__("Please note that if you choose to save the SQL content of the sub-sites in different files, you will also have some %s files (with %s the index of the blog). You can separately handle these files.", $this->pluginID), "<code>blogx.sql</code>", "<code>x</code>")."</p>" ; 
+			$howto7 = new SLFramework_Box (__("How to restore the other files?", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ;
+				echo "<p>".sprintf(__("The backup files are stored in %s.", $this->pluginID), "<code>wp-content/sedlex/backup-scheduler/</code>")."</p>" ; 
+				echo "<p>".__("In addition, the plugin may store the files on a distant FTP.", $this->pluginID)."</p>" ; 
+				echo "<p>".__("Finally, you can configure the plugin to send the backup files by mail but be informed that there is some difficulties with most of mail provider (size issue, extension rejection, etc.).", $this->pluginID)."</p>" ; 
+			$howto8 = new SLFramework_Box (__("Where the backup are stored?", $this->pluginID), ob_get_clean()) ; 
+			ob_start() ; 
+				 echo $howto1->flush() ; 
+				 echo $howto8->flush() ; 
+				 echo $howto3->flush() ; 
+				 echo $howto2->flush() ; 
+				 echo $howto4->flush() ; 
+				 echo $howto5->flush() ; 
+				 echo $howto6->flush() ; 
+				 echo $howto7->flush() ; 
+			$tabs->add_tab(__('How To',  $this->pluginID), ob_get_clean() , plugin_dir_url("/").'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_how.png") ; 	
 			
 			$frmk = new coreSLframework() ; 
 			if ( ((is_multisite())&&($blog_id == 1)) || (!is_multisite()) || ($frmk->get_param('global_allow_translation_by_blogs'))) {
 				ob_start() ; 
 					$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-					$trans = new translationSL($this->pluginID, $plugin) ; 
+					$trans = new SLFramework_Translation($this->pluginID, $plugin) ; 
 					$trans->enable_translation() ; 
 				$tabs->add_tab(__('Manage translations',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_trad.png") ; 	
 			}
 			
 			ob_start() ; 
 				$plugin = str_replace("/","",str_replace(basename(__FILE__),"",plugin_basename( __FILE__))) ; 
-				$trans = new feedbackSL($plugin, $this->pluginID) ; 
+				$trans = new SLFramework_Feedback($plugin, $this->pluginID) ; 
 				$trans->enable_feedback() ; 
 			$tabs->add_tab(__('Give feedback',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_mail.png") ; 	
 			
@@ -493,7 +555,7 @@ class backup_scheduler extends pluginSedLex {
 				// A list of plugin slug to be excluded
 				$exlude = array('wp-pirates-search') ; 
 				// Replace sedLex by your own author name
-				$trans = new otherPlugins("sedLex", $exlude) ; 
+				$trans = new SLFramework_OtherPlugins("sedLex", $exlude) ; 
 				$trans->list_plugins() ; 
 			$tabs->add_tab(__('Other plugins',  $this->pluginID), ob_get_clean() , WP_PLUGIN_URL.'/'.str_replace(basename(__FILE__),"",plugin_basename(__FILE__))."core/img/tab_plug.png") ; 	
 			
@@ -523,7 +585,7 @@ class backup_scheduler extends pluginSedLex {
 			$blog_fold = $blog_id."/" ; 
 		}
 	
-		$table = new adminTable() ;
+		$table = new SLFramework_Table() ;
 		$table->title(array(__('Date of the backup',  $this->pluginID), __('Backup files',  $this->pluginID)) ) ;
 		
 		if (!is_dir(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold)) {
@@ -549,7 +611,7 @@ class backup_scheduler extends pluginSedLex {
 					$racine = str_replace(".zip",".z". sprintf("%02d",$i), $f) ; 
 					
 					while (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)) {
-						SL_Debug::log(get_class(), "The sub-backup ".$racine." has been found" , 5) ; 
+						SLFramework_Debug::log(get_class(), "The sub-backup ".$racine." has been found" , 5) ; 
 						$ftp_transfer_info = "" ; 
 						if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp.ok")) {
 							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#006600'>".__("FTP transfer OK",$this->pluginID)."</span>)</span>" ; 
@@ -558,7 +620,7 @@ class backup_scheduler extends pluginSedLex {
 						} elseif (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine.".ftp.progress")) {
 							$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#B84A00'>".__("FTP transfer reset",$this->pluginID)."</span>)</span>" ; 
 						}
-						$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$racine."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)).") $ftp_transfer_info | "  ; 
+						$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$racine."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".SLFramework_Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine)).") $ftp_transfer_info | "  ; 
 						$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$racine) ; 
 						//MAJ
 						$i++ ; 
@@ -574,7 +636,7 @@ class backup_scheduler extends pluginSedLex {
 						$ftp_transfer_info = "<span style='font-size:75%'>(<span style='color:#B84A00'>".__("FTP transfer reset",$this->pluginID)."</span>)</span>" ; 
 					}
 					$size += filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f) ; 
-					$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$f."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f)).") $ftp_transfer_info"  ; 
+					$lien .= "<a href='".WP_CONTENT_URL."/sedlex/backup-scheduler/".$blog_fold.$f."'>".sprintf(__('Part %s',  $this->pluginID), sprintf("%02d",$i))."</a> (".SLFramework_Utils::byteSize(filesize(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f)).") $ftp_transfer_info"  ; 
 					$lien .= "<p>" ; 
 					
 					// We compute in how many days the backup will be deleted
@@ -585,7 +647,7 @@ class backup_scheduler extends pluginSedLex {
 					$delta = $this->get_param("delete_after")-intval($s/86400);   
 
 					$valeur  = "<p>".sprintf(__('Backup finished on %s at %s',  $this->pluginID), $date, $heure)."</p>" ; 
-					$valeur .= "<p style='font-size:80%'>".sprintf(__('The total size of the files is %s',  $this->pluginID), Utils::byteSize($size))."</p>" ; 
+					$valeur .= "<p style='font-size:80%'>".sprintf(__('The total size of the files is %s',  $this->pluginID), SLFramework_Utils::byteSize($size))."</p>" ; 
 					$valeur .= "<p style='font-size:80%'>".sprintf(__('These files will be deleted in %s days',  $this->pluginID), $delta)."</p>" ; 
 					$cel1 = new adminCell($valeur) ;
 					$racinefichier = explode(".", $f) ; 
@@ -637,7 +699,7 @@ class backup_scheduler extends pluginSedLex {
 				} 
 				$num_file -- ; 					
 
-				$valeur  .= "<p style='font-size:80%'>".sprintf(__('The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s).',  $this->pluginID), $progress, $num_file, Utils::byteSize($size))."</p>" ;				
+				$valeur  .= "<p style='font-size:80%'>".sprintf(__('The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s).',  $this->pluginID), $progress, $num_file, SLFramework_Utils::byteSize($size))."</p>" ;				
 			}
 			
 			// STEP FTP
@@ -698,7 +760,7 @@ class backup_scheduler extends pluginSedLex {
 		}
 		if (!is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."index.php")) {
 			@file_put_contents(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."index.php", "You are not allowed here!") ; 
-			SL_Debug::log(get_class(), "Create the index.php file in the ".WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold." to avoid any listing of the directory." , 5) ; 
+			SLFramework_Debug::log(get_class(), "Create the index.php file in the ".WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold." to avoid any listing of the directory." , 5) ; 
 		}
 		
 		// Memory limit upgrade
@@ -741,7 +803,7 @@ class backup_scheduler extends pluginSedLex {
 			SL_Zip::reset(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold) ; 	
 			// If the state is not set, it means that we just start the processes
 			$state = array(
-				"rand"=>date_i18n("YmdHis")."_".Utils::rand_str(10, "abcdefghijklmnopqrstuvwxyz0123456789"), 
+				"rand"=>date_i18n("YmdHis")."_".SLFramework_Utils::rand_str(10, "abcdefghijklmnopqrstuvwxyz0123456789"), 
 				"step"=>"SQL"
 			) ;			
 			$summary['start'] = time() ; 
@@ -778,7 +840,7 @@ class backup_scheduler extends pluginSedLex {
 				$res = $sql->createSQL(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."BackupScheduler".$this->get_param('add_name')."_".$state['rand'], $this->get_param('max_time'),ceil(($this->get_param('max_allocated')-0.5)*1024*1024)); // We remove 0.5Mo to ensure that the sql file will be included in the backup
 				// Check if the step should be modified
 				if ($res['finished']==true) {
-					SL_Debug::log(get_class(), "SQL extraction finished", 4) ; 
+					SLFramework_Debug::log(get_class(), "SQL extraction finished", 4) ; 
 					$state['step'] = "ZIP" ; 
 					$this->set_param('process_state', $state) ; 
 					$state['sqlfile'] = $res['path'] ;
@@ -814,60 +876,77 @@ class backup_scheduler extends pluginSedLex {
 				$upload_dir = $upload_dir['basedir']."/";
 
 				if ( ( (is_multisite()&&($blog_id == 1))||(!is_multisite()) ) && ($this->get_param('save_all')) ) {
-					SL_Debug::log(get_class(), "ZIP backup of " .ABSPATH, 4) ; 
-					$z->addDir(ABSPATH, ABSPATH, "backup_".date_i18n("Ymd")."/", array(WP_CONTENT_DIR."/sedlex/"));
+					SLFramework_Debug::log(get_class(), "ZIP backup of " .ABSPATH, 4) ; 
+					$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+					$exclu = array_map('trim',$exclu);
+					$exclu[] = WP_CONTENT_DIR."/sedlex/" ; 
+					$z->addDir(ABSPATH, ABSPATH, "backup_".date_i18n("Ymd")."/", $exclu);
 				} else {
 					if  ( ( (is_multisite()&&($blog_id == 1))||(!is_multisite()) ) && ($this->get_param('save_plugin')) ) {
-						SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/plugins/", 4) ; 
-						$z->addDir(WP_CONTENT_DIR."/plugins/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						SLFramework_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/plugins/", 4) ; 
+						$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+						$exclu = array_map('trim',$exclu);
+						$z->addDir(WP_CONTENT_DIR."/plugins/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/", $exclu);
 					}
 					if  ( ( (is_multisite()&&($blog_id == 1))||(!is_multisite()) ) && ($this->get_param('save_theme')) ) {
-						SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/themes/", 4) ; 
-						$z->addDir(WP_CONTENT_DIR."/themes/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						SLFramework_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/themes/", 4) ; 
+						$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+						$exclu = array_map('trim',$exclu);
+						$z->addDir(WP_CONTENT_DIR."/themes/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/", $exclu);
 					}
 					if  ( (!is_multisite()) && ($this->get_param('save_upload')) ) {
 						$upload_dir = wp_upload_dir();
 						$upload_dir = $upload_dir['basedir']."/";
-						SL_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
-						$z->addDir($upload_dir, WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+						SLFramework_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
+						$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+						$exclu = array_map('trim',$exclu);
+						$z->addDir($upload_dir, WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/", $exclu);
 					}
 					if  ( is_multisite() && ($this->get_param('save_upload')) ) {
 						// blogs.dir n'est plus utilisé pour les nouveaux blogs MU
 						if (is_dir(WP_CONTENT_DIR."/blogs.dir/".$blog_id)) {
-							SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", 4) ; 
-							$z->addDir(WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+							SLFramework_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", 4) ; 
+							$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+							$exclu = array_map('trim',$exclu);
+							$z->addDir(WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/", $exclu);
 						} 
 						if ($blog_id != 1) {
-							SL_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
-							$z->addDir($upload_dir, WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+							SLFramework_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
+							$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+							$exclu = array_map('trim',$exclu);
+							$z->addDir($upload_dir, WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/", $exclu);
 						} else {
 							$root = scandir($upload_dir);
         					foreach($root as $value){
         						if (($value!=="sites")&&($value!==".")&&($value!=="..")) {
- 									SL_Debug::log(get_class(), "ZIP backup of " .$upload_dir.$value."/", 4) ; 
-									$z->addDir($upload_dir.$value."/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+ 									SLFramework_Debug::log(get_class(), "ZIP backup of " .$upload_dir.$value."/", 4) ; 
+ 									$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+									$exclu = array_map('trim',$exclu);
+									$z->addDir($upload_dir.$value."/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/", $exclu);
         						}
         					}
 						}
 					}
 					if  ( is_multisite() && ($blog_id == 1) && ($this->get_param('save_upload_all')) ) {
 						// blogs.dir n'est plus utilisé pour les nouveaux blogs MU
+						$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+						$exclu = array_map('trim',$exclu);
 						if (is_dir(WP_CONTENT_DIR."/blogs.dir/")) {
-							SL_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", 4) ; 
-							$z->addDir(WP_CONTENT_DIR."/blogs.dir/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/");
+							SLFramework_Debug::log(get_class(), "ZIP backup of " .WP_CONTENT_DIR."/blogs.dir/".$blog_id."/", 4) ; 
+							$z->addDir(WP_CONTENT_DIR."/blogs.dir/", WP_CONTENT_DIR."/", "backup_".date_i18n("Ymd")."/", $exclu);
 						} 
-						SL_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
-						$z->addDir($upload_dir, $upload_dir, "backup_".date_i18n("Ymd")."/");
+						SLFramework_Debug::log(get_class(), "ZIP backup of " .$upload_dir, 4) ; 
+						$z->addDir($upload_dir, $upload_dir, "backup_".date_i18n("Ymd")."/", $exclu);
 					}
 					if  ( (is_multisite()&&($blog_id == 1))||(!is_multisite()) ) {
-						SL_Debug::log(get_class(), "ZIP backup of " .ABSPATH."/wp-config.php", 4) ; 
+						SLFramework_Debug::log(get_class(), "ZIP backup of " .ABSPATH."/wp-config.php", 4) ; 
 						$z->addFile(ABSPATH."/wp-config.php", ABSPATH, "backup_".date_i18n("Ymd")."/");
 					}
 				}
 				if ($this->get_param('save_db')||$this->get_param('save_db_all')) {
 					foreach($state['sqlfile']  as $f=>$t) {
-						$z -> addFile($f, WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold, "backup_".date_i18n("Ymd")."/");
-						SL_Debug::log(get_class(), "ZIP backup of " .$f, 4) ; 
+						$z->addFile($f, WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold, "backup_".date_i18n("Ymd")."/");
+						SLFramework_Debug::log(get_class(), "ZIP backup of " .$f, 4) ; 
 					}
 				}
 			} 
@@ -911,7 +990,7 @@ class backup_scheduler extends pluginSedLex {
 				$summary = $this->get_param('info_process') ;
 				
 				if (is_file($file_to_sent)) {
-					SL_Debug::log(get_class(), "FTP file to be sent: " .$file_to_sent, 4) ; 
+					SLFramework_Debug::log(get_class(), "FTP file to be sent: " .$file_to_sent, 4) ; 
 					file_put_contents ($file_to_sent.".ftp.progress","in progress") ; 
 					$res = $this->sendFTP(array($file_to_sent)) ; 
 					if ($res['transfer']) {
@@ -972,17 +1051,17 @@ class backup_scheduler extends pluginSedLex {
 				$this->set_param('info_process', $summary) ;
 				
 				if (is_file($file_to_sent)) {
-					SL_Debug::log(get_class(), "Email the backup file: ".$file_to_sent , 4) ; 
+					SLFramework_Debug::log(get_class(), "Email the backup file: ".$file_to_sent , 4) ; 
 					$subject = sprintf(__("Backup of %s on %s (%s)", $this->pluginID), get_bloginfo('name') , date_i18n('Y-m-d'), count($files_sent)."/".(count($files_to_sent)+count($files_sent)) ) ; 
 					$res = $this->sendEmail(array($file_to_sent), $subject) ; 
 					if ($res===true) {
 						$path['text'] = ' '.__('(MAIL sending)', $this->pluginID) ; 	
 						$path['nb_finished'] = count($files_sent) ; 
 						$path['nb_to_finished'] = count($files_to_sent) ; 
-						SL_Debug::log(get_class(), "Email sent.", 4) ; 
+						SLFramework_Debug::log(get_class(), "Email sent.", 4) ; 
 						array_push($files_sent, $file_to_sent ) ; 
 					} else {
-						SL_Debug::log(get_class(), "Email failed to be sent.", 2) ; 
+						SLFramework_Debug::log(get_class(), "Email failed to be sent.", 2) ; 
 						$path['error'] = __("Your Wordpress installation cannot send emails (with heavy attachments)!", $this->pluginID)  ; 
 						array_push($files_sent, __("Your Wordpress installation cannot send emails (with heavy attachments)!", $this->pluginID).": ".$file_to_sent ) ; 
 					}
@@ -1007,7 +1086,7 @@ class backup_scheduler extends pluginSedLex {
 		
 		// STEP END
 		} else if ($state['step']=="END") {	
-			SL_Debug::log(get_class(), "Email to summarize the backup process.", 4) ; 
+			SLFramework_Debug::log(get_class(), "Email to summarize the backup process.", 4) ; 
 			//new log
 			$summary = $this->get_param('info_process') ;
 			$summary['end'] = time() ; 
@@ -1020,7 +1099,7 @@ class backup_scheduler extends pluginSedLex {
 			while (true) {
 				if (is_file(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."BackupScheduler".$this->get_param('add_name')."_".$state['rand'].".sql".$num_i)) {
 					@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."BackupScheduler".$this->get_param('add_name')."_".$state['rand'].".sql".$num_i) ; 
-					SL_Debug::log(get_class(), "SQL file is deleted: " .WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."BackupScheduler".$this->get_param('add_name')."_".$state['rand'].".sql".$num_i, 4) ; 
+					SLFramework_Debug::log(get_class(), "SQL file is deleted: " .WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold."BackupScheduler".$this->get_param('add_name')."_".$state['rand'].".sql".$num_i, 4) ; 
 					$num_i ++ ; 
 				} else {
 					break ; 
@@ -1033,7 +1112,7 @@ class backup_scheduler extends pluginSedLex {
 			return array('text'=>__('(END - ending)', $this->pluginID) ) ; 		
 		}
 		
-		SL_Debug::log(get_class(), "An unknown error occured!" , 2) ; 
+		SLFramework_Debug::log(get_class(), "An unknown error occured!" , 2) ; 
 		return array('finished'=>false, 'error'=>__("An unknown error occured!", $this->pluginID)) ; 
 	}
 	
@@ -1044,8 +1123,8 @@ class backup_scheduler extends pluginSedLex {
 	*/
 	function initBackupForce() {
 		$this->only_cancelBackup() ; 
-		SL_Debug::log(get_class(), "Init force a new backup." , 4) ; 
-		$pb = new progressBarAdmin(500, 20, 0, "Initialization") ; 
+		SLFramework_Debug::log(get_class(), "Init force a new backup." , 4) ; 
+		$pb = new SLFramework_Progressbar(500, 20, 0, "Initialization") ; 
 		$this->displayBackup() ; 	
 		echo "<br>" ; 
 		$pb->flush() ;
@@ -1066,7 +1145,7 @@ class backup_scheduler extends pluginSedLex {
 		}
 		
 		$type_backup = $_POST['type_backup'] ;
-		SL_Debug::log(get_class(), "Force a new backup." , 4) ; 
+		SLFramework_Debug::log(get_class(), "Force a new backup." , 4) ; 
 
 		$result = $this->create_zip($type_backup) ;
 		$state = $this->get_param('process_state') ; 
@@ -1081,14 +1160,14 @@ class backup_scheduler extends pluginSedLex {
 		
 		if ((is_array($state))&&(count($state)==0)) {
 			$this->only_cancelBackup() ; 
-			SL_Debug::log(get_class(), "The backup process has end." , 4) ; 
+			SLFramework_Debug::log(get_class(), "The backup process has end." , 4) ; 
 			echo "<div class='updated fade'><p class='backupEnd'>".__("A new backup has been generated!", $this->pluginID)."</p></div>" ; 
 		} else {
 			echo "<span class='continueBackupProcess'></span>" ;
 			if ((isset($result['nb_finished']))&&(isset($result['nb_to_finished']))&&(0!=($result['nb_finished']))&&(0!=($result['nb_to_finished']))) {
-				$pb = new progressBarAdmin(500, 20, ceil($result['nb_finished']/($result['nb_finished']+$result['nb_to_finished'])*100),ceil($result['nb_finished']/($result['nb_finished']+$result['nb_to_finished'])*100)."% ".$result['text']) ; 
+				$pb = new SLFramework_Progressbar(500, 20, ceil($result['nb_finished']/($result['nb_finished']+$result['nb_to_finished'])*100),ceil($result['nb_finished']/($result['nb_finished']+$result['nb_to_finished'])*100)."% ".$result['text']) ; 
 			} else {
-				$pb = new progressBarAdmin(500, 20, 100, $result['text']) ; 
+				$pb = new SLFramework_Progressbar(500, 20, 100, $result['text']) ; 
 			}
 			$pb->flush() ;
 			$this->set_param('process_running', false) ; 
@@ -1135,7 +1214,7 @@ class backup_scheduler extends pluginSedLex {
 			}
 		
 		} else {
-			SL_Debug::log(get_class(), "No backup needed" , 5) ; 
+			SLFramework_Debug::log(get_class(), "No backup needed" , 5) ; 
 			echo "No Backup Needed" ; 
 			$this->only_cancelBackup() ; 
 		}
@@ -1151,7 +1230,7 @@ class backup_scheduler extends pluginSedLex {
 				$delta = intval($s/86400);   
 				if ($delta >= $this->get_param("delete_after")) {
 					@unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f) ; 
-					SL_Debug::log(get_class(), "The backup file ".$f." has been deleted because it is too old" , 4) ; 
+					SLFramework_Debug::log(get_class(), "The backup file ".$f." has been deleted because it is too old" , 4) ; 
 					
 					echo "File $f has been deleted as ".$new_date." and ".$date." is seperated of $delta days and should be deleted after ".$this->get_param("delete_after")." days\n" ; 
 				}
@@ -1204,13 +1283,13 @@ class backup_scheduler extends pluginSedLex {
 		$files = @scandir(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold) ; 
 		$nb = 0 ; 
 		
-		SL_Debug::log(get_class(), "The backup files ".$racine." is asked to be deleted" , 4) ; 
+		SLFramework_Debug::log(get_class(), "The backup files ".$racine." is asked to be deleted" , 4) ; 
 
 		foreach ($files as $f) {
 			if (preg_match("/^".$racine."/i", $f)) {
 				$res = @unlink(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f) ; 
 				if ($res===false) {
-					SL_Debug::log(get_class(), "The file ".WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f." cannot be deleted." , 2) ; 
+					SLFramework_Debug::log(get_class(), "The file ".WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f." cannot be deleted." , 2) ; 
 					echo "Error: ".WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold.$f." can not be deleted. Checks rights!" ; 
 					die() ; 
 				}
@@ -1241,7 +1320,7 @@ class backup_scheduler extends pluginSedLex {
 			$blog_fold = $blog_id."/" ; 
 		}
 
-		SL_Debug::log(get_class(), "Cancel any previous backup process if exists" , 4) ; 
+		SLFramework_Debug::log(get_class(), "Cancel any previous backup process if exists" , 4) ; 
 		
 		if (!is_dir(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold)) {
 			@mkdir(WP_CONTENT_DIR."/sedlex/backup-scheduler/".$blog_fold, 0777, true) ; 
@@ -1303,10 +1382,10 @@ class backup_scheduler extends pluginSedLex {
 				}
 				
 				if (!$res) {
-					SL_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('email')." with ".$attach[$i] , 2) ; 
+					SLFramework_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('email')." with ".$attach[$i] , 2) ; 
 					return false ; 			
 				} else {
-					SL_Debug::log(get_class(), "The email has been successfully sent to ".$this->get_param('email')." with ".$attach[$i] , 4) ; 
+					SLFramework_Debug::log(get_class(), "The email has been successfully sent to ".$this->get_param('email')." with ".$attach[$i] , 4) ; 
 				}
 	
 			}
@@ -1378,7 +1457,7 @@ class backup_scheduler extends pluginSedLex {
 					$message .= "<ul>" ; 	
 					foreach ($info['zip']['excluded_entries'] as $f) {
 						$message .= "<li>" ; 	
-						$message .= sprintf(__("%s (size %s)", $this->pluginID), str_replace(ABSPATH, "", $f), Utils::byteSize(filesize($f))) ; 					
+						$message .= sprintf(__("%s (size %s)", $this->pluginID), str_replace(ABSPATH, "", $f), SLFramework_Utils::byteSize(filesize($f))) ; 					
 						$message .= "</li>" ; 	
 					}		
 					$message .= "</ul>" ; 	
@@ -1423,9 +1502,9 @@ class backup_scheduler extends pluginSedLex {
 			// send the email
 			$res = wp_mail($this->get_param('ftp_mail'), $subject, $message, $headers) ; 
 			if (!$res) {
-				SL_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('ftp_mail') , 2) ; 
+				SLFramework_Debug::log(get_class(), "An error occurred sending the mail to ".$this->get_param('ftp_mail') , 2) ; 
 			} else {
-				SL_Debug::log(get_class(), "The email has been successfully sent  to ".$this->get_param('ftp_mail') , 4) ; 
+				SLFramework_Debug::log(get_class(), "The email has been successfully sent  to ".$this->get_param('ftp_mail') , 4) ; 
 			}
 		} 
 	}	
@@ -1448,7 +1527,7 @@ class backup_scheduler extends pluginSedLex {
 			$conn = @ftp_connect($match[1], $this->get_param('ftp_port'), 50); 
 		} else {
 			if (!function_exists('ftp_ssl_connect')) {
-				SL_Debug::log(get_class(), "The PHP installation does not support SSL features" , 1) ; 
+				SLFramework_Debug::log(get_class(), "The PHP installation does not support SSL features" , 1) ; 
 				return array("transfer"=>false, "error"=>sprintf(__('Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
 			}
 			if (preg_match("/ftps:\/\/([^\/]*)(\/*.*)/i", $this->get_ftp_host(), $match)) {
@@ -1456,7 +1535,7 @@ class backup_scheduler extends pluginSedLex {
 			}
 		}
 		if ($conn===false) {
-			SL_Debug::log(get_class(), sprintf("Problem with host %s", $match[1]) , 2) ; 
+			SLFramework_Debug::log(get_class(), sprintf("Problem with host %s", $match[1]) , 2) ; 
 			return array("transfer"=>false, "error"=>sprintf(__('The host %s cannot be resolved!', $this->pluginID),  "<code>".$match[1] ."</code>")) ; 
 		} else {
 			if (@ftp_login($conn, $this->get_param('ftp_login'), $this->get_param('ftp_pass'))) {
@@ -1471,10 +1550,10 @@ class backup_scheduler extends pluginSedLex {
 								if (@ftp_chdir($conn, str_replace("//","/",$match[2]."/".$this->get_param('ftp_prefix_folder').date('Ymd')))) { 
 									// Nothing to do ...
 								} else {
-									SL_Debug::log(get_class(), "Problem for going into subdir: ".$this->get_param('ftp_prefix_folder').$str_replace("//","/",$match[2]."/".date('Ymd')) , 2) ; 
+									SLFramework_Debug::log(get_class(), "Problem for going into subdir: ".$this->get_param('ftp_prefix_folder').$str_replace("//","/",$match[2]."/".date('Ymd')) , 2) ; 
 								}
 							} else {
-								SL_Debug::log(get_class(), "Problem with creation of subdir: ".$this->get_param('ftp_prefix_folder').$str_replace("//","/",$match[2]."/".date('Ymd')) , 2) ; 
+								SLFramework_Debug::log(get_class(), "Problem with creation of subdir: ".$this->get_param('ftp_prefix_folder').$str_replace("//","/",$match[2]."/".date('Ymd')) , 2) ; 
 								return array("transfer"=>false, "error"=>sprintf(__('The folder %s cannot be created on the FTP repository!', $this->pluginID), "<code>".$this->get_param('ftp_prefix_folder').str_replace("//","/",$match[2]."/".date('Ymd'))."</code>")) ; 
 							}
 						}
@@ -1489,19 +1568,19 @@ class backup_scheduler extends pluginSedLex {
 								if (!$res) {
 									$value = ob_get_clean() ; 
 									@ftp_close($conn) ; 
-									SL_Debug::log(get_class(), "Problem with FTP transferring: ".$value , 2) ; 
+									SLFramework_Debug::log(get_class(), "Problem with FTP transferring: ".$value , 2) ; 
 									return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository %s! The ftp_put function returns: %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".ftp_pwd($conn)."</code>", "<code>".$value."</code>")) ; 
 								} else {
-									SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_ftp_host(), 4) ; 
+									SLFramework_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_ftp_host(), 4) ; 
 								}								
 							} else {
 								$value = ob_get_clean() ; 
 								@ftp_close($conn) ; 
-								SL_Debug::log(get_class(), "Problem with PASV mode: ".$value , 2) ; 
+								SLFramework_Debug::log(get_class(), "Problem with PASV mode: ".$value , 2) ; 
 								return array("transfer"=>false, "error"=>sprintf(__('The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s', $this->pluginID), "<code>".$attach[$i]."</code>", "<code>".$value."</code>")) ; 
 							}						
 						} else {
-							SL_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_ftp_host(), 4) ; 
+							SLFramework_Debug::log(get_class(), "FTP transfer OK of ".$attach[$i].' to '.$this->get_ftp_host(), 4) ; 
 						}
 						$vide = ob_get_clean() ; 
 					}
@@ -1509,12 +1588,12 @@ class backup_scheduler extends pluginSedLex {
 					return array("transfer"=>true, 'pasv'=>$pasv, 'file'=>$attach, 'ftp_host'=>$match[1], 'ftp_dir'=>$match[2]) ; 
 				} else {
 				 	@ftp_close($conn) ; 
-					SL_Debug::log(get_class(), "Problem with FTP chdir to ".$match[2] , 2) ; 
+					SLFramework_Debug::log(get_class(), "Problem with FTP chdir to ".$match[2] , 2) ; 
 					return array("transfer"=>false, "error"=>sprintf(__('The specified folder %s does not exists. Please create it so that the transfer may start!', $this->pluginID), $match[2])) ; 
 				}
 			} else {
 				@ftp_close($conn) ; 
-				SL_Debug::log(get_class(), "The login (i.e. ".$this->get_param('ftp_login').")  and the password (i.e. ".$this->get_param('ftp_pass').") do not seem to be valid!" , 2) ; 
+				SLFramework_Debug::log(get_class(), "The login (i.e. ".$this->get_param('ftp_login').")  and the password (i.e. ".$this->get_param('ftp_pass').") do not seem to be valid!" , 2) ; 
 				return array("transfer"=>false, "error"=>__('The login/password does not seems valid!', $this->pluginID)) ; 
 			}
 		}

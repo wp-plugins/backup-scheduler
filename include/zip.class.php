@@ -76,7 +76,7 @@ if (!class_exists("SL_Zip")) {
 					$exclu_folder = false ; 
 					foreach($exclu as $e) {
 						$path = str_replace("//", "/", $dirname . '/' . $filename) ; 
-						if (($e==$path)||($e==$path."/")) {
+						if (($e==$filename)||($e==$path)||($e==$path."/")) {
 							$exclu_folder=true ; 
 							SL_Debug::log(get_class(), "The folder has been excluded: ".$path, 4) ; 
 						}

@@ -77,6 +77,10 @@ Have fun !
 
 == Changelog ==
 
+= 1.5.7 =
+* NEW: Exclusion folder enabled
+* NEW: Detailed HOW TO
+
 = 1.5.6 =
 * BUG : Problem of activation with version of PHP below 5.2
 
@@ -210,4 +214,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:5563ec387c16fb8c6e189fdce7ed4511
+InfoVersion:bfe57d2f731a518e3f202f7a779bdbe70bba769e
