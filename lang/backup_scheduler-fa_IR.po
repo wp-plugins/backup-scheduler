@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-03-06T12:54:54+00:00\n"
+"PO-Revision-Date: 2014-05-11T11:24:18+00:00\n"
 "Last-Translator: sehrama.ir <sehrama.ir>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgid "This plugin enables scheduled backup of important part of your website : 
 msgstr "این پلاگین پشتیبان گیری زمان بندی شده را که بخش مهمی برای وب سایت شماست فعال می کند: استفاده آسان و بهینه"
 
 msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
-msgstr "متاسفانه، شما باید پلاگین را در وب سایت خود نصب و یا فعال  %s کنید، احتمال دارد پلاگین به‌ خوبی کار نکند"
+msgstr "متاسفانه، شما باید پلاگین را در وب سایت خود نصب و یا فعال %s کنید، احتمال دارد پلاگین به‌ خوبی کار نکند"
 
 msgid "How often do you want to backup your website?"
 msgstr "شما چگونه می‌خواهید از وب سایت خود پشتیبان‌گیری کنید؟"
@@ -157,4 +157,76 @@ msgstr "اگر می‌خواهید همه‌ی افزونه‌هایی را که
 
 msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
 msgstr "اگر می‌خواهید همه‌ی قالب‌هایی را که روی وب‌سایت‌تان نصب کرده‌اید و استفاده می‌کنید، ذخیره شوند، این گزینه را انتخاب کنید."
+
+msgid "This plugin enables scheduled backups of important parts of your website!"
+msgstr "این افزونه شما را برای پشتیبان‌گیری برنامه‌ریزی شده از بخش‌مهم وب‌سایت‌تان یاری می‌کند!"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
+msgstr "این گزینه را تیک بزنید؛ اگر می‌خواهید تصاویر، فایل‌ها و غیره را که خودتان روی وب‌سایت‌تان برای ایجاد مقالات، صفحات و نوشته‌ها آپلود کرده‌اید، ذخیره کنید"
+
+msgid "Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages."
+msgstr "این گزینه را تیک بزنید؛ اگر می‌خواهید تصاویر، فایل‌ها و غیره را که دیگران روی وب‌سایت‌تان برای ایجاد مقالات، صفحات و نوشته‌ها آپلود کرده‌اند، ذخیره کنید"
+
+msgid "The upload directory for the main site:"
+msgstr "دایرکتوری آپلود برای سایت اصلی"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
+msgstr "این گزینه را تیک بزنید؛ اگر می‌خواهید تصاویر، فایل‌ها و غیره را که روی وب‌سایت‌ اصلی برای ایجاد مقالات، صفحات و نوشته‌ها آپلود کرده‌اید، ذخیره کنید"
+
+msgid "The upload directory:"
+msgstr "دایرکتوری آپلود"
+
+msgid "The SQL database:"
+msgstr "پایگاه داده‌ SQL"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr "این گزینه را تیک بزنید؛ اگر می‌خواهید متن نوشته‌های‌تان، پیکربندی‌های‌تان و... روی این وبلاگ را ذخیره کنید"
+
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr "این گزینه را تیک بزنید؛ اگر می‌خواهید همه‌ی متن نوشته‌های‌تان، پیکربندی‌های‌تان و... روی همه‌ی وبلاگ‌های این وب‌سایت را ذخیره کنید"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
+msgstr "این گزینه را تیک بزنید؛ اگر می‌خواهید همه‌ی متن نوشته‌های‌تان، پیکربندی‌های‌تان و... روی همه‌ی وبلاگ‌های وب‌سایت اصلی را ذخیره کنید"
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr "آیا می‌خواهید فایل پشتیبان روی یک FTP ذخیره شود؟"
+
+msgid "Create sub-folder with date in your FTP repository for all backup files:"
+msgstr "ایجاد زیرپوشه با تاریخ در مخزن اف‌تی‌پی برای همه‌ی فایل‌های پشتیبان"
+
+msgid "Parameters"
+msgstr "پارامترها"
+
+msgid "There is two different ways to create a backup:"
+msgstr "این‌جا دو راه متفاوت برای پشتیبان‌گیری وجود دارد:"
+
+msgid "a forced process:"
+msgstr "یک فرایند اجباری"
+
+msgid "How to backup the site?"
+msgstr "چگونه از سایت پشتیبان بگیرید؟"
+
+msgid "The backup process cannot end"
+msgstr "فریاند پشتیبان‌گیری نمی‌تواند به آخر برسد"
+
+msgid "FTP transfer OK"
+msgstr "انتقال اف‌تی‌پی انجام شد"
+
+msgid "FTP transfer KO: %s"
+msgstr "انجام انتقال اف‌تی‌پی: %s"
+
+msgid "FTP transfer reset"
+msgstr "از سرگیری انتقال اف‌تی‌پی"
+
+msgid "(ZIP creation)"
+msgstr "(فشرده‌سازی زیپ)"
+
+msgid "(MAIL sending)"
+msgstr "(در حال ارسال ایمیل)"
+
+msgid "(MAIL sending - ending)"
+msgstr "(در حال ارسال ایمیل - در حال اتمام)"
+
+msgid "The login/password does not seems valid!"
+msgstr "رمز / ورود فعال به نظر نمی‌رسد"
 
