@@ -226,7 +226,7 @@ if (!class_exists("SL_Database")) {
 									return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql.tmp</code>")) ; 
 								}
 								// we inform that the process is finished
-								if (!Utils::rm_rec($path."/sql_in_progress")) {
+								if (!SLFramework_Utils::rm_rec($path."/sql_in_progress")) {
 									return array('finished'=>false, "step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/sql_in_progress"."</code>")) ; 
 								}
 								return  array('finished'=>false, 'nb_to_finished' => $nb_entry_total-$nb_entry_current, 'nb_finished' => $nb_entry_current, 'info' => $table[0], 'start'=>$timedebut) ; 
@@ -250,10 +250,10 @@ if (!class_exists("SL_Database")) {
 				return array('finished'=>false, "error"=>sprintf(__('The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql.tmp</code>")) ; 
 			}
 			// we inform that the process is finished
-			if (!Utils::rm_rec($path."/sql_in_progress")) {
+			if (!SLFramework_Utils::rm_rec($path."/sql_in_progress")) {
 				return array('finished'=>false, "step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$path."/sql_in_progress"."</code>")) ; 
 			}
-			if (!Utils::rm_rec($sqlfilename.".sql.tmp")) {
+			if (!SLFramework_Utils::rm_rec($sqlfilename.".sql.tmp")) {
 				return array('finished'=>false, "step"=>"error", "error"=>sprintf(__('The file %s cannot be deleted. You should have a problem with file permissions or security restrictions.', 'SL_framework'),"<code>".$sqlfilename.".sql.tmp"."</code>")) ; 
 			}
 			

@@ -6,7 +6,7 @@ Author URI: http://www.sedlex.fr/
 Plugin URI: http://wordpress.org/plugins/backup-scheduler/
 Tags: backup, schedule, plugin, save, database, zip
 Requires at least: 3.0
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: trunk
 
 With this plugin, you may plan the backup of your entire website (folders, files and/or database).
@@ -35,7 +35,7 @@ The super-admin may save either its data or the whole website. By saving the who
 = Localization =
 
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab, scream
-* German (Germany) translation provided by agent-test, agent, bartdev2000, Ditoran
+* German (Germany) translation provided by agent-test, agent, bartdev2000, Ditoran, GLassnig
 * English (United States), default language
 * Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives, FelipeJAG
 * Farsi (Iran) translation provided by sehrama.ir
@@ -48,7 +48,7 @@ The super-admin may save either its data or the whole website. By saving the who
 * Polish (Poland) translation provided by Opti, Lukasz, pablo, Misiek, MarekMackiewicz, Darbo
 * Portuguese (Brazil) translation provided by RainilsonRodriguis, GuiBeloto
 * Portuguese (Portugal) translation provided by FranciscoRocha
-* Russian (Russia) translation provided by GerinG, Slawka
+* Russian (Russia) translation provided by GerinG, Slawka, Berdych
 * Swedish (Sweden) translation provided by 
 * Thai (Thailand) translation provided by tontan
 * Turkish (Turkey) translation provided by UfukArt
@@ -76,6 +76,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.5.8 =
+* NEW: Exclusion folder is now possible with regexp
 
 = 1.5.7 =
 * NEW: Exclusion folder enabled
@@ -214,4 +217,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:838667b9171aef004597b716c79043433afaf327
+InfoVersion:4717c0f418c006b2f888e1b5658c1b7ecd18c52e

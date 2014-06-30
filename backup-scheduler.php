@@ -3,7 +3,8 @@
 Plugin Name: Backup Scheduler
 Plugin Tag: backup, schedule, plugin, save, database, zip
 Description: <p>With this plugin, you may plan the backup of your entire website (folders, files and/or database).</p><p>You can choose: </p><ul><li>which folders you want to save; </li><li>the frequency of the backup process; </li><li>whether your database should be saved; </li><li>whether the backup is stored on the local website, sent by email or stored on a distant FTP (support of multipart zip files)</li></ul><p>This plugin is under GPL licence</p>
-Version: 1.5.7
+Version: 1.5.8
+
 Framework: SL_Framework
 Author: SedLex
 Author Email: sedlex@sedlex.fr
@@ -387,9 +388,17 @@ class backup_scheduler extends pluginSedLex {
 
 				$params->add_param('chunk', __('The maximum zip file size (in MB, namely the chunck size):',$this->pluginID)) ; 
 				$params->add_comment(__('Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated',$this->pluginID)) ; 
-				
 				$params->add_param('exclude_folder', __('Exclude these folders:',$this->pluginID)) ; 
-				$params->add_comment(__('Please enter one name of folder to be excluded per line',$this->pluginID)) ; 
+				$params->add_comment(__('Please enter one name of folder to be excluded per line',$this->pluginID)) ;
+				$params->add_comment(sprintf(__('By default, the line should exactely match the folder name or the folder path to exclude said folder (for instance %s or %s, to exclude the content folder)',$this->pluginID), "<code>wp-content</code>", "<code>".WP_CONTENT_DIR."</code>")) ;
+				$params->add_comment(sprintf(__('If the line begins with %s, the line will be consider as a regexp (for instance %s, to exclude the content folder)',$this->pluginID), "<code>[regexp]</code>", "<code>[regexp].*\/wp-content</code>")) ;
+				$params->add_comment(__('For now, the following folder are exluded (please refresh the page if you just upfdate the options to see the correct list):',$this->pluginID)) ;
+				$exclu = explode("\n", $this->get_param('exclude_folder')) ;
+				$exclu = array_map('trim',$exclu);
+				$exclu[] = WP_CONTENT_DIR."/sedlex" ;
+				ob_start() ; 
+					$this->searchFolder(ABSPATH, $exclu) ; 
+				$params->add_comment(ob_get_clean()) ;
 
 				$params->add_title(__('Do you want that the backup is sent by email?',$this->pluginID)) ; 
 				$params->add_param('email_check', __('Send the backup files by email:',$this->pluginID), '', '', array('email', 'rename')) ; 
@@ -568,6 +577,40 @@ class backup_scheduler extends pluginSedLex {
 			<?php echo $this->signature ; ?>
 		</div>
 		<?php
+	}
+	
+	function searchFolder($dirname, $exclu) {
+		if ($handle = opendir($dirname)) { 
+			while (false !== ($filename = readdir($handle))) { 
+				// We check if exclu
+				$exclu_folder = false ; 
+				foreach($exclu as $e) {
+					$path = str_replace("//", "/", $dirname . '/' . $filename) ; 
+					// Normal
+					if (strpos($e, "[regexp]")===false) {
+						if (($e==$filename)||($e==$path)||($e==$path."/")) {
+							$exclu_folder=true ; 
+							echo " &nbsp; <code>".$path."</code><br>" ; 
+						}
+					} else {
+						// Regexp
+						$e = str_replace("[regexp]", "", $e) ; 
+						if (preg_match("/".$e."/i", $path)) {
+							$exclu_folder=true ; 
+							echo " &nbsp; <code>".$path."</code><br>" ; 
+						}
+					}
+					
+				}
+				// On recursive
+				if ($filename != "." && $filename != ".." && !$exclu_folder)  {
+					if (is_dir($dirname . '/' . $filename)) {
+						$this->searchFolder($dirname . '/' . $filename, $exclu);
+					}
+				}
+			} 
+			closedir($handle); 
+		} 
 	}
 	
 	
@@ -879,7 +922,7 @@ class backup_scheduler extends pluginSedLex {
 					SLFramework_Debug::log(get_class(), "ZIP backup of " .ABSPATH, 4) ; 
 					$exclu = explode("\n", $this->get_param('exclude_folder')) ;
 					$exclu = array_map('trim',$exclu);
-					$exclu[] = WP_CONTENT_DIR."/sedlex/" ; 
+					$exclu[] = WP_CONTENT_DIR."/sedlex" ; 
 					$z->addDir(ABSPATH, ABSPATH, "backup_".date_i18n("Ymd")."/", $exclu);
 				} else {
 					if  ( ( (is_multisite()&&($blog_id == 1))||(!is_multisite()) ) && ($this->get_param('save_plugin')) ) {
