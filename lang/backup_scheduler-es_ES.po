@@ -4,13 +4,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-02-02T19:34:32+00:00\n"
+"PO-Revision-Date: 2014-12-27T10:26:01+00:00\n"
 "Last-Translator: Javier <>\n"
 "Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
 "Last-Translator: charliechin <http://www.twitter.com/charliechin>\n"
 "Last-Translator: IgnacioCalvo <http://ignaciocalvo.com>\n"
 "Last-Translator: JordiVives <>\n"
 "Last-Translator: FelipeJAG <www.coyse.com>\n"
+"Last-Translator: Sebas <coquimoran@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +66,7 @@ msgid "The plugins directory:"
 msgstr "El directorio de plugins:"
 
 msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
-msgstr "Marque esta opción si desea guardar todos los plugins que ha instalado y que usa en  este sitio web."
+msgstr "Marque esta opción si desea guardar todos los plugins que ha instalado y que usa en este sitio web."
 
 msgid "The themes directory:"
 msgstr "El directorio de temas:"
@@ -77,7 +78,7 @@ msgid "The upload directory for this blog:"
 msgstr "El directorio de subidas de este blog:"
 
 msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
-msgstr "Marca esta opción si desea guardar las imágenes, archivos, etc., que se han subido a su sitio web  para crear articulos/entradas/páginas."
+msgstr "Marca esta opción si desea guardar las imágenes, archivos, etc., que se han subido a su sitio web para crear articulos/entradas/páginas."
 
 msgid "All upload directories (for this site and the sub-blogs):"
 msgstr "Todos los directorios de subidas (para este blog y los sub-blogs):"
@@ -140,7 +141,7 @@ msgid "You do not need to fill this field if no mail is to be sent."
 msgstr "No necesita rellenar este campo si no se va a enviar ningún correo"
 
 msgid "Do you want that the backup is stored on a FTP?"
-msgstr "¿Desea que su copia de seguridad se almacene en un  FTP?"
+msgstr "¿Desea que su copia de seguridad se almacene en un FTP?"
 
 msgid "Save the backup files on a FTP?"
 msgstr "¿Guardar los archivos de la copia de seguridad en un FTP?"
@@ -369,4 +370,97 @@ msgstr "Si quiere que se le notifique cuando el proceso de respaldo haya termina
 
 msgid "Customize the name of the files?"
 msgstr "¿Desea personalizar el nombre de los archivos?"
+
+msgid "This plugin enables scheduled backups of important parts of your website!"
+msgstr "Este plugin permite programar las copias de seguridad de aquellas partes importantes de tu web!"
+
+msgid "Just configure the schedule and the content to be save and enjoy: a background process will be triggered by the person who visits your website!"
+msgstr "Tan solo configura la programación y el contenido que va ha ser guardado y disfruta: un proceso en segundo plano será lanzado por la persona que visite tu web!"
+
+msgid "Add this string to the name of the files:"
+msgstr "Añadir esta cadena de caracteres a los nombres de los archivos:"
+
+msgid "The name of the files will be %s."
+msgstr "El nombre de los archivos será %s."
+
+msgid "%s is the string of the present option. You may set this option to %s."
+msgstr "%s es la cadena de caracteres de la opción actual. Puedes ajustar esta opción a %s."
+
+msgid "%s is a random string for security reasons."
+msgstr "%s es una cadena de caracteres al azar por motivos de seguridad."
+
+msgid "%s is the extension (i.e. %s)."
+msgstr "%s es la extensión (p.ej. %s)."
+
+msgid "(i.e. %s and %s)"
+msgstr "(p.ej. %s y %s)"
+
+msgid "Save the SQL content of the sub-sites in different files:"
+msgstr "Guardar el contenido SQL de los sub-sitios en diferentes archivos:"
+
+msgid "The maximum zip file size (in MB, namely the chunck size):"
+msgstr "El tamaño máximo de los archivos zip (en MB, véase tamaño de las porciones):"
+
+msgid "Exclude these folders:"
+msgstr "Excluir estas carpetas:"
+
+msgid "Please enter one name of folder to be excluded per line"
+msgstr "Por favor introduce un nombre de la carpeta a excluir por linea"
+
+msgid "By default, the line should exactely match the folder name or the folder path to exclude said folder (for instance %s or %s, to exclude the content folder)"
+msgstr "Por defecto, la linea deve coincidir perfectamente con el nombre de la carpeta o ruta de la carpeta para excluir dicha carpeta (por ejemplo %s o %s, para excluir el contenido de la carpeta)"
+
+msgid "If the line begins with %s, the line will be consider as a regexp (for instance %s, to exclude the content folder)"
+msgstr "Si la linea comienza con %s, la linea será considerada como una expresión regular (por ejemplo %s, para excluir el contenido de una carpeta)"
+
+msgid "For now, the following folder are exluded (please refresh the page if you just upfdate the options to see the correct list):"
+msgstr "Por ahora, la siguiente carpeta está excluida (por favor refresca la pagina para ver la lista correcta si has actualizado las opciones):"
+
+msgid "Create sub-folder with date in your FTP repository for all backup files:"
+msgstr "Crear uns subcarpeta con la fecha en tu repositorio FTP para todos los archivos de copia de seguridad:"
+
+msgid "Add a prefix to the created folder:"
+msgstr "Añadir un prefijo a la carpeta creada:"
+
+msgid "The files greater than this limit won't be included in the zip file!"
+msgstr "Los archivos mayores a este limite no serán incluidos en el archivo zip!"
+
+msgid "There is two different ways to create a backup:"
+msgstr "Existen dos formas diferentes de crear la copia de seguridad:"
+
+msgid "an automatic process (namely background process):"
+msgstr "un proceso automatico (llamado proceso en segundo plano)"
+
+msgid "Every time a user visits a page of the frontside of your website, a small portion of the backup process is performed;"
+msgstr "Cada vez que un usuario visite la pagina inicial de tu web, una pequeña parte del proceso de copia de seguridad se realizará;"
+
+msgid "Note that if you have very few visits, a complete backup may be quite long."
+msgstr "Ten en cuenta que si tienes pocas visitas, la copia de seguridad completa podrá tardar en completarse."
+
+msgid "a forced process:"
+msgstr "un proceso forzado:"
+
+msgid "The button that triggers this forced process may be found in the Backup tab;"
+msgstr "El botón para desencadenar el proceso forzado lo encontraras en la pestaña de Copia de Seguridad;"
+
+msgid "You have to stay on that page for processing all attachments: if you go on another page (or if you reload the page), the process will be stopped."
+msgstr "Deves de permanecer en esta pagina para procesar todos los archivos adjuntos: si vas a otra pagina (o si refrescas esta pagina), el proceso será parado."
+
+msgid "How to backup the site?"
+msgstr "¿Como hacer la copia de seguridad de tu web?"
+
+msgid "When forcing a backup process, the plugin indicates that another process is running."
+msgstr "Cuando el proceso de copia de seguridad es forzado, el plugin indica que se está ejecutando otro proceso."
+
+msgid "99% of the time, it means that the memory limit and/or the chunck size have been increased and that you exceed the maximum memory limit authorized by your server: therefore, the PHP process related to the backup is killed."
+msgstr "En un 99% de las veces, significa que el limite de memoria y/o el tamaño de las porciones se han visto incrementadas y que excedes del la cantidad máxima autorizada de memoria en tu servidor: por lo tanto, el proceso PHP relacionado a la copia de seguridad se para."
+
+msgid "Most of the time, this chunk size and memory limit do not have to be higher than 15Mo."
+msgstr "La mayoría de veces, el tamaño de las porciones y el limite de memoria no deven de ser mayores de 15Mb."
+
+msgid "DO NOT contact me before trying to reduce the chunk size and the memory limit: 250Mo is, for instance, often not a good idea..."
+msgstr "NUNCA contactarme antes de intentar reducir el tamaño de las porciones y el limite de memoria: 250Mb por ejemplo no es normalmente una buena idea..."
+
+msgid "The backup process cannot end"
+msgstr "El proceso de copia de seguridad no puede finalizar"
 

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-04-16T22:06:04+00:00\n"
+"PO-Revision-Date: 2014-07-22T16:21:49+00:00\n"
 "Last-Translator: Opti <>\n"
 "Last-Translator: Lukasz <www.premiumaccount.co.ukwww.esteepc.co.uk>\n"
 "Last-Translator: pablo <pawel@dream.net.pl>\n"
@@ -495,4 +495,19 @@ msgstr "Wszystko jest OK!"
 
 msgid "Save the SQL content of the sub-sites in different files:"
 msgstr "Zapisz zawartość SQL z treścią pod-witryn w innych plikach:"
+
+msgid "(i.e. %s and %s)"
+msgstr "(np. %s oraz %s)"
+
+msgid "The maximum zip file size (in MB, namely the chunck size):"
+msgstr "maksymalny rozmiar pliku zip (w MB, rozmiar kawałka):"
+
+msgid "Exclude these folders:"
+msgstr "Wyklucz te foldery:"
+
+msgid "Please enter one name of folder to be excluded per line"
+msgstr "Podaj nazwę każego folderu w osobnej linii"
+
+msgid "By default, the line should exactely match the folder name or the folder path to exclude said folder (for instance %s or %s, to exclude the content folder)"
+msgstr "Domyślnie linia powinna dokładnie odwzorować nazwę folderu lub ścieżkę do folderu aby wykluczyć folder (na przykład %s lub %s, aby wykluczyć zawartość folderu)"
 
