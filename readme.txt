@@ -38,7 +38,7 @@ The super-admin may save either its data or the whole website. By saving the who
 * German (Switzerland) translation provided by PeterDbbert, BernhardKnab, scream
 * German (Germany) translation provided by agent-test, agent, bartdev2000, Ditoran, GLassnig
 * English (United States), default language
-* Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives, FelipeJAG
+* Spanish (Spain) translation provided by Javier, AVfoto, charliechin, IgnacioCalvo, JordiVives, FelipeJAG, Sebas
 * Farsi (Iran) translation provided by sehrama.ir
 * Finnish (Finland) translation provided by AnttiSilvola
 * French (France) translation provided by SedLex, wkpixearts, Matthieu, mutmut, anonymous, noaneo, TonyLand
@@ -77,6 +77,9 @@ Have fun !
 2. The configuration page of the plugin
 
 == Changelog ==
+
+= 1.5.10 =
+* NEW: deletion of temp files upon desinstall
 
 = 1.5.9 =
 * NEW: Add icons
@@ -221,4 +224,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:f450b43eebb7570fb1ec0ce188b82e8eebae57cd
+InfoVersion:524e4a3b94fe43bb4c7be5ea99ebfd2886d513a0
