@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-05-27T08:13:50+00:00\n"
+"PO-Revision-Date: 2015-01-26T12:31:41+00:00\n"
 "Last-Translator: PuntoCon <www.puntocon.it>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -118,4 +118,16 @@ msgstr "Orario dei backup"
 
 msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
 msgstr "Si prega di notare che 0 significa mezzanotte, 1 significa 01:00, 13 significa 13:00, etc. Il backup inizierà a quell&#039;ora quindi assicurati che il sito non sia sovraccarico a quell&#039;ora."
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr "Se vuoi ricevere un avviso quando il backup è concluso, inserisci la tua email"
+
+msgid "Customize the name of the files?"
+msgstr "Vuoi personalizzare il nome dei files?"
+
+msgid "Add this string to the name of the files:"
+msgstr "Aggiungi questa stringa al nome dei files:"
+
+msgid "The name of the files will be %s."
+msgstr "Il nome dei files sarà %s."
 

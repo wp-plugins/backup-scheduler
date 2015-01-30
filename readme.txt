@@ -78,6 +78,9 @@ Have fun !
 
 == Changelog ==
 
+= 1.5.11 =
+* BUG: some installation have some difficulties to identify the type of the column of the SQL table, thus now the quote are set by default one all column
+
 = 1.5.10 =
 * NEW: deletion of temp files upon desinstall
 
@@ -224,4 +227,4 @@ If you have still this issue, please try with Winzip software.
 Visit http://www.sedlex.fr/cote_geek/
  
  
-InfoVersion:524e4a3b94fe43bb4c7be5ea99ebfd2886d513a0
+InfoVersion:8ee39166f1cea4c224b3e877f600b5fd74cfd951
