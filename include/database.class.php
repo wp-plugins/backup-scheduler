@@ -187,13 +187,14 @@ if (!class_exists("SL_Database")) {
 								$contentOfTable .=  ", ";
 							//DATE, TIMESTAMP, TIMESTAMP
 							$delimit = "'" ; 
-							//if ( ($wpdb->get_col_info('type', $ii) == "string") || ($wpdb->get_col_info('type', $ii) == "blob") || ($wpdb->get_col_info('type', $ii) == "datetime") || ($wpdb->get_col_info('type', $ii) == "date") || ($wpdb->get_col_info('type', $ii) == "timestamp") || ($wpdb->get_col_info('type', $ii) == "time") || ($wpdb->get_col_info('type', $ii) == "year") )
-							//	$delimit .=  "'";
-							if ($ligne[$ii]==NULL) {
-								$ligne[$ii]="" ; 
-							}
-							if (($ligne[$ii]==NULL)&&($delimit == "")) {
-								$ligne[$ii]="NULL" ; 
+							if ( ($wpdb->get_col_info('type', $ii) == "string") || ($wpdb->get_col_info('type', $ii) == "blob") || ($wpdb->get_col_info('type', $ii) == "datetime") || ($wpdb->get_col_info('type', $ii) == "date") || ($wpdb->get_col_info('type', $ii) == "timestamp") || ($wpdb->get_col_info('type', $ii) == "time") || ($wpdb->get_col_info('type', $ii) == "year") ) {
+								if ($ligne[$ii]==NULL) {
+									$ligne[$ii]="" ; 
+								}
+							} else {
+								if ($ligne[$ii]==NULL) {
+									$ligne[$ii]="NULL" ; 
+								}
 							}
 							$contentOfTable .= $delimit.addslashes($ligne[$ii]).$delimit;
 						}
