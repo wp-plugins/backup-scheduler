@@ -194,6 +194,7 @@ if (!class_exists("SL_Database")) {
 							} else {
 								if ($ligne[$ii]==NULL) {
 									$ligne[$ii]="NULL" ; 
+									$delimit = "" ; 
 								}
 							}
 							$contentOfTable .= $delimit.addslashes($ligne[$ii]).$delimit;
